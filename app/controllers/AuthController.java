@@ -84,7 +84,7 @@ public class AuthController extends Controller {
 			return redirect("/");
 		}
     	else {
-    		return ok(design.render(login.render()));
+    		return ok(design.render("Title", login.render("Title")));
     	}
 	}
 	
