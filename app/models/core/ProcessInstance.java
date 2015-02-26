@@ -1,8 +1,16 @@
 package models.core;
 
+import java.util.Date;
+
 import models.util.sessions.User;
 
 public class ProcessInstance {
+	
+	private String id; 
+	private User user;
+	private String process;
+	private Date time;
+	
 	/*
 	 * TODO
 	 * Method to internally (PRIVATE method) create an empty ProcessInstance
@@ -43,5 +51,37 @@ public class ProcessInstance {
 	 */
 	public static ProcessInstance create(User user, ProcessModel processModel) {
 		return null;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getProcess() {
+		return process;
+	}
+
+	public void setProcess(String process) {
+		this.process = process;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
 	}
 }
