@@ -1,0 +1,12 @@
+@import core._
+<div class="process_selector">
+
+	<select>
+
+		@defining(controllers.AuthController.getUser()) { user =>
+  			@process_selector_options(user.getProcessInstances(), user.getCurrentProcessInstance())
+		}
+
+	</select>
+
+</div>

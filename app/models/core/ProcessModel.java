@@ -31,6 +31,14 @@ public class ProcessModel {
 	
 	/*
 	 * TODO
+	 * Returns the name of this ProcessModel
+	 */
+	public String getName() {
+		return "";
+	}
+	
+	/*
+	 * TODO
 	 * Returns all process models stored in the SPA
 	 */
 	public static List<ProcessModel> getAll() {

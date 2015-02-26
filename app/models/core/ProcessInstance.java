@@ -30,6 +30,22 @@ public class ProcessInstance {
 	
 	/*
 	 * TODO
+	 * Returns the ID of this ProcessInstance
+	 */
+	public String getID() {
+		return "";
+	}
+	
+	/*
+	 * TODO
+	 * Returns the name of this ProcessInstance
+	 */
+	public String getName() {
+		return "";
+	}
+	
+	/*
+	 * TODO
 	 * Returns the reference to the ProcessModel used as template by the static method ProcessInstance.create()
 	 */
 	public ProcessModel getProcessModel() {

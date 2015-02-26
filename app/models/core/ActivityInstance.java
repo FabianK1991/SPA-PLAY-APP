@@ -22,6 +22,14 @@ public class ActivityInstance {
 	
 	/*
 	 * TODO
+	 * Returns a the type of Activity of this ActivityInstance
+	 */
+	public Activity getActivity() {
+		return null;
+	}
+	
+	/*
+	 * TODO
 	 * Returns a List of BusinessObjectInstances (sometimes created and) referenced by this ActivityInstance
 	 */
 	public List<BusinessObjectInstance> getBusinessObjectInstances() {
