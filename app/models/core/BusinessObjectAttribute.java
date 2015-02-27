@@ -24,6 +24,6 @@ public class BusinessObjectAttribute {
 	 * 
 	 */
 	public String getName() {
-		return Application.sss.getAttributeName(this.id);
+		return Application.sss.getAttributeName(Integer.parseInt(this.id));
 	}
 }

@@ -73,7 +73,7 @@ public class SAPServerSimulator {
 	 * @param Attributes the attributes which should be shown
 	 * @return A map of attributes and values
 	 */
-	public Map getBussinesObjectInstance(int id, List<Integer> Attributes){
+	public Map getBusinessObjectInstance(int id, List<Integer> Attributes){
 		return null;
 	}
 	
