@@ -5,7 +5,6 @@ import models.spa.api.process.buildingblock.*;
 
 public class Activity {
 	private models.spa.api.process.buildingblock.Activity activity;
-	private String action;
 	
 	public Activity(models.spa.api.ProcessModel pm){
 		this.activity = new models.spa.api.process.buildingblock.Activity(pm);
@@ -26,15 +25,19 @@ public class Activity {
 	 * used in the HTML SVG created by the CAMUNDA JS-BPMN viewer
 	 */
 	public String getBPMN_ID() {
+		
 		return activity.getId();
 	}
 	
 	/*
 	 * TODO
 	 * Returns the type of action (create, update, select, delete) of this Activity
+	 * 
+	 * @Deprecated Get action directly from the business object
 	 */
+	@Deprecated
 	public String getAction() {
-		return this.action;
+		return null;
 	}
 	
 	/*

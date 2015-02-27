@@ -55,6 +55,16 @@ public class SAPServerSimulator {
 		return true;
 	}
 	
+	/*
+	 * Retrieves the attributes ids of a business object
+	 * @author Fabian
+	 * @param id The BO id
+	 * @return A list of attribute ids
+	 */
+	public List<String> getBusinessObjectAttributes(int id){
+		return null;
+	}
+	
 	
 	/*
 	 * Creates a new BO Instance in the database

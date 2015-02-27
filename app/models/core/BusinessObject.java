@@ -1,8 +1,18 @@
 package models.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import controllers.Application;
+
 public class BusinessObject {
+	private String id;
+	
+	public BusinessObject(String id){
+		this.id = id;
+	}
+	
+	
 	/*
 	 * TODO
 	 * Returns an ordered List of BusinessObjectAttributes that are allowed for this BusinessObject
@@ -11,7 +21,16 @@ public class BusinessObject {
 	 * => List should be ordered ASCending by column order
 	 */
 	public List<BusinessObjectAttribute> getAttributes() {
-		return null;
+		List<String> attr = Application.sss.getBusinessObjectAttributes(Integer.parseInt(this.id));
+		
+		ArrayList<BusinessObjectAttribute> resultList = new ArrayList<BusinessObjectAttribute>();
+		
+		for (String a : attr) {
+			BusinessObjectAttribute boa = new BusinessObjectAttribute(a);
+			resultList.add(boa);
+		}
+		
+		return resultList;
 	}
 	
 	/*
