@@ -1,6 +1,8 @@
 package models.core;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +39,11 @@ public class ProcessModel {
 	 * Returns the BPMN XML file locally stored by the static method ProcessModel.createFromBPMN_File()
 	 */
 	public File getBPMN_XML() {
-		return null;
+		return new File("process/" + this.pm.getId() + ".bpmn");
+	}
+	
+	public String getId(){
+		return this.pm.getId();
 	}
 	
 	/*
@@ -89,9 +95,19 @@ public class ProcessModel {
 	 */
 	public static ProcessModel createFromBPMN_File(File file) {
 		ProcessParser pp = new ProcessParser(file);
+		ProcessModel pm = pp.getParsedModels().get(0);
 		
-		// TODO: store file
+		File f = new File("process/" + pm.getId() + ".bpmn");
 		
-		return pp.getParsedModels().get(0);
+		// Check if file exists, otherwise write it
+		if( !f.exists() ){
+			try {
+				Files.copy(file.toPath(), f.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return pm;
 	}
 }
