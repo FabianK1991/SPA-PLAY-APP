@@ -16,9 +16,9 @@ public class SAPServerSimulator {
 	 * @author Fabian
 	 * @param id The BO id
 	 * @param values A map of the attributes
-	 * @return
+	 * @return the business object instance id
 	 */
-	public boolean createBusinessObjectInstance(int id, Map values){
+	public String createBusinessObjectInstance(String id, Map values){
 		Application.db.connect();
 		
 		// retrieve our instance id
@@ -45,14 +45,29 @@ public class SAPServerSimulator {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(Integer.toString(InstanceId));
 		args.add("66"); // BUSINESS OBJECT ID
-		args.add(Integer.toString(id));
+		args.add(id);
 		
 		// execute query
 		Application.db.exec(query, args, false);
 		
-		// TODO: Inser other attributes
+		// insert other attributes
+		Set keys = values.keySet();
 		
-		return true;
+		for(Object key : keys){
+			String value = (String) values.get(key);
+			
+			query = "INSERT INTO `business_objects_data` (`business_object`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
+			
+			args = new ArrayList<String>();
+			args.add(Integer.toString(InstanceId));
+			args.add((String)key); // BUSINESS OBJECT ID
+			args.add(value);
+			
+			// execute query
+			Application.db.exec(query, args, false);
+		}
+		
+		return Integer.toString(InstanceId);
 	}
 	
 	/*
@@ -62,6 +77,8 @@ public class SAPServerSimulator {
 	 * @return A list of attribute ids
 	 */
 	public List<String> getBusinessObjectAttributes(int id){
+		Application.db.connect();
+		
 		return null;
 	}
 	
@@ -74,6 +91,8 @@ public class SAPServerSimulator {
 	 * @return A map of attributes and values
 	 */
 	public Map getBusinessObjectInstance(int id, List<Integer> Attributes){
+		Application.db.connect();
+		
 		return null;
 	}
 	
@@ -84,6 +103,8 @@ public class SAPServerSimulator {
 	 * @return the name of the attribute
 	 */
 	public String getAttributeName(int AttributeId){
+		Application.db.connect();
+		
 		return null;
 	}
 	
@@ -94,6 +115,8 @@ public class SAPServerSimulator {
 	 * @return a list of business object ids
 	 */
 	public List<Integer> searchBusinessObjectInstances(Map Attributes){
+		Application.db.connect();
+		
 		return null;
 	}
 }
