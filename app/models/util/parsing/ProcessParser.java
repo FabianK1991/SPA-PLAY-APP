@@ -3,6 +3,7 @@ package models.util.parsing;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,13 +26,22 @@ import org.xml.sax.SAXException;
 
 public class ProcessParser {
 	public static void main(String[] args){
-		ProcessParser pp = new ProcessParser();
-		
-		pp.parseXML(new File("test.xml"));
+		ProcessParser pp = new ProcessParser(new File("test.xml"));
+	}
+	
+	public ProcessParser(File file){
+		this.parseXML(file);
 	}
 	
 	private Document doc;
 	private ArrayList<ProcessModel> pms; 
+	
+	/*
+	 * Retrieves the parsed Process Models
+	 */
+	public List<ProcessModel> getParsedModels(){
+		return pms;
+	}
 	
 	/*
 	 * Creates a new flow and adds it to the source node
@@ -124,7 +134,7 @@ public class ProcessParser {
 	/*
 	 * Parses an xml into processmodels
 	 */
-	public void parseXML(File file){
+	private void parseXML(File file){
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		
 		DocumentBuilder db;

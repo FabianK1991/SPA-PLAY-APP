@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import models.util.parsing.ProcessParser;
+
 public class ProcessModel {
 	models.spa.api.ProcessModel pm;
 	
@@ -43,7 +45,7 @@ public class ProcessModel {
 	 * Returns the name of this ProcessModel
 	 */
 	public String getName() {
-		return "";
+		return this.pm.getName();
 	}
 	
 	/*
@@ -62,8 +64,6 @@ public class ProcessModel {
 	}
 	
 	public void addActivity(Activity act){
-		
-		
 		// add it to the spa model
 		this.pm.getNodes().add(act.getSPAActivity());
 	}
@@ -88,8 +88,10 @@ public class ProcessModel {
 	 * The created ProcessModel instance needs to be returned.
 	 */
 	public static ProcessModel createFromBPMN_File(File file) {
+		ProcessParser pp = new ProcessParser(file);
 		
+		// TODO: store file
 		
-		return null;
+		return pp.getParsedModels().get(0);
 	}
 }
