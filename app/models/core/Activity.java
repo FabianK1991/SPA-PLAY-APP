@@ -11,13 +11,14 @@ public class Activity {
 	private ArrayList<BusinessObject> bos;
 	
 	public Activity(String id, models.spa.api.ProcessModel pm){
-		this.activity.setId(id);
 		this.activity = new models.spa.api.process.buildingblock.Activity(pm);
+		this.activity.setId(id);
+		
 	}
 	
 	public Activity(String id, models.spa.api.process.buildingblock.Activity activity){
-		this.activity.setId(id);
 		this.activity = activity;
+		this.activity.setId(id);
 	}
 	
 	/*

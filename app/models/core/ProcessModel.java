@@ -1,12 +1,16 @@
 package models.core;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
 public class ProcessModel {
 	models.spa.api.ProcessModel pm;
+	
+	private List<Activity> activities; 
 	
 	/*
 	 * TODO
@@ -23,8 +27,7 @@ public class ProcessModel {
 	 */
 	public ProcessModel(String id) {
 		this.pm = new models.spa.api.ProcessModel(id);
-		
-		
+		this.activities = new ArrayList<Activity>();
 	}
 	
 	/*
@@ -41,6 +44,28 @@ public class ProcessModel {
 	 */
 	public String getName() {
 		return "";
+	}
+	
+	/*
+	 * Returns a node by id from the spa process model
+	 */
+	public models.spa.api.process.buildingblock.Node getSPANodeById(String id){
+		Set<models.spa.api.process.buildingblock.Node> nodes = this.pm.getNodes();
+		
+		for(models.spa.api.process.buildingblock.Node n : nodes){
+			if( n.getId().equals(id) ){
+				return n;
+			}
+		}
+		
+		return null;
+	}
+	
+	public void addActivity(Activity act){
+		
+		
+		// add it to the spa model
+		this.pm.getNodes().add(act.getSPAActivity());
 	}
 	
 	public models.spa.api.ProcessModel getSPAProcessModel(){
