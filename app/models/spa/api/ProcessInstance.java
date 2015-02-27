@@ -171,7 +171,7 @@ public class ProcessInstance
 
     public static ProcessInstance getProcessInstance(ProcessModel processModel, String id) throws Exception
     {
-        return rdfToModel(spa.rest.entities.ProcessInstance.getProcessInstance(id), processModel);
+        return rdfToModel(models.spa.rest.entities.ProcessInstance.getProcessInstance(id), processModel);
     }
 
 
@@ -189,7 +189,7 @@ public class ProcessInstance
         Model model = ModelFactory.createDefaultModel();
         model.read(new FileInputStream(file), null, "TURTLE");
 
-        spa.rest.entities.ProcessInstance.createProcessInstance(model);
+        models.spa.rest.entities.ProcessInstance.createProcessInstance(model);
 
         return rdfToModel(model, null);
     }
@@ -197,25 +197,25 @@ public class ProcessInstance
 
     public String store() throws Exception
     {
-        return spa.rest.entities.ProcessInstance.createProcessInstance(modelToRDF(this));
+        return models.spa.rest.entities.ProcessInstance.createProcessInstance(modelToRDF(this));
     }
 
 
     public String update() throws Exception
     {
-        return spa.rest.entities.ProcessInstance.updateProcessInstance(modelToRDF(this));
+        return models.spa.rest.entities.ProcessInstance.updateProcessInstance(modelToRDF(this));
     }
 
 
     public boolean delete() throws Exception
     {
-        return spa.rest.entities.ProcessInstance.deleteProcessInstance(id);
+        return models.spa.rest.entities.ProcessInstance.deleteProcessInstance(id);
     }
 
 
     public static boolean delete(String id) throws Exception
     {
-        return spa.rest.entities.ProcessInstance.deleteProcessInstance(id);
+        return models.spa.rest.entities.ProcessInstance.deleteProcessInstance(id);
     }
 
 

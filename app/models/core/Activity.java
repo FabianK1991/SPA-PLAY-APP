@@ -10,11 +10,13 @@ public class Activity {
 	private models.spa.api.process.buildingblock.Activity activity;
 	private ArrayList<BusinessObject> bos;
 	
-	public Activity(models.spa.api.ProcessModel pm){
+	public Activity(String id, models.spa.api.ProcessModel pm){
+		this.activity.setId(id);
 		this.activity = new models.spa.api.process.buildingblock.Activity(pm);
 	}
 	
-	public Activity(models.spa.api.process.buildingblock.Activity activity){
+	public Activity(String id, models.spa.api.process.buildingblock.Activity activity){
+		this.activity.setId(id);
 		this.activity = activity;
 	}
 	
@@ -24,6 +26,10 @@ public class Activity {
 	 */
 	public String getName() {
 		return activity.getName();
+	}
+	
+	public void setName(String name){
+		this.activity.setName(name);
 	}
 	
 	/*

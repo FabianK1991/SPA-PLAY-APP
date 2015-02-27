@@ -1,19 +1,19 @@
-package spa.example;
+package models.spa.example;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import spa.api.ProcessInstance;
-import spa.api.ProcessModel;
-import spa.api.process.buildingblock.Activity;
-import spa.api.process.buildingblock.BusinessObject;
-import spa.api.process.buildingblock.Event;
-import spa.api.process.buildingblock.Event.EventType;
-import spa.api.process.buildingblock.Flow;
-import spa.api.process.buildingblock.Gateway;
-import spa.api.process.buildingblock.Gateway.GatewayType;
-import spa.api.process.buildingblock.instance.ActivityInstance;
-import spa.api.process.buildingblock.instance.BusinessObjectInstance;
+import models.spa.api.ProcessInstance;
+import models.spa.api.ProcessModel;
+import models.spa.api.process.buildingblock.Activity;
+import models.spa.api.process.buildingblock.BusinessObject;
+import models.spa.api.process.buildingblock.Event;
+import models.spa.api.process.buildingblock.Event.EventType;
+import models.spa.api.process.buildingblock.Flow;
+import models.spa.api.process.buildingblock.Gateway;
+import models.spa.api.process.buildingblock.Gateway.GatewayType;
+import models.spa.api.process.buildingblock.instance.ActivityInstance;
+import models.spa.api.process.buildingblock.instance.BusinessObjectInstance;
 
 
 public class MailProcess

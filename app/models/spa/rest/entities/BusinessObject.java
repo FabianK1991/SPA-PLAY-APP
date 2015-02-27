@@ -1,8 +1,8 @@
-package spa.rest.entities;
+package models.spa.rest.entities;
 
 import java.util.Set;
 
-import spa.rest.RestController;
+import models.spa.rest.RestController;
 
 import com.hp.hpl.jena.rdf.model.Model;
 

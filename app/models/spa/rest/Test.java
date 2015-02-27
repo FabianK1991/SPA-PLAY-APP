@@ -1,12 +1,12 @@
-package spa.rest;
+package models.spa.rest;
 
 import java.io.FileInputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-import spa.rest.entities.BusinessObject;
-import spa.rest.entities.Process;
-import spa.rest.entities.ProcessInstance;
+import models.spa.rest.entities.BusinessObject;
+import models.spa.rest.entities.Process;
+import models.spa.rest.entities.ProcessInstance;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;

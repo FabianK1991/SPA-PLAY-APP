@@ -3,14 +3,18 @@ package models.core;
 import java.io.File;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+
 public class ProcessModel {
+	models.spa.api.ProcessModel pm;
+	
 	/*
 	 * TODO
 	 * Method to internally (PRIVATE method) create an empty ProcessModel
 	 * Should be used only by static method ProcessModel.createFromBPMN_File()
 	 */
 	private ProcessModel() {
-		
+		this(null);
 	}
 	
 	/*
@@ -18,6 +22,8 @@ public class ProcessModel {
 	 * Instantiates a ProcessModel object by the given ID
 	 */
 	public ProcessModel(String id) {
+		this.pm = new models.spa.api.ProcessModel(id);
+		
 		
 	}
 	
@@ -37,6 +43,10 @@ public class ProcessModel {
 		return "";
 	}
 	
+	public models.spa.api.ProcessModel getSPAProcessModel(){
+		return this.pm;
+	}
+	
 	/*
 	 * TODO
 	 * Returns all process models stored in the SPA
@@ -53,6 +63,8 @@ public class ProcessModel {
 	 * The created ProcessModel instance needs to be returned.
 	 */
 	public static ProcessModel createFromBPMN_File(File file) {
+		
+		
 		return null;
 	}
 }

@@ -1,4 +1,4 @@
-package spa.rest;
+package models.spa.rest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
