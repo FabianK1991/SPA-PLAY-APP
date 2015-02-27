@@ -1,14 +1,22 @@
 package models.core;
 
 import java.util.List;
+import models.spa.api.process.buildingblock.*;
 
 public class Activity {
+	private models.spa.api.process.buildingblock.Activity activity;
+	private String action;
+	
+	public Activity(models.spa.api.ProcessModel pm){
+		this.activity = new models.spa.api.process.buildingblock.Activity(pm);
+	}
+	
 	/*
 	 * TODO
 	 * Returns the name of an Activity
 	 */
 	public String getName() {
-		return "";
+		return activity.getName();
 	}
 	
 	/*
@@ -17,8 +25,8 @@ public class Activity {
 	 * This identifier must be derived from the XML file, then saved in SPA and should also be consistently 
 	 * used in the HTML SVG created by the CAMUNDA JS-BPMN viewer
 	 */
-	public void getBPMN_ID() {
-		
+	public String getBPMN_ID() {
+		return activity.getId();
 	}
 	
 	/*
@@ -26,7 +34,7 @@ public class Activity {
 	 * Returns the type of action (create, update, select, delete) of this Activity
 	 */
 	public String getAction() {
-		return "";
+		return this.action;
 	}
 	
 	/*
