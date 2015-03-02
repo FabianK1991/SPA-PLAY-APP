@@ -33,9 +33,9 @@ public class ProcessInstance {
 	 * TODO
 	 * Instantiates a ProcessInstance
 	 */
-	/*public ProcessInstance(String id) {
+	public ProcessInstance(String id) {
 		
-	}*/
+	}
 	
 	/*
 	 * TODO

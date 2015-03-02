@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import play.Logger;
+
 import controllers.Application;
 import controllers.AuthController;
 
@@ -34,6 +36,7 @@ public class DBHandler {
 	
 	public DBHandler(){
 		this.connect();
+		Logger.debug("hallo lukas");
 	}
 	
 	/**
