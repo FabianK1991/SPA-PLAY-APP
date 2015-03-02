@@ -4,6 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import models.core.exceptions.ActivityInstanceNotFoundException;
 
 public class ActivityInstance {
 	// reference to the activity
@@ -17,7 +20,7 @@ public class ActivityInstance {
 	 * Method to internally (PRIVATE method) create an empty ActivityInstance
 	 * Should be used only by static method ActivityInstance.create()
 	 */
-	public ActivityInstance(ProcessInstance pi, Activity activity, String id) {
+	private ActivityInstance(ProcessInstance pi, Activity activity, String id) {
 		this.activity = activity;
 		this.id = id;
 		
@@ -35,6 +38,20 @@ public class ActivityInstance {
 		this.activityInstance.setDateTime(dateFormat.format(date));
 		
 		// TODO: handle bos
+	}
+	
+	/*
+	 * TODO
+	 * Returns a the type of Activity of this ActivityInstance
+	 */
+	public ActivityInstance(String id) throws ActivityInstanceNotFoundException {
+		/*IF id does not exists, throw exception*/
+		if (true) {
+			throw new ActivityInstanceNotFoundException();
+		}/*
+		else {
+			retrieve instance from ID and fill the properties
+		}*/
 	}
 	
 	public models.spa.api.process.buildingblock.instance.ActivityInstance getSPAActivityInstance(){
@@ -77,11 +94,21 @@ public class ActivityInstance {
 	 * TODO
 	 * Creates and returns ActivityInstance referencing the "template" of an Activity,
 	 * e.g. ActivityInstance.create(new Activity("create bill"))
-	 * 
-	 * @Deprecated use constructor instead
 	 */
-	@Deprecated
-	public static ActivityInstance create(Activity activity) {
-		return null;
+	public static ActivityInstance create(ProcessInstance pi, Activity activity) {
+		ActivityInstance newActivityInstance = null;
+		
+		while (true) {
+			String id = UUID.randomUUID().toString();
+			
+			try {
+				new ActivityInstance(id);
+			} catch (ActivityInstanceNotFoundException e) {
+				newActivityInstance = new ActivityInstance(pi, activity, id);
+				
+				break;
+			}
+		}
+		return newActivityInstance;
 	}
 }
