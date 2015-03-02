@@ -6,6 +6,7 @@ import java.util.Set;
 
 import models.spa.api.process.buildingblock.*;
 
+@SuppressWarnings("unused")
 public class Activity {
 	private models.spa.api.process.buildingblock.Activity activity;
 	private ArrayList<BusinessObject> bos;
@@ -48,9 +49,8 @@ public class Activity {
 	 * TODO
 	 * Returns the type of action (create, update, select, delete) of this Activity
 	 * 
-	 * @Deprecated Use business object instead to get action
+	 * Why DEPRECATED? This methods need to return the type of action for this activity.
 	 */
-	@Deprecated
 	public String getAction() {
 		return null;
 	}
@@ -80,7 +80,7 @@ public class Activity {
 	 * Returns a List of types of BusinessObjects that will be [created/updated/selected/deleted] by this Activity
 	 */
 	public List<BusinessObject> getBusinessObjects() {
-		/*Set<models.spa.api.process.buildingblock.BusinessObject> bos = this.activity.getBusinessObjects();
+		Set<models.spa.api.process.buildingblock.BusinessObject> bos = this.activity.getBusinessObjects();
 		
 		ArrayList<BusinessObject> resultList = new ArrayList<BusinessObject>();
 		
@@ -88,7 +88,7 @@ public class Activity {
 		    BusinessObject b = new BusinessObject(bo.getId());
 		    
 		    resultList.add(b);
-		}*/
+		}
 		
 		return this.bos;
 	}

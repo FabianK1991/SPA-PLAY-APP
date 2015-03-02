@@ -9,10 +9,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import play.Logger;
 import controllers.Application;
 import controllers.AuthController;
-
 import models.core.ProcessInstance;
+import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.util.sessions.Session;
 import models.util.sessions.User;
 
@@ -149,7 +150,7 @@ public class DBHandler {
 						reObj.add(pi);
 					}
 				}
-			} catch (SQLException e) {
+			} catch (SQLException | ProcessInstanceNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
