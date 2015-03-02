@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import models.util.db.DBHandler;
 import models.util.db.SAPServerSimulator;
+import play.Logger;
 import play.mvc.*;
 import views.html.*;
 
@@ -16,7 +17,7 @@ public class Application extends Controller {
 	/*
 	 * TODO
 	 */
-    public static Result index() {
+    public static Result index() {Logger.debug("App started");Application.db.connect();
     	if(AuthController.check()) {
     		return ok(index.render("Your new application is ready."));
     	}
