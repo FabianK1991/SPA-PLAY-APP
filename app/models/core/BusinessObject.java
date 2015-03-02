@@ -7,7 +7,6 @@ import controllers.Application;
 
 public class BusinessObject {
 	private String id;
-	
 	private String action;
 	private int min;
 	private int max;
@@ -30,7 +29,7 @@ public class BusinessObject {
 		this.action = action;
 		this.min = min;
 		this.max = max;
-		this.neededAttributes = neededAttributes;
+		this.setNeededAttributes(neededAttributes);
 	}
 	
 	
@@ -74,5 +73,17 @@ public class BusinessObject {
 	 */
 	public int getMaxQuantity() {
 		return this.max;
+	}
+
+	public List<String> getNeededAttributes() {
+		return neededAttributes;
+	}
+
+	public void setNeededAttributes(List<String> neededAttributes) {
+		this.neededAttributes = neededAttributes;
+	}
+	
+	public String getId(){
+		return this.id;
 	}
 }

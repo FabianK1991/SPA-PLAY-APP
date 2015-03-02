@@ -9,9 +9,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import play.Logger;
+
 import controllers.Application;
 import controllers.AuthController;
 
+import models.core.BusinessObject;
+import models.core.BusinessObjectAttribute;
 import models.core.ProcessInstance;
 import models.util.sessions.Session;
 import models.util.sessions.User;
@@ -34,6 +38,7 @@ public class DBHandler {
 	
 	public DBHandler(){
 		this.connect();
+		Logger.debug("hallo lukas");
 	}
 	
 	/**
@@ -53,9 +58,11 @@ public class DBHandler {
 			 */ 
 //			this.connection = DriverManager.getConnection(this.Driver + this.host + ":" + this.port + "/" + this.path, this.user, this.passwd);
 			this.connection = DriverManager.getConnection("jdbc:h2:./mtp_spa_app_data", this.user, this.passwd);
+			Logger.debug("Lukas ist stolz");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			Logger.debug("Lukas ist enttäuscht");
 			return false;
 		}
 	}
@@ -78,9 +85,10 @@ public class DBHandler {
 	}
 	
 	/**
-	 * Selects all rows for a given id of an Object.
+	 * Selects a single row for a given id of an Object.
 	 * @author Christian
-	 * @param o TODO
+	 * @param o object of either user,session, TODO
+	 * @param mode if o = user then if mode = true gets user by id else if mode = false gets user by email
 	 * @return A list of strings filled with the rows.
 	 */
 	public ArrayList<String> select(Object o, boolean mode){
@@ -124,14 +132,25 @@ public class DBHandler {
 	}
 	
 	@SuppressWarnings("rawtypes")//For compatibility with Scala Template Engine.
-	public ArrayList selectAll(Class c){
+	/**
+	 * @author Christian
+	 * @param c the class for which everything is selected; applicable for ProcessInstance,...
+	 * @param mode for process instance if true it is only selected of the current user, if false every process instance is selected.
+	 * @return
+	 */
+	public ArrayList selectAll(Class c, boolean mode){
 		ArrayList<Object> reObj = new ArrayList<Object>();
 		if(this.connect()){
 			String query = "";
 			if(c.equals(ProcessInstance.class)){
-				User u = AuthController.getUser();
-				String userid = u.getId();
-				query = "SELECT * FROM `user_process_instances` WHERE `user` = '"+ userid +"' ORDER BY `time`";
+				if(mode){
+					User u = AuthController.getUser();
+					String userid = u.getId();
+					query = "SELECT * FROM `user_process_instances` WHERE `user` = '"+ userid +"' ORDER BY `time`";
+				}else{
+					query = "SELECT * FROM `user_process_instances` ORDER BY `time`";
+				}
+				
 			}
 			ResultSet rs = this.exec(query, null, true);
 			try {
