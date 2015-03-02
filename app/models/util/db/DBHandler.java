@@ -10,13 +10,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import play.Logger;
-
 import controllers.Application;
 import controllers.AuthController;
-
 import models.core.BusinessObject;
 import models.core.BusinessObjectAttribute;
 import models.core.ProcessInstance;
+import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.util.sessions.Session;
 import models.util.sessions.User;
 
@@ -168,11 +167,15 @@ public class DBHandler {
 						reObj.add(pi);
 					}
 				}
-			} catch (SQLException e) {
+			} catch (SQLException | ProcessInstanceNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
 		return reObj;
+	}
+	
+	public ArrayList selectAll(Class c){
+		return selectAll(c, true);
 	}
 	
 	/**
