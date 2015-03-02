@@ -9,10 +9,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import play.Logger;
-
 import controllers.Application;
 import controllers.AuthController;
+
 import models.core.ProcessInstance;
 import models.util.sessions.Session;
 import models.util.sessions.User;
@@ -33,7 +32,7 @@ public class DBHandler {
 	
 	public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public DBHandler(){Logger.debug("DB Handler!");
+	public DBHandler(){
 		this.connect();
 	}
 	
@@ -54,11 +53,9 @@ public class DBHandler {
 			 */ 
 //			this.connection = DriverManager.getConnection(this.Driver + this.host + ":" + this.port + "/" + this.path, this.user, this.passwd);
 			this.connection = DriverManager.getConnection("jdbc:h2:./mtp_spa_app_data", this.user, this.passwd);
-			Logger.debug("DB connection established!");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			Logger.debug("DB connection not established!");
 			return false;
 		}
 	}
