@@ -144,8 +144,9 @@ public class User {
 	/*
 	 * TODO
 	 */
+	@SuppressWarnings("unchecked")
 	public List<ProcessInstance> getProcessInstances() {
-		return null;
+		return Application.db.selectAll(ProcessInstance.class);
 	}
 	
 	/*
@@ -165,7 +166,7 @@ public class User {
 	/*
 	 * TODO
 	 */
-	public void archiveProcessInstances(ProcessInstance p) {
+	public void archiveProcessInstance(ProcessInstance p) {
 		
 	}
 }

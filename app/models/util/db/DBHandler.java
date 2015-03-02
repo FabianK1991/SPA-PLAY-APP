@@ -1,10 +1,5 @@
 package models.util.db;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,9 +9,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import play.Logger;
 import controllers.Application;
 import controllers.AuthController;
+
 import models.core.ProcessInstance;
 import models.util.sessions.Session;
 import models.util.sessions.User;
@@ -26,32 +21,19 @@ public class DBHandler {
 	/*
 	 * MySQL-Connection information
 	 */
-	private String host 	= null;
-	private int    port 	= 3306;
-	private String path 	= "data_mtp_spa_app";
-	private String user 	= null; 
-	private String passwd	= null; 
-	private String Driver 	= "com.mysql.jdbc.Driver";
+	private String host 	= "";
+	private int    port 	= 8082;
+	private String path 	= "./data_mtp_spa_app";
+	private String user 	= "mtp_spa_app"; 
+	private String passwd	= "crasuhacru-EC3mewa*ep"; 
+	private String Driver 	= "org.h2.Driver";
 	private Connection connection;
 	
 	
 	public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public DBHandler(){Logger.debug("start DB Handler");
-		try {
-			File f = new File(Encoding.decode("YXBwL3ByaXZhdGUvYmR3cC50eHQ="));
-			BufferedReader br = new BufferedReader(new FileReader(f));
-			
-			this.passwd = Encoding.decode(br.readLine());
-			this.user = Encoding.decode(br.readLine());
-			this.host = Encoding.decode(br.readLine());
-		} catch (FileNotFoundException e) {
-			//log if failed?!
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public DBHandler(){
+		this.connect();
 	}
 	
 	/**
@@ -66,11 +48,13 @@ public class DBHandler {
 			}
 			
 			Class.forName(this.Driver);
-			this.connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.path, this.user, this.passwd);
-			Logger.debug("connected");
+			/*
+			 * line 1 for MySql, line 2 for h2
+			 */ 
+//			this.connection = DriverManager.getConnection(this.Driver + this.host + ":" + this.port + "/" + this.path, this.user, this.passwd);
+			this.connection = DriverManager.getConnection("jdbc:h2:./mtp_spa_app_data", this.user, this.passwd);
 			return true;
 		} catch (Exception e) {
-			Logger.debug("not connected123");
 			e.printStackTrace();
 			return false;
 		}
@@ -94,10 +78,10 @@ public class DBHandler {
 	}
 	
 	/**
-	 * Selects all columns for a given id of an Object.
+	 * Selects all rows for a given id of an Object.
 	 * @author Christian
 	 * @param o TODO
-	 * @return A list of strings filled with the columns.
+	 * @return A list of strings filled with the rows.
 	 */
 	public ArrayList<String> select(Object o, boolean mode){
 		ArrayList<String> re = new ArrayList<String>();
