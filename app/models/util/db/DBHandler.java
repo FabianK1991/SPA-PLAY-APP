@@ -1,10 +1,5 @@
 package models.util.db;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,32 +21,19 @@ public class DBHandler {
 	/*
 	 * MySQL-Connection information
 	 */
-	private String host 	= null;
-	private int    port 	= 3306;
-	private String path 	= "data_mtp_spa_app";
-	private String user 	= null; 
-	private String passwd	= null; 
-	private String Driver 	= "com.mysql.jdbc.Driver";
+	private String host 	= "";
+	private int    port 	= 8082;
+	private String path 	= "./data_mtp_spa_app";
+	private String user 	= "mtp_spa_app"; 
+	private String passwd	= "crasuhacru-EC3mewa*ep"; 
+	private String Driver 	= "org.h2.Driver";
 	private Connection connection;
 	
 	
 	public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public DBHandler(){
-		try {
-			File f = new File(Encoding.decode("YXBwL3ByaXZhdGUvYmR3cC50eHQ="));
-			BufferedReader br = new BufferedReader(new FileReader(f));
-			
-			this.passwd = Encoding.decode(br.readLine());
-			this.user = Encoding.decode(br.readLine());
-			this.host = Encoding.decode(br.readLine());
-		} catch (FileNotFoundException e) {
-			//log if failed?!
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.connect();
 	}
 	
 	/**
@@ -66,7 +48,11 @@ public class DBHandler {
 			}
 			
 			Class.forName(this.Driver);
-			this.connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.path, this.user, this.passwd);
+			/*
+			 * line 1 for MySql, line 2 for h2
+			 */ 
+//			this.connection = DriverManager.getConnection(this.Driver + this.host + ":" + this.port + "/" + this.path, this.user, this.passwd);
+			this.connection = DriverManager.getConnection("jdbc:h2:./mtp_spa_app_data", this.user, this.passwd);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
