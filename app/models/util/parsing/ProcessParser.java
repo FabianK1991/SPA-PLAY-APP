@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import models.core.Activity;
 import models.core.ProcessModel;
+import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
 import models.spa.api.process.buildingblock.Event;
 import models.spa.api.process.buildingblock.Flow;
 import models.spa.api.process.buildingblock.Gateway;
@@ -25,12 +26,13 @@ import org.xml.sax.SAXException;
 
 
 public class ProcessParser {
-	public static void main(String[] args){
-		ProcessParser pp = new ProcessParser(new File("test.xml"));
-	}
 	
-	public ProcessParser(File file){
-		this.parseXML(file);
+	public ProcessParser(File file, ProcessModel processModel){
+		try {
+			this.parseXML(file, processModel);
+		} catch (IncorrectNumberOfProcessModelsExeption e) {
+			/*If file contains 0 or more than 1 Process Model!*/
+		}
 	}
 	
 	private Document doc;
@@ -72,7 +74,7 @@ public class ProcessParser {
 				
 				String id = el.getAttribute("id");
 				
-				Activity a = new Activity(el.getAttribute("id"), pm.getSPAProcessModel());
+				Activity a = new Activity(id, pm.getSPAProcessModel());
 				
 				if( el.getAttribute("name") != null ){
 					a.setName(el.getAttribute("name"));
@@ -116,9 +118,7 @@ public class ProcessParser {
 	/*
 	 * Parses a process node into an ProcessModel
 	 */
-	private ProcessModel parseProcess(Element ele){		
-		ProcessModel pm = new ProcessModel(ele.getAttribute("id"));
-		
+	private ProcessModel parseProcess(ProcessModel pm, Element ele){
 		// parse nodes
 		NodeList nList = ele.getChildNodes();
 		
@@ -134,7 +134,7 @@ public class ProcessParser {
 	/*
 	 * Parses an xml into processmodels
 	 */
-	private void parseXML(File file){
+	private void parseXML(File file, ProcessModel processModel) throws IncorrectNumberOfProcessModelsExeption{
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		
 		DocumentBuilder db;
@@ -146,13 +146,21 @@ public class ProcessParser {
 			NodeList nList = this.doc.getElementsByTagName("process");
 			this.pms = new ArrayList<ProcessModel>();
 			
+			//One file can only contain one process model!
+			if (nList.getLength() == 1) {
+				this.parseProcess(processModel, (Element)nList.item(0));
+			}
+			else {
+				throw new IncorrectNumberOfProcessModelsExeption();
+			}
+			/*
 			// parse each process
 			for (int temp = 0; temp < nList.getLength(); temp++) {
 				Element ele = (Element)nList.item(temp);
 				
-				ProcessModel pm = this.parseProcess(ele);
+				ProcessModel pm = 
 				this.pms.add(pm);
-			}
+			}*/
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

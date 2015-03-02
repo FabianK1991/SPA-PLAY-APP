@@ -6,9 +6,13 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import models.core.exceptions.ActivityInstanceNotFoundException;
+import models.core.exceptions.ProcessInstanceNotFoundException;
+import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.parsing.ProcessParser;
 
 public class ProcessModel {
@@ -16,22 +20,33 @@ public class ProcessModel {
 	
 	private List<Activity> activities; 
 	
+	private static final String xmlPath = "/public/processes/";
+	
 	/*
 	 * TODO
 	 * Method to internally (PRIVATE method) create an empty ProcessModel
 	 * Should be used only by static method ProcessModel.createFromBPMN_File()
 	 */
 	private ProcessModel() {
-		this(null);
+		this.pm = new models.spa.api.ProcessModel(getUID());
+		this.activities = new ArrayList<Activity>();
 	}
 	
 	/*
 	 * TODO
 	 * Instantiates a ProcessModel object by the given ID
+	 * 
+	 * >> Needs to SEARCH in SPA for a ProcessModel with the given ID <<
+	 * >> This process model (already existing!) needs to be instantiated, not a new one! <<
 	 */
-	public ProcessModel(String id) {
-		this.pm = new models.spa.api.ProcessModel(id);
-		this.activities = new ArrayList<Activity>();
+	public ProcessModel(String id) throws ProcessModelNotFoundException {
+		/*IF id does not exists, throw exception*/
+		if (true) {
+			throw new ProcessModelNotFoundException();
+		}/*
+		else {
+			retrieve instance from ID and fill the properties
+		}*/
 	}
 	
 	/*
@@ -39,7 +54,7 @@ public class ProcessModel {
 	 * Returns the BPMN XML file locally stored by the static method ProcessModel.createFromBPMN_File()
 	 */
 	public File getBPMN_XML() {
-		return new File("process/" + this.pm.getId() + ".bpmn");
+		return new File(xmlPath + this.pm.getId() + ".bpmn");
 	}
 	
 	public String getId(){
@@ -94,10 +109,11 @@ public class ProcessModel {
 	 * The created ProcessModel instance needs to be returned.
 	 */
 	public static ProcessModel createFromBPMN_File(File file) {
-		ProcessParser pp = new ProcessParser(file);
-		ProcessModel pm = pp.getParsedModels().get(0);
+		ProcessModel newProcessModel = new ProcessModel();
 		
-		File f = new File("process/" + pm.getId() + ".bpmn");
+		ProcessParser pp = new ProcessParser(file, newProcessModel);
+		
+		File f = new File(xmlPath + newProcessModel.getId() + ".bpmn");
 		
 		// Check if file exists, otherwise write it
 		if( !f.exists() ){
@@ -108,6 +124,21 @@ public class ProcessModel {
 			}
 		}
 		
-		return pm;
+		return newProcessModel;
+	}
+	
+	private static String getUID() {
+		String id = "";
+		
+		while (true) {
+			id = UUID.randomUUID().toString();
+			
+			try {
+				new ProcessModel(id);
+			} catch (ProcessModelNotFoundException e) {
+				break;
+			}
+		}
+		return id;
 	}
 }

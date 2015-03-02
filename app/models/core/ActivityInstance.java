@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import models.core.exceptions.ActivityInstanceNotFoundException;
+import models.core.exceptions.ProcessModelNotFoundException;
 
 public class ActivityInstance {
 	// reference to the activity
@@ -20,9 +21,9 @@ public class ActivityInstance {
 	 * Method to internally (PRIVATE method) create an empty ActivityInstance
 	 * Should be used only by static method ActivityInstance.create()
 	 */
-	private ActivityInstance(ProcessInstance pi, Activity activity, String id) {
+	private ActivityInstance(ProcessInstance pi, Activity activity) {
+		this.id = getUID();
 		this.activity = activity;
-		this.id = id;
 		
 		this.activityInstance = new models.spa.api.process.buildingblock.instance.ActivityInstance(pi.getSPAProcessInstance());
 		this.activityInstance.setId(id);
@@ -43,6 +44,9 @@ public class ActivityInstance {
 	/*
 	 * TODO
 	 * Returns a the type of Activity of this ActivityInstance
+	 * 
+	 * >> Needs to SEARCH in SPA for a ActivityInstance with the given ID <<
+	 * >> This activity instance (already existing!) needs to be instantiated, not a new one! <<
 	 */
 	public ActivityInstance(String id) throws ActivityInstanceNotFoundException {
 		/*IF id does not exists, throw exception*/
@@ -94,21 +98,27 @@ public class ActivityInstance {
 	 * TODO
 	 * Creates and returns ActivityInstance referencing the "template" of an Activity,
 	 * e.g. ActivityInstance.create(new Activity("create bill"))
+	 * 
+	 * >> This create method prevents the user of this class from setting IDs!! <<
 	 */
 	public static ActivityInstance create(ProcessInstance pi, Activity activity) {
-		ActivityInstance newActivityInstance = null;
+		ActivityInstance newActivityInstance = new ActivityInstance(pi, activity);
+		
+		return newActivityInstance;
+	}
+	
+	private static String getUID() {
+		String id = "";
 		
 		while (true) {
-			String id = UUID.randomUUID().toString();
+			id = UUID.randomUUID().toString();
 			
 			try {
 				new ActivityInstance(id);
 			} catch (ActivityInstanceNotFoundException e) {
-				newActivityInstance = new ActivityInstance(pi, activity, id);
-				
 				break;
 			}
 		}
-		return newActivityInstance;
+		return id;
 	}
 }

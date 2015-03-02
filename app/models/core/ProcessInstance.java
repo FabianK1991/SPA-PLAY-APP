@@ -1,7 +1,11 @@
 package models.core;
 
 import java.util.Date;
+import java.util.UUID;
 
+import models.core.exceptions.ActivityInstanceNotFoundException;
+import models.core.exceptions.ProcessInstanceNotFoundException;
+import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.sessions.User;
 
 public class ProcessInstance {
@@ -21,11 +25,11 @@ public class ProcessInstance {
 	 * Method to internally (PRIVATE method) create an empty ProcessInstance
 	 * Should be used only by static method ProcessInstance.create()
 	 */
-	public ProcessInstance(User user, ProcessModel pm, String id) {
+	private ProcessInstance(User user, ProcessModel pm) {
+		this.id = getUID();
 		this.pm = pm;
 		this.pi = new models.spa.api.ProcessInstance(pm.getSPAProcessModel());
 		
-		this.id = id;
 		this.pi.setId(id);
 	}
 	
@@ -33,9 +37,15 @@ public class ProcessInstance {
 	 * TODO
 	 * Instantiates a ProcessInstance
 	 */
-	/*public ProcessInstance(String id) {
-		
-	}*/
+	public ProcessInstance(String id) throws ProcessInstanceNotFoundException {
+		/*IF id does not exists, throw exception*/
+		if (true) {
+			throw new ProcessInstanceNotFoundException();
+		}/*
+		else {
+			retrieve instance from ID and fill the properties
+		}*/
+	}
 	
 	/*
 	 * TODO
@@ -78,11 +88,23 @@ public class ProcessInstance {
 	 * Creates and returns a ProcessInstance object that uses the passed "processModel" as template and references the current user passed as "user"
 	 * All ProcessInstances need to be stored in database "user_process_instances" (columns: id, user, archive[no])
 	 * 
-	 * @Deprecated use constructor instead
+	 * >> This create method prevents the user of this class from setting IDs!! <<
 	 */
-	@Deprecated
 	public static ProcessInstance create(User user, ProcessModel processModel) {
-		return null;
+		ProcessInstance newProcessInstance = null;
+		
+		while (true) {
+			String id = UUID.randomUUID().toString();
+			
+			try {
+				new ProcessInstance(id);
+			} catch (ProcessInstanceNotFoundException e) {
+				newProcessInstance = new ProcessInstance(user, processModel);
+				
+				break;
+			}
+		}
+		return newProcessInstance;
 	}
 
 	public void setId(String id) {
@@ -111,5 +133,20 @@ public class ProcessInstance {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+	
+	private static String getUID() {
+		String id = "";
+		
+		while (true) {
+			id = UUID.randomUUID().toString();
+			
+			try {
+				new ProcessInstance(id);
+			} catch (ProcessInstanceNotFoundException e) {
+				break;
+			}
+		}
+		return id;
 	}
 }
