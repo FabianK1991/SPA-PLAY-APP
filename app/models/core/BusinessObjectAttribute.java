@@ -1,13 +1,21 @@
 package models.core;
 
+import controllers.Application;
+
 public class BusinessObjectAttribute {
+	private String id;
+	
 	/*
 	 * TODO
 	 * Instantiates a BusinessObjectAttribute
 	 * All available BusinessObjectAttributes can be found in database "attributes" (columns: id, name)
 	 */
 	public BusinessObjectAttribute(String id) {
-		
+		this.id = id;
+	}
+	
+	public String getId(){
+		return this.id;
 	}
 	
 	/*
@@ -16,6 +24,6 @@ public class BusinessObjectAttribute {
 	 * 
 	 */
 	public String getName() {
-		return "";
+		return Application.sss.getAttributeName(Integer.parseInt(this.id));
 	}
 }

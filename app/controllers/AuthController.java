@@ -86,7 +86,11 @@ public class AuthController extends Controller {
 			return redirect("/");
 		}
     	else {
+<<<<<<< HEAD
     		return ok(login.render(""));
+=======
+    		return ok(design.render("Title", login.render("Title")));
+>>>>>>> origin/master
     	}
 	}
 	

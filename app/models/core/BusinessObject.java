@@ -1,8 +1,39 @@
 package models.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import controllers.Application;
+
 public class BusinessObject {
+	private String id;
+	
+	private String action;
+	private int min;
+	private int max;
+	
+	private List<String> neededAttributes;
+	
+	public BusinessObject(String id){
+		this.id = id;
+	}
+	
+	public BusinessObject(String id, String action, int min, int max){
+		this.id = id;
+		this.action = action;
+		this.min = min;
+		this.max = max;
+	}
+	
+	public BusinessObject(String id, String action, int min, int max, List<String> neededAttributes){
+		this.id = id;
+		this.action = action;
+		this.min = min;
+		this.max = max;
+		this.neededAttributes = neededAttributes;
+	}
+	
+	
 	/*
 	 * TODO
 	 * Returns an ordered List of BusinessObjectAttributes that are allowed for this BusinessObject
@@ -11,7 +42,22 @@ public class BusinessObject {
 	 * => List should be ordered ASCending by column order
 	 */
 	public List<BusinessObjectAttribute> getAttributes() {
-		return null;
+		List<String> attr = Application.sss.getBusinessObjectAttributes(Integer.parseInt(this.id));
+		
+		ArrayList<BusinessObjectAttribute> resultList = new ArrayList<BusinessObjectAttribute>();
+		
+		for (String a : attr) {
+			BusinessObjectAttribute boa = new BusinessObjectAttribute(a);
+			resultList.add(boa);
+		}
+		
+		return resultList;
+	}
+	/*
+	 * Returns the action for which the business object is be used
+	 */
+	public String getAction(){
+		return this.action;
 	}
 	
 	/*
@@ -19,7 +65,7 @@ public class BusinessObject {
 	 * Returns the minimum number of BusinessObjects that need to be defined in a ActivityInstance
 	 */
 	public int getMinQuantity() {
-		return 0;
+		return this.min;
 	}
 	
 	/*
@@ -27,6 +73,6 @@ public class BusinessObject {
 	 * Returns the maximum number of BusinessObjects that can be defined in a ActivityInstance
 	 */
 	public int getMaxQuantity() {
-		return 0;
+		return this.max;
 	}
 }
