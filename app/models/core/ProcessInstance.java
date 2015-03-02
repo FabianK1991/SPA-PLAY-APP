@@ -30,6 +30,22 @@ public class ProcessInstance {
 	
 	/*
 	 * TODO
+	 * Returns the ID of this ProcessInstance
+	 */
+	public String getID() {
+		return "";
+	}
+	
+	/*
+	 * TODO
+	 * Returns the name of this ProcessInstance
+	 */
+	public String getName() {
+		return "";
+	}
+	
+	/*
+	 * TODO
 	 * Returns the reference to the ProcessModel used as template by the static method ProcessInstance.create()
 	 */
 	public ProcessModel getProcessModel() {
@@ -47,7 +63,7 @@ public class ProcessInstance {
 	/*
 	 * TODO
 	 * Creates and returns a ProcessInstance object that uses the passed "processModel" as template and references the current user passed as "user"
-	 * All ProcessInstances need to be stored in database "user_process_instances" (columns: id, user, archive[no])
+	 * All ProcessInstances need to be stored in database "user_process_instances" (columns: id, user, process, archive[no])
 	 */
 	public static ProcessInstance create(User user, ProcessModel processModel) {
 		return null;

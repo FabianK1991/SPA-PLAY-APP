@@ -1,26 +1,25 @@
-@(title: String)(content: Html)
+@import core._
+@(currentActivityInstance: ActivityInstance)
 
-<!DOCTYPE html>
+@design("Process Guidance") {
 
-<html>
-    <head>
-        <title>@title</title>
-        
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        
-        <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.css"))'>
-        
-		<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
-		<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.js"))'></script>
+    @process_selector()
+    
+    @process_viewer()
+    
+    @defining(currentActivityInstance.getActivity()) { activity =>
+    	@defining(activity.getBusinessObjects()) { businessObjects =>
+    		@activity.getAction() match {
+        		case "select" 	=> 	{@bo_select(businessObjects)}
+        		case "update" 	=> 	{@bo_update(businessObjects)}
+        		case "create" 	=> 	{@bo_create(businessObjects)}
+        		case "delete" 	=> 	{@bo_delete(businessObjects)}
+        		case _ 			=>	{@bo_none()}
+    		}
+    	}
+   	}
+    @document_viewer()
 
-        
-    </head>
-    <body>
-        <div id="diagram">
-  		</div>
-  		
-    </body>
-</html>
+}
 
-<script data-main="@routes.Assets.at("javascripts/main.js")" type="text/javascript" src="@routes.Assets.at("lib/requirejs/require.js")"></script>
+

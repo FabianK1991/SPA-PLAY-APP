@@ -4,14 +4,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import models.util.db.DBHandler;
+import models.util.db.SAPServerSimulator;
 import play.mvc.*;
-
 import views.html.*;
 
 public class Application extends Controller {
 	
 	public static DBHandler db = new DBHandler();
-
+	public static SAPServerSimulator sss = new SAPServerSimulator();
+	
 	/*
 	 * TODO
 	 */

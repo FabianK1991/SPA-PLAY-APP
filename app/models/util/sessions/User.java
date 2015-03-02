@@ -152,6 +152,13 @@ public class User {
 	/*
 	 * TODO
 	 */
+	public ProcessInstance getCurrentProcessInstance() {
+		return null;
+	}
+	
+	/*
+	 * TODO
+	 */
 	public ProcessInstance createProcessInstance(ProcessModel processModel) {
 		return null;
 	}
