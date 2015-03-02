@@ -14,9 +14,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import play.Logger;
 import controllers.Application;
 import controllers.AuthController;
-
 import models.core.ProcessInstance;
 import models.util.sessions.Session;
 import models.util.sessions.User;
@@ -37,7 +37,7 @@ public class DBHandler {
 	
 	public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public DBHandler(){
+	public DBHandler(){Logger.debug("start DB Handler");
 		try {
 			File f = new File(Encoding.decode("YXBwL3ByaXZhdGUvYmR3cC50eHQ="));
 			BufferedReader br = new BufferedReader(new FileReader(f));
@@ -67,8 +67,10 @@ public class DBHandler {
 			
 			Class.forName(this.Driver);
 			this.connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + this.port + "/" + this.path, this.user, this.passwd);
+			Logger.debug("connected");
 			return true;
 		} catch (Exception e) {
+			Logger.debug("not connected123");
 			e.printStackTrace();
 			return false;
 		}
@@ -92,10 +94,10 @@ public class DBHandler {
 	}
 	
 	/**
-	 * Selects all rows for a given id of an Object.
+	 * Selects all columns for a given id of an Object.
 	 * @author Christian
 	 * @param o TODO
-	 * @return A list of strings filled with the rows.
+	 * @return A list of strings filled with the columns.
 	 */
 	public ArrayList<String> select(Object o, boolean mode){
 		ArrayList<String> re = new ArrayList<String>();

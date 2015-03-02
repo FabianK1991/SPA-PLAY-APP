@@ -2,11 +2,9 @@ package controllers;
 
 import java.util.Date;
 
-import models.util.db.DBHandler;
 import models.util.http.Parameters;
 import models.util.sessions.Session;
 import models.util.sessions.User;
-import play.*;
 import play.mvc.*;
 import play.mvc.Http.Cookie;
 
@@ -41,7 +39,11 @@ public class AuthController extends Controller {
 				return true;
 			}
 		}
-		return false;
+		/*
+		 * TODO: remove next line for production mode!
+		 */
+		return true;
+		//return false;
 	}
 	/**
 	 * Logs the user into the system.
@@ -73,7 +75,7 @@ public class AuthController extends Controller {
 			response().discardCookie("sessid");
 			response().discardCookie("sesskey");
 		}
-		return redirect("/auth");
+		return redirect("/login");
 	}
 	/**
 	 * Redirects the user to the SPA APP
@@ -84,7 +86,7 @@ public class AuthController extends Controller {
 			return redirect("/");
 		}
     	else {
-    		return ok(design.render(login.render()));
+    		return ok(login.render(""));
     	}
 	}
 	
