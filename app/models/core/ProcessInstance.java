@@ -1,8 +1,16 @@
 package models.core;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
+import models.spa.api.process.buildingblock.Flow;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
@@ -18,8 +26,6 @@ public class ProcessInstance {
 	private ProcessModel pm;
 	private models.spa.api.ProcessInstance pi;
 	
-	private ActivityInstance currentActivity;
-	
 	/*
 	 * TODO
 	 * Method to internally (PRIVATE method) create an empty ProcessInstance
@@ -31,6 +37,14 @@ public class ProcessInstance {
 		this.pi = new models.spa.api.ProcessInstance(pm.getSPAProcessModel());
 		
 		this.pi.setId(id);
+		
+		// save to repository
+		try {
+			//this.pi.store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/*
@@ -38,13 +52,11 @@ public class ProcessInstance {
 	 * Instantiates a ProcessInstance
 	 */
 	public ProcessInstance(String id) throws ProcessInstanceNotFoundException {
-		/*IF id does not exists, throw exception*/
-		if (true) {
+		try {
+			this.pi = models.spa.api.ProcessInstance.getProcessInstance(null, id);
+		} catch (Exception e) {
 			throw new ProcessInstanceNotFoundException();
-		}/*
-		else {
-			retrieve instance from ID and fill the properties
-		}*/
+		}
 	}
 	
 	/*
@@ -75,12 +87,66 @@ public class ProcessInstance {
 		return this.pm;
 	}
 	
+	private models.spa.api.process.buildingblock.Activity getStartActivity(){
+		models.spa.api.ProcessModel pm = this.pm.getSPAProcessModel();
+
+ 		Set<models.spa.api.process.buildingblock.Node> nodes = pm.getNodes();
+ 		models.spa.api.process.buildingblock.Node startNode = null;
+ 		
+ 		for(models.spa.api.process.buildingblock.Node n : nodes){
+ 			if(n instanceof models.spa.api.process.buildingblock.Event && ((models.spa.api.process.buildingblock.Event)n).type == models.spa.api.process.buildingblock.Event.EventType.Start.toString()){
+ 				startNode = n;
+ 				break;
+ 			}
+ 		}
+ 		
+ 		// Now get first activity
+ 		if( startNode != null ){
+ 			for(models.spa.api.process.buildingblock.Flow f : startNode.getNextFlows()){
+ 				if( f.getTo() instanceof models.spa.api.process.buildingblock.Activity ){
+ 					return (models.spa.api.process.buildingblock.Activity)f.getTo();
+ 				}
+ 			};
+ 		}
+ 		
+ 		return null;
+ 	}
+	
 	/*
 	 * TODO
 	 * Returns the ActivityInstance currently active in the ProcessInstance
 	 */
 	public ActivityInstance getCurrentActivity() {
-		return this.currentActivity;
+		Set<models.spa.api.process.buildingblock.instance.ActivityInstance> instances = this.pi.getActivities();
+		
+		models.spa.api.process.buildingblock.instance.ActivityInstance latestInstance = null;
+		
+		for (models.spa.api.process.buildingblock.instance.ActivityInstance instance : instances) {
+			SimpleDateFormat inFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+			
+			try {
+				Date dtIn = inFormat.parse(instance.getDateTime());
+				
+				if( latestInstance == null || dtIn.getTime() > inFormat.parse(latestInstance.getDateTime()).getTime() ){
+					latestInstance = instance;
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				continue;
+			}
+	    }
+		
+		if( latestInstance != null ){
+			return new ActivityInstance(latestInstance);
+		}
+		else{
+			// get start activity
+			models.spa.api.process.buildingblock.Activity a = this.getStartActivity();
+			
+			return ActivityInstance.create(this, new Activity(a));
+		}
 	}
 	
 	/*

@@ -17,9 +17,6 @@ import models.util.parsing.ProcessParser;
 
 public class ProcessModel {
 	models.spa.api.ProcessModel pm;
-	
-	private List<Activity> activities; 
-	
 	private static final String xmlPath = "/public/processes/";
 	
 	/*
@@ -29,7 +26,14 @@ public class ProcessModel {
 	 */
 	private ProcessModel() {
 		this.pm = new models.spa.api.ProcessModel(getUID());
-		this.activities = new ArrayList<Activity>();
+		
+		// save to repository
+		try {
+			//this.pm.store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/*
@@ -40,13 +44,11 @@ public class ProcessModel {
 	 * >> This process model (already existing!) needs to be instantiated, not a new one! <<
 	 */
 	public ProcessModel(String id) throws ProcessModelNotFoundException {
-		/*IF id does not exists, throw exception*/
-		if (true) {
+		try {
+			this.pm = models.spa.api.ProcessModel.getProcess(id);
+		} catch (Exception e) {
 			throw new ProcessModelNotFoundException();
-		}/*
-		else {
-			retrieve instance from ID and fill the properties
-		}*/
+		}
 	}
 	
 	/*
@@ -82,11 +84,6 @@ public class ProcessModel {
 		}
 		
 		return null;
-	}
-	
-	public void addActivity(Activity act){
-		// add it to the spa model
-		this.pm.getNodes().add(act.getSPAActivity());
 	}
 	
 	public models.spa.api.ProcessModel getSPAProcessModel(){

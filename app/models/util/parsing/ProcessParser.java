@@ -74,14 +74,17 @@ public class ProcessParser {
 				
 				String id = el.getAttribute("id");
 				
-				Activity a = new Activity(id, pm.getSPAProcessModel());
+				//Activity a = new Activity(id, pm.getSPAProcessModel());
+				models.spa.api.process.buildingblock.Activity a = new models.spa.api.process.buildingblock.Activity(pm.getSPAProcessModel());
+				
+				a.setId(id);
 				
 				if( el.getAttribute("name") != null ){
 					a.setName(el.getAttribute("name"));
 				}
 				
 				// add activity to process model
-				pm.addActivity(a);
+				pm.getSPAProcessModel().getNodes().add(a);
 				break;
 			case "startEvent":
 				Event start = new Event(pm.getSPAProcessModel(), EventType.Start);

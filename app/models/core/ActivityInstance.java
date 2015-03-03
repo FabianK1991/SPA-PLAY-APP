@@ -2,6 +2,7 @@ package models.core;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +16,7 @@ public class ActivityInstance {
 	private String id;
 	
 	private models.spa.api.process.buildingblock.instance.ActivityInstance activityInstance;
+	private static List<ActivityInstance> instances = new ArrayList<ActivityInstance>();
 	
 	/*
 	 * TODO
@@ -39,6 +41,12 @@ public class ActivityInstance {
 		this.activityInstance.setDateTime(dateFormat.format(date));
 		
 		// TODO: handle bos
+		ActivityInstance.instances.add(this);
+	}
+	
+	public ActivityInstance(models.spa.api.process.buildingblock.instance.ActivityInstance ai) {
+		this.activityInstance = ai;
+		ActivityInstance.instances.add(this);
 	}
 	
 	/*
@@ -47,7 +55,11 @@ public class ActivityInstance {
 	 * 
 	 * >> Needs to SEARCH in SPA for a ActivityInstance with the given ID <<
 	 * >> This activity instance (already existing!) needs to be instantiated, not a new one! <<
+	 * 
+	 * 
+	 * Use ActivityInstance.getInstanceById(id)
 	 */
+	@Deprecated
 	public ActivityInstance(String id) throws ActivityInstanceNotFoundException {
 		/*IF id does not exists, throw exception*/
 		if (true) {
@@ -94,6 +106,19 @@ public class ActivityInstance {
 		
 	}
 	
+	public static ActivityInstance getInstanceById(String id) throws ActivityInstanceNotFoundException{
+		//throw new ActivityInstanceNotFoundException();
+		for(int i=0;i<ActivityInstance.instances.size();i++){
+			ActivityInstance ai = ActivityInstance.instances.get(i);
+			
+			if( ai.getSPAActivityInstance().getId().equals(id) ){
+				return ai;
+			}
+		}
+		
+		throw new ActivityInstanceNotFoundException(); 
+	}
+	
 	/*
 	 * TODO
 	 * Creates and returns ActivityInstance referencing the "template" of an Activity,
@@ -114,7 +139,7 @@ public class ActivityInstance {
 			id = UUID.randomUUID().toString();
 			
 			try {
-				new ActivityInstance(id);
+				ActivityInstance.getInstanceById(id);
 			} catch (ActivityInstanceNotFoundException e) {
 				break;
 			}

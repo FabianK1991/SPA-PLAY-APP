@@ -41,7 +41,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 public class RestController
 {
 
-    private static String                       uri                 = "http://localhost:9000/";
+    private static String                       uri                 = "http://manitu-1.webmans.de:9000/";
 
     private static ResponseHandler<Set<String>> responseHandlerList = new ResponseHandler<Set<String>>() {
 

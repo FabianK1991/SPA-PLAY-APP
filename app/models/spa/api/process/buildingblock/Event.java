@@ -11,7 +11,10 @@ public class Event extends Node
         Start, End
     };
 
-    String type = "Event";
+    // TODO:
+    // REQUIREMENT STUCKENSCHMIDT 
+    // HAS TO BE PUBLIC OR GETTER METHOD
+    public String type = "Event";
 
 
     public Event(ProcessModel process, EventType type)

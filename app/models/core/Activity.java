@@ -17,9 +17,8 @@ public class Activity {
 		
 	}
 	
-	public Activity(String id, models.spa.api.process.buildingblock.Activity activity){
+	public Activity(models.spa.api.process.buildingblock.Activity activity){
 		this.activity = activity;
-		this.activity.setId(id);
 	}
 	
 	/*
