@@ -27,6 +27,7 @@ public class ActivityInstance {
 		this.id = getUID();
 		this.activity = activity;
 		
+		
 		this.activityInstance = new models.spa.api.process.buildingblock.instance.ActivityInstance(pi.getSPAProcessInstance());
 		this.activityInstance.setId(id);
 		
@@ -42,6 +43,9 @@ public class ActivityInstance {
 		
 		// TODO: handle bos
 		ActivityInstance.instances.add(this);
+		
+		// Add to spa model
+		pi.getSPAProcessInstance().getActivities().add(this.activityInstance);
 	}
 	
 	public ActivityInstance(models.spa.api.process.buildingblock.instance.ActivityInstance ai) {
