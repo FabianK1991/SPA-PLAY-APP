@@ -159,7 +159,8 @@ public class ProcessModel {
 		
 		// save process model
 		try {
-			//newProcessModel.getSPAProcessModel().store();
+			newProcessModel.getSPAProcessModel().delete();
+			newProcessModel.getSPAProcessModel().store();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

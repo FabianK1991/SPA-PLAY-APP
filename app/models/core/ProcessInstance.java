@@ -182,6 +182,15 @@ public class ProcessInstance {
 				break;
 			}
 		}
+		
+		// Store it in SPA
+		try {
+			newProcessInstance.pi.store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return newProcessInstance;
 	}
 
