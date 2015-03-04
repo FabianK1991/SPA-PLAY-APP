@@ -177,7 +177,7 @@ public class DBHandler {
 				args.add(((User) o).getName());
 				args.add(((User) o).getEmail());
 				args.add(((User) o).getPasswd());
-				args.add(""+((User) o).getTime());
+				args.add(DBHandler.format.format(((User) o).getTime()).toString());
 				args.add(((User) o).getSession().getId());
 			}else if(o instanceof Session){
 				((Session) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 8));
@@ -185,8 +185,8 @@ public class DBHandler {
 				args.add(((Session) o).getId());
 				args.add(((Session) o).getUser().getId());
 				args.add(((Session) o).getKey());
-				args.add(""+((Session) o).getTime());
-				args.add(""+((Session) o).getUpdate());
+				args.add(DBHandler.format.format(((Session) o).getTime()).toString());
+				args.add(DBHandler.format.format(((Session) o).getUpdate()).toString());
 			}else if(o instanceof ProcessInstance){
 				query = "INSERT INTO `user_process_instances` (`user`, `process`) VALUES ('%s', '%s')";
 				args.add(((ProcessInstance) o).getUser().getId());
