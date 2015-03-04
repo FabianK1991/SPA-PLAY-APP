@@ -268,6 +268,9 @@ public class DBHandler {
 
 		try {
 			Statement stmt = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			
+			Logger.debug(secureQuery.toString());
+			
 			if(read){
 				ResultSet rs = stmt.executeQuery(secureQuery.toString());
 				return rs;

@@ -9,11 +9,12 @@ import controllers.Application;
 
 public class Session {
 	public static Session o=null;
+	
 	private String id;
 	private User user;
 	private String key;
-	private Date time;
-	private Date update;
+    private Date time	= new Date();
+	private Date update	= new Date();
 	
 	public Session(){
 	}

@@ -415,3 +415,121 @@ INSERT INTO users(mail, name, passwd) VALUES('maedche@uni-mannheim.de', 'Alexand
 org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "'ba3be039' (USER_SESSIONS: ID INT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF)"
 Data conversion error converting "'ba3be039' (USER_SESSIONS: ID INT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF)"; SQL statement:
 INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('ba3be039', '1', '258f9f678a01a06dfae7d7ebb242d71dcb051a85', 'null', 'null') -- ('ba3be039', '1', '258f9f678a01a06dfae7d7ebb242d71dcb051a85', 'null', 'null') [22018-175]
+03-04 23:25:50 jdbc[69]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "ba3be039"
+Data conversion error converting "ba3be039"; SQL statement:
+SELECT * FROM `user_sessions` WHERE `id` = 'ba3be039' [22018-175]
+03-04 23:28:00 jdbc[76]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "ba3be039"
+Data conversion error converting "ba3be039"; SQL statement:
+SELECT * FROM `user_sessions` WHERE `id` = 'ba3be039' [22018-175]
+03-04 23:28:23 jdbc[76]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "'965339a8' (USER_SESSIONS: ID INT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF)"
+Data conversion error converting "'965339a8' (USER_SESSIONS: ID INT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF)"; SQL statement:
+INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('965339a8', '1', 'c1a095fccd23387cbf7e7ed95028ec6e61e4ee4a', 'null', 'null') -- ('965339a8', '1', 'c1a095fccd23387cbf7e7ed95028ec6e61e4ee4a', 'null', 'null') [22018-175]
+03-04 23:31:45 jdbc[64]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLE ""USER_SESSIONS""
+CHANGE[*] ""ID"" ""ID"" VARCHAR(7) NOT NULL "; erwartet "., ADD, SET, RENAME, DROP, MODIFY, ALTER"
+Syntax error in SQL statement "ALTER TABLE ""USER_SESSIONS""
+CHANGE[*] ""ID"" ""ID"" VARCHAR(7) NOT NULL "; expected "., ADD, SET, RENAME, DROP, MODIFY, ALTER"; SQL statement:
+ALTER TABLE `user_sessions`
+CHANGE `id` `id` varchar(7) NOT NULL [42001-175]
+03-04 23:32:07 jdbc[64]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLE ""USER_SESSIONS"" CHANGE[*] ""ID"" ""ID"" VARCHAR(7) NOT NULL "; erwartet "., ADD, SET, RENAME, DROP, MODIFY, ALTER"
+Syntax error in SQL statement "ALTER TABLE ""USER_SESSIONS"" CHANGE[*] ""ID"" ""ID"" VARCHAR(7) NOT NULL "; expected "., ADD, SET, RENAME, DROP, MODIFY, ALTER"; SQL statement:
+ALTER TABLE `user_sessions` CHANGE `id` `id` varchar(7) NOT NULL [42001-175]
+03-04 23:32:25 jdbc[64]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLE ""USER_SESSIONS"" CHANGE[*] ""ID"" ""ID"" VARCHAR NOT NULL "; erwartet "., ADD, SET, RENAME, DROP, MODIFY, ALTER"
+Syntax error in SQL statement "ALTER TABLE ""USER_SESSIONS"" CHANGE[*] ""ID"" ""ID"" VARCHAR NOT NULL "; expected "., ADD, SET, RENAME, DROP, MODIFY, ALTER"; SQL statement:
+ALTER TABLE `user_sessions` CHANGE `id` `id` varchar NOT NULL [42001-175]
+03-04 23:34:16 jdbc[64]: exception
+org.h2.jdbc.JdbcSQLException: Unbekannter Datentyp: "ID"
+Unknown data type: "ID"; SQL statement:
+ALTER TABLE `user_sessions` ALTER COLUMN `id` `id` varchar NOT NULL [50004-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3853)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3716)
+	at org.h2.command.Parser.parseAlterTableAlterColumnType(Parser.java:5260)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5253)
+	at org.h2.command.Parser.parseAlter(Parser.java:4552)
+	at org.h2.command.Parser.parsePrepared(Parser.java:325)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:168)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+03-04 23:43:54 jdbc[87]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIMESTAMP" "Wed Mar 04 23:43:54 CET 2015" nicht umwandeln
+Cannot parse "TIMESTAMP" constant "Wed Mar 04 23:43:54 CET 2015"; SQL statement:
+INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('f3b69839', '1', '2b3843af8bbf911d3b8fa198e95d2005b7edb560', 'Wed Mar 04 23:43:54 CET 2015', 'Wed Mar 04 23:43:54 CET 2015') -- ('f3b69839', '1', '2b3843af8bbf911d3b8fa198e95d2005b7edb560', 'Wed Mar 04 23:43:54 CET 2015', 'Wed Mar 04 23:43:54 CET 2015') [22007-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:161)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:87)
+	at org.h2.value.Value.convertTo(Value.java:843)
+	at org.h2.table.Column.convert(Column.java:145)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at com.jolbox.bonecp.StatementHandle.execute(StatementHandle.java:254)
+	at models.util.db.DBHandler.exec(DBHandler.java:278)
+	at models.util.db.DBHandler.add(DBHandler.java:191)
+	at models.util.sessions.User.createSession(User.java:106)
+	at controllers.AuthController.login(AuthController.java:57)
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$3$$anonfun$apply$3.apply(routes_routing.scala:96)
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$3$$anonfun$apply$3.apply(routes_routing.scala:96)
+	at play.core.Router$HandlerInvokerFactory$$anon$4.resultCall(Router.scala:264)
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.invocation(Router.scala:255)
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:55)
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82)
+	at play.core.j.JavaAction$$anonfun$11.apply(JavaAction.scala:82)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:40)
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:46)
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:32)
+	at scala.concurrent.impl.Future$.apply(Future.scala:31)
+	at scala.concurrent.Future$.apply(Future.scala:492)
+	at play.core.j.JavaAction$class.apply(JavaAction.scala:82)
+	at play.core.Router$HandlerInvokerFactory$JavaActionInvokerFactory$$anon$15$$anon$1.apply(Router.scala:252)
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130)
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4$$anonfun$apply$5.apply(Action.scala:130)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:129)
+	at play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$4.apply(Action.scala:128)
+	at scala.Option.map(Option.scala:145)
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:128)
+	at play.api.mvc.Action$$anonfun$apply$1.apply(Action.scala:121)
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483)
+	at play.api.libs.iteratee.Iteratee$$anonfun$mapM$1.apply(Iteratee.scala:483)
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519)
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMapM$1.apply(Iteratee.scala:519)
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496)
+	at play.api.libs.iteratee.Iteratee$$anonfun$flatMap$1$$anonfun$apply$14.apply(Iteratee.scala:496)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:41)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:393)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: java.lang.IllegalArgumentException: Wed Mar 04 23:43:54 CET 2015
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:270)
+	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:105)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:85)
+	... 51 more

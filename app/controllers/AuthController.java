@@ -30,12 +30,15 @@ public class AuthController extends Controller {
 	public static boolean check(){
 		Cookie sessKey = request().cookies().get("sesskey");
 		Cookie sessId = request().cookies().get("sessid");
-		if(sessKey != null){
+		
+		if (sessKey != null) {
 			AuthController.s = new Session(sessId.value());
 			Long time = new Date().getTime();
-			if(sessKey.value().equals(Application.sha1(AuthController.s.getKey())) && time-AuthController.s.getUpdate().getTime()<1000*60*20){
+			
+			if (sessKey.value().equals(Application.sha1(AuthController.s.getKey())) && time - AuthController.s.getUpdate().getTime()<1000*60*20) {
 				AuthController.s.setUpdate(new Date());
 				Application.db.update(AuthController.s, "update" , time.toString());
+				
 				return true;
 			}
 		}
