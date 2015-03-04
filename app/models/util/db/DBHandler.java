@@ -1,7 +1,6 @@
 package models.util.db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,35 +8,24 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import play.Logger;
-import controllers.Application;
-import controllers.AuthController;
-import models.core.BusinessObject;
-import models.core.BusinessObjectAttribute;
 import models.core.ProcessInstance;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.util.sessions.Session;
 import models.util.sessions.User;
+import play.Logger;
+import play.db.DB;
+import controllers.Application;
+import controllers.AuthController;
 
 public class DBHandler {
 	
-	/*
-	 * MySQL-Connection information
-	 */
-	private String host 	= "";
-	private int    port 	= 8082;
-	private String path 	= "./data_mtp_spa_app";
-	private String user 	= "mtp_spa_app"; 
-	private String passwd	= "crasuhacru-EC3mewa*ep"; 
-	private String Driver 	= "org.h2.Driver";
 	private Connection connection;
 	
 	
 	public static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	public DBHandler(){
+	public DBHandler() {
 		this.connect();
-		Logger.debug("hallo lukas");
 	}
 	
 	/**
@@ -50,18 +38,10 @@ public class DBHandler {
 			if(this.connection != null && this.connection.isValid(0)){
 				return true;
 			}
-			
-			Class.forName(this.Driver);
-			/*
-			 * line 1 for MySql, line 2 for h2
-			 */ 
-//			this.connection = DriverManager.getConnection(this.Driver + this.host + ":" + this.port + "/" + this.path, this.user, this.passwd);
-			this.connection = DriverManager.getConnection("jdbc:h2:./mtp_spa_app_data", this.user, this.passwd);
-			Logger.debug("Lukas ist stolz");
+			this.connection = DB.getConnection();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			Logger.debug("Lukas ist enttäuscht");
 			return false;
 		}
 	}
@@ -174,6 +154,7 @@ public class DBHandler {
 		return reObj;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public ArrayList selectAll(Class c){
 		return selectAll(c, true);
 	}
@@ -287,7 +268,6 @@ public class DBHandler {
 
 		try {
 			Statement stmt = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
 			if(read){
 				ResultSet rs = stmt.executeQuery(secureQuery.toString());
 				return rs;
@@ -297,7 +277,7 @@ public class DBHandler {
 			}
 
 		} catch (Exception e) {
-			System.err.println(e.toString());
+			Logger.debug(e.toString());
 			return null;
 		}
 	}
