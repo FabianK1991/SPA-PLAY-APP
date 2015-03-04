@@ -11,6 +11,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import models.core.Activity;
+import models.core.BusinessObject;
+import models.core.DataAssociation;
 import models.core.ProcessModel;
 import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
 import models.core.exceptions.ProcessModelNotFoundException;
@@ -127,6 +129,19 @@ public class ProcessParser {
 				
 				// add activity to process model
 				pm.getSPAProcessModel().getNodes().add(a);
+				
+				
+				// Input Association
+				NodeList dataAssociations = el.getElementsByTagNameNS("*", "sourceRef");
+				
+				for (int temp = 0; temp < dataAssociations.getLength(); temp++) {
+					Element e = (Element)dataAssociations.item(temp);
+					
+					DataAssociation da = new DataAssociation(nsm + id, e.getTextContent());
+					//System.out.println("Yolo: " + e.getTextContent());
+					
+					pm.dataAssoc.add(da);
+				}
 				break;
 			case "startEvent":
 				//System.out.println("Start!");
@@ -165,6 +180,42 @@ public class ProcessParser {
 				
 				break;
 			case "association":
+				break;
+			// create bo
+			case "dataObjectReference":
+				//System.out.println("BO!!");
+				Element ele = (Element)n;
+				
+				NodeList properties = ele.getElementsByTagNameNS("*", "property");
+				BusinessObject bo = new BusinessObject(nsm + ele.getAttribute("id"));
+				
+				bo.setName(ele.getAttribute("name"));
+				
+				for (int temp = 0; temp < properties.getLength(); temp++) {
+					Element property = (Element)properties.item(temp);
+					String propName = property.getAttribute("name");
+					
+					switch(propName){
+						case "action":
+							bo.setAction(property.getAttribute("value"));
+							//System.out.println(propName + ": " + property.getAttribute("value"));
+							break;
+						case "min":
+							bo.setMin(property.getAttribute("value"));
+							//System.out.println(propName + ": " + property.getAttribute("value"));
+							break;
+						case "max":
+							bo.setMax(property.getAttribute("value"));
+							//System.out.println(propName + ": " + property.getAttribute("value"));
+							break;
+						case "attributes":
+							bo.setNeededAttributes(property.getAttribute("value").split(","));
+							//System.out.println(propName + ": " + property.getAttribute("value"));
+							break;
+					}
+				}
+				
+				pm.bos.add(bo);
 				break;
 			default:
 		}

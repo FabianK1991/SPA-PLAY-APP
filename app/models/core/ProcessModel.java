@@ -19,6 +19,11 @@ public class ProcessModel {
 	models.spa.api.ProcessModel pm;
 	private static final String xmlPath = "public/processes/";
 	
+	// Maps activities to bos
+	// TODO: Need to be parsed again (or get it from a db) if Model is retrieved by SPA 
+	public List<DataAssociation> dataAssoc;
+	public List<BusinessObject> bos;
+	
 	/*
 	 * TODO
 	 * Method to internally (PRIVATE method) create an empty ProcessModel
@@ -26,6 +31,8 @@ public class ProcessModel {
 	 */
 	private ProcessModel() {
 		this.pm = new models.spa.api.ProcessModel();
+		this.dataAssoc = new ArrayList<DataAssociation>();
+		this.bos = new ArrayList<BusinessObject>();
 	}
 	
 	/*
@@ -120,7 +127,7 @@ public class ProcessModel {
 		
 		// save process model
 		try {
-			newProcessModel.getSPAProcessModel().store();
+			//newProcessModel.getSPAProcessModel().store();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

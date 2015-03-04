@@ -37,6 +37,7 @@ public class ProcessInstance {
 		this.pm = pm;
 		this.pi = new models.spa.api.ProcessInstance(pm.getSPAProcessModel());
 		
+		this.user = user;
 		this.pi.setId(id);
 		
 		// save to repository

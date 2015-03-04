@@ -8,28 +8,34 @@ import controllers.Application;
 public class BusinessObject {
 	private String id;
 	private String action;
-	private int min;
-	private int max;
+	private String min;
+	private String max;
 	
-	private List<String> neededAttributes;
+	private String name;
+	
+	private String[] neededAttributes;
 	
 	public BusinessObject(String id){
 		this.id = id;
 	}
 	
-	public BusinessObject(String id, String action, int min, int max){
+	public BusinessObject(String id, String action, String min, String max){
 		this.id = id;
 		this.action = action;
 		this.min = min;
 		this.max = max;
 	}
 	
-	public BusinessObject(String id, String action, int min, int max, List<String> neededAttributes){
+	public BusinessObject(String id, String action, String min, String max, String[] neededAttributes){
 		this.id = id;
 		this.action = action;
 		this.min = min;
 		this.max = max;
-		this.setNeededAttributes(neededAttributes);
+		this.neededAttributes = neededAttributes;
+	}
+	
+	public void setName(String name){
+		this.name = name;
 	}
 	
 	
@@ -52,6 +58,23 @@ public class BusinessObject {
 		
 		return resultList;
 	}
+	
+	public void setAction(String action){
+		this.action = action;
+	}
+	
+	public void setMin(String min){
+		this.min = min;
+	}
+	
+	public void setMax(String max){
+		this.max = max;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
 	/*
 	 * Returns the action for which the business object is be used
 	 */
@@ -63,7 +86,7 @@ public class BusinessObject {
 	 * TODO
 	 * Returns the minimum number of BusinessObjects that need to be defined in a ActivityInstance
 	 */
-	public int getMinQuantity() {
+	public String getMinQuantity() {
 		return this.min;
 	}
 	
@@ -71,15 +94,15 @@ public class BusinessObject {
 	 * TODO
 	 * Returns the maximum number of BusinessObjects that can be defined in a ActivityInstance
 	 */
-	public int getMaxQuantity() {
+	public String getMaxQuantity() {
 		return this.max;
 	}
 
-	public List<String> getNeededAttributes() {
+	public String[] getNeededAttributes() {
 		return neededAttributes;
 	}
 
-	public void setNeededAttributes(List<String> neededAttributes) {
+	public void setNeededAttributes(String[] neededAttributes) {
 		this.neededAttributes = neededAttributes;
 	}
 	

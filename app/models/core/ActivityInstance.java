@@ -141,7 +141,7 @@ public class ActivityInstance {
 		String id = "";
 		
 		while (true) {
-			id = UUID.randomUUID().toString();
+			id = UUID.randomUUID().toString().replace('-', '0');
 			
 			try {
 				ActivityInstance.getInstanceById(id);

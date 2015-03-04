@@ -48,7 +48,6 @@ public class Activity {
 	 * TODO
 	 * Returns the type of action (create, update, select, delete) of this Activity
 	 * 
-	 * Why DEPRECATED? This methods need to return the type of action for this activity.
 	 */
 	public String getAction() {
 		return null;
@@ -58,14 +57,14 @@ public class Activity {
 	 * Adds a business object to the activity
 	 * 
 	 */
-	public void addBusinessObject(String id, String action, int min, int max){
+	public void addBusinessObject(String id, String action, String min, String max){
 		this.addBusinessObject(id, action, min, max, null);
 	}
 	
 	/*
 	 * Adds a business object to the activity
 	 */
-	public void addBusinessObject(String id, String action, int min, int max, List<String> neededAttributes){
+	public void addBusinessObject(String id, String action, String min, String max, String[] neededAttributes){
 		// add to internal list
 		this.bos.add(new BusinessObject(id, action, min, max, neededAttributes));
 		
