@@ -78,7 +78,7 @@ public class DBHandler {
 		
 		if(this.connect()){
 			if(o instanceof User){
-				query = "SELECT * FROM `users` WHERE `%s` = '%s'";
+				query = "SELECT * FROM `users` WHERE `%s` = '%s' LIMIT 1";
 				if(mode == false){
 					args.add("mail");
 					args.add(((User) o).getEmail());
@@ -88,8 +88,11 @@ public class DBHandler {
 					args.add(((User) o).getId());
 				}
 			}else if (o instanceof Session){
-				query = "SELECT * FROM `user_sessions` WHERE `id` = '%s'";
+				query = "SELECT * FROM `user_sessions` WHERE `id` = '%s' LIMIT 1";
 				args.add(((Session) o).getId());
+			}else if(o instanceof ProcessInstance){
+				query = "SELECT * FROM `user_process_instances` WHERE `user`= '%s' ORDER BY `time` DESC LIMIT 1";
+				args.add(AuthController.getUser().getId());
 			}
 			ResultSet rs = this.exec(query, args, true);
 			try {
@@ -128,8 +131,7 @@ public class DBHandler {
 					query = "SELECT * FROM `user_process_instances` WHERE `user` = '"+ userid +"' ORDER BY `time`";
 				}else{
 					query = "SELECT * FROM `user_process_instances` ORDER BY `time`";
-				}
-				
+				}		
 			}
 			ResultSet rs = this.exec(query, null, true);
 			try {
@@ -241,6 +243,21 @@ public class DBHandler {
 				args.add(prop);
 				args.add(value);
 				args.add(((User) o).getId());
+			}
+			this.exec(query, args, false);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean archive(Object o){
+		if(this.connect()){
+			String query = "";
+			ArrayList<String> args = new ArrayList<String>();
+			if(o instanceof ProcessInstance){
+				query = "UPDATE `user_process_instances` SET `archive` = TRUE WHERE `user`= '%s' AND `process` = '%s'";
+				args.add(AuthController.getUser().getId());
+				args.add(((ProcessInstance) o).getId());
 			}
 			this.exec(query, args, false);
 			return true;

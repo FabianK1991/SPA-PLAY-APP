@@ -533,3 +533,39 @@ Caused by: java.lang.IllegalArgumentException: Wed Mar 04 23:43:54 CET 2015
 	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:105)
 	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:85)
 	... 51 more
+03-05 00:44:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unbekannter Datentyp: "DEFAULT"
+Unknown data type: "DEFAULT"; SQL statement:
+ALTER TABLE USER_PROCESS_INSTANCES ALTER COLUMN archive DEFAULT false [50004-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3853)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3716)
+	at org.h2.command.Parser.parseAlterTableAlterColumnType(Parser.java:5260)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5253)
+	at org.h2.command.Parser.parseAlter(Parser.java:4552)
+	at org.h2.command.Parser.parsePrepared(Parser.java:325)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:168)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-05 00:51:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER BUSINESS_OBJECTS[*]   ALTER COLUMN SAP_ID  VARCHAR(255) NOT NULL "; erwartet "TABLE, USER, INDEX, SCHEMA, SEQUENCE, VIEW"
+Syntax error in SQL statement "ALTER BUSINESS_OBJECTS[*]   ALTER COLUMN SAP_ID  VARCHAR(255) NOT NULL "; expected "TABLE, USER, INDEX, SCHEMA, SEQUENCE, VIEW"; SQL statement:
+ALTER BUSINESS_OBJECTS   ALTER COLUMN sap_id  varchar(255) NOT NULL [42001-175]
+03-05 00:52:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER BUSINESS_OBJECTS[*] ALTER COLUMN SAP_ID VARCHAR(255) NOT NULL "; erwartet "TABLE, USER, INDEX, SCHEMA, SEQUENCE, VIEW"
+Syntax error in SQL statement "ALTER BUSINESS_OBJECTS[*] ALTER COLUMN SAP_ID VARCHAR(255) NOT NULL "; expected "TABLE, USER, INDEX, SCHEMA, SEQUENCE, VIEW"; SQL statement:
+ALTER BUSINESS_OBJECTS ALTER COLUMN sap_id varchar(255) NOT NULL [42001-175]
