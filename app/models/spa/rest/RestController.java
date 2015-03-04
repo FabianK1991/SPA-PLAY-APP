@@ -106,6 +106,8 @@ public class RestController
         OutputStream baos = new ByteArrayOutputStream();
         RDFDataMgr.write(baos, model, RDFFormat.TURTLE);
         String input = ((ByteArrayOutputStream) baos).toString("UTF-8");
+        
+        System.out.println(input);
 
         FileBody fileBody = new FakeFileBody(input);
 

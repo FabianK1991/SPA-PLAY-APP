@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import models.core.Activity;
 import models.core.ProcessModel;
 import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
+import models.core.exceptions.ProcessModelNotFoundException;
 import models.spa.api.process.buildingblock.Event;
 import models.spa.api.process.buildingblock.Flow;
 import models.spa.api.process.buildingblock.Gateway;
@@ -38,6 +40,9 @@ public class ProcessParser {
 	private Document doc;
 	private ArrayList<ProcessModel> pms; 
 	
+	public static String nsm = "http://masterteamproject/";
+	public static String nsmi = "http://masterteamproject/instance/";
+	
 	/*
 	 * Retrieves the parsed Process Models
 	 */
@@ -45,15 +50,45 @@ public class ProcessParser {
 		return pms;
 	}
 	
+	private static String getUID() {
+		String id = "";
+		
+		while (true) {
+			id = UUID.randomUUID().toString();
+			
+			try {
+				new ProcessModel(id);
+			} catch (ProcessModelNotFoundException e) {
+				break;
+			}
+		}
+		return id;
+	}
+	
 	/*
 	 * Creates a new flow and adds it to the source node
+	 * 
+	 * TODO: If target or source is null then wait with creation!!!
+	 * WORKAROUND: Place sequenceflow nodes at end of xml!!!
+	 * 
 	 */
 	private void createFlow(Element el, ProcessModel pm){
-		models.spa.api.process.buildingblock.Node source = pm.getSPANodeById(el.getAttribute("sourceRef"));
-		models.spa.api.process.buildingblock.Node target = pm.getSPANodeById(el.getAttribute("targetRef"));
+		models.spa.api.process.buildingblock.Node source = pm.getSPANodeById(nsm + el.getAttribute("sourceRef"));
+		models.spa.api.process.buildingblock.Node target = pm.getSPANodeById(nsm + el.getAttribute("targetRef"));
 		
 		Flow f = new Flow(pm.getSPAProcessModel(), source, target);
-		f.setId(el.getAttribute("id"));
+		
+		//System.out.println("Flow:");
+		//System.out.println(el.getAttribute("id"));
+		//System.out.println(source.getId());
+		//System.out.println(target.getId());
+		
+		if( el.getAttribute("id") != null ){
+			f.setId(nsm + el.getAttribute("id"));
+		}
+		else{
+			f.setId(nsm + getUID());
+		}
 		
 		// set name ? - not supported by spa
 		//f.setName(el.getAttribute("name"));
@@ -65,19 +100,26 @@ public class ProcessParser {
 	 * Loops over the nodes and takes action according to node type
 	 */
 	private void handleChildren(Node n, ProcessModel pm){
-		String name = n.getNodeName();
+		String name = n.getLocalName(); // ignore namespace
+		
+		if( name == null ){
+			return;
+		}
 		
 		switch(name){
 			// Node is a task
 			case "task":
+				//System.out.println("Task!");
 				Element el = (Element)n;
 				
 				String id = el.getAttribute("id");
 				
+				System.out.println(id);
+				
 				//Activity a = new Activity(id, pm.getSPAProcessModel());
 				models.spa.api.process.buildingblock.Activity a = new models.spa.api.process.buildingblock.Activity(pm.getSPAProcessModel());
 				
-				a.setId(id);
+				a.setId(nsm + id);
 				
 				if( el.getAttribute("name") != null ){
 					a.setName(el.getAttribute("name"));
@@ -87,20 +129,29 @@ public class ProcessParser {
 				pm.getSPAProcessModel().getNodes().add(a);
 				break;
 			case "startEvent":
+				//System.out.println("Start!");
 				Event start = new Event(pm.getSPAProcessModel(), EventType.Start);
-		        start.setId(((Element)n).getAttribute("id"));
+		        start.setId(nsm + ((Element)n).getAttribute("id"));
+		        
+		        System.out.println(((Element)n).getAttribute("id"));
 				
 		        pm.getSPAProcessModel().getNodes().add(start);
 				break;
 			case "endEvent":
+				//System.out.println("End!");
 				Event end = new Event(pm.getSPAProcessModel(), EventType.End);
-		        end.setId(((Element)n).getAttribute("id"));
+		        end.setId(nsm + ((Element)n).getAttribute("id"));
+		        
+		        System.out.println(((Element)n).getAttribute("id"));
 				
 		        pm.getSPAProcessModel().getNodes().add(end);
 				break;
 			case "exclusiveGateway":
+				//System.out.println("Gaytway!");
 				Gateway xor = new Gateway(pm.getSPAProcessModel(), GatewayType.XOR);
-		        xor.setId(((Element)n).getAttribute("id"));
+		        xor.setId(nsm + ((Element)n).getAttribute("id"));
+		        
+		        System.out.println(((Element)n).getAttribute("id"));
 		        
 		        if( ((Element)n).getAttribute("name") != null ){
 		        	xor.setName(((Element)n).getAttribute("name"));
@@ -109,6 +160,7 @@ public class ProcessParser {
 		        pm.getSPAProcessModel().getNodes().add(xor);
 				break;
 			case "sequenceFlow":
+				//System.out.println("Flow!");
 				this.createFlow((Element)n, pm);
 				
 				break;
@@ -122,6 +174,9 @@ public class ProcessParser {
 	 * Parses a process node into an ProcessModel
 	 */
 	private ProcessModel parseProcess(ProcessModel pm, Element ele){
+		// set id
+		pm.getSPAProcessModel().setId(nsm + ele.getAttribute("id"));
+		
 		// parse nodes
 		NodeList nList = ele.getChildNodes();
 		
@@ -139,15 +194,16 @@ public class ProcessParser {
 	 */
 	private void parseXML(File file, ProcessModel processModel) throws IncorrectNumberOfProcessModelsExeption{
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		
+		dbf.setNamespaceAware(true);
 		DocumentBuilder db;
 		try {
 			db = dbf.newDocumentBuilder();
 			
 			this.doc = db.parse(file);
 			
-			NodeList nList = this.doc.getElementsByTagName("process");
+			NodeList nList = this.doc.getElementsByTagNameNS("*", "process");
 			this.pms = new ArrayList<ProcessModel>();
+
 			
 			//One file can only contain one process model!
 			if (nList.getLength() == 1) {

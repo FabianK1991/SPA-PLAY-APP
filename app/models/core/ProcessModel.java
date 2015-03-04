@@ -17,7 +17,7 @@ import models.util.parsing.ProcessParser;
 
 public class ProcessModel {
 	models.spa.api.ProcessModel pm;
-	private static final String xmlPath = "/public/processes/";
+	private static final String xmlPath = "public/processes/";
 	
 	/*
 	 * TODO
@@ -25,15 +25,7 @@ public class ProcessModel {
 	 * Should be used only by static method ProcessModel.createFromBPMN_File()
 	 */
 	private ProcessModel() {
-		this.pm = new models.spa.api.ProcessModel(getUID());
-		
-		// save to repository
-		try {
-			//this.pm.store();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.pm = new models.spa.api.ProcessModel();
 	}
 	
 	/*
@@ -49,6 +41,11 @@ public class ProcessModel {
 		} catch (Exception e) {
 			throw new ProcessModelNotFoundException();
 		}
+	}
+	
+	// Needed for ProcessInstance Constructor
+	public ProcessModel(models.spa.api.ProcessModel pm) {
+		this.pm = pm;
 	}
 	
 	/*
@@ -110,7 +107,7 @@ public class ProcessModel {
 		
 		ProcessParser pp = new ProcessParser(file, newProcessModel);
 		
-		File f = new File(xmlPath + newProcessModel.getId() + ".bpmn");
+		/*File f = new File(xmlPath + newProcessModel.getId() + ".bpmn");
 		
 		// Check if file exists, otherwise write it
 		if( !f.exists() ){
@@ -119,6 +116,14 @@ public class ProcessModel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}*/
+		
+		// save process model
+		try {
+			newProcessModel.getSPAProcessModel().store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return newProcessModel;

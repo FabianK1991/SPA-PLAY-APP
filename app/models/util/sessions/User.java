@@ -52,6 +52,12 @@ public class User {
 		
 	}
 	
+	// TEST CONSTRUCTOR TO AVOID DB
+	public User(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
 	public User() {
 		
 	}

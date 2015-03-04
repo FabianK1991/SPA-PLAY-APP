@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.util.parsing.ProcessParser;
 
 public class ActivityInstance {
 	// reference to the activity
@@ -24,7 +25,7 @@ public class ActivityInstance {
 	 * Should be used only by static method ActivityInstance.create()
 	 */
 	private ActivityInstance(ProcessInstance pi, Activity activity) {
-		this.id = getUID();
+		this.id = ProcessParser.nsmi + getUID();
 		this.activity = activity;
 		
 		

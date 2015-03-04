@@ -1,11 +1,14 @@
 package controllers;
 
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import models.core.ProcessModel;
 import models.util.db.DBHandler;
 import models.util.db.SAPServerSimulator;
 import play.mvc.*;
+import play.Logger;
 import views.html.*;
 
 public class Application extends Controller {
@@ -17,12 +20,20 @@ public class Application extends Controller {
 	 * TODO
 	 */
     public static Result index() {
+    	Logger.debug("GetStarted!!");
+    	
+    	ProcessModel.createFromBPMN_File(new File("test.xml"));
+    	
+    	Logger.debug("Created bois!");
+    	
+    	return null;
+    	/*
     	if(AuthController.check()) {
     		return ok(index.render("Your new application is ready."));
     	}
     	else {
     		return redirect("/auth");
-    	}
+    	}*/
         
     }
 

@@ -14,6 +14,7 @@ import models.spa.api.process.buildingblock.Flow;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.util.parsing.ProcessParser;
 import models.util.sessions.User;
 
 public class ProcessInstance {
@@ -32,7 +33,7 @@ public class ProcessInstance {
 	 * Should be used only by static method ProcessInstance.create()
 	 */
 	private ProcessInstance(User user, ProcessModel pm) {
-		this.id = getUID();
+		this.id = ProcessParser.nsmi + getUID();
 		this.pm = pm;
 		this.pi = new models.spa.api.ProcessInstance(pm.getSPAProcessModel());
 		
@@ -54,6 +55,8 @@ public class ProcessInstance {
 	public ProcessInstance(String id) throws ProcessInstanceNotFoundException {
 		try {
 			this.pi = models.spa.api.ProcessInstance.getProcessInstance(null, id);
+			
+			this.pm = new ProcessModel(this.pi.getProcessModel());
 		} catch (Exception e) {
 			throw new ProcessInstanceNotFoundException();
 		}
@@ -63,7 +66,7 @@ public class ProcessInstance {
 	 * TODO
 	 * Returns the ID of this ProcessInstance
 	 */
-	public String getID() {
+	public String getId() {
 		return this.pi.getId();
 	}
 	
@@ -111,6 +114,14 @@ public class ProcessInstance {
  		
  		return null;
  	}
+	
+	/*
+	 * Sets the current activity
+	 */
+	public void setActivity(Activity activity){
+		// creates a new activity instance
+		ActivityInstance.create(this, activity);
+	}
 	
 	/*
 	 * TODO
@@ -205,7 +216,7 @@ public class ProcessInstance {
 		String id = "";
 		
 		while (true) {
-			id = UUID.randomUUID().toString();
+			id = UUID.randomUUID().toString().replace('-', '0');
 			
 			try {
 				new ProcessInstance(id);
