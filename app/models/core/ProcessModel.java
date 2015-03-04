@@ -17,7 +17,12 @@ import models.util.parsing.ProcessParser;
 
 public class ProcessModel {
 	models.spa.api.ProcessModel pm;
-	private static final String xmlPath = "/public/processes/";
+	private static final String xmlPath = "public/processes/";
+	
+	// Maps activities to bos
+	// TODO: Need to be parsed again (or get it from a db) if Model is retrieved by SPA 
+	public List<DataAssociation> dataAssoc;
+	public List<BusinessObject> bos;
 	
 	/*
 	 * TODO
@@ -25,15 +30,9 @@ public class ProcessModel {
 	 * Should be used only by static method ProcessModel.createFromBPMN_File()
 	 */
 	private ProcessModel() {
-		this.pm = new models.spa.api.ProcessModel(getUID());
-		
-		// save to repository
-		try {
-			//this.pm.store();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.pm = new models.spa.api.ProcessModel();
+		this.dataAssoc = new ArrayList<DataAssociation>();
+		this.bos = new ArrayList<BusinessObject>();
 	}
 	
 	/*
@@ -49,6 +48,11 @@ public class ProcessModel {
 		} catch (Exception e) {
 			throw new ProcessModelNotFoundException();
 		}
+	}
+	
+	// Needed for ProcessInstance Constructor
+	public ProcessModel(models.spa.api.ProcessModel pm) {
+		this.pm = pm;
 	}
 	
 	/*
@@ -90,6 +94,38 @@ public class ProcessModel {
 		return this.pm;
 	}
 	
+	public String getActionForActivity(String id){
+		for(DataAssociation da : this.dataAssoc){
+			if( da.activityId.equals(id) ){
+				// Search for bo
+				for(BusinessObject bo : this.bos){
+					if( bo.getId().equals(da.boId) ){
+						return bo.getAction();
+					}
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	public List<BusinessObject> getBosForActivity(String id){
+		List<BusinessObject> resultBos = new ArrayList<BusinessObject>();
+		
+		for(DataAssociation da : this.dataAssoc){
+			if( da.activityId.equals(id) ){
+				// Search for bo
+				for(BusinessObject bo : this.bos){
+					if( bo.getId().equals(da.boId) ){
+						resultBos.add(bo);
+					}
+				}
+			}
+		}
+		
+		return resultBos;
+	}
+	
 	/*
 	 * TODO
 	 * Returns all process models stored in the SPA
@@ -110,7 +146,7 @@ public class ProcessModel {
 		
 		ProcessParser pp = new ProcessParser(file, newProcessModel);
 		
-		File f = new File(xmlPath + newProcessModel.getId() + ".bpmn");
+		/*File f = new File(xmlPath + newProcessModel.getId() + ".bpmn");
 		
 		// Check if file exists, otherwise write it
 		if( !f.exists() ){
@@ -119,6 +155,15 @@ public class ProcessModel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}*/
+		
+		// save process model
+		try {
+			newProcessModel.getSPAProcessModel().delete();
+			newProcessModel.getSPAProcessModel().store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return newProcessModel;

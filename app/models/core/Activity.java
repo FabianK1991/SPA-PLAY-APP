@@ -9,16 +9,11 @@ import models.spa.api.process.buildingblock.*;
 @SuppressWarnings("unused")
 public class Activity {
 	private models.spa.api.process.buildingblock.Activity activity;
-	private ArrayList<BusinessObject> bos;
+	private ProcessModel pm;
 	
-	public Activity(String id, models.spa.api.ProcessModel pm){
-		this.activity = new models.spa.api.process.buildingblock.Activity(pm);
-		this.activity.setId(id);
-		
-	}
-	
-	public Activity(models.spa.api.process.buildingblock.Activity activity){
-		this.activity = activity;
+	public Activity(String id, ProcessModel pm){
+		this.activity = (models.spa.api.process.buildingblock.Activity)pm.getSPANodeById(id);
+		this.pm = pm;
 	}
 	
 	/*
@@ -48,30 +43,9 @@ public class Activity {
 	 * TODO
 	 * Returns the type of action (create, update, select, delete) of this Activity
 	 * 
-	 * Why DEPRECATED? This methods need to return the type of action for this activity.
 	 */
 	public String getAction() {
-		return null;
-	}
-	
-	/*
-	 * Adds a business object to the activity
-	 * 
-	 */
-	public void addBusinessObject(String id, String action, int min, int max){
-		this.addBusinessObject(id, action, min, max, null);
-	}
-	
-	/*
-	 * Adds a business object to the activity
-	 */
-	public void addBusinessObject(String id, String action, int min, int max, List<String> neededAttributes){
-		// add to internal list
-		this.bos.add(new BusinessObject(id, action, min, max, neededAttributes));
-		
-		// add to spa activity
-		models.spa.api.process.buildingblock.BusinessObject bo = new models.spa.api.process.buildingblock.BusinessObject(this.activity.getProcess());
-		this.activity.getBusinessObjects().add(bo);
+		return this.pm.getActionForActivity(this.activity.getId());
 	}
 	
 	/*
@@ -79,17 +53,7 @@ public class Activity {
 	 * Returns a List of types of BusinessObjects that will be [created/updated/selected/deleted] by this Activity
 	 */
 	public List<BusinessObject> getBusinessObjects() {
-		Set<models.spa.api.process.buildingblock.BusinessObject> bos = this.activity.getBusinessObjects();
-		
-		ArrayList<BusinessObject> resultList = new ArrayList<BusinessObject>();
-		
-		for (models.spa.api.process.buildingblock.BusinessObject bo : bos) {
-		    BusinessObject b = new BusinessObject(bo.getId());
-		    
-		    resultList.add(b);
-		}
-		
-		return this.bos;
+		return this.pm.getBosForActivity(this.activity.getId());
 	}
 	
 	public models.spa.api.process.buildingblock.Activity getSPAActivity(){

@@ -14,6 +14,7 @@ import models.spa.api.process.buildingblock.Flow;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.util.parsing.ProcessParser;
 import models.util.sessions.User;
 
 public class ProcessInstance {
@@ -32,19 +33,12 @@ public class ProcessInstance {
 	 * Should be used only by static method ProcessInstance.create()
 	 */
 	private ProcessInstance(User user, ProcessModel pm) {
-		this.id = getUID();
+		this.id = ProcessParser.nsmi + getUID();
 		this.pm = pm;
 		this.pi = new models.spa.api.ProcessInstance(pm.getSPAProcessModel());
 		
+		this.user = user;
 		this.pi.setId(id);
-		
-		// save to repository
-		try {
-			//this.pi.store();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	/*
@@ -54,6 +48,8 @@ public class ProcessInstance {
 	public ProcessInstance(String id) throws ProcessInstanceNotFoundException {
 		try {
 			this.pi = models.spa.api.ProcessInstance.getProcessInstance(null, id);
+			
+			this.pm = new ProcessModel(this.pi.getProcessModel());
 		} catch (Exception e) {
 			throw new ProcessInstanceNotFoundException();
 		}
@@ -63,7 +59,7 @@ public class ProcessInstance {
 	 * TODO
 	 * Returns the ID of this ProcessInstance
 	 */
-	public String getID() {
+	public String getId() {
 		return this.pi.getId();
 	}
 	
@@ -113,6 +109,14 @@ public class ProcessInstance {
  	}
 	
 	/*
+	 * Sets the current activity
+	 */
+	public void setCurrentActivity(Activity activity){
+		// creates a new activity instance
+		ActivityInstance.create(this, activity);
+	}
+	
+	/*
 	 * TODO
 	 * Returns the ActivityInstance currently active in the ProcessInstance
 	 */
@@ -139,13 +143,19 @@ public class ProcessInstance {
 	    }
 		
 		if( latestInstance != null ){
-			return new ActivityInstance(latestInstance);
+			try {
+				return new ActivityInstance(latestInstance.getActivity(), this);
+			} catch (ActivityInstanceNotFoundException e) {
+				e.printStackTrace();
+				
+				return null;
+			}
 		}
 		else{
 			// get start activity
 			models.spa.api.process.buildingblock.Activity a = this.getStartActivity();
 			
-			return ActivityInstance.create(this, new Activity(a));
+			return ActivityInstance.create(this, new Activity(a.getId(), this.pm));
 		}
 	}
 	
@@ -170,6 +180,15 @@ public class ProcessInstance {
 				break;
 			}
 		}
+		
+		// Store it in SPA
+		try {
+			newProcessInstance.pi.store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return newProcessInstance;
 	}
 
@@ -205,7 +224,7 @@ public class ProcessInstance {
 		String id = "";
 		
 		while (true) {
-			id = UUID.randomUUID().toString();
+			id = UUID.randomUUID().toString().replace('-', '0');
 			
 			try {
 				new ProcessInstance(id);
