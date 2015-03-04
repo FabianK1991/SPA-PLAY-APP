@@ -39,14 +39,6 @@ public class ProcessInstance {
 		
 		this.user = user;
 		this.pi.setId(id);
-		
-		// save to repository
-		try {
-			//this.pi.store();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	/*
@@ -119,7 +111,7 @@ public class ProcessInstance {
 	/*
 	 * Sets the current activity
 	 */
-	public void setActivity(Activity activity){
+	public void setCurrentActivity(Activity activity){
 		// creates a new activity instance
 		ActivityInstance.create(this, activity);
 	}
@@ -151,7 +143,13 @@ public class ProcessInstance {
 	    }
 		
 		if( latestInstance != null ){
-			return new ActivityInstance(latestInstance);
+			try {
+				return new ActivityInstance(latestInstance.getActivity(), this);
+			} catch (ActivityInstanceNotFoundException e) {
+				e.printStackTrace();
+				
+				return null;
+			}
 		}
 		else{
 			// get start activity
