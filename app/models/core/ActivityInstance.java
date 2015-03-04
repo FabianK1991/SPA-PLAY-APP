@@ -67,6 +67,7 @@ public class ActivityInstance {
 				this.activityInstance = ai;
 				this.activity = new Activity(ai.getActivity(), pi.getProcessModel());
 				this.id = ai.getId();
+				break;
 			}
 		}
 		
