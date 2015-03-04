@@ -137,7 +137,7 @@ public class ProcessParser {
 				for (int temp = 0; temp < dataAssociations.getLength(); temp++) {
 					Element e = (Element)dataAssociations.item(temp);
 					
-					DataAssociation da = new DataAssociation(nsm + id, e.getTextContent());
+					DataAssociation da = new DataAssociation(nsm + id, nsm + e.getTextContent());
 					//System.out.println("Yolo: " + e.getTextContent());
 					
 					pm.dataAssoc.add(da);

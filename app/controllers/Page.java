@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.File;
 
+import models.core.Activity;
 import models.core.ProcessInstance;
 import models.core.ProcessModel;
 import models.core.exceptions.ProcessModelNotFoundException;
@@ -16,10 +17,15 @@ public class Page extends Controller {
     public static Result index() {
     	Application.db.connect();
     	
-    	Logger.debug("GetStarted!!");
+    	//Logger.debug("GetStarted!!");
     	
-    	//System.out.println(ProcessModel.createFromBPMN_File(new File("test.xml")).getId());
-    	//ProcessModel.createFromBPMN_File(new File("test.xml"));
+    	//ProcessModel pm = ProcessModel.createFromBPMN_File(new File("test.xml"));
+    	//Activity a = new Activity(ProcessParser.nsm + "Task_3", pm);
+    	
+    	//a.getBusinessObjects().size();
+    	//a.getAction();
+    	
+    	//System.out.println(a.getBusinessObjects().size());
     	
     	/*try{
     		// Works
@@ -40,7 +46,7 @@ public class Page extends Controller {
     		e.printStackTrace();
     	}*/
     	
-    	Logger.debug("Created bois!");
+    	//Logger.debug("Created bois!");
     	
         return ok(index.render("Your new application is ready."));
     }

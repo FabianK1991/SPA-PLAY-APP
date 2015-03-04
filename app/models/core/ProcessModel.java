@@ -94,6 +94,38 @@ public class ProcessModel {
 		return this.pm;
 	}
 	
+	public String getActionForActivity(String id){
+		for(DataAssociation da : this.dataAssoc){
+			if( da.activityId.equals(id) ){
+				// Search for bo
+				for(BusinessObject bo : this.bos){
+					if( bo.getId().equals(da.boId) ){
+						return bo.getAction();
+					}
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	public List<BusinessObject> getBosForActivity(String id){
+		List<BusinessObject> resultBos = new ArrayList<BusinessObject>();
+		
+		for(DataAssociation da : this.dataAssoc){
+			if( da.activityId.equals(id) ){
+				// Search for bo
+				for(BusinessObject bo : this.bos){
+					if( bo.getId().equals(da.boId) ){
+						resultBos.add(bo);
+					}
+				}
+			}
+		}
+		
+		return resultBos;
+	}
+	
 	/*
 	 * TODO
 	 * Returns all process models stored in the SPA

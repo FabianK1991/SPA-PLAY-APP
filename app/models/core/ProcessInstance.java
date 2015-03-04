@@ -157,7 +157,7 @@ public class ProcessInstance {
 			// get start activity
 			models.spa.api.process.buildingblock.Activity a = this.getStartActivity();
 			
-			return ActivityInstance.create(this, new Activity(a));
+			return ActivityInstance.create(this, new Activity(a.getId(), this.pm));
 		}
 	}
 	
