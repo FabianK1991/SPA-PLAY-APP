@@ -187,6 +187,10 @@ public class DBHandler {
 				args.add(((Session) o).getKey());
 				args.add(""+((Session) o).getTime());
 				args.add(""+((Session) o).getUpdate());
+			}else if(o instanceof ProcessInstance){
+				query = "INSERT INTO `user_process_instances` (`user`, `process`) VALUES ('%s', '%s')";
+				args.add(((ProcessInstance) o).getUser().getId());
+				args.add(((ProcessInstance) o).getProcess());
 			}
 			this.exec(query, args, false);
 			return true;

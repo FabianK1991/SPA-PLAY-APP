@@ -10,10 +10,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import controllers.Application;
 import models.spa.api.process.buildingblock.Flow;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.util.db.DBHandler;
 import models.util.parsing.ProcessParser;
 import models.util.sessions.User;
 
@@ -36,7 +38,7 @@ public class ProcessInstance {
 		this.id = ProcessParser.nsmi + getUID();
 		this.pm = pm;
 		this.pi = new models.spa.api.ProcessInstance(pm.getSPAProcessModel());
-		
+	
 		this.user = user;
 		this.pi.setId(id);
 	}
@@ -181,6 +183,7 @@ public class ProcessInstance {
 			}
 		}
 		
+		
 		// Store it in SPA
 		try {
 			newProcessInstance.pi.store();
@@ -188,6 +191,9 @@ public class ProcessInstance {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//Store it in DB
+		DBHandler db = Application.db;
+		db.add(newProcessInstance);
 		
 		return newProcessInstance;
 	}
