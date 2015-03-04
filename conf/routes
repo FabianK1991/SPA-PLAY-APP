@@ -6,7 +6,8 @@
 GET     /                           controllers.Page.index()
 
 # Login page
-GET     /login                     	controllers.Page.login()
+GET     /login                     	controllers.Page.login(email:String ?= "")
+POST    /login                     	controllers.AuthController.login()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

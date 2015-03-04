@@ -48,11 +48,16 @@ public class Page extends Controller {
     	
     	//Logger.debug("Created bois!");
     	
-        return ok(index.render("Your new application is ready."));
+    	if(AuthController.check()) {
+    		return ok(index.render("Your new application is ready."));
+    	}
+    	else {
+    		return redirect("/login");
+    	}
     }
     
-    public static Result login() {
-        return ok(login.render("Your new application is ready."));
+    public static Result login(String email) {
+        return ok(login.render(email));
     }
     /*
     public static Result main() {

@@ -15,27 +15,6 @@ public class Application extends Controller {
 	
 	public static DBHandler db = new DBHandler();
 	public static SAPServerSimulator sss = new SAPServerSimulator();
-	
-	/*
-	 * TODO
-	 */
-    public static Result index() {
-    	Logger.debug("GetStarted!!");
-    	
-    	ProcessModel.createFromBPMN_File(new File("test.xml"));
-    	
-    	Logger.debug("Created bois!");
-    	
-    	return null;
-    	/*
-    	if(AuthController.check()) {
-    		return ok(index.render("Your new application is ready."));
-    	}
-    	else {
-    		return redirect("/auth");
-    	}*/
-        
-    }
 
     public static String sha1(String input) {
         MessageDigest mDigest = null;

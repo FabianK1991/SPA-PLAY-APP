@@ -1,1 +1,14 @@
-@(title: String)
+@import core._
+@(email: String)
+
+@design("Login") {
+	<form class="login-form" action="/login" method="post">
+	
+		<input type="text" name="email" value="email" />
+		
+		<input type="password" name="passwd" />
+		
+		<input type="submit" name="submit" value="Login" />
+	
+	</form>
+}

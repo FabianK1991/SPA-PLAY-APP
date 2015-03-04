@@ -78,9 +78,9 @@ public class DBHandler {
 		
 		if(this.connect()){
 			if(o instanceof User){
-				query = "SELECT * FROM `user` WHERE `%s` = '%s'";
+				query = "SELECT * FROM `users` WHERE `%s` = '%s'";
 				if(mode == false){
-					args.add("email");
+					args.add("mail");
 					args.add(((User) o).getEmail());
 				}
 				else {
@@ -88,7 +88,7 @@ public class DBHandler {
 					args.add(((User) o).getId());
 				}
 			}else if (o instanceof Session){
-				query = "SELECT * FROM `session` WHERE `id` = '%s'";
+				query = "SELECT * FROM `user_sessions` WHERE `id` = '%s'";
 				args.add(((Session) o).getId());
 			}
 			ResultSet rs = this.exec(query, args, true);
@@ -172,7 +172,7 @@ public class DBHandler {
 			ArrayList<String> args = new ArrayList<String>();
 			if(o instanceof User){
 				((User) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 8));
-				query = "INSERT INTO `user` (`id`, `name`, `email`, `passwd`, `time`, `session`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s')";
+				query = "INSERT INTO `users` (`id`, `name`, `mail`, `passwd`, `time`, `session`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s')";
 				args.add(((User) o).getId());
 				args.add(((User) o).getName());
 				args.add(((User) o).getEmail());
@@ -181,7 +181,7 @@ public class DBHandler {
 				args.add(((User) o).getSession().getId());
 			}else if(o instanceof Session){
 				((Session) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 8));
-				query = "INSERT INTO `session` (`id`, `user`, `key`, `time`, `update`) VALUES ('%s', '%s', '%s', '%s', '%s')";
+				query = "INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('%s', '%s', '%s', '%s', '%s')";
 				args.add(((Session) o).getId());
 				args.add(((Session) o).getUser().getId());
 				args.add(((Session) o).getKey());

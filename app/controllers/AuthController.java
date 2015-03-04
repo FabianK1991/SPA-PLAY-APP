@@ -5,9 +5,9 @@ import java.util.Date;
 import models.util.http.Parameters;
 import models.util.sessions.Session;
 import models.util.sessions.User;
+import play.Logger;
 import play.mvc.*;
 import play.mvc.Http.Cookie;
-
 import views.html.*;
 
 public class AuthController extends Controller {
@@ -39,11 +39,7 @@ public class AuthController extends Controller {
 				return true;
 			}
 		}
-		/*
-		 * TODO: remove next line for production mode!
-		 */
-		return true;
-		//return false;
+		return false;
 	}
 	/**
 	 * Logs the user into the system.
@@ -54,6 +50,7 @@ public class AuthController extends Controller {
 		if(!AuthController.check()){
 			User u = new User();
 			u.init(Parameters.get("email"));
+			Logger.debug(Parameters.get("email"));
 			if(u.createSession(Parameters.get("passwd"))){
 				return ok("1|Login succesful!");
 			}
