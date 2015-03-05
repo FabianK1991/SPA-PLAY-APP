@@ -82,7 +82,25 @@ public class SAPServerSimulator {
 	public List<String> getBusinessObjectAttributes(int id){
 		Application.db.connect();
 		
-		return null;
+		String query = "SELECT attribute FROM business_object_attributes WHERE business_object = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(String.valueOf(id));
+		
+		List<String> resultList = new ArrayList<String>();
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.first()){
+				do{
+					resultList.add(rs.getString("attribute"));
+				}while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return resultList;
 	}
 	
 	/*
@@ -94,15 +112,56 @@ public class SAPServerSimulator {
 	 */
 	public void setBusinessObjectAttribute(int id, BusinessObjectAttribute boa, String Value){
 		Application.db.connect();
+		
+		// Check if attribute exists
+		if( this.getBusinessObjectAttribute(id, boa) == null ){
+			// INSERT
+			String query = "INSERT INTO business_objects_data (business_object,attribute,value) VALUES ('%s','%s','%s')";
+			
+			ArrayList<String> args = new ArrayList<String>();
+			args.add(String.valueOf(id));
+			args.add(boa.getId());
+			args.add(Value);
+			
+			Application.db.exec(query, args, false);
+		}
+		else{
+			// UPDATE
+			String query = "UPDATE business_objects_data SET value = '%s' WHERE business_object = '%s' AND attribute = '%s'";
+			
+			ArrayList<String> args = new ArrayList<String>();
+			args.add(Value);
+			args.add(String.valueOf(id));
+			args.add(boa.getId());
+			
+			Application.db.exec(query, args, false);
+		}
 	}
 	
 	/*
 	 * @author Fabian
-	 * @param Attributes the attributes with values to search for
+	 * @param the bo instance id
+	 * @param boa the object attribute
 	 * @return the value of the attribute
 	 */
 	public String getBusinessObjectAttribute(int id, BusinessObjectAttribute boa){
 		Application.db.connect();
+		
+		String query = "SELECT value FROM business_objects_data WHERE business_object = '%s' AND attribute = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(String.valueOf(id));
+		args.add(boa.getId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.first()){
+				return rs.getString("value");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return null;
 	}
@@ -115,18 +174,20 @@ public class SAPServerSimulator {
 	public String getBusinessObjectDatabaseId(String SAPName){
 		Application.db.connect();
 		
-		return null;
-	}
-	
-	
-	/*
-	 * @author Fabian
-	 * @param id The BO instance id
-	 * @param Attributes the attributes which should be shown
-	 * @return A map of attributes and values
-	 */
-	public Map getBusinessObjectInstance(int id, List<Integer> Attributes){
-		Application.db.connect();
+		String query = "SELECT id FROM business_objects WHERE sap_id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(SAPName);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.first()){
+				return rs.getString("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return null;
 	}
@@ -139,6 +200,21 @@ public class SAPServerSimulator {
 	public String getAttributeName(int AttributeId){
 		Application.db.connect();
 		
+		String query = "SELECT id FROM attributes WHERE name = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(String.valueOf(AttributeId));
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.first()){
+				return rs.getString("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
@@ -149,5 +225,12 @@ public class SAPServerSimulator {
 	 */
 	public void deleteBusinessObjectInstance(int id){
 		Application.db.connect();
+		
+		String query = "DELETE FROM business_objects_data WHERE business_object = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(String.valueOf(id));
+		
+		Application.db.exec(query, args, false);
 	}
 }

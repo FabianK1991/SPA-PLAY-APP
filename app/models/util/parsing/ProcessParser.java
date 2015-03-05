@@ -57,11 +57,16 @@ public class ProcessParser {
 		return id;
 	}
 	
+	private List<Element> flows = new ArrayList<Element>();
+	
+	private void postprocessFlows(ProcessModel pm){
+		for(Element e: this.flows){
+			this.createFlow(e, pm);
+		}
+	}
+	
 	/*
 	 * Creates a new flow and adds it to the source node
-	 * 
-	 * TODO: If target or source is null then wait with creation!!!
-	 * WORKAROUND: Place sequenceflow nodes at end of xml!!!
 	 * 
 	 */
 	private void createFlow(Element el, ProcessModel pm){
@@ -166,7 +171,8 @@ public class ProcessParser {
 				break;
 			case "sequenceFlow":
 				//System.out.println("Flow!");
-				this.createFlow((Element)n, pm);
+				//this.createFlow((Element)n, pm);
+				this.flows.add((Element)n);
 				
 				break;
 			case "association":
@@ -180,6 +186,9 @@ public class ProcessParser {
 				BusinessObject bo = new BusinessObject(nsm + ele.getAttribute("id"));
 				
 				bo.setName(ele.getAttribute("name"));
+				
+				// TODO: clarify if this should be common way to go
+				bo.setSAPId(ele.getAttribute("name").split(":")[0]);
 				
 				for (int temp = 0; temp < properties.getLength(); temp++) {
 					Element property = (Element)properties.item(temp);
@@ -202,10 +211,10 @@ public class ProcessParser {
 							bo.setNeededAttributes(property.getAttribute("value").split(","));
 							//System.out.println(propName + ": " + property.getAttribute("value"));
 							break;
-						case "sapid":
-							bo.setSAPId(property.getAttribute("value"));
-							//System.out.println(propName + ": " + property.getAttribute("value"));
-							break;
+						//case "sapid":
+						//	bo.setSAPId(property.getAttribute("value"));
+						//	//System.out.println(propName + ": " + property.getAttribute("value"));
+						//	break;
 					}
 				}
 				
@@ -230,6 +239,9 @@ public class ProcessParser {
 			
 			this.handleChildren(n, pm);
 		}
+		
+		// Process flows
+		this.postprocessFlows(pm);
 		
 		return pm;
 	}
