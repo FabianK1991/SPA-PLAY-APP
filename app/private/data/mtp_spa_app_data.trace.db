@@ -1435,3 +1435,33 @@ Caused by: java.lang.IllegalArgumentException: 1425521056793
 org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "f0e5b58db657b2bc194e1963412516357a3de5d5"
 Data conversion error converting "f0e5b58db657b2bc194e1963412516357a3de5d5"; SQL statement:
 SELECT * FROM `users` WHERE `id` = 'f0e5b58db657b2bc194e1963412516357a3de5d5' [22018-175]
+03-05 18:12:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLEBUSINESS_OBJECTS_DATA[*]  ALTER COLUMN BUSINESS_OBJECT  RENAME TO ID "; erwartet "TABLE, USER, INDEX, SCHEMA, SEQUENCE, VIEW"
+Syntax error in SQL statement "ALTER TABLEBUSINESS_OBJECTS_DATA[*]  ALTER COLUMN BUSINESS_OBJECT  RENAME TO ID "; expected "TABLE, USER, INDEX, SCHEMA, SEQUENCE, VIEW"; SQL statement:
+ALTER TABLEBUSINESS_OBJECTS_DATA  ALTER COLUMN business_object  rename to id [42001-175]
+03-05 18:20:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Index "PRIMARY_KEY_" nicht gefunden
+Index "PRIMARY_KEY_" not found; SQL statement:
+ALTER TABLE BUSINESS_OBJECT_INSTANCES DROP PRIMARY KEY [42112-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.table.Table.getPrimaryKey(Table.java:692)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5161)
+	at org.h2.command.Parser.parseAlter(Parser.java:4552)
+	at org.h2.command.Parser.parsePrepared(Parser.java:325)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:168)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
