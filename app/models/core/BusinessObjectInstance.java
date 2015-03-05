@@ -156,7 +156,7 @@ public class BusinessObjectInstance {
 	 * Creates and returns BusinessObjectInstance referencing the "template" of a BusinessObject,
 	 * e.g. BusinessObjectInstance.create(new BusinessObject('bill'))
 	 */
-	public static BusinessObjectInstance create(BusinessObject businessObject, ActivityInstance ai) {
+	public static BusinessObjectInstance create(ActivityInstance ai, BusinessObject businessObject) {
 		return new BusinessObjectInstance(businessObject, ai);
 	}
 	

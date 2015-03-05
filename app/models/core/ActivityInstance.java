@@ -113,9 +113,8 @@ public class ActivityInstance {
 	 * Adds a reference to a BusinessObjectInstance to this ActivityInstance
 	 *	Deprecated: Not needed anymore because of the additional parameter in BusinessObjectInstance.create the instance is automatically added to the ActivityInstance
 	 */
-	@Deprecated
-	public void addBusinessObjectInstance(BusinessObjectInstance businessObjectInstance) {
-		
+	public void addBusinessObjectInstance(BusinessObject businessObject) {
+		BusinessObjectInstance.create(this, businessObject);
 	}
 	
 	/*
