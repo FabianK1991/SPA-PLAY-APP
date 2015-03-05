@@ -849,3 +849,11 @@ The connection was not closed by the application and is garbage collected [90018
 org.h2.jdbc.JdbcSQLException: Tabelle "SESSION" nicht gefunden
 Table "SESSION" not found; SQL statement:
 UPDATE `session` SET `update`='1425516213713' WHERE `id`='0ad2c0b' [42102-175]
+03-05 02:21:51 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "'fb558e1' (USER_SESSIONS: ID INT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF)"
+Data conversion error converting "'fb558e1' (USER_SESSIONS: ID INT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_F08AE3F5_B8BE_4CD3_888C_CD34E346CBAF)"; SQL statement:
+INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('fb558e1', '1', 'cacbff154509aa9817d16aed7fd23081525f7e14', '2015-03-05 02:21:51', '2015-03-05 02:21:51') -- ('fb558e1', '1', 'cacbff154509aa9817d16aed7fd23081525f7e14', '2015-03-05 02:21:51', '2015-03-05 02:21:51') [22018-175]
+03-05 02:21:55 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "fb558e1"
+Data conversion error converting "fb558e1"; SQL statement:
+SELECT * FROM `user_sessions` WHERE `id` = 'fb558e1' [22018-175]
