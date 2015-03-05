@@ -57,6 +57,15 @@ public class ProcessInstance {
 		}
 	}
 	
+	@Override
+	public boolean equals(Object o){
+		if(this.getId().equals(((ProcessInstance) o).getId())){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	/*
 	 * TODO
 	 * Returns the ID of this ProcessInstance
@@ -70,7 +79,8 @@ public class ProcessInstance {
 	 * Returns the name of this ProcessInstance
 	 */
 	public String getName() {
-		return this.pi.getName();
+		return this.pm.getName() + " - (" + this.getCurrentActivity().getTime()+ ")";
+//		return this.pi.getName();
 	}
 	
 	public models.spa.api.ProcessInstance getSPAProcessInstance(){

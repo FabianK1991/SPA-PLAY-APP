@@ -142,6 +142,10 @@ public class ActivityInstance {
 		return newActivityInstance;
 	}
 	
+	public String getTime(){
+		return this.getSPAActivityInstance().getDateTime();
+	}
+	
 	private static String getUID(ProcessInstance pi) {
 		String id = "";
 		
