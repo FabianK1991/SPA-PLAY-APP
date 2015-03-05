@@ -16,7 +16,6 @@ public class BusinessObjectInstance {
 	private models.spa.api.process.buildingblock.instance.BusinessObjectInstance boi;
 	
 	// the id of the instance in the SAP database
-	// TODO: Save this id in our database
 	private int databaseId;
 	
 	/*
@@ -29,19 +28,22 @@ public class BusinessObjectInstance {
 		this.bo = bo;
 		
 		this.boi = new models.spa.api.process.buildingblock.instance.BusinessObjectInstance(this.ai.getSPAActivityInstance().getPi());
-		this.boi.setId(ProcessParser.nsmi + BusinessObjectInstance.getUID());
+		
+		// Database SAP NAME NEEDED!!
+		this.databaseId = Integer.parseInt(Application.sss.createBusinessObjectInstance(Application.sss.getBusinessObjectDatabaseId(bo.getSAPId()), null));
+		
+		this.boi.setId(ProcessParser.nsboi + this.databaseId);
 		this.boi.setBusinessObject(bo.getId());
 		
 		// Add to spa model
 		this.ai.getSPAActivityInstance().getBoi().add(this.boi);
 		
 		// TODO: update?
-		//this.ai.getSPAActivityInstance().getPi().update();
-		
-		// TODO: Save in database
-		if( bo.getSAPId() != null && bo.getSAPId().length() > 0 ){
-			this.databaseId = Integer.parseInt(Application.sss.createBusinessObjectInstance(Application.sss.getBusinessObjectDatabaseId(bo.getSAPId()), null));
-			this.storeDatabaseId();
+		try {
+			this.ai.getSPAActivityInstance().getPi().update();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -66,16 +68,9 @@ public class BusinessObjectInstance {
 		}
 	
 		this.bo = ai.getActivity().getBusinessObjectById(this.boi.getBusinessObject());
-		this.databaseId = this.getDatabaseId();
-	}
-	
-	private void storeDatabaseId(){
-		// TODO: Implement
-	}
-	
-	private int getDatabaseId(){
-		// TODO: Implement
-		return 0;
+		
+		// 
+		this.databaseId = Integer.parseInt(this.boi.getId().substring(ProcessParser.nsboi.length()));
 	}
 	
 	/*

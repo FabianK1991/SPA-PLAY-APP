@@ -40,6 +40,7 @@ public class ProcessParser {
 	
 	public static String nsm = "http://masterteamproject/";
 	public static String nsmi = "http://masterteamproject/instance/";
+	public static String nsboi = "http://masterteamproject/business_object_instance/";
 	
 	private static String getUID() {
 		String id = "";
