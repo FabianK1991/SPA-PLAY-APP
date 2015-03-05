@@ -19,7 +19,6 @@ public class BusinessObjectInstance {
 	private int databaseId;
 	
 	/*
-	 * TODO
 	 * Method to internally (PRIVATE method) create an empty BusinessObjectInstance
 	 * Should be used only by static method BusinessObjectInstance.create()
 	 */
@@ -38,17 +37,15 @@ public class BusinessObjectInstance {
 		// Add to spa model
 		this.ai.getSPAActivityInstance().getBoi().add(this.boi);
 		
-		// TODO: update?
+		// update?
 		try {
 			this.ai.getSPAActivityInstance().getPi().update();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	/*
-	 * TODO
 	 * Instantiates a BusinessObjectInstance
 	 */
 	public BusinessObjectInstance(String id, ActivityInstance ai) throws BusinessObjectInstanceNotFoundException {
@@ -74,22 +71,24 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Deletes a BusinessObjectInstance and removes all references to it stored in SPA
 	 */
 	public void delete() {
 		Set<models.spa.api.process.buildingblock.instance.BusinessObjectInstance> list = ai.getSPAActivityInstance().getBoi();
 		list.remove(this.boi);
 		
-		// TODO: Update ProcessInstance?
-		//this.ai.getSPAActivityInstance().getPi().update();
+		// Update ProcessInstance?
+		try {
+			this.ai.getSPAActivityInstance().getPi().update();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		// TODO: Delete in database?
+		// Delete in database?
 		Application.sss.deleteBusinessObjectInstance(this.databaseId);
 	}
 	
 	/*
-	 * TODO
 	 * Sets the given type of BusinessObjectAttribute to the given value,
 	 * e.g. BusinessObjectInstance="BILL-1" => setAttrbuteValue(BusinessObjectAttribute('date'), new Date('2014-01-01'))
 	 * => Values need to be saved in SPA, as the BusinessObjectInstance will not be persistent!
@@ -101,7 +100,6 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the current value of the attribute passed to the method,
 	 * e.g. BusinessObjectInstance="BILL-1" => getAttrbuteValue(BusinessObjectAttribute('date')) returns new Date('2014-01-01')
 	 * => Values can be retrieved from SPA
@@ -114,7 +112,6 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the "type of" BusinessObject (e.g. BusinessObjectInstance="Bill-1" returns BusinessObject("bill"))
 	 */
 	public BusinessObject getBusinessObject() {
@@ -122,7 +119,6 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns a list of documents related to this BusinessObjectInstance,
 	 * e.g. BusinessObjectInstance="BILL-1" (BusinessObject="Bill") and documents like PDF-bill,...
 	 */
@@ -131,7 +127,6 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Creates and returns BusinessObjectInstance referencing the "template" of a BusinessObject,
 	 * e.g. BusinessObjectInstance.create(new BusinessObject('bill'))
 	 */

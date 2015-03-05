@@ -22,7 +22,6 @@ public class ActivityInstance {
 	private static List<ActivityInstance> instances = new ArrayList<ActivityInstance>();
 	
 	/*
-	 * TODO
 	 * Method to internally (PRIVATE method) create an empty ActivityInstance
 	 * Should be used only by static method ActivityInstance.create()
 	 */
@@ -45,18 +44,19 @@ public class ActivityInstance {
 
 		this.activityInstance.setDateTime(dateFormat.format(date));
 		
-		// TODO: handle bos
-		//ActivityInstance.instances.add(this);
-		
 		// Add to spa model
 		pi.getSPAProcessInstance().getActivities().add(this.activityInstance);
 		
-		// TODO: Update SPA model?
-		//pi.getSPAProcessInstance().update();
+		// Update SPA model?
+		try {
+			pi.getSPAProcessInstance().update();
+		} catch (Exception e) {
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/*
-	 * TODO
 	 * Returns a the type of Activity of this ActivityInstance
 	 * 
 	 * >> Needs to SEARCH in SPA for a ActivityInstance with the given ID <<
@@ -85,7 +85,6 @@ public class ActivityInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the type of Activity of this ActivityInstance
 	 */
 	public Activity getActivity() {
@@ -93,7 +92,6 @@ public class ActivityInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns a List of BusinessObjectInstances (sometimes created and) referenced by this ActivityInstance
 	 */
 	public List<BusinessObjectInstance> getBusinessObjectInstances() {
@@ -112,7 +110,6 @@ public class ActivityInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Adds a reference to a BusinessObjectInstance to this ActivityInstance
 	 *	Deprecated: Not needed anymore because of the additional parameter in BusinessObjectInstance.create the instance is automatically added to the ActivityInstance
 	 */
@@ -122,7 +119,6 @@ public class ActivityInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Removes the reference to a BusinessObjectInstance from this ActivityInstance
 	 */
 	public void removeBusinessObjectInstance(BusinessObjectInstance businessObjectInstance) {
@@ -130,24 +126,6 @@ public class ActivityInstance {
 	}
 	
 	/*
-	 * Returns an existing ActivityInstance
-	 */
-	/*
-	public static ActivityInstance getInstanceById(String id) throws ActivityInstanceNotFoundException{
-		//throw new ActivityInstanceNotFoundException();
-		for(int i=0;i<ActivityInstance.instances.size();i++){
-			ActivityInstance ai = ActivityInstance.instances.get(i);
-			
-			if( ai.getSPAActivityInstance().getId().equals(id) ){
-				return ai;
-			}
-		}
-		
-		throw new ActivityInstanceNotFoundException(); 
-	}*/
-	
-	/*
-	 * TODO
 	 * Creates and returns ActivityInstance referencing the "template" of an Activity,
 	 * e.g. ActivityInstance.create(new Activity("create bill"))
 	 * 

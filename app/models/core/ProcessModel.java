@@ -40,7 +40,6 @@ public class ProcessModel {
 	public List<BusinessObject> bos;
 	
 	/*
-	 * TODO
 	 * Method to internally (PRIVATE method) create an empty ProcessModel
 	 * Should be used only by static method ProcessModel.createFromBPMN_File()
 	 */
@@ -51,7 +50,6 @@ public class ProcessModel {
 	}
 	
 	/*
-	 * TODO
 	 * Instantiates a ProcessModel object by the given ID
 	 * 
 	 * >> Needs to SEARCH in SPA for a ProcessModel with the given ID <<
@@ -79,7 +77,6 @@ public class ProcessModel {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the BPMN XML file locally stored by the static method ProcessModel.createFromBPMN_File()
 	 */
 	public File getBPMN_XML() {
@@ -91,7 +88,6 @@ public class ProcessModel {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the name of this ProcessModel
 	 */
 	public String getName() {
@@ -150,7 +146,6 @@ public class ProcessModel {
 	}
 	
 	/*
-	 * TODO
 	 * Returns all process models stored in the SPA
 	 */
 	public static List<ProcessModel> getAll() {
@@ -172,7 +167,6 @@ public class ProcessModel {
 	}
 	
 	/*
-	 * TODO
 	 * Receives a BPMN XML file containing a process model with annotated business objects,
 	 * stores this file as /processes/[ProcessModel:ID].bpmn
 	 * and parses the XML to create a ProcessModel in the SPA.
@@ -283,7 +277,6 @@ public class ProcessModel {
 				} while(rs.next());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}
@@ -421,7 +414,6 @@ public class ProcessModel {
 					}
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return;
 			}

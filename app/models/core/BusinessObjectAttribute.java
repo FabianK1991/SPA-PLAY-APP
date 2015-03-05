@@ -6,7 +6,6 @@ public class BusinessObjectAttribute {
 	private String id;
 	
 	/*
-	 * TODO
 	 * Instantiates a BusinessObjectAttribute
 	 * All available BusinessObjectAttributes can be found in database "attributes" (columns: id, name)
 	 */
@@ -19,7 +18,6 @@ public class BusinessObjectAttribute {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the name of the BusinessObjectAttribute
 	 * 
 	 */

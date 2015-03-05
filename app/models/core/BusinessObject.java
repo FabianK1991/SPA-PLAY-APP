@@ -92,7 +92,6 @@ public class BusinessObject {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the minimum number of BusinessObjects that need to be defined in a ActivityInstance
 	 */
 	public String getMinQuantity() {
@@ -100,7 +99,6 @@ public class BusinessObject {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the maximum number of BusinessObjects that can be defined in a ActivityInstance
 	 */
 	public String getMaxQuantity() {
