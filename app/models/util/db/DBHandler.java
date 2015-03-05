@@ -78,7 +78,7 @@ public class DBHandler {
 		
 		if(this.connect()){
 			if(o instanceof User){
-				query = "SELECT * FROM `users` WHERE `%s` = '%s' LIMIT 1";
+				query = "SELECT * FROM `users` WHERE `%s` = '%s'";
 				if(mode == false){
 					args.add("mail");
 					args.add(((User) o).getEmail());
@@ -88,11 +88,8 @@ public class DBHandler {
 					args.add(((User) o).getId());
 				}
 			}else if (o instanceof Session){
-				query = "SELECT * FROM `user_sessions` WHERE `id` = '%s' LIMIT 1";
+				query = "SELECT * FROM `user_sessions` WHERE `id` = '%s'";
 				args.add(((Session) o).getId());
-			}else if(o instanceof ProcessInstance){
-				query = "SELECT * FROM `user_process_instances` WHERE `user`= '%s' ORDER BY `time` DESC LIMIT 1";
-				args.add(AuthController.getUser().getId());
 			}
 			ResultSet rs = this.exec(query, args, true);
 			try {
@@ -131,7 +128,8 @@ public class DBHandler {
 					query = "SELECT * FROM `user_process_instances` WHERE `user` = '"+ userid +"' ORDER BY `time`";
 				}else{
 					query = "SELECT * FROM `user_process_instances` ORDER BY `time`";
-				}		
+				}
+				
 			}
 			ResultSet rs = this.exec(query, null, true);
 			try {
@@ -173,16 +171,14 @@ public class DBHandler {
 			String query="";
 			ArrayList<String> args = new ArrayList<String>();
 			if(o instanceof User){
-				((User) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 8));
-				query = "INSERT INTO `users` (`id`, `name`, `mail`, `passwd`, `time`, `session`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s')";
-				args.add(((User) o).getId());
+				query = "INSERT INTO `users` ( `name`, `mail`, `passwd`, `time`, `session`) VALUES ('%s', '%s', '%s', '%s', '%s')";
 				args.add(((User) o).getName());
 				args.add(((User) o).getEmail());
 				args.add(((User) o).getPasswd());
 				args.add(DBHandler.format.format(((User) o).getTime()).toString());
 				args.add(((User) o).getSession().getId());
 			}else if(o instanceof Session){
-				((Session) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 8));
+				((Session) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 7));
 				query = "INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('%s', '%s', '%s', '%s', '%s')";
 				args.add(((Session) o).getId());
 				args.add(((Session) o).getUser().getId());
@@ -243,21 +239,6 @@ public class DBHandler {
 				args.add(prop);
 				args.add(value);
 				args.add(((User) o).getId());
-			}
-			this.exec(query, args, false);
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean archive(Object o){
-		if(this.connect()){
-			String query = "";
-			ArrayList<String> args = new ArrayList<String>();
-			if(o instanceof ProcessInstance){
-				query = "UPDATE `user_process_instances` SET `archive` = TRUE WHERE `user`= '%s' AND `process` = '%s'";
-				args.add(AuthController.getUser().getId());
-				args.add(((ProcessInstance) o).getId());
 			}
 			this.exec(query, args, false);
 			return true;

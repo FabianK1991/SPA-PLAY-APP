@@ -1,0 +1,33 @@
+@import core._
+
+<div class="process_model_selector">
+
+	@defining(ProcessModel.getAll()) { processModels =>
+	
+		@if(processModels.length > 0) {
+		
+			<select>
+			
+				@for(model <- processModels) {
+				
+					<option value="@model.getId()">@model.getName()</option>
+				
+				}
+			
+			</select>
+		
+		} else {
+				
+			<div class="warning no-process_model">
+			
+				No process models available. Please add a new process model.
+			
+			</div>
+			
+			@process_model_uploader()
+			
+		}
+	
+	}
+
+</div>

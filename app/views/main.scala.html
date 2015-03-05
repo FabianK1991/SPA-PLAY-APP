@@ -1,24 +1,13 @@
 @import core._
-@(currentActivityInstance: ActivityInstance)
 
 @design("Process Guidance") {
-
-    @process_selector()
+	
+   	@defining(AuthController.getUser()) { user =>
     
-    @process_viewer()
-    
-    @defining(currentActivityInstance.getActivity()) { activity =>
-    	@defining(activity.getBusinessObjects()) { businessObjects =>
-    		@activity.getAction() match {
-        		case "select" 	=> 	{@bo_select(businessObjects)}
-        		case "update" 	=> 	{@bo_update(businessObjects)}
-        		case "create" 	=> 	{@bo_create(businessObjects)}
-        		case "delete" 	=> 	{@bo_delete(businessObjects)}
-        		case _ 			=>	{@bo_none()}
-    		}
-    	}
-   	}
-    @document_viewer()
+   	 	@process_selector(user)
+    	
+    	@process_viewer(user.getCurrentProcessInstance())
+    }
 
 }
 
