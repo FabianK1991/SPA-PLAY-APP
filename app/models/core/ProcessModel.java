@@ -131,7 +131,21 @@ public class ProcessModel {
 	 * Returns all process models stored in the SPA
 	 */
 	public static List<ProcessModel> getAll() {
-		return null;
+		List<models.spa.api.ProcessModel> pms;
+		List<ProcessModel> resultList = new ArrayList<ProcessModel>();
+		
+		try {
+			pms = models.spa.api.ProcessModel.getAllProcesses();
+			
+			for( models.spa.api.ProcessModel pm : pms ){
+				resultList.add(new ProcessModel(pm));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return resultList;
 	}
 	
 	/*
