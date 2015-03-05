@@ -31,26 +31,15 @@ import org.xml.sax.SAXException;
 
 public class ProcessParser {
 	
-	public ProcessParser(File file, ProcessModel processModel){
-		try {
-			this.parseXML(file, processModel);
-		} catch (IncorrectNumberOfProcessModelsExeption e) {
-			/*If file contains 0 or more than 1 Process Model!*/
-		}
+	public ProcessParser(ProcessModel pm){
+		this.prm = pm;
 	}
 	
 	private Document doc;
-	private ArrayList<ProcessModel> pms; 
+	private ProcessModel prm; 
 	
 	public static String nsm = "http://masterteamproject/";
 	public static String nsmi = "http://masterteamproject/instance/";
-	
-	/*
-	 * Retrieves the parsed Process Models
-	 */
-	public List<ProcessModel> getParsedModels(){
-		return pms;
-	}
 	
 	private static String getUID() {
 		String id = "";
@@ -247,7 +236,7 @@ public class ProcessParser {
 	/*
 	 * Parses an xml into processmodels
 	 */
-	private void parseXML(File file, ProcessModel processModel) throws IncorrectNumberOfProcessModelsExeption{
+	public void parseXML(File file) throws IncorrectNumberOfProcessModelsExeption{
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setNamespaceAware(true);
 		DocumentBuilder db;
@@ -257,12 +246,10 @@ public class ProcessParser {
 			this.doc = db.parse(file);
 			
 			NodeList nList = this.doc.getElementsByTagNameNS("*", "process");
-			this.pms = new ArrayList<ProcessModel>();
-
 			
 			//One file can only contain one process model!
 			if (nList.getLength() == 1) {
-				this.parseProcess(processModel, (Element)nList.item(0));
+				this.parseProcess(this.prm, (Element)nList.item(0));
 			}
 			else {
 				throw new IncorrectNumberOfProcessModelsExeption();

@@ -50,6 +50,9 @@ public class ActivityInstance {
 		
 		// Add to spa model
 		pi.getSPAProcessInstance().getActivities().add(this.activityInstance);
+		
+		// TODO: Update SPA model?
+		//pi.getSPAProcessInstance().update();
 	}
 	
 	/*

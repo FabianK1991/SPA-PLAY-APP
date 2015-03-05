@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import controllers.Application;
 import models.core.exceptions.ActivityInstanceNotFoundException;
+import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.parsing.ProcessParser;
@@ -178,11 +179,19 @@ public class ProcessModel {
 	 * The created ProcessModel instance needs to be returned.
 	 */
 	public static ProcessModel createFromBPMN_File(File file) {
+		// Init model and parser
 		ProcessModel newProcessModel = new ProcessModel();
+		ProcessParser pp = new ProcessParser(newProcessModel);
 		
-		ProcessParser pp = new ProcessParser(file, newProcessModel);
+		// Parse model
+		try {
+			pp.parseXML(file);
+		} catch (IncorrectNumberOfProcessModelsExeption e1) {
+			e1.printStackTrace();
+		}
 		
-		/*File f = new File(xmlPath + newProcessModel.getId() + ".bpmn");
+		// Save to file
+		File f = new File(xmlPath + newProcessModel.getId() + ".bpmn");
 		
 		// Check if file exists, otherwise write it
 		if( !f.exists() ){
@@ -191,8 +200,9 @@ public class ProcessModel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}*/
+		}
 		
+		// persist bos in spa model and database
 		newProcessModel.addBusinessObjectsToSpaModel();
 		newProcessModel.persistBusinessObjectDataAssociations();
 		
@@ -201,7 +211,6 @@ public class ProcessModel {
 			newProcessModel.getSPAProcessModel().delete();
 			newProcessModel.getSPAProcessModel().store();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
