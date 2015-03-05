@@ -7,6 +7,8 @@ import controllers.Application;
 
 public class BusinessObject {
 	private String id;
+	private String SAPId;
+	
 	private String action;
 	private String min;
 	private String max;
@@ -38,6 +40,13 @@ public class BusinessObject {
 		this.name = name;
 	}
 	
+	public void setSAPId(String SAPId){
+		this.SAPId = SAPId;
+	}
+	
+	public String getSAPId(){
+		return SAPId;
+	}
 	
 	/*
 	 * TODO

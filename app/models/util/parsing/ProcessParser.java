@@ -212,6 +212,10 @@ public class ProcessParser {
 							bo.setNeededAttributes(property.getAttribute("value").split(","));
 							//System.out.println(propName + ": " + property.getAttribute("value"));
 							break;
+						case "sapid":
+							bo.setSAPId(property.getAttribute("value"));
+							//System.out.println(propName + ": " + property.getAttribute("value"));
+							break;
 					}
 				}
 				
