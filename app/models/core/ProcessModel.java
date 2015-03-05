@@ -1,19 +1,14 @@
 package models.core;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import models.core.exceptions.ActivityInstanceNotFoundException;
-import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.parsing.ProcessParser;
+import play.mvc.Http.MultipartFormData.FilePart;
 
 public class ProcessModel {
 	models.spa.api.ProcessModel pm;
@@ -155,7 +150,11 @@ public class ProcessModel {
 	 * and parses the XML to create a ProcessModel in the SPA.
 	 * The created ProcessModel instance needs to be returned.
 	 */
-	public static ProcessModel createFromBPMN_File(File file) {
+	public static ProcessModel createFromBPMN_File(FilePart filepart) {
+		String fileName = filepart.getFilename();
+	    String contentType = filepart.getContentType();
+	    File file = filepart.getFile();
+	    
 		ProcessModel newProcessModel = new ProcessModel();
 		
 		ProcessParser pp = new ProcessParser(file, newProcessModel);

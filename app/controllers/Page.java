@@ -1,16 +1,13 @@
 package controllers;
 
-import java.io.File;
-
-import models.core.Activity;
-import models.core.ProcessInstance;
 import models.core.ProcessModel;
 import models.core.exceptions.ProcessModelNotFoundException;
-import models.util.parsing.ProcessParser;
-import models.util.sessions.User;
-import play.Logger;
-import play.mvc.*;
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Http.MultipartFormData;
+import play.mvc.Http.MultipartFormData.FilePart;
+import play.mvc.Result;
+import views.html.login;
+import views.html.main;
 
 public class Page extends Controller {
 
@@ -69,6 +66,21 @@ public class Page extends Controller {
 		} catch (ProcessModelNotFoundException e) {
 			return notFound();
 		}
+    }
+    
+    public static Result uploadProcess() {
+    	MultipartFormData body = request().body().asMultipartFormData();
+    	FilePart filepart = body.getFile("bpmn_file");
+    	
+    	if (filepart != null) {
+    		ProcessModel.createFromBPMN_File(filepart);
+    		
+    		return ok("File uploaded");
+    	}
+    	else {
+    		flash("error", "Missing file");
+    		return redirect(routes.Page.index());
+    	}
     }
     /*
     public static Result main() {

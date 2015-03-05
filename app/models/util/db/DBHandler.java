@@ -207,7 +207,7 @@ public class DBHandler {
 			String query = "DELETE FROM `%s` WHERE `id` = '%s'";
 			ArrayList<String> args = new ArrayList<String>();
 			if(o instanceof Session){
-				args.add("session");
+				args.add("user_sessions");
 				args.add(((Session) o).getId());
 			}
 			this.exec(query, args, false);
@@ -229,7 +229,7 @@ public class DBHandler {
 			String query = "UPDATE `%s` SET `%s`='%s' WHERE `id`='%s'";
 			ArrayList<String> args = new ArrayList<String>();
 			if(o instanceof Session){
-				args.add("session");
+				args.add("user_sessions");
 				args.add(prop);
 				args.add(value);
 				args.add(((Session) o).getId());

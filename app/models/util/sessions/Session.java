@@ -33,8 +33,8 @@ public class Session {
 			this.key = filling.get(2);
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			try {
-				this.time = format.parse(filling.get(3));
-				this.update = format.parse(filling.get(4));
+				this.time = format.parse(filling.get(4));
+				this.update = format.parse(filling.get(5));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

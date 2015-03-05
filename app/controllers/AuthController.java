@@ -38,7 +38,7 @@ public class AuthController extends Controller {
 			
 			if (sessKey.value().equals(Application.sha1(AuthController.s.getKey())) && time - AuthController.s.getUpdate().getTime()<1000*60*20) {
 				AuthController.s.setUpdate(new Date());
-				Application.db.update(AuthController.s, "update" , DBHandler.format.format(time.toString()));
+				Application.db.update(AuthController.s, "update" , DBHandler.format.format(time));
 				
 				return true;
 			}

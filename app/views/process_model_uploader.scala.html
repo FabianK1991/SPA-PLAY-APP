@@ -2,8 +2,12 @@
 
 <div class="process_model_uploader">
 
-	<input type="file" name="xml_process" accept=".bpmn,.xml" />
+	<form action="@routes.Page.uploadProcess" method="post" enctype="multipart/form-data">
 	
-	<input type="submit" name="Add" />
+		<input type="file" name="bpmn_file" accept=".bpmn,.xml" />
+		
+		<input type="submit" name="Add" />
+	
+	</form>
 
 </div>
