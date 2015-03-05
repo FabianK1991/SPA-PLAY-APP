@@ -1,12 +1,28 @@
 @import core._
+@(user: util.sessions.User = AuthController.getUser())
+
 <div class="process_selector">
 
-	<select>
-
-		@defining(controllers.AuthController.getUser()) { user =>
-  			@process_selector_options(user.getProcessInstances(), user.getCurrentProcessInstance())
+	@defining(user.getProcessInstances()) { processInstances =>
+	
+		@if(processInstances.length > 0) {
+		
+			<select>
+			
+				@process_selector_options(processInstances, user.getCurrentProcessInstance())
+			
+			</select>
+		
+		} else {
+			<div class="warning no-process_instance">
+			
+				There are no processes currently running. Please start a new process.
+			
+			</div>
+			
+			@process_model_selector()
 		}
-
-	</select>
+	
+	}
 
 </div>

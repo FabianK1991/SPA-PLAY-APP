@@ -1,0 +1,39 @@
+@import core._
+@(processInstance: ProcessInstance = AuthController.getUser().getCurrentProcessInstance())
+
+<div class="process_viewer">
+
+@if(processInstance != null) {
+	<div class="process_model" data-process_model="@processInstance.getProcessModel().getId()">
+	
+		<div class="loader">
+		
+			Process visualization in progress
+		
+		</div>
+	
+	</div>
+	
+	@defining(processInstance.getCurrentActivity()) { activityInstance =>
+		@defining(activityInstance.getActivity()) { activity =>
+    		@defining(activity.getBusinessObjects()) { businessObjects =>
+    			@activity.getAction() match {
+        			case "select" 	=> 	{@bo_select(businessObjects)}
+        			case "update" 	=> 	{@bo_update(businessObjects)}
+        			case "create" 	=> 	{@bo_create(businessObjects)}
+        			case "delete" 	=> 	{@bo_delete(businessObjects)}
+        			case _ 			=>	{@bo_none()}
+    			}
+    			@document_viewer()
+    		}
+   		}
+	}
+} else {
+	<div class="none">
+	
+		You are currently not executing a process.
+	
+	</div>
+}
+
+</div>

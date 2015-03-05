@@ -49,7 +49,7 @@ public class Page extends Controller {
     	//Logger.debug("Created bois!");
     	
     	if(AuthController.check()) {
-    		return ok(index.render("Your new application is ready."));
+    		return ok(main.render());
     	}
     	else {
     		return redirect("/login");
@@ -58,6 +58,17 @@ public class Page extends Controller {
     
     public static Result login(String email) {
         return ok(login.render(email));
+    }
+    
+    public static Result xmlProcess(String processID) {
+    	ProcessModel processModel;
+		try {
+			processModel = new ProcessModel(processID);
+			
+			return ok(processModel.getBPMN_XML());
+		} catch (ProcessModelNotFoundException e) {
+			return notFound();
+		}
     }
     /*
     public static Result main() {

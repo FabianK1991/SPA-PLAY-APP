@@ -171,16 +171,14 @@ public class DBHandler {
 			String query="";
 			ArrayList<String> args = new ArrayList<String>();
 			if(o instanceof User){
-				((User) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 8));
-				query = "INSERT INTO `users` (`id`, `name`, `mail`, `passwd`, `time`, `session`) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s')";
-				args.add(((User) o).getId());
+				query = "INSERT INTO `users` ( `name`, `mail`, `passwd`, `time`, `session`) VALUES ('%s', '%s', '%s', '%s', '%s')";
 				args.add(((User) o).getName());
 				args.add(((User) o).getEmail());
 				args.add(((User) o).getPasswd());
 				args.add(DBHandler.format.format(((User) o).getTime()).toString());
 				args.add(((User) o).getSession().getId());
 			}else if(o instanceof Session){
-				((Session) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 8));
+				((Session) o).setId(Application.sha1(""+System.currentTimeMillis()).substring(0, 7));
 				query = "INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('%s', '%s', '%s', '%s', '%s')";
 				args.add(((Session) o).getId());
 				args.add(((Session) o).getUser().getId());

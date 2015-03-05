@@ -533,3 +533,319 @@ Caused by: java.lang.IllegalArgumentException: Wed Mar 04 23:43:54 CET 2015
 	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:105)
 	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:85)
 	... 51 more
+03-05 00:02:51 jdbc[102]: exception
+org.h2.jdbc.JdbcSQLException: Wert zu gross / lang für Feld "ID VARCHAR(7) NOT NULL": "'5a3986e3' (8)"
+Value too long for column "ID VARCHAR(7) NOT NULL": "'5a3986e3' (8)"; SQL statement:
+INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('5a3986e3', '1', 'b91462d136a5c9377e139b09a3b97e7b82c9d5fc', '2015-03-05 00:02:51', '2015-03-05 00:02:51') [22001-175]
+03-05 00:04:37 jdbc[109]: exception
+org.h2.jdbc.JdbcSQLException: Wert zu gross / lang für Feld "ID VARCHAR(7) NOT NULL": "'f2f334ef' (8)"
+Value too long for column "ID VARCHAR(7) NOT NULL": "'f2f334ef' (8)"; SQL statement:
+INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('f2f334ef', '1', '60c608f46a5c44eddd882c94f39d75f94b5bf4cf', '2015-03-05 00:04:37', '2015-03-05 00:04:37') [22001-175]
+03-05 00:05:55 jdbc[116]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "SESSION" nicht gefunden
+Table "SESSION" not found; SQL statement:
+UPDATE `session` SET `update`='1425510355670' WHERE `id`='0ad2c0b' [42102-175]
+03-05 00:31:11 jdbc[131]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "SESSION" nicht gefunden
+Table "SESSION" not found; SQL statement:
+UPDATE `session` SET `update`='1425511871877' WHERE `id`='0ad2c0b' [42102-175]
+03-05 00:39:52 jdbc[138]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "SESSION" nicht gefunden
+Table "SESSION" not found; SQL statement:
+UPDATE `session` SET `update`='1425512392944' WHERE `id`='0ad2c0b' [42102-175]
+03-05 00:40:43 jdbc[145]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "SESSION" nicht gefunden
+Table "SESSION" not found; SQL statement:
+UPDATE `session` SET `update`='1425512443817' WHERE `id`='0ad2c0b' [42102-175]
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:01:09 jdbc[152]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:363)
+	at com.jolbox.bonecp.BoneCP.obtainInternalConnection(BoneCP.java:269)
+	at com.jolbox.bonecp.ConnectionHandle.<init>(ConnectionHandle.java:242)
+	at com.jolbox.bonecp.PoolWatchThread.fillConnections(PoolWatchThread.java:115)
+	at com.jolbox.bonecp.PoolWatchThread.run(PoolWatchThread.java:82)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 17 more
+03-05 01:43:33 jdbc[176]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "SESSION" nicht gefunden
+Table "SESSION" not found; SQL statement:
+UPDATE `session` SET `update`='1425516213713' WHERE `id`='0ad2c0b' [42102-175]
