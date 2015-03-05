@@ -128,7 +128,7 @@ public class MailProcess
     }
 
 
-    private static ProcessInstance createProcessInstances(ProcessModel pm) throws Exception
+    public static ProcessInstance createProcessInstances(ProcessModel pm) throws Exception
     {
 
         ProcessInstance pi = new ProcessInstance(pm);
