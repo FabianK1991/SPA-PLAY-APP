@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import models.core.BusinessObjectAttribute;
 import controllers.Application;
 
 public class SAPServerSimulator {
@@ -77,6 +78,30 @@ public class SAPServerSimulator {
 	 * @return A list of attribute ids
 	 */
 	public List<String> getBusinessObjectAttributes(int id){
+		Application.db.connect();
+		
+		return null;
+	}
+	
+	/*
+	 * Creates a new BO Instance in the database
+	 * @author Fabian
+	 * @param id the bo instance id in the database
+	 * @param boa the businessobjectattribute to change
+	 * @param value the value to set to the attribute
+	 * @return
+	 */
+	public void setBusinessObjectAttribute(int id, BusinessObjectAttribute boa, String Value){
+		Application.db.connect();
+	}
+	
+	/*
+	 * Creates a new BO Instance in the database
+	 * @author Fabian
+	 * @param Attributes the attributes with values to search for
+	 * @return the value of the attribute
+	 */
+	public String getBusinessObjectAttribute(int id, BusinessObjectAttribute boa){
 		Application.db.connect();
 		
 		return null;

@@ -171,6 +171,8 @@ public class ProcessModel {
 			}
 		}*/
 		
+		newProcessModel.addBusinessObjectsToSpaModel();
+		
 		// save process model
 		try {
 			newProcessModel.getSPAProcessModel().delete();
@@ -181,6 +183,28 @@ public class ProcessModel {
 		}
 		
 		return newProcessModel;
+	}
+	
+	private BusinessObject getBoById(String id){
+		for(BusinessObject bo: this.bos){
+			if ( bo.getId().equals(id) ){
+				return bo;
+			}
+		}
+		
+		return null;
+	}
+	
+	private void addBusinessObjectsToSpaModel(){
+		for(DataAssociation da : this.dataAssoc){
+			BusinessObject currentBo = this.getBoById(da.boId);
+			
+			models.spa.api.process.buildingblock.BusinessObject SPABo = new models.spa.api.process.buildingblock.BusinessObject(this.getSPAProcessModel());
+			SPABo.setId(currentBo.getId());
+			SPABo.setName(currentBo.getName());
+			
+			this.getSPANodeById(da.activityId).getBusinessObjects().add(SPABo);
+		}
 	}
 	
 	private static String getUID() {

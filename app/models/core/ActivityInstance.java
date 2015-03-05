@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import models.core.exceptions.ActivityInstanceNotFoundException;
+import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.parsing.ProcessParser;
 
@@ -93,13 +94,26 @@ public class ActivityInstance {
 	 * Returns a List of BusinessObjectInstances (sometimes created and) referenced by this ActivityInstance
 	 */
 	public List<BusinessObjectInstance> getBusinessObjectInstances() {
-		return null;
+		Set<models.spa.api.process.buildingblock.instance.BusinessObjectInstance> list = this.getSPAActivityInstance().getBoi();
+		List<BusinessObjectInstance> resultList = new ArrayList<BusinessObjectInstance>();
+		
+		for(models.spa.api.process.buildingblock.instance.BusinessObjectInstance SPABoi: list ){
+			try {
+				resultList.add(new BusinessObjectInstance(SPABoi.getId(), this));
+			} catch (BusinessObjectInstanceNotFoundException e) {
+				continue;
+			}
+		}
+		
+		return resultList;
 	}
 	
 	/*
 	 * TODO
 	 * Adds a reference to a BusinessObjectInstance to this ActivityInstance
+	 *	Deprecated: Not needed anymore because of the additional parameter in BusinessObjectInstance.create the instance is automatically added to the ActivityInstance
 	 */
+	@Deprecated
 	public void addBusinessObjectInstance(BusinessObjectInstance businessObjectInstance) {
 		
 	}
@@ -109,7 +123,7 @@ public class ActivityInstance {
 	 * Removes the reference to a BusinessObjectInstance from this ActivityInstance
 	 */
 	public void removeBusinessObjectInstance(BusinessObjectInstance businessObjectInstance) {
-		
+		businessObjectInstance.delete();
 	}
 	
 	/*

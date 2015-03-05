@@ -56,6 +56,19 @@ public class Activity {
 		return this.pm.getBosForActivity(this.activity.getId());
 	}
 	
+	public BusinessObject getBusinessObjectById(String id){
+		List<BusinessObject> lBos = this.pm.getBosForActivity(this.activity.getId());
+		
+		for(BusinessObject bo: lBos){
+			if(bo.getId().equals(id)){
+				return bo;
+			}
+		}
+		
+		return null;
+	}
+	
+	
 	public models.spa.api.process.buildingblock.Activity getSPAActivity(){
 		return this.activity;
 	}
