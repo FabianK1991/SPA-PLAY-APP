@@ -2,6 +2,7 @@ package controllers;
 
 import models.core.ProcessModel;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.util.http.Parameters;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -73,7 +74,7 @@ public class Page extends Controller {
     	FilePart filepart = body.getFile("bpmn_file");
     	
     	if (filepart != null) {
-    		ProcessModel.createFromBPMN_File(filepart);
+    		ProcessModel processModel = ProcessModel.createFromBPMN_File(filepart, Parameters.get("process_name"));
     		
     		return ok("File uploaded");
     	}

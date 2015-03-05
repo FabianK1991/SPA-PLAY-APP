@@ -1465,3 +1465,7 @@ ALTER TABLE BUSINESS_OBJECT_INSTANCES DROP PRIMARY KEY [42112-175]
 	at org.h2.server.web.WebThread.process(WebThread.java:167)
 	at org.h2.server.web.WebThread.run(WebThread.java:94)
 	at java.lang.Thread.run(Thread.java:745)
+03-05 22:19:23 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "36909f7"
+Data conversion error converting "36909f7"; SQL statement:
+SELECT * FROM `user_sessions` WHERE `id` = '36909f7' [22018-175]

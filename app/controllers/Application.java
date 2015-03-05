@@ -15,6 +15,9 @@ public class Application extends Controller {
 	public static SAPServerSimulator sss = new SAPServerSimulator();
 
     public static String sha1(String input) {
+    	if (input == null) {
+    		return "";
+    	}
         MessageDigest mDigest = null;
         
 		try {

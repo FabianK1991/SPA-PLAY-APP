@@ -4,6 +4,8 @@
 
 	<form action="@routes.Page.uploadProcess" method="post" enctype="multipart/form-data">
 	
+		<input type="text" name="process_name" value="Enter Process Name" />
+		
 		<input type="file" name="bpmn_file" accept=".bpmn,.xml" />
 		
 		<input type="submit" name="Add" />

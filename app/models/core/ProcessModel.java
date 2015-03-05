@@ -12,6 +12,9 @@ import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.io.FileUtils;
+
+import play.mvc.Http.MultipartFormData.FilePart;
 import controllers.Application;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
@@ -21,7 +24,7 @@ import models.util.parsing.ProcessParser;
 
 public class ProcessModel {
 	models.spa.api.ProcessModel pm;
-	private static final String xmlPath = "public/processes/";
+	private static final String xmlPath = "data/processes/";
 	
 	// Maps activities to bos
 	/* TABLE FORMAT CREATE TABLE DataAssociationBusinessObjects (
@@ -38,6 +41,7 @@ public class ProcessModel {
 	*/
 	public List<DataAssociation> dataAssoc;
 	public List<BusinessObject> bos;
+	private String id;
 	
 	/*
 	 * Method to internally (PRIVATE method) create an empty ProcessModel
@@ -45,6 +49,8 @@ public class ProcessModel {
 	 */
 	private ProcessModel() {
 		this.pm = new models.spa.api.ProcessModel();
+		this.pm.setId(ProcessParser.nsm + getUID());
+		
 		this.dataAssoc = new ArrayList<DataAssociation>();
 		this.bos = new ArrayList<BusinessObject>();
 	}
@@ -57,6 +63,7 @@ public class ProcessModel {
 	 */
 	public ProcessModel(String id) throws ProcessModelNotFoundException {
 		try {
+			this.id = id;
 			this.pm = models.spa.api.ProcessModel.getProcess(id);
 			this.dataAssoc = new ArrayList<DataAssociation>();
 			this.bos = new ArrayList<BusinessObject>();
@@ -80,7 +87,7 @@ public class ProcessModel {
 	 * Returns the BPMN XML file locally stored by the static method ProcessModel.createFromBPMN_File()
 	 */
 	public File getBPMN_XML() {
-		return new File(xmlPath + this.pm.getId() + ".bpmn");
+		return new File(getXML_Filename());
 	}
 	
 	public String getId(){
@@ -92,6 +99,10 @@ public class ProcessModel {
 	 */
 	public String getName() {
 		return this.pm.getName();
+	}
+	
+	public void setName(String name) {
+		this.pm.setName(name);
 	}
 	
 	/*
@@ -166,16 +177,28 @@ public class ProcessModel {
 		return resultList;
 	}
 	
+	public static ProcessModel createFromBPMN_File(FilePart filepart) {
+		String fileName = filepart.getFilename();
+		
+		return createFromBPMN_File(filepart, fileName);
+	}
+	
 	/*
 	 * Receives a BPMN XML file containing a process model with annotated business objects,
 	 * stores this file as /processes/[ProcessModel:ID].bpmn
 	 * and parses the XML to create a ProcessModel in the SPA.
 	 * The created ProcessModel instance needs to be returned.
 	 */
-	public static ProcessModel createFromBPMN_File(File file) {
+	public static ProcessModel createFromBPMN_File(FilePart filepart, String name) {
+		String fileName = filepart.getFilename();
+	    String contentType = filepart.getContentType();
+	    File file = filepart.getFile();
+	    
 		// Init model and parser
 		ProcessModel newProcessModel = new ProcessModel();
 		ProcessParser pp = new ProcessParser(newProcessModel);
+		
+		newProcessModel.setName(name);
 		
 		// Parse model
 		try {
@@ -185,12 +208,12 @@ public class ProcessModel {
 		}
 		
 		// Save to file
-		File f = new File(xmlPath + newProcessModel.getId() + ".bpmn");
+		File f = new File(newProcessModel.getXML_Filename());
 		
 		// Check if file exists, otherwise write it
 		if( !f.exists() ){
 			try {
-				Files.copy(file.toPath(), f.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+				FileUtils.moveFile(file, f);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -209,6 +232,10 @@ public class ProcessModel {
 		}
 		
 		return newProcessModel;
+	}
+	
+	private String getXML_Filename() {
+		return xmlPath + this.getId().replaceAll("(" + ProcessParser.nsm + "|[^A-Za-z0-9-_])", "")+ ".bpmn";
 	}
 	
 	private BusinessObject getBoById(String id){

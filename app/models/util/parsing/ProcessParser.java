@@ -228,9 +228,6 @@ public class ProcessParser {
 	 * Parses a process node into an ProcessModel
 	 */
 	private ProcessModel parseProcess(ProcessModel pm, Element ele){
-		// set id
-		pm.getSPAProcessModel().setId(nsm + ele.getAttribute("id"));
-		
 		// parse nodes
 		NodeList nList = ele.getChildNodes();
 		
