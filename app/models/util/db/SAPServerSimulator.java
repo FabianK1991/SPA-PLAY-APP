@@ -82,7 +82,7 @@ public class SAPServerSimulator {
 	public List<String> getBusinessObjectAttributes(int id){
 		Application.db.connect();
 		
-		String query = "SELECT attribute FROM business_object_attributes WHERE business_object = '%s'";
+		String query = "SELECT attribute FROM business_object_attributes WHERE business_object = '%s' ORDER BY order ASC";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(String.valueOf(id));
