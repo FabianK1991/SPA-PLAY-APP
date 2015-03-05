@@ -23,7 +23,7 @@ public class SAPServerSimulator {
 		Application.db.connect();
 		
 		// retrieve our instance id
-		String query = "SELECT MAX(business_object) FROM business_objects_data";
+		String query = "SELECT MAX(id) FROM business_objects_instances";
 		
 		ResultSet rs = Application.db.exec(query, null, true);
 		
@@ -41,7 +41,7 @@ public class SAPServerSimulator {
 		}
 		
 		// Create BO instance with id
-		query = "INSERT INTO `business_objects_data` (`business_object`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
+		query = "INSERT INTO `business_objects_instances` (`id`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(Integer.toString(InstanceId));
@@ -58,7 +58,7 @@ public class SAPServerSimulator {
 			for(Object key : keys){
 				String value = (String) values.get(key);
 				
-				query = "INSERT INTO `business_objects_data` (`business_object`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
+				query = "INSERT INTO `business_objects_instances` (`id`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
 				
 				args = new ArrayList<String>();
 				args.add(Integer.toString(InstanceId));
@@ -116,7 +116,7 @@ public class SAPServerSimulator {
 		// Check if attribute exists
 		if( this.getBusinessObjectAttribute(id, boa) == null ){
 			// INSERT
-			String query = "INSERT INTO business_objects_data (business_object,attribute,value) VALUES ('%s','%s','%s')";
+			String query = "INSERT INTO business_objects_instances (id,attribute,value) VALUES ('%s','%s','%s')";
 			
 			ArrayList<String> args = new ArrayList<String>();
 			args.add(String.valueOf(id));
@@ -127,7 +127,7 @@ public class SAPServerSimulator {
 		}
 		else{
 			// UPDATE
-			String query = "UPDATE business_objects_data SET value = '%s' WHERE business_object = '%s' AND attribute = '%s'";
+			String query = "UPDATE business_objects_instances SET value = '%s' WHERE id = '%s' AND attribute = '%s'";
 			
 			ArrayList<String> args = new ArrayList<String>();
 			args.add(Value);
@@ -147,7 +147,7 @@ public class SAPServerSimulator {
 	public String getBusinessObjectAttribute(int id, BusinessObjectAttribute boa){
 		Application.db.connect();
 		
-		String query = "SELECT value FROM business_objects_data WHERE business_object = '%s' AND attribute = '%s'";
+		String query = "SELECT value FROM business_objects_instances WHERE id = '%s' AND attribute = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(String.valueOf(id));
@@ -226,7 +226,7 @@ public class SAPServerSimulator {
 	public void deleteBusinessObjectInstance(int id){
 		Application.db.connect();
 		
-		String query = "DELETE FROM business_objects_data WHERE business_object = '%s'";
+		String query = "DELETE FROM business_objects_instances WHERE id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(String.valueOf(id));
