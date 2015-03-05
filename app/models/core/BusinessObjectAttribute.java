@@ -4,6 +4,7 @@ import controllers.Application;
 
 public class BusinessObjectAttribute {
 	private String id;
+	private String name;
 	
 	/*
 	 * Instantiates a BusinessObjectAttribute
@@ -22,6 +23,10 @@ public class BusinessObjectAttribute {
 	 * 
 	 */
 	public String getName() {
-		return Application.sss.getAttributeName(Integer.parseInt(this.id));
+		if(this.name == null){
+			this.name = Application.sss.getAttributeName(Integer.parseInt(this.id));
+		}
+		
+		return this.name;
 	}
 }

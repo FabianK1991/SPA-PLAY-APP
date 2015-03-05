@@ -88,6 +88,22 @@ public class BusinessObjectInstance {
 		Application.sss.deleteBusinessObjectInstance(this.databaseId);
 	}
 	
+	private boolean isAttributeAllowed(String name){
+		String[] nA = this.bo.getNeededAttributes();
+		
+		if( nA == null || nA.length == 0 ){
+			return true;
+		}
+		
+		for(String a : nA){
+			if(a.equals(name)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	/*
 	 * Sets the given type of BusinessObjectAttribute to the given value,
 	 * e.g. BusinessObjectInstance="BILL-1" => setAttrbuteValue(BusinessObjectAttribute('date'), new Date('2014-01-01'))
@@ -96,7 +112,12 @@ public class BusinessObjectInstance {
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
 	public void setAttribute(BusinessObjectAttribute attribute, Object value) throws ForbiddenBusinessObjectAttributeException {
-		Application.sss.setBusinessObjectAttribute(this.databaseId, attribute, (String)value);
+		if(this.isAttributeAllowed(attribute.getName())){
+			Application.sss.setBusinessObjectAttribute(this.databaseId, attribute, (String)value);
+		}
+		else{
+			throw new ForbiddenBusinessObjectAttributeException();
+		}
 	}
 	
 	/*
@@ -108,7 +129,12 @@ public class BusinessObjectInstance {
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
 	public Object getAttributeValue(BusinessObjectAttribute attribute) throws ForbiddenBusinessObjectAttributeException {
-		return Application.sss.getBusinessObjectAttribute(this.databaseId, attribute);
+		if(this.isAttributeAllowed(attribute.getName())){
+			return Application.sss.getBusinessObjectAttribute(this.databaseId, attribute);
+		}
+		else{
+			throw new ForbiddenBusinessObjectAttributeException();
+		}
 	}
 	
 	/*
