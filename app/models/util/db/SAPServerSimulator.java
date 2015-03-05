@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import models.core.BusinessObjectAttribute;
 import controllers.Application;
 
 public class SAPServerSimulator {
@@ -51,20 +52,22 @@ public class SAPServerSimulator {
 		Application.db.exec(query, args, false);
 		
 		// insert other attributes
-		Set keys = values.keySet();
-		
-		for(Object key : keys){
-			String value = (String) values.get(key);
+		if( values != null ){
+			Set keys = values.keySet();
 			
-			query = "INSERT INTO `business_objects_data` (`business_object`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
-			
-			args = new ArrayList<String>();
-			args.add(Integer.toString(InstanceId));
-			args.add((String)key); // BUSINESS OBJECT ID
-			args.add(value);
-			
-			// execute query
-			Application.db.exec(query, args, false);
+			for(Object key : keys){
+				String value = (String) values.get(key);
+				
+				query = "INSERT INTO `business_objects_data` (`business_object`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
+				
+				args = new ArrayList<String>();
+				args.add(Integer.toString(InstanceId));
+				args.add((String)key); // BUSINESS OBJECT ID
+				args.add(value);
+				
+				// execute query
+				Application.db.exec(query, args, false);
+			}
 		}
 		
 		return Integer.toString(InstanceId);
@@ -79,25 +82,117 @@ public class SAPServerSimulator {
 	public List<String> getBusinessObjectAttributes(int id){
 		Application.db.connect();
 		
-		return null;
+		String query = "SELECT attribute FROM business_object_attributes WHERE business_object = '%s' ORDER BY order ASC";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(String.valueOf(id));
+		
+		List<String> resultList = new ArrayList<String>();
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.first()){
+				do{
+					resultList.add(rs.getString("attribute"));
+				}while(rs.next());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return resultList;
 	}
 	
+	/*
+	 * @author Fabian
+	 * @param id the bo instance id in the database
+	 * @param boa the businessobjectattribute to change
+	 * @param value the value to set to the attribute
+	 * @return
+	 */
+	public void setBusinessObjectAttribute(int id, BusinessObjectAttribute boa, String Value){
+		Application.db.connect();
+		
+		// Check if attribute exists
+		if( this.getBusinessObjectAttribute(id, boa) == null ){
+			// INSERT
+			String query = "INSERT INTO business_objects_data (business_object,attribute,value) VALUES ('%s','%s','%s')";
+			
+			ArrayList<String> args = new ArrayList<String>();
+			args.add(String.valueOf(id));
+			args.add(boa.getId());
+			args.add(Value);
+			
+			Application.db.exec(query, args, false);
+		}
+		else{
+			// UPDATE
+			String query = "UPDATE business_objects_data SET value = '%s' WHERE business_object = '%s' AND attribute = '%s'";
+			
+			ArrayList<String> args = new ArrayList<String>();
+			args.add(Value);
+			args.add(String.valueOf(id));
+			args.add(boa.getId());
+			
+			Application.db.exec(query, args, false);
+		}
+	}
 	
 	/*
-	 * Creates a new BO Instance in the database
 	 * @author Fabian
-	 * @param id The BO instance id
-	 * @param Attributes the attributes which should be shown
-	 * @return A map of attributes and values
+	 * @param the bo instance id
+	 * @param boa the object attribute
+	 * @return the value of the attribute
 	 */
-	public Map getBusinessObjectInstance(int id, List<Integer> Attributes){
+	public String getBusinessObjectAttribute(int id, BusinessObjectAttribute boa){
 		Application.db.connect();
+		
+		String query = "SELECT value FROM business_objects_data WHERE business_object = '%s' AND attribute = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(String.valueOf(id));
+		args.add(boa.getId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.first()){
+				return rs.getString("value");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return null;
 	}
 	
 	/*
-	 * Creates a new BO Instance in the database
+	 * @author Fabian
+	 * @param SAPName the business object sap name
+	 * @return the value of the attribute
+	 */
+	public String getBusinessObjectDatabaseId(String SAPName){
+		Application.db.connect();
+		
+		String query = "SELECT id FROM business_objects WHERE sap_id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(SAPName);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.first()){
+				return rs.getString("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/*
 	 * @author Fabian
 	 * @param id the attribute id
 	 * @return the name of the attribute
@@ -105,18 +200,37 @@ public class SAPServerSimulator {
 	public String getAttributeName(int AttributeId){
 		Application.db.connect();
 		
+		String query = "SELECT id FROM attributes WHERE name = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(String.valueOf(AttributeId));
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.first()){
+				return rs.getString("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
 	/*
-	 * Creates a new BO Instance in the database
 	 * @author Fabian
-	 * @param Attributes the attributes with values to search for
-	 * @return a list of business object ids
+	 * @param id the id of the business object instance
+	 * @return
 	 */
-	public List<Integer> searchBusinessObjectInstances(Map Attributes){
+	public void deleteBusinessObjectInstance(int id){
 		Application.db.connect();
 		
-		return null;
+		String query = "DELETE FROM business_objects_data WHERE business_object = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(String.valueOf(id));
+		
+		Application.db.exec(query, args, false);
 	}
 }

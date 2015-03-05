@@ -4,9 +4,9 @@ import controllers.Application;
 
 public class BusinessObjectAttribute {
 	private String id;
+	private String name;
 	
 	/*
-	 * TODO
 	 * Instantiates a BusinessObjectAttribute
 	 * All available BusinessObjectAttributes can be found in database "attributes" (columns: id, name)
 	 */
@@ -19,11 +19,14 @@ public class BusinessObjectAttribute {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the name of the BusinessObjectAttribute
 	 * 
 	 */
 	public String getName() {
-		return Application.sss.getAttributeName(Integer.parseInt(this.id));
+		if(this.name == null){
+			this.name = Application.sss.getAttributeName(Integer.parseInt(this.id));
+		}
+		
+		return this.name;
 	}
 }

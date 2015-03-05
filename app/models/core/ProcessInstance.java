@@ -30,7 +30,6 @@ public class ProcessInstance {
 	private models.spa.api.ProcessInstance pi;
 	
 	/*
-	 * TODO
 	 * Method to internally (PRIVATE method) create an empty ProcessInstance
 	 * Should be used only by static method ProcessInstance.create()
 	 */
@@ -44,7 +43,6 @@ public class ProcessInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Instantiates a ProcessInstance
 	 */
 	public ProcessInstance(String id) throws ProcessInstanceNotFoundException {
@@ -67,7 +65,6 @@ public class ProcessInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the ID of this ProcessInstance
 	 */
 	public String getId() {
@@ -75,7 +72,6 @@ public class ProcessInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the name of this ProcessInstance
 	 */
 	public String getName() {
@@ -88,7 +84,6 @@ public class ProcessInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the reference to the ProcessModel used as template by the static method ProcessInstance.create()
 	 */
 	public ProcessModel getProcessModel() {
@@ -129,7 +124,6 @@ public class ProcessInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Returns the ActivityInstance currently active in the ProcessInstance
 	 */
 	public ActivityInstance getCurrentActivity() {
@@ -172,7 +166,6 @@ public class ProcessInstance {
 	}
 	
 	/*
-	 * TODO
 	 * Creates and returns a ProcessInstance object that uses the passed "processModel" as template and references the current user passed as "user"
 	 * All ProcessInstances need to be stored in database "user_process_instances" (columns: id, user, archive[no])
 	 * 
