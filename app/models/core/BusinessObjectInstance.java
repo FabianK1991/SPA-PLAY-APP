@@ -16,6 +16,7 @@ public class BusinessObjectInstance {
 	private models.spa.api.process.buildingblock.instance.BusinessObjectInstance boi;
 	
 	// the id of the instance in the SAP database
+	// TODO: Save this id in our database
 	private int databaseId;
 	
 	/*
@@ -38,6 +39,10 @@ public class BusinessObjectInstance {
 		//this.ai.getSPAActivityInstance().getPi().update();
 		
 		// TODO: Save in database
+		if( bo.getSAPId() != null && bo.getSAPId().length() > 0 ){
+			this.databaseId = Integer.parseInt(Application.sss.createBusinessObjectInstance(Application.sss.getBusinessObjectDatabaseId(bo.getSAPId()), null));
+			this.storeDatabaseId();
+		}
 	}
 	
 	/*
@@ -61,6 +66,16 @@ public class BusinessObjectInstance {
 		}
 	
 		this.bo = ai.getActivity().getBusinessObjectById(this.boi.getBusinessObject());
+		this.databaseId = this.getDatabaseId();
+	}
+	
+	private void storeDatabaseId(){
+		// TODO: Implement
+	}
+	
+	private int getDatabaseId(){
+		// TODO: Implement
+		return 0;
 	}
 	
 	/*
@@ -75,6 +90,7 @@ public class BusinessObjectInstance {
 		//this.ai.getSPAActivityInstance().getPi().update();
 		
 		// TODO: Delete in database?
+		Application.sss.deleteBusinessObjectInstance(this.databaseId);
 	}
 	
 	/*

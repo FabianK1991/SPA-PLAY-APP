@@ -52,20 +52,22 @@ public class SAPServerSimulator {
 		Application.db.exec(query, args, false);
 		
 		// insert other attributes
-		Set keys = values.keySet();
-		
-		for(Object key : keys){
-			String value = (String) values.get(key);
+		if( values != null ){
+			Set keys = values.keySet();
 			
-			query = "INSERT INTO `business_objects_data` (`business_object`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
-			
-			args = new ArrayList<String>();
-			args.add(Integer.toString(InstanceId));
-			args.add((String)key); // BUSINESS OBJECT ID
-			args.add(value);
-			
-			// execute query
-			Application.db.exec(query, args, false);
+			for(Object key : keys){
+				String value = (String) values.get(key);
+				
+				query = "INSERT INTO `business_objects_data` (`business_object`, `attribute`, `value`) VALUES ('%s', '%s', '%s')";
+				
+				args = new ArrayList<String>();
+				args.add(Integer.toString(InstanceId));
+				args.add((String)key); // BUSINESS OBJECT ID
+				args.add(value);
+				
+				// execute query
+				Application.db.exec(query, args, false);
+			}
 		}
 		
 		return Integer.toString(InstanceId);
@@ -84,7 +86,6 @@ public class SAPServerSimulator {
 	}
 	
 	/*
-	 * Creates a new BO Instance in the database
 	 * @author Fabian
 	 * @param id the bo instance id in the database
 	 * @param boa the businessobjectattribute to change
@@ -96,7 +97,6 @@ public class SAPServerSimulator {
 	}
 	
 	/*
-	 * Creates a new BO Instance in the database
 	 * @author Fabian
 	 * @param Attributes the attributes with values to search for
 	 * @return the value of the attribute
@@ -107,9 +107,19 @@ public class SAPServerSimulator {
 		return null;
 	}
 	
+	/*
+	 * @author Fabian
+	 * @param SAPName the business object sap name
+	 * @return the value of the attribute
+	 */
+	public String getBusinessObjectDatabaseId(String SAPName){
+		Application.db.connect();
+		
+		return null;
+	}
+	
 	
 	/*
-	 * Creates a new BO Instance in the database
 	 * @author Fabian
 	 * @param id The BO instance id
 	 * @param Attributes the attributes which should be shown
@@ -122,7 +132,6 @@ public class SAPServerSimulator {
 	}
 	
 	/*
-	 * Creates a new BO Instance in the database
 	 * @author Fabian
 	 * @param id the attribute id
 	 * @return the name of the attribute
@@ -134,14 +143,11 @@ public class SAPServerSimulator {
 	}
 	
 	/*
-	 * Creates a new BO Instance in the database
 	 * @author Fabian
-	 * @param Attributes the attributes with values to search for
-	 * @return a list of business object ids
+	 * @param id the id of the business object instance
+	 * @return
 	 */
-	public List<Integer> searchBusinessObjectInstances(Map Attributes){
+	public void deleteBusinessObjectInstance(int id){
 		Application.db.connect();
-		
-		return null;
 	}
 }
