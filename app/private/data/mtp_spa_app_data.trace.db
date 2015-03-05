@@ -857,3 +857,26 @@ INSERT INTO `user_sessions` (`id`, `user`, `key`, `time`, `update`) VALUES ('fb5
 org.h2.jdbc.JdbcSQLException: Datenumwandlungsfehler beim Umwandeln von "fb558e1"
 Data conversion error converting "fb558e1"; SQL statement:
 SELECT * FROM `user_sessions` WHERE `id` = 'fb558e1' [22018-175]
+03-05 17:33:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "BUSINESS_OBJECTS_ATTRIBUTES" nicht gefunden
+Table "BUSINESS_OBJECTS_ATTRIBUTES" not found; SQL statement:
+Select * from BUSINESS_OBJECTS_attributes [42102-175]
+03-05 17:36:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Kann "PUBLIC.ATTRIBUTES" nicht zurücksetzen per TRUNCATE
+Cannot truncate "PUBLIC.ATTRIBUTES"; SQL statement:
+Truncate TABLE ATTRIBUTES [90106-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.ddl.TruncateTable.update(TruncateTable.java:36)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
