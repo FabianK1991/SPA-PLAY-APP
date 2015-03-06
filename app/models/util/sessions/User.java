@@ -21,6 +21,7 @@ public class User {
 	private String passwd;
 	private Date time;
 	private Session session;
+	private ProcessInstance currentProcess;
 	
 	
 	/**
@@ -42,10 +43,13 @@ public class User {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			try{
+				this.currentProcess = new ProcessInstance(filling.get(5));
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 			if(Session.o != null){
 				this.session = Session.o;
-			}else{
-				this.session = new Session(filling.get(5));
 			}
 		}
 		
@@ -57,6 +61,11 @@ public class User {
 		this.id = id;
 		this.name = name;
 	}
+	
+	public void setCurrentProcess(ProcessInstance pi){
+		Application.db.update(this, "current_process", pi.getId());
+	}
+	
 	
 	public User() {
 		
@@ -80,8 +89,14 @@ public class User {
 				this.time = DBHandler.format.parse(filling.get(4));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
+				
+			}
+			try{
+				this.currentProcess = new ProcessInstance(filling.get(5));
+			}catch (Exception e){
 				e.printStackTrace();
 			}
+			
 			return true;
 		}else{
 			return false;
@@ -155,11 +170,8 @@ public class User {
 		return Application.db.selectAll(ProcessInstance.class);
 	}
 	
-	/*
-	 * TODO
-	 */
 	public ProcessInstance getCurrentProcessInstance() {
-		return null;
+		return this.currentProcess;
 	}
 	
 	/*

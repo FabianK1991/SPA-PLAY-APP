@@ -38,7 +38,15 @@ public class SPATest {
 			fail("Error in store!");
 		}
 		
-		fail("Not yet implemented!");
+		try {
+			ProcessModel pmNew = ProcessModel.getProcess(pm.getId());
+			if(pmNew == null){
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("Error on retrieving the Process Model by an ID");
+		}
 		
 		try {
 			pm.delete();
