@@ -89,6 +89,13 @@ public class Activity {
 		return resultList;
 	}
 	
+	/*
+	 * TODO
+	 */
+	public List<Gateway> getNextGateways() {
+		return null;
+	}
+	
 	
 	public models.spa.api.process.buildingblock.Activity getSPAActivity(){
 		return this.activity;
