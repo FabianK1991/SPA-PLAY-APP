@@ -2868,3 +2868,146 @@ Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht ex
 The connection was not closed by the application and is garbage collected [90018-175]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
 	... 39 more
+03-06 03:02:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Bedingung "CONSTRAINT_INDEX_4" nicht gefunden
+Constraint "CONSTRAINT_INDEX_4" not found; SQL statement:
+ALTER TABLE USERS  DROP CONSTRAINT constraint_index_4 [90057-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-06 03:02:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLE USERS  DROP CONSTRAINT CURRENT:[*]PROCESS "
+Syntax error in SQL statement "ALTER TABLE USERS  DROP CONSTRAINT CURRENT:[*]PROCESS "; SQL statement:
+ALTER TABLE USERS  DROP CONSTRAINT current:process [42000-175]
+03-06 03:03:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Bedingung "CONSTRAINT_INDEX_4" nicht gefunden
+Constraint "CONSTRAINT_INDEX_4" not found; SQL statement:
+ALTER TABLE USERS  DROP CONSTRAINT constraint_index_4 [90057-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-06 03:03:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Bedingung "CURRENT_PROCESS" nicht gefunden
+Constraint "CURRENT_PROCESS" not found; SQL statement:
+ALTER TABLE USERS  DROP CONSTRAINT current_process [90057-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-06 03:03:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Bedingung "CONSTRAINT_INDEX_4" nicht gefunden
+Constraint "CONSTRAINT_INDEX_4" not found; SQL statement:
+ALTER TABLE USERS  DROP CONSTRAINT constraint_index_4 [90057-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-06 03:06:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Feld "DROP" nicht gefunden
+Column "DROP" not found; SQL statement:
+ALTER TABLE USERS  DROP Drop current_process [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.table.Table.getColumn(Table.java:626)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5175)
+	at org.h2.command.Parser.parseAlter(Parser.java:4552)
+	at org.h2.command.Parser.parsePrepared(Parser.java:325)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:168)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-06 03:07:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Feld "SET" nicht gefunden
+Column "SET" not found; SQL statement:
+ALTER TABLE USERS  ADD  COLUMN current_process varchar(255) DEFAULT SET NULL ON UPDATE CASCADE ON DELETE SET NULL [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:144)
+	at org.h2.table.Column.setDefaultExpression(Column.java:207)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3735)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5289)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5128)
+	at org.h2.command.Parser.parseAlter(Parser.java:4552)
+	at org.h2.command.Parser.parsePrepared(Parser.java:325)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:168)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-06 03:07:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLE USERS  ADD  COLUMN CURRENT_PROCESS VARCHAR(255) DEFAULT  NULL ON[*] UPDATE CASCADE ON DELETE SET NULL "
+Syntax error in SQL statement "ALTER TABLE USERS  ADD  COLUMN CURRENT_PROCESS VARCHAR(255) DEFAULT  NULL ON[*] UPDATE CASCADE ON DELETE SET NULL "; SQL statement:
+ALTER TABLE USERS  ADD  COLUMN current_process varchar(255) DEFAULT  NULL ON UPDATE CASCADE ON DELETE SET NULL [42000-175]
+03-06 03:09:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLE USERS  ADD  COLUMN CURRENT_PROCESS VARCHAR(255) SET[*] NULL ON UPDATE CASCADE ON DELETE SET NULL "
+Syntax error in SQL statement "ALTER TABLE USERS  ADD  COLUMN CURRENT_PROCESS VARCHAR(255) SET[*] NULL ON UPDATE CASCADE ON DELETE SET NULL "; SQL statement:
+ALTER TABLE USERS  ADD  COLUMN current_process varchar(255) SET NULL ON UPDATE CASCADE ON DELETE SET NULL [42000-175]
