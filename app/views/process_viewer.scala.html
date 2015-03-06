@@ -4,15 +4,17 @@
 <div class="process_viewer">
 
 @if(processInstance != null) {
-	<div class="process_model" data-process_model="@processInstance.getProcessModel().getId()">
-	
-		<div class="loader">
+	@defining(processInstance.getProcessModel()) { processModel =>
+		<div class="process_model" data-process_model="@processModel.getId()">
 		
-			Process visualization in progress
+			<div class="loader">
+			
+				Process visualization in progress
+			
+			</div>
 		
 		</div>
-	
-	</div>
+	}
 	
 	@defining(processInstance.getCurrentActivity()) { activityInstance =>
 		@defining(activityInstance.getActivity()) { activity =>

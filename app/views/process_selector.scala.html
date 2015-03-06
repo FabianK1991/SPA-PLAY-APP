@@ -7,11 +7,15 @@
 	
 		@if(processInstances.length > 0) {
 		
-			<select>
+			<form action="@routes.ProcessController.setCurrentProcess" method="post">
 			
-				@process_selector_options(processInstances, user.getCurrentProcessInstance())
+				<select name="process_instance">
+				
+					@process_selector_options(processInstances, user.getCurrentProcessInstance())
+				
+				</select>
 			
-			</select>
+			</form>
 		
 		} else {
 			<div class="warning no-process_instance">

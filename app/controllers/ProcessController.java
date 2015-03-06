@@ -2,6 +2,7 @@ package controllers;
 
 import models.core.ProcessInstance;
 import models.core.ProcessModel;
+import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.http.Parameters;
 import play.Logger;
@@ -50,6 +51,22 @@ public class ProcessController extends Controller {
 			return notFound("Process Model not found! (ID: " + processID + ")");
 		}
     	ProcessInstance.create(AuthController.getUser(), processModel);
+    	
+    	return ok("Process started");
+    }
+    
+    public static Result setCurrentProcess() {
+    	String processInstanceID = Parameters.get("process_instance");
+    	
+    	ProcessInstance processInstance;
+    	
+		try {
+			processInstance = new ProcessInstance(processInstanceID);
+		} catch (ProcessInstanceNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AuthController.getUser().setCurrentProcess(processInstance);
     	
     	return ok("Process started");
     }
