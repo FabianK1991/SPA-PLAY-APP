@@ -6,15 +6,21 @@
 	
 		@if(processModels.length > 0) {
 		
-			<select>
+			<form action="@routes.ProcessController.startProcess" method="post">
 			
-				@for(model <- processModels) {
+				<select name="process_model">
 				
-					<option value="@model.getId()">@model.getName()</option>
+					@for(model <- processModels) {
+					
+						<option value="@model.getId()">@model.getName()</option>
+					
+					}
 				
-				}
+				</select>
+				
+				<input type="submit" name="Start" />
 			
-			</select>
+			</form>
 		
 		} else {
 				

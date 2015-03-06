@@ -45,6 +45,7 @@ public class AuthController extends Controller {
 		}
 		return false;
 	}
+	
 	/**
 	 * Logs the user into the system.
 	 * @author Christian
@@ -55,6 +56,7 @@ public class AuthController extends Controller {
 			User u = new User();
 			u.init(Parameters.get("email"));
 			Logger.debug(Parameters.get("email"));
+			
 			if(u.createSession(Parameters.get("passwd"))){
 				return ok("1|Login succesful!");
 			}
@@ -67,30 +69,15 @@ public class AuthController extends Controller {
 	 * @author Christian
 	 * @return A redirect to the Login-Screen.
 	 */
+	@With(AuthCheck.class)
 	public static Result logout(){
-		if(AuthController.check()){
-			AuthController.s = new Session(request().cookies().get("sessid").value());
-			AuthController.s.getUser().setSession(null);
-			Application.db.update(AuthController.s.getUser(), "session", "");
-			Application.db.delete(AuthController.s);
-			response().discardCookie("sessid");
-			response().discardCookie("sesskey");
-		}
+		AuthController.s = new Session(request().cookies().get("sessid").value());
+		AuthController.s.getUser().setSession(null);
+		Application.db.update(AuthController.s.getUser(), "session", "");
+		Application.db.delete(AuthController.s);
+		response().discardCookie("sessid");
+		response().discardCookie("sesskey");
+		
 		return redirect("/login");
 	}
-	/**
-	 * Redirects the user to the SPA APP
-	 * @author Christian
-	 */
-	public static Result start(){
-		if(AuthController.check()) {
-			return redirect("/");
-		}
-    	else {
-    		return ok(login.render(""));
-    	}
-	}
-	
-	
-	
 }

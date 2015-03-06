@@ -135,11 +135,11 @@ public class DBHandler {
 			try {
 				while(rs.next()){
 					if(c.equals(ProcessInstance.class)){
-						ProcessInstance pi = new ProcessInstance(rs.getString("id"));
+						ProcessInstance pi = new ProcessInstance(rs.getString("process"));
 						pi.setUser(new User(rs.getString("user")));
-						pi.setProcess(rs.getString("process"));
+						
 						try {
-							pi.setTime(DBHandler.format.parse(rs.getString("timestamp")));
+							pi.setTime(DBHandler.format.parse(rs.getString("time")));
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -188,7 +188,7 @@ public class DBHandler {
 			}else if(o instanceof ProcessInstance){
 				query = "INSERT INTO `user_process_instances` (`user`, `process`) VALUES ('%s', '%s')";
 				args.add(((ProcessInstance) o).getUser().getId());
-				args.add(((ProcessInstance) o).getProcess());
+				args.add(((ProcessInstance) o).getId());
 			}
 			this.exec(query, args, false);
 			return true;

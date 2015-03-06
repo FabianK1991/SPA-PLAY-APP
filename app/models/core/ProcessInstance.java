@@ -21,7 +21,6 @@ import models.util.sessions.User;
 
 public class ProcessInstance {
 	
-	private String id; 
 	private User user;
 	private String process;
 	private Date time;
@@ -34,12 +33,11 @@ public class ProcessInstance {
 	 * Should be used only by static method ProcessInstance.create()
 	 */
 	private ProcessInstance(User user, ProcessModel pm) {
-		this.id = ProcessParser.nsmi + getUID();
+		this.user = user;
 		this.pm = pm;
 		this.pi = new models.spa.api.ProcessInstance(pm.getSPAProcessModel());
-	
-		this.user = user;
-		this.pi.setId(id);
+		
+		this.pi.setId(ProcessParser.nsmi + getUID());
 	}
 	
 	/*
@@ -57,7 +55,7 @@ public class ProcessInstance {
 	
 	@Override
 	public boolean equals(Object o){
-		if(this.getId().equals(((ProcessInstance) o).getId())){
+		if(o != null && this.getId().equals(((ProcessInstance) o).getId())){
 			return true;
 		}else{
 			return false;
@@ -75,7 +73,7 @@ public class ProcessInstance {
 	 * Returns the name of this ProcessInstance
 	 */
 	public String getName() {
-		return this.pm.getName() + " - (" + this.getCurrentActivity().getTime()+ ")";
+		return this.pm.getName();
 //		return this.pi.getName();
 	}
 	
@@ -150,7 +148,7 @@ public class ProcessInstance {
 		
 		if( latestInstance != null ){
 			try {
-				return new ActivityInstance(latestInstance.getActivity(), this);
+				return new ActivityInstance(latestInstance.getId(), this);
 			} catch (ActivityInstanceNotFoundException e) {
 				e.printStackTrace();
 				
@@ -172,20 +170,7 @@ public class ProcessInstance {
 	 * >> This create method prevents the user of this class from setting IDs!! <<
 	 */
 	public static ProcessInstance create(User user, ProcessModel processModel) {
-		ProcessInstance newProcessInstance = null;
-		
-		while (true) {
-			String id = UUID.randomUUID().toString();
-			
-			try {
-				new ProcessInstance(id);
-			} catch (ProcessInstanceNotFoundException e) {
-				newProcessInstance = new ProcessInstance(user, processModel);
-				
-				break;
-			}
-		}
-		
+		ProcessInstance newProcessInstance = new ProcessInstance(user, processModel);
 		
 		// Store it in SPA
 		try {
@@ -195,14 +180,13 @@ public class ProcessInstance {
 			e.printStackTrace();
 		}
 		//Store it in DB
-		DBHandler db = Application.db;
-		db.add(newProcessInstance);
+		Application.db.add(newProcessInstance);
 		
 		return newProcessInstance;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.pi.setId(id);
 	}
 
 	public User getUser() {

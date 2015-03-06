@@ -6,5 +6,5 @@
 	@if(instance.equals(currentInstance)) {
 		selected="selected"
 	}
-	value="@instance.getId()">@instance.getProcessModel().getName() - @instance.getName()</option>
+	value="@instance.getId()">@instance.getName() (@instance.getCurrentActivity().getTime())</option>
 }
