@@ -35,7 +35,7 @@ public class ActivityInstance {
 		this.activityInstance.setActivity(activity.getSPAActivity().getId());
 		
 		// TODO: decide if we use user name or user id
-		this.activityInstance.setAgent(pi.getUser().getName());
+		this.activityInstance.setAgent(pi.getUser().getId());
 		
 		// Write time
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");

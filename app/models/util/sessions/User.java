@@ -46,7 +46,6 @@ public class User {
 			try{
 				this.currentProcess = new ProcessInstance(filling.get(5));
 			}catch (Exception e){
-				e.printStackTrace();
 			}
 			if(Session.o != null){
 				this.session = Session.o;
@@ -94,7 +93,7 @@ public class User {
 			try{
 				this.currentProcess = new ProcessInstance(filling.get(5));
 			}catch (Exception e){
-				e.printStackTrace();
+				this.getCurrentProcessInstance();
 			}
 			
 			return true;
@@ -171,6 +170,17 @@ public class User {
 	}
 	
 	public ProcessInstance getCurrentProcessInstance() {
+		if (this.currentProcess == null) {
+			List<ProcessInstance> processInstances = getProcessInstances();
+			
+			if (processInstances.size() > 0) {
+				ProcessInstance firstProcess = processInstances.get(0);
+				
+				setCurrentProcess(firstProcess);
+				
+				return firstProcess;
+			}
+		}
 		return this.currentProcess;
 	}
 	
@@ -178,7 +188,7 @@ public class User {
 	 * TODO
 	 */
 	public ProcessInstance createProcessInstance(ProcessModel processModel) {
-		return null;
+		return ProcessInstance.create(this, processModel);
 	}
 	
 	/*

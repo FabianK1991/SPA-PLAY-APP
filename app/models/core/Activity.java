@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import play.Logger;
 import models.spa.api.process.buildingblock.*;
+import models.util.parsing.ProcessParser;
 
 @SuppressWarnings("unused")
 public class Activity {
@@ -15,6 +17,15 @@ public class Activity {
 		this.activity = (models.spa.api.process.buildingblock.Activity)pm.getSPANodeById(id);
 		this.pm = pm;
 	}
+	
+	public String getId() {
+		return activity.getId();
+	}
+	
+	public String getRawId() {
+		return this.getId().replace(ProcessParser.nsm, "");
+	}
+	
 	
 	/*
 	 * Returns the name of an Activity
@@ -62,6 +73,20 @@ public class Activity {
 		}
 		
 		return null;
+	}
+	
+	public List<Activity> getNextActivities() {
+		List<Activity> resultList = new ArrayList<Activity>();
+		Logger.info(this.getSPAActivity().getNextFlows().size() + "");
+		for (Flow e : this.getSPAActivity().getNextFlows()) {
+			Node n = e.getTo();
+			Logger.info(n.getId());
+			Logger.info(n.type);
+			if (n.type.equals("Node")) {
+				resultList.add(new Activity(n.getId(), this.pm));
+			}
+		}
+		return resultList;
 	}
 	
 	

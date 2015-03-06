@@ -1,15 +1,16 @@
 package controllers;
 
+import models.core.Activity;
 import models.core.ProcessInstance;
 import models.core.ProcessModel;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.http.Parameters;
-import play.Logger;
+import models.util.parsing.ProcessParser;
 import play.mvc.Controller;
-import play.mvc.Result;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
+import play.mvc.Result;
 import play.mvc.With;
 
 @With(AuthCheck.class)
@@ -50,7 +51,7 @@ public class ProcessController extends Controller {
 		} catch (ProcessModelNotFoundException e) {
 			return notFound("Process Model not found! (ID: " + processID + ")");
 		}
-    	ProcessInstance.create(AuthController.getUser(), processModel);
+    	AuthController.getUser().createProcessInstance(processModel);
     	
     	return ok("Process started");
     }
@@ -62,12 +63,35 @@ public class ProcessController extends Controller {
     	
 		try {
 			processInstance = new ProcessInstance(processInstanceID);
+			AuthController.getUser().setCurrentProcess(processInstance);
+			
+			return ok("Process started");
 		} catch (ProcessInstanceNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			return notFound("Process Instance not found! (ID: " + processInstanceID + ")");
 		}
-		AuthController.getUser().setCurrentProcess(processInstance);
+    }
+    
+    public static Result setCurrentActivity() {
+    	String processInstanceID = Parameters.get("process_instance");
+    	String activityID = Parameters.get("activity_id");
     	
-    	return ok("Process started");
+    	ProcessInstance processInstance;
+    	
+		try {
+			processInstance = new ProcessInstance(processInstanceID);
+	    	
+			Activity activity = new Activity(ProcessParser.nsm + activityID, processInstance.getProcessModel());
+			
+			processInstance.setCurrentActivity(activity);
+				
+			return ok("Current Activity updated!");
+		} catch (ProcessInstanceNotFoundException e1) {
+			return notFound("Process Instance not found! (ID: " + processInstanceID + ")");
+		}
+    	
+    	
     }
 }

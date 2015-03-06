@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import controllers.Application;
+import controllers.AuthController;
 import models.spa.api.process.buildingblock.Flow;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.ProcessInstanceNotFoundException;
@@ -48,6 +49,7 @@ public class ProcessInstance {
 			this.pi = models.spa.api.ProcessInstance.getProcessInstance(null, id);
 			
 			this.pm = new ProcessModel(this.pi.getProcessModel());
+			this.user = AuthController.getUser();
 		} catch (Exception e) {
 			throw new ProcessInstanceNotFoundException();
 		}

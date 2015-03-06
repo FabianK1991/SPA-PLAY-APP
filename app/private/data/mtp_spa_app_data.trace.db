@@ -3011,3 +3011,635 @@ ALTER TABLE USERS  ADD  COLUMN current_process varchar(255) DEFAULT  NULL ON UPD
 org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLE USERS  ADD  COLUMN CURRENT_PROCESS VARCHAR(255) SET[*] NULL ON UPDATE CASCADE ON DELETE SET NULL "
 Syntax error in SQL statement "ALTER TABLE USERS  ADD  COLUMN CURRENT_PROCESS VARCHAR(255) SET[*] NULL ON UPDATE CASCADE ON DELETE SET NULL "; SQL statement:
 ALTER TABLE USERS  ADD  COLUMN current_process varchar(255) SET NULL ON UPDATE CASCADE ON DELETE SET NULL [42000-175]
+03-06 03:32:58 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:32:59 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:34:53 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:34:53 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:36:59 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:36:59 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:37:25 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:37:26 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:56:17 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:56:17 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:56:39 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:56:39 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:57:43 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:57:43 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:58:38 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 03:58:39 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:02:59 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:02:59 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:05:25 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:05:25 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:06:25 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:06:25 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:09:57 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:09:58 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:19:10 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:19:10 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:19:24 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:19:24 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:19:38 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:19:38 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:20:10 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:20:10 jdbc[27]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:24:17 jdbc[42]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:24:17 jdbc[42]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:26:28 jdbc[49]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:26:28 jdbc[49]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:28:06 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:28:06 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:34:16 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:34:16 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:36:05 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:36:05 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:36:43 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:36:43 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:38:42 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:38:42 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:40:10 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:40:10 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:43:26 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:43:26 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:45:03 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 04:45:04 jdbc[56]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:03:54 jdbc[75]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:03:54 jdbc[75]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:04:32 jdbc[82]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:04:32 jdbc[82]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:06:42 jdbc[89]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:06:42 jdbc[89]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:15:15 jdbc[8]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:15:15 jdbc[8]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:15:47 jdbc[8]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:15:47 jdbc[8]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:18:09 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:18:09 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:20:08 jdbc[29]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:20:09 jdbc[29]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "USER" nicht gefunden
+Table "USER" not found; SQL statement:
+UPDATE `user` SET `current_process`='http://masterteamproject/instance/807463e7026e7048910824809bcdaa403df6' WHERE `id`='1' [42102-175]
+03-06 05:28:14 jdbc[67]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:351)
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416)
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238)
+	at scala.collection.immutable.List.map(List.scala:274)
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at scala.collection.immutable.List.foreach(List.scala:383)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.Play$.start(Play.scala:90)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128)
+	at scala.util.Success.flatMap(Try.scala:230)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 39 more
+03-06 05:28:14 jdbc[67]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:351)
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416)
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238)
+	at scala.collection.immutable.List.map(List.scala:274)
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at scala.collection.immutable.List.foreach(List.scala:383)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.Play$.start(Play.scala:90)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128)
+	at scala.util.Success.flatMap(Try.scala:230)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 39 more
+03-06 05:28:14 jdbc[67]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:351)
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416)
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238)
+	at scala.collection.immutable.List.map(List.scala:274)
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at scala.collection.immutable.List.foreach(List.scala:383)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.Play$.start(Play.scala:90)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128)
+	at scala.util.Success.flatMap(Try.scala:230)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 39 more
+03-06 05:28:14 jdbc[67]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:351)
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416)
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238)
+	at scala.collection.immutable.List.map(List.scala:274)
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at scala.collection.immutable.List.foreach(List.scala:383)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.Play$.start(Play.scala:90)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128)
+	at scala.util.Success.flatMap(Try.scala:230)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 39 more
+03-06 05:28:14 jdbc[67]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:351)
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416)
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238)
+	at scala.collection.immutable.List.map(List.scala:274)
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at scala.collection.immutable.List.foreach(List.scala:383)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.Play$.start(Play.scala:90)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128)
+	at scala.util.Success.flatMap(Try.scala:230)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 39 more
+03-06 05:41:28 jdbc[78]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:351)
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416)
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238)
+	at scala.collection.immutable.List.map(List.scala:274)
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at scala.collection.immutable.List.foreach(List.scala:383)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.Play$.start(Play.scala:90)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128)
+	at scala.util.Success.flatMap(Try.scala:230)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 39 more
+03-06 05:41:28 jdbc[78]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:351)
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416)
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238)
+	at scala.collection.immutable.List.map(List.scala:274)
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at scala.collection.immutable.List.foreach(List.scala:383)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.Play$.start(Play.scala:90)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128)
+	at scala.util.Success.flatMap(Try.scala:230)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 39 more
+03-06 05:41:28 jdbc[78]: null
+org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.message.DbException.get(DbException.java:138)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:171)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:116)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:90)
+	at org.h2.Driver.connect(Driver.java:73)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at com.jolbox.bonecp.BoneCP.obtainRawInternalConnection(BoneCP.java:351)
+	at com.jolbox.bonecp.BoneCP.<init>(BoneCP.java:416)
+	at com.jolbox.bonecp.BoneCPDataSource.getConnection(BoneCPDataSource.java:120)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:240)
+	at play.api.db.BoneCPPlugin$$anonfun$onStart$1.apply(DB.scala:238)
+	at scala.collection.immutable.List.map(List.scala:274)
+	at play.api.db.BoneCPPlugin.onStart(DB.scala:238)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:91)
+	at scala.collection.immutable.List.foreach(List.scala:383)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:91)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.Play$.start(Play.scala:90)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:157)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:130)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:130)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:128)
+	at scala.util.Success.flatMap(Try.scala:230)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:128)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:120)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
+The connection was not closed by the application and is garbage collected [90018-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	... 39 more

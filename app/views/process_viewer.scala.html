@@ -5,15 +5,18 @@
 
 @if(processInstance != null) {
 	@defining(processInstance.getProcessModel()) { processModel =>
-		<div class="process_model" data-process_model="@processModel.getId()">
-		
-			<div class="loader">
+		@defining(processInstance.getCurrentActivity().getActivity()) { currentActivity =>
+			<div class="process_model" data-process_instance="@processInstance.getId()" data-process_model="@processModel.getId()" data-current_activity="@currentActivity.getRawId()" 
+			data-next_activities="@for(nextActivity <- currentActivity.getNextActivities()){@nextActivity.getRawId(),}">
 			
-				Process visualization in progress
+				<div class="loader">
+				
+					Process visualization in progress
+				
+				</div>
 			
 			</div>
-		
-		</div>
+		}
 	}
 	
 	@defining(processInstance.getCurrentActivity()) { activityInstance =>

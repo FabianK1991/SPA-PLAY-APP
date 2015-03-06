@@ -235,7 +235,7 @@ public class DBHandler {
 				args.add(((Session) o).getId());
 			}
 			if(o instanceof User){
-				args.add("user");
+				args.add("users");
 				args.add(prop);
 				args.add(value);
 				args.add(((User) o).getId());
