@@ -26,6 +26,10 @@ public class ActivityInstance {
 	 * Should be used only by static method ActivityInstance.create()
 	 */
 	private ActivityInstance(ProcessInstance pi, Activity activity) {
+		this(pi, activity, new Date());
+	}
+	
+	private ActivityInstance(ProcessInstance pi, Activity activity, Date date) {
 		this.id = ProcessParser.nsmi + getUID(pi);
 		this.activity = activity;
 		
@@ -40,7 +44,6 @@ public class ActivityInstance {
 		// Write time
 		DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 	    //get current date time with Date()
-	    Date date = new Date();
 
 		this.activityInstance.setDateTime(dateFormat.format(date));
 		
@@ -134,6 +137,18 @@ public class ActivityInstance {
 		ActivityInstance newActivityInstance = new ActivityInstance(pi, activity);
 		
 		return newActivityInstance;
+	}
+	
+	public static List<ActivityInstance> create(ProcessInstance pi, List<Activity> activities) {
+		Date date = new Date();
+		List<ActivityInstance> resultList = new ArrayList<ActivityInstance>();
+		
+		for(Activity activity: activities){
+			ActivityInstance newActivityInstance = new ActivityInstance(pi, activity, date);
+			resultList.add(newActivityInstance);
+		}
+
+		return resultList;
 	}
 	
 	public String getTime(){

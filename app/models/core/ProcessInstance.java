@@ -3,9 +3,11 @@ package models.core;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -124,10 +126,19 @@ public class ProcessInstance {
 	}
 	
 	/*
+	 * Sets the current activities
+	 */
+	public void setCurrentActivities(List<Activity> activities){
+		// creates a new activity instance
+		ActivityInstance.create(this, activities);
+	}
+	
+	/*
 	 * Returns the ActivityInstance currently active in the ProcessInstance
 	 */
-	public ActivityInstance getCurrentActivity() {
+	public List<ActivityInstance> getCurrentActivities() {
 		Set<models.spa.api.process.buildingblock.instance.ActivityInstance> instances = this.pi.getActivities();
+		List<ActivityInstance> resultList = new ArrayList<ActivityInstance>();
 		
 		models.spa.api.process.buildingblock.instance.ActivityInstance latestInstance = null;
 		
@@ -138,9 +149,19 @@ public class ProcessInstance {
 				Date dtIn = inFormat.parse(instance.getDateTime());
 				
 				if( latestInstance == null || dtIn.getTime() > inFormat.parse(latestInstance.getDateTime()).getTime() ){
+					resultList.clear();
 					latestInstance = instance;
+					resultList.add(new ActivityInstance(latestInstance.getId(), this));
+				}
+				else if( latestInstance != null && dtIn.getTime() == inFormat.parse(latestInstance.getDateTime()).getTime() ){
+					resultList.add(new ActivityInstance(instance.getId(), this));
 				}
 			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				continue;
+			} catch (ActivityInstanceNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				
@@ -149,19 +170,17 @@ public class ProcessInstance {
 	    }
 		
 		if( latestInstance != null ){
-			try {
-				return new ActivityInstance(latestInstance.getId(), this);
-			} catch (ActivityInstanceNotFoundException e) {
-				e.printStackTrace();
-				
-				return null;
-			}
+			return resultList;
 		}
 		else{
 			// get start activity
 			models.spa.api.process.buildingblock.Activity a = this.getStartActivity();
 			
-			return ActivityInstance.create(this, new Activity(a.getId(), this.pm));
+			// should be empty anyway
+			resultList.clear();
+			resultList.add(ActivityInstance.create(this, new Activity(a.getId(), this.pm)));
+			
+			return resultList;
 		}
 	}
 	

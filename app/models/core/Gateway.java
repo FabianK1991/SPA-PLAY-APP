@@ -1,28 +1,43 @@
 package models.core;
 
 import java.util.Hashtable;
+import java.util.Set;
+
+import models.spa.api.process.buildingblock.Flow;
 
 
 public class Gateway {
+	models.spa.api.process.buildingblock.Gateway gateway;
+	ProcessModel pm;
+	
 	/*
-	 * TODO
 	 */
-	public Gateway(String id) {
-		
+	public Gateway(String id, ProcessModel pm) {
+		this.gateway = (models.spa.api.process.buildingblock.Gateway)pm.getSPANodeById(id);
+		this.pm = pm;
 	}
 	
 	/*
-	 * TODO
 	 */
 	public String getCondition() {
-		return null;
+		return this.gateway.getName();
 	}
 	
 	/*
-	 * TODO
 	 */
 	public Hashtable<String,Activity> getOptions() {
 		/*Matching: possible answer (e.g. credit card) => related next activity (e.g. payment with credit card)*/
-		return null;
+		Hashtable<String,Activity> result = new Hashtable<String,Activity>();
+		
+		Set<Flow> nextFlows = this.gateway.getNextFlows();
+		
+		for(Flow f: nextFlows){
+			String toId = f.getTo().getId();
+			String key = f.getCondition();
+			
+			result.put(key, new Activity(toId, this.pm));
+		}
+		
+		return result;
 	}
 }
