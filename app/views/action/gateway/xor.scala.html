@@ -1,0 +1,16 @@
+@import core._
+@(gateway: Gateway)
+
+<fieldset>
+
+	@for((optionText, nextActivity) <- gateway.getOptions()) {
+
+		<div class="gateway_option">
+		
+			<input type="radio" name="next_activity" value="@nextActivity.getRawId()"><label for="mc">@optionText</label>
+		
+		</div>
+	
+	}
+
+</fieldset>

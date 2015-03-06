@@ -5,32 +5,67 @@
 
 @if(processInstance != null) {
 	@defining(processInstance.getProcessModel()) { processModel =>
-		@defining(processInstance.getCurrentActivity().getActivity()) { currentActivity =>
-			<div class="process_model" data-process_instance="@processInstance.getId()" data-process_model="@processModel.getId()" data-current_activity="@currentActivity.getRawId()" 
-			data-next_activities="@for(nextActivity <- currentActivity.getNextActivities()){@nextActivity.getRawId(),}">
+	
+		<div class="process_model" data-process_instance="@processInstance.getId()" data-process_model="@processModel.getId()">
+		
+			<div class="loader">
 			
-				<div class="loader">
-				
-					Process visualization in progress
-				
-				</div>
+				Process visualization in progress
 			
 			</div>
-		}
+		
+		</div>
+	
 	}
 	
-	@defining(processInstance.getCurrentActivity()) { activityInstance =>
-		@defining(activityInstance.getActivity()) { activity =>
-    		@defining(activity.getBusinessObjects()) { businessObjects =>
-    			@activity.getAction() match {
-        			case "select" 	=> 	{@bo_select(businessObjects)}
-        			case "update" 	=> 	{@bo_update(businessObjects)}
-        			case "create" 	=> 	{@bo_create(businessObjects)}
-        			case "delete" 	=> 	{@bo_delete(businessObjects)}
-        			case _ 			=>	{@bo_none()}
-    			}
-    			@document_viewer()
-    		}
+	@defining(processInstance.getCurrentActivities()) { activityInstances =>
+		@for(activityInstance <- activityInstances) {
+			@defining(activityInstance.getActivity()) { activity =>
+				@defining(activity.getNextGateway()) { nextGateway =>
+				
+					<div class="activity_instance" data-activity_id="@activity.getRawId()" data-next_activities="@for(nextActivity <- activity.getNextActivities()){@nextActivity.getRawId(),}">
+					
+						@if(nextGateway != null) {
+						
+							<div class="action_gateway">
+							
+								<div class="gateway_condition">
+								
+									@nextGateway.getCondition()
+								
+								</div>
+								
+								@nextGateway.getType() match {
+        							case "XOR" 	=> 	{@action.gateway.xor(nextGateway)}
+        							case "OR" 	=> 	{@action.gateway.or(nextGateway)}
+        							case "AND" 	=> 	{@action.gateway.and(nextGateway)}
+        							case _ 		=>	{@action.gateway._none(nextGateway)}
+    							}
+    						
+    						</div>
+    					
+						} else {
+							@defining(activityInstance.getActivity()) { activity =>
+    							@defining(activity.getBusinessObjects()) { businessObjects =>
+    								@activity.getAction() match {
+        								case "select" 	=> 	{@action.bo.select(businessObjects)}
+        								case "update" 	=> 	{@action.bo.update(businessObjects)}
+        								case "create" 	=> 	{@action.bo.create(businessObjects)}
+        								case "delete" 	=> 	{@action.bo.delete(businessObjects)}
+        								case _ 			=>	{@action.bo._none()}
+    								}
+    								@document_viewer()
+    							}
+   							}
+   						}
+   					
+   					</div>
+				
+				}
+			
+				
+   			
+   			}
    		}
 	}
 } else {

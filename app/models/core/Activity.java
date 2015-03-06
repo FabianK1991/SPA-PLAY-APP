@@ -13,6 +13,9 @@ public class Activity {
 	private models.spa.api.process.buildingblock.Activity activity;
 	private ProcessModel pm;
 	
+	private static final ArrayList<String> gatewayTypes = new ArrayList<String>();
+	
+	
 	public Activity(String id, ProcessModel pm){
 		this.activity = (models.spa.api.process.buildingblock.Activity)pm.getSPANodeById(id);
 		this.pm = pm;
@@ -77,11 +80,10 @@ public class Activity {
 	
 	public List<Activity> getNextActivities() {
 		List<Activity> resultList = new ArrayList<Activity>();
-		Logger.info(this.getSPAActivity().getNextFlows().size() + "");
+		
 		for (Flow e : this.getSPAActivity().getNextFlows()) {
 			Node n = e.getTo();
-			Logger.info(n.getId());
-			Logger.info(n.type);
+			
 			if (n.type.equals("Node")) {
 				resultList.add(new Activity(n.getId(), this.pm));
 			}
@@ -92,7 +94,16 @@ public class Activity {
 	/*
 	 * TODO
 	 */
-	public List<Gateway> getNextGateways() {
+	public Gateway getNextGateway() {
+		List<Gateway> resultList = new ArrayList<Gateway>();
+		
+		for (Flow e : this.getSPAActivity().getNextFlows()) {
+			Node n = e.getTo();
+			
+			if (Gateway.isGatewayType(n.type)) {
+				return new Gateway(n.getId(), this.pm);
+			}
+		}
 		return null;
 	}
 	
