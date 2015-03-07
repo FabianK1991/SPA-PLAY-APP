@@ -121,16 +121,46 @@ public class ProcessInstance {
 	 * Sets the current activity
 	 */
 	public void setCurrentActivity(Activity activity){
-		// creates a new activity instance
-		ActivityInstance.create(this, activity);
+		List<Activity> activities = new ArrayList<Activity>();
+		activities.add(activity);
+		
+		setCurrentActivities(activities);
 	}
 	
 	/*
 	 * Sets the current activities
 	 */
 	public void setCurrentActivities(List<Activity> activities){
-		// creates a new activity instance
-		ActivityInstance.create(this, activities);
+		List<ActivityInstance> currentActivities = this.getCurrentActivities();
+		List<String> nextActivities = new ArrayList<String>();
+		
+		for (ActivityInstance activityInstance : currentActivities) {
+			for (Activity possibleNextActivity : activityInstance.getActivity().getNextActivities()) {
+				nextActivities.add(possibleNextActivity.getRawId());
+			}
+			Gateway activeGateway = activityInstance.getActivity().getNextGateway();
+			
+			if (activeGateway != null) {
+				HashMap<String, Activity> activeGatewayOptions = activeGateway.getOptions();
+				
+				for (String key : activeGatewayOptions.keySet()) {
+					nextActivities.add(activeGatewayOptions.get(key).getRawId());
+				}
+			}
+		}
+				
+		for (Activity activity : activities) {
+			if (nextActivities.contains(activity.getRawId())) {
+				// creates a new activity instance
+				ActivityInstance.create(this, activity);
+			}
+			else {
+				/*
+				 * TODO
+				 * Somehow handle this bad request
+				 */
+			}
+		}
 	}
 	
 	/*
