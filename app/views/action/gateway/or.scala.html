@@ -1,2 +1,16 @@
 @import core._
 @(gateway: Gateway)
+
+<fieldset>
+
+	@for((optionText, nextActivity) <- gateway.getOptions()) {
+	
+		<label for="next_process-">
+		
+			<input type="checkbox" name="next_process-" value="@nextActivity.getRawId()">@optionText
+		
+		</label>
+	
+	}
+
+</fieldset>
