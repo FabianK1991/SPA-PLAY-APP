@@ -18,8 +18,6 @@
 	
 	}
 	
-	<div class="workbench">
-	
 	@defining(processInstance.getCurrentActivities()) { activityInstances =>
 		@for(activityInstance <- activityInstances) {
 			@defining(activityInstance.getActivity()) { activity =>
@@ -29,10 +27,7 @@
 					
 						@if(nextGateway != null) {
 						
-							<form class="action_gateway" action="@routes.ProcessController.performGatewayAction()" method="post">
-							
-								<input type="hidden" name="process_instance" value="@processInstance.getId()">
-								<input type="hidden" name="current_activity" value="@activity.getRawId()">
+							<div class="action_gateway">
 							
 								<div class="gateway_condition">
 								
@@ -46,53 +41,39 @@
         							case "AND" 	=> 	{@action.gateway.and(nextGateway)}
         							case _ 		=>	{@action.gateway._none(nextGateway)}
     							}
-    							
-    							<input type="submit" value="Weiter">
     						
-    						</form>
+    						</div>
     					
 						} else {
 							@defining(activityInstance.getActivity()) { activity =>
-							
-								<form action="@routes.ProcessController.performActivity()" method="post">
-								
-									<input type="hidden" name="process_instance" value="@processInstance.getId()">
-									<input type="hidden" name="current_activity" value="@activity.getRawId()">
-								
-    								@defining(activity.getBusinessObjects()) { businessObjects =>
-    									@activity.getAction() match {
-        									case "select" 	=> 	{@action.bo.select(businessObjects)}
-        									case "update" 	=> 	{@action.bo.update(businessObjects)}
-        									case "create" 	=> 	{@action.bo.create(businessObjects)}
-        									case "delete" 	=> 	{@action.bo.delete(businessObjects)}
-        									case _ 			=>	{@action.bo._none()}
-    									}
-    									@document_viewer()
+    							@defining(activity.getBusinessObjects()) { businessObjects =>
+    								@activity.getAction() match {
+        								case "select" 	=> 	{@action.bo.select(businessObjects)}
+        								case "update" 	=> 	{@action.bo.update(businessObjects)}
+        								case "create" 	=> 	{@action.bo.create(businessObjects)}
+        								case "delete" 	=> 	{@action.bo.delete(businessObjects)}
+        								case _ 			=>	{@action.bo._none()}
     								}
-									
-									<input type="submit" value="Weiter">
-								
-								</form>
+    								@document_viewer()
+    							}
    							}
    						}
    					
    					</div>
 				
 				}
+			
+				
+   			
    			}
    		}
 	}
-	
-	</div>
-
 } else {
-
 	<div class="none">
 	
 		You are currently not executing a process.
 	
 	</div>
-
 }
 
 </div>

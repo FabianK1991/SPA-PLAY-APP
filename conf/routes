@@ -14,8 +14,7 @@ POST    /uploadProcess				controllers.ProcessController.uploadProcess()
 POST    /startProcess             	controllers.ProcessController.startProcess()
 GET     /process/*processID			controllers.ProcessController.xmlProcess(processID)
 POST    /setCurrentProcess			controllers.ProcessController.setCurrentProcess()
-POST    /performActivity			controllers.ProcessController.performActivity()
-POST    /performGatewayAction		controllers.ProcessController.performGatewayAction()
+POST    /setCurrentActivity			controllers.ProcessController.setCurrentActivity()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
