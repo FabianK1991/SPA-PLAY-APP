@@ -93,7 +93,7 @@ public class ProcessParser {
 		if( el.getAttribute("name") != null && el.getAttribute("name").length() > 0 ){
 			//f.setCondition(el.getAttribute("name"));
 			Set<String> conditionSet = new HashSet<String>();
-			conditionSet.add("condition:" + el.getAttribute("name"));
+			conditionSet.add("condition:" + el.getAttribute("name").replaceAll("[^A-Za-z0-9-_.]", ""));
 			
 			f.getTo().setKeywords(conditionSet);
 		}
