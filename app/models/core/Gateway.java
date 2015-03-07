@@ -46,7 +46,9 @@ public class Gateway {
 		
 		for(Flow f: nextFlows){
 			String toId = f.getTo().getId();
+			String key = f.getCondition();
 			
+			/*
 			Set<String> set = f.getTo().getKeywords();
 			
 			for(String s: set){
@@ -54,7 +56,8 @@ public class Gateway {
 					result.put(s.substring(10), new Activity(toId, this.pm));
 					break;
 				}
-			}
+			}*/
+			result.put(key, new Activity(toId, this.pm));
 		}
 		
 		return result;

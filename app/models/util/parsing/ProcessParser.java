@@ -92,10 +92,11 @@ public class ProcessParser {
 		// set name ? - not supported by spa
 		if( el.getAttribute("name") != null && el.getAttribute("name").length() > 0 ){
 			//f.setCondition(el.getAttribute("name"));
-			Set<String> conditionSet = new HashSet<String>();
-			conditionSet.add("condition:" + el.getAttribute("name").replaceAll("[^A-Za-z0-9-_.]", ""));
+			//Set<String> conditionSet = new HashSet<String>();
+			//conditionSet.add("condition:" + el.getAttribute("name").replaceAll("[^A-Za-z0-9-_.]", ""));
 			
-			f.getTo().setKeywords(conditionSet);
+			//f.getTo().setKeywords(conditionSet);
+			f.setCondition(el.getAttribute("name").replaceAll("[^0-9a-zA-Z!?.;:+'&(){}\\[\\]\\\\/=<>-_]", ""));
 		}
 		
 		source.getNextFlows().add(f);
