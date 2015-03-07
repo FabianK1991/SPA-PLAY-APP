@@ -197,6 +197,14 @@ public class MailProcess
         pi.getActivities().add(a3);
         pi.getActivities().add(a4);
         pi.getActivities().add(a5);
+        
+        /*
+         * fix to make testcases work 
+         */
+        HashSet<BusinessObjectInstance> bois = new HashSet<BusinessObjectInstance>();
+        bois.add(mail122);
+        bois.add(mail117);
+        pi.setBusinessObjects(bois);
 
         return pi;
     }
