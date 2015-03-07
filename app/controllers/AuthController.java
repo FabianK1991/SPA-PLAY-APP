@@ -78,6 +78,6 @@ public class AuthController extends Controller {
 		response().discardCookie("sessid");
 		response().discardCookie("sesskey");
 		
-		return redirect("/login");
+		return redirect(routes.Page.index());
 	}
 }
