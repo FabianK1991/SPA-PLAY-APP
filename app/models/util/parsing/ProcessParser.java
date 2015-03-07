@@ -88,7 +88,7 @@ public class ProcessParser {
 		}
 		
 		// set name ? - not supported by spa
-		if( el.getAttribute("name") != null ){
+		if( el.getAttribute("name") != null && el.getAttribute("name").length() > 0 ){
 			f.setCondition(el.getAttribute("name"));
 		}
 		
