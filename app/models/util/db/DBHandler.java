@@ -148,7 +148,7 @@ public class DBHandler {
 							}
 							reObj.add(pi);
 						} catch (ProcessInstanceNotFoundException e1) {
-							this.exec("DELETE FROM `user_process_instances` WHERE `id` = '" + rs.getString("process") + "'", null, true);
+							this.exec("DELETE FROM `user_process_instances` WHERE `process` = '" + rs.getString("process") + "'", null, false);
 						}
 					}
 				}

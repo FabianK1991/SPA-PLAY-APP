@@ -27,16 +27,16 @@ public class ProcessModel {
 	private static final String xmlPath = "data/processes/";
 	
 	// Maps activities to bos
-	/* TABLE FORMAT CREATE TABLE Data_Association_Business_Objects (
-		process_model_ref VARCHAR(128),
-		activity_ref VARCHAR(128),
-		bo_ref VARCHAR(128),
-		business_object VARCHAR(32),
-		action VARCHAR(32),
-		min VARCHAR(16),
-		max VARCHAR(16),
+	/* TABLE FORMAT CREATE TABLE DataAssociationBusinessObjects (
+		ProcessModelId VARCHAR(128),
+		ActivityId VARCHAR(128),
+		BoId VARCHAR(128),
+		BoSAPId VARCHAR(32),
+		BoAction VARCHAR(32),
+		BoMin VARCHAR(16),
+		BoMax VARCHAR(16),
 		BoName VARCHAR(128),
-		req_attributes VARCHAR(255),
+		BoneededAttributes VARCHAR(255),
 		RID int(11) NOT NULL auto_increment, primary KEY (RID));
 	*/
 	public List<DataAssociation> dataAssoc;
@@ -262,7 +262,7 @@ public class ProcessModel {
 	
 	private void loadBusinessObjectDataAssociations(){
 		Application.db.connect();
-		String query = "SELECT * FROM data_association_business_objects WHERE process_model_ref = '%s'";
+		String query = "SELECT * FROM DataAssociationBusinessObjects WHERE ProcessModelId = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		
@@ -273,30 +273,30 @@ public class ProcessModel {
 		try {
 			if(rs.first()){
 				do{
-					this.dataAssoc.add(new DataAssociation(rs.getString("activity_ref"), rs.getString("bo_ref")));
+					this.dataAssoc.add(new DataAssociation(rs.getString("ActivityId"), rs.getString("BoId")));
 					
-					BusinessObject bo = this.getBoById(rs.getString("bo_ref"));
+					BusinessObject bo = this.getBoById(rs.getString("BoId"));
 					
 					if( bo == null ){
-						bo = new BusinessObject(rs.getString("bo_ref"));
+						bo = new BusinessObject(rs.getString("BoId"));
 						
-						if( rs.getString("business_object").length() > 0 ){
-							bo.setSAPId(rs.getString("business_object"));
+						if( rs.getString("BoSAPId").length() > 0 ){
+							bo.setSAPId(rs.getString("BoSAPId"));
 						}
-						if( rs.getString("action").length() > 0 ){
-							bo.setAction(rs.getString("action"));
+						if( rs.getString("BoAction").length() > 0 ){
+							bo.setAction(rs.getString("BoAction"));
 						}
-						if( rs.getString("min").length() > 0 ){
-							bo.setMin(rs.getString("min"));
+						if( rs.getString("BoMin").length() > 0 ){
+							bo.setMin(rs.getString("BoMin"));
 						}
-						if( rs.getString("max").length() > 0 ){
-							bo.setMax(rs.getString("max"));
+						if( rs.getString("BoMax").length() > 0 ){
+							bo.setMax(rs.getString("BoMax"));
 						}
 						if( rs.getString("BoName").length() > 0 ){
 							bo.setName(rs.getString("BoName"));
 						}
-						if( rs.getString("req_attributes").length() > 0 ){
-							bo.setNeededAttributes(rs.getString("req_attributes").split(","));
+						if( rs.getString("BoneededAttributes").length() > 0 ){
+							bo.setNeededAttributes(rs.getString("BoneededAttributes").split(","));
 						}
 						
 						this.bos.add(bo);
@@ -309,16 +309,16 @@ public class ProcessModel {
 		}
 	}
 	
-	/* TABLE FORMAT CREATE TABLE data_association_business_objects (
-		process_model_ref VARCHAR(128),
-		activity_ref VARCHAR(128),
-		bo_ref VARCHAR(128),
-		business_object VARCHAR(32),
-		action VARCHAR(32),
-		min VARCHAR(16),
-		max VARCHAR(16),
+	/* TABLE FORMAT CREATE TABLE DataAssociationBusinessObjects (
+		ProcessModelId VARCHAR(128),
+		ActivityId VARCHAR(128),
+		BoId VARCHAR(128),
+		BoSAPId VARCHAR(32),
+		BoAction VARCHAR(32),
+		BoMin VARCHAR(16),
+		BoMax VARCHAR(16),
 		BoName VARCHAR(128),
-		req_attributes VARCHAR(255),
+		BoneededAttributes VARCHAR(255),
 		RID int(11) NOT NULL auto_increment, primary KEY (RID));
 	*/
 	private void persistBusinessObjectDataAssociations(){
@@ -328,7 +328,7 @@ public class ProcessModel {
 			BusinessObject currentBo = this.getBoById(da.boId);
 			
 			// Check if already in database
-			String query = "SELECT * FROM data_association_business_objects WHERE process_model_ref = '%s' AND activity_ref = '%s' AND bo_ref = '%s'";
+			String query = "SELECT * FROM DataAssociationBusinessObjects WHERE ProcessModelId = '%s' AND ActivityId = '%s' AND BoId = '%s'";
 			ArrayList<String> args = new ArrayList<String>();
 			
 			args.add(this.getId());
@@ -342,7 +342,7 @@ public class ProcessModel {
 
 				if(rs.first()){
 					// Already exists
-					query = "UPDATE data_association_business_objects SET business_object = '%s',action = '%s',min = '%s',max = '%s',BoName = '%s',req_attributes = '%s' WHERE process_model_ref = '%s' AND activity_ref = '%s' AND bo_ref = '%s'";
+					query = "UPDATE DataAssociationBusinessObjects SET BoSAPId = '%s',BoAction = '%s',BoMin = '%s',BoMax = '%s',BoName = '%s',BoneededAttributes = '%s' WHERE ProcessModelId = '%s' AND ActivityId = '%s' AND BoId = '%s'";
 					
 					if( currentBo.getSAPId() != null ){
 						args.add(currentBo.getSAPId());
@@ -392,7 +392,7 @@ public class ProcessModel {
 				}
 				else{
 					// Don't exists
-					query = "INSERT INTO data_association_business_objects (process_model_ref, activity_ref, bo_ref, business_object, action, min, max, BoName, req_attributes) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
+					query = "INSERT INTO DataAssociationBusinessObjects (ProcessModelId, ActivityId, BoId, BoSAPId, BoAction, BoMin, BoMax, BoName, BoneededAttributes) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
 				
 					args.add(this.getId());
 					args.add(da.activityId);
