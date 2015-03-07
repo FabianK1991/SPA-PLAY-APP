@@ -135,19 +135,24 @@ public class DBHandler {
 			try {
 				while(rs.next()){
 					if(c.equals(ProcessInstance.class)){
-						ProcessInstance pi = new ProcessInstance(rs.getString("process"));
-						pi.setUser(new User(rs.getString("user")));
-						
+						ProcessInstance pi;
 						try {
-							pi.setTime(DBHandler.format.parse(rs.getString("time")));
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							pi = new ProcessInstance(rs.getString("process"));
+							pi.setUser(new User(rs.getString("user")));
+							
+							try {
+								pi.setTime(DBHandler.format.parse(rs.getString("time")));
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							reObj.add(pi);
+						} catch (ProcessInstanceNotFoundException e1) {
+							this.exec("DELETE FROM `user_process_instances` WHERE `id` = '" + rs.getString("process") + "'", null, true);
 						}
-						reObj.add(pi);
 					}
 				}
-			} catch (SQLException | ProcessInstanceNotFoundException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

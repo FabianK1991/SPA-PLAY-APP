@@ -64,6 +64,11 @@ public class Gateway {
 	}
 	
 	public static boolean isGatewayType(String type) {
-		return (models.spa.api.process.buildingblock.Gateway.GatewayType.valueOf(type) != null);
+		try {
+			return (models.spa.api.process.buildingblock.Gateway.GatewayType.valueOf(type) != null);
+		}
+		catch(IllegalArgumentException e) {
+			return false;
+		}
 	}
 }

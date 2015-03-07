@@ -53,46 +53,47 @@ require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
         
         // import function
         return function(xml) {
-	
-	    // import diagram
-	    bpmnViewer.importXML(xml, function(err) {
-	
-	      if (err) {
-	        return console.error('could not import BPMN 2.0 diagram', err);
-	      }
-          
-          $('.loader', obj).remove();
-	
-	      var canvas = bpmnViewer.get('canvas'),
-	          overlays = bpmnViewer.get('overlays');
-	
-	
-	      // zoom to fit full viewport
-	      canvas.zoom(0.6);
-          
-          var currentActivityNode = $('g[data-element-id="' + obj.data('current_activity') + '"]', obj);
-          
-          currentActivityNode.attr('class', currentActivityNode.attr('class') + ' current-activity');
-          
-          var activityNodes = $('g[data-element-id]:gt(1)', obj);
-          
-          activityNodes.on('click', function(e) {
-              if ($.inArray($(this).data('element-id'), obj.data('next_activities').split(',')) != -1) {
-                $.ajax({
-                    url: '/setCurrentActivity',
-                    type: 'POST',
-                    complete: function(re) {
-                        console.log(re);
-                    },
-                    error: function() {
-                        console.log('error');
-                    },
-                    data: {process_instance: obj.data('process_instance'), activity_id: $(this).data('element-id')}
+            // import diagram
+            bpmnViewer.importXML(xml, function(err) {
+            
+                if (err) {
+                    return console.error('could not import BPMN 2.0 diagram', err);
+                }
+                
+                $('.loader', obj).remove();
+                
+                var canvas = bpmnViewer.get('canvas'),
+                  overlays = bpmnViewer.get('overlays');
+                
+                
+                // zoom to fit full viewport
+                canvas.zoom(0.6);
+                
+                $('.activity_instance').each(function() {
+                    var currentActivityNode = $('g[data-element-id="' + $(this).data('activity_id') + '"]', obj);
+                    
+                    currentActivityNode.attr('class', currentActivityNode.attr('class') + ' current-activity');
                 });
-              }
-          });
-	    });
-	  };
+                
+                var activityNodes = $('g[data-element-id]:gt(1)', obj);
+                
+                activityNodes.on('click', function(e) {
+                    if ($.inArray($(this).data('element-id'), obj.data('next_activities').split(',')) != -1) {
+                        $.ajax({
+                            url: '/setCurrentActivity',
+                            type: 'POST',
+                            complete: function(re) {
+                                console.log(re);
+                            },
+                            error: function() {
+                                console.log('error');
+                            },
+                            data: {process_instance: obj.data('process_instance'), activity_id: $(this).data('element-id')}
+                        });
+                    }
+                });
+            });
+        };
 	};
     
 	$('.process_model').each(function() {
