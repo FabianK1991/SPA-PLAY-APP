@@ -3,7 +3,9 @@ package models.util.parsing;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -89,7 +91,11 @@ public class ProcessParser {
 		
 		// set name ? - not supported by spa
 		if( el.getAttribute("name") != null && el.getAttribute("name").length() > 0 ){
-			f.setCondition(el.getAttribute("name"));
+			//f.setCondition(el.getAttribute("name"));
+			Set<String> conditionSet = new HashSet<String>();
+			conditionSet.add("condition:" + el.getAttribute("name"));
+			
+			f.getTo().setKeywords(conditionSet);
 		}
 		
 		source.getNextFlows().add(f);
