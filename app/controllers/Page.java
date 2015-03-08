@@ -12,7 +12,7 @@ import play.mvc.Result;
 import views.html.login;
 import views.html.main;
 
-@With(AuthCheck.class)
+@With(ActionController.class)
 public class Page extends Controller {
 
     public static Result index() {

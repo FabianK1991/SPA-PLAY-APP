@@ -1,7 +1,6 @@
 package models.util.http;
 
 import java.util.Map;
-
 import play.mvc.Controller;
 
 public class Parameters {
@@ -15,10 +14,10 @@ public class Parameters {
 	 * @return The parameters of the key.
 	 */
 	public static String get(String key){
-		if (requestData == null){
+		if (requestData == null) {
 			requestData = Controller.request().body().asFormUrlEncoded();
 		}
-		if (requestData == null){
+		if (requestData == null) {
 			requestData = Controller.request().body().asMultipartFormData().asFormUrlEncoded();
 		}
 		
@@ -26,5 +25,9 @@ public class Parameters {
 			return requestData.get(key)[0];
 		}
 		return "";
+	}
+	
+	public static void clearRequestData() {
+		requestData = null;
 	}
 }

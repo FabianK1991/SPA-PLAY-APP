@@ -16,7 +16,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.With;
 
-@With(AuthCheck.class)
+@With(ActionController.class)
 public class ProcessController extends Controller {
 	public static Result xmlProcess(String processID) {
     	ProcessModel processModel;
@@ -33,7 +33,7 @@ public class ProcessController extends Controller {
     	MultipartFormData body = request().body().asMultipartFormData();
     	FilePart filepart = body.getFile("bpmn_file");
     	
-    	if (filepart != null) {
+    	if (filepart != null) {Logger.debug(Parameters.get("process_name"));
     		ProcessModel.createFromBPMN_File(filepart, Parameters.get("process_name"));
     		
     		return ok("File uploaded");

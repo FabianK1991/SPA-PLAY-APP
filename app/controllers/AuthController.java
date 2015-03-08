@@ -69,7 +69,7 @@ public class AuthController extends Controller {
 	 * @author Christian
 	 * @return A redirect to the Login-Screen.
 	 */
-	@With(AuthCheck.class)
+	@With(ActionController.class)
 	public static Result logout(){
 		AuthController.s = new Session(request().cookies().get("sessid").value());
 		AuthController.s.getUser().setSession(null);
