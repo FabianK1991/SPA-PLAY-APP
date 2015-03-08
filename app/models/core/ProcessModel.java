@@ -262,7 +262,7 @@ public class ProcessModel {
 	
 	private void loadBusinessObjectDataAssociations(){
 		Application.db.connect();
-		String query = "SELECT * FROM DataAssociationBusinessObjects WHERE ProcessModelId = '%s'";
+		String query = "SELECT * FROM Data_Association_Business_Objects WHERE Process_Model_Ref = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		
@@ -273,30 +273,30 @@ public class ProcessModel {
 		try {
 			if(rs.first()){
 				do{
-					this.dataAssoc.add(new DataAssociation(rs.getString("ActivityId"), rs.getString("BoId")));
+					this.dataAssoc.add(new DataAssociation(rs.getString("Activity_Ref"), rs.getString("Business_object")));
 					
-					BusinessObject bo = this.getBoById(rs.getString("BoId"));
+					BusinessObject bo = this.getBoById(rs.getString("Bo_Ref"));
 					
 					if( bo == null ){
-						bo = new BusinessObject(rs.getString("BoId"));
+						bo = new BusinessObject(rs.getString("Bo_Ref"));
 						
-						if( rs.getString("BoSAPId").length() > 0 ){
-							bo.setSAPId(rs.getString("BoSAPId"));
+						if( rs.getString("Business_object").length() > 0 ){
+							bo.setSAPId(rs.getString("Business_object"));
 						}
-						if( rs.getString("BoAction").length() > 0 ){
-							bo.setAction(rs.getString("BoAction"));
+						if( rs.getString("Action").length() > 0 ){
+							bo.setAction(rs.getString("Action"));
 						}
-						if( rs.getString("BoMin").length() > 0 ){
-							bo.setMin(rs.getString("BoMin"));
+						if( rs.getString("Min").length() > 0 ){
+							bo.setMin(rs.getString("Min"));
 						}
-						if( rs.getString("BoMax").length() > 0 ){
-							bo.setMax(rs.getString("BoMax"));
+						if( rs.getString("Max").length() > 0 ){
+							bo.setMax(rs.getString("Max"));
 						}
 						if( rs.getString("BoName").length() > 0 ){
 							bo.setName(rs.getString("BoName"));
 						}
-						if( rs.getString("BoneededAttributes").length() > 0 ){
-							bo.setNeededAttributes(rs.getString("BoneededAttributes").split(","));
+						if( rs.getString("Req_Attributes").length() > 0 ){
+							bo.setNeededAttributes(rs.getString("Req_Attributes").split(","));
 						}
 						
 						this.bos.add(bo);
@@ -310,15 +310,15 @@ public class ProcessModel {
 	}
 	
 	/* TABLE FORMAT CREATE TABLE DataAssociationBusinessObjects (
-		ProcessModelId VARCHAR(128),
-		ActivityId VARCHAR(128),
-		BoId VARCHAR(128),
-		BoSAPId VARCHAR(32),
-		BoAction VARCHAR(32),
-		BoMin VARCHAR(16),
-		BoMax VARCHAR(16),
+		Process_Model_Ref VARCHAR(128),
+		Activity_Ref VARCHAR(128),
+		Bo_Ref VARCHAR(128),
+		Business_object VARCHAR(32),
+		Action VARCHAR(32),
+		Min VARCHAR(16),
+		Max VARCHAR(16),
 		BoName VARCHAR(128),
-		BoneededAttributes VARCHAR(255),
+		Req_Attributes VARCHAR(255),
 		RID int(11) NOT NULL auto_increment, primary KEY (RID));
 	*/
 	private void persistBusinessObjectDataAssociations(){
@@ -328,7 +328,7 @@ public class ProcessModel {
 			BusinessObject currentBo = this.getBoById(da.boId);
 			
 			// Check if already in database
-			String query = "SELECT * FROM DataAssociationBusinessObjects WHERE ProcessModelId = '%s' AND ActivityId = '%s' AND BoId = '%s'";
+			String query = "SELECT * FROM Data_Association_Business_Objects WHERE Process_Model_Ref = '%s' AND Activity_Ref = '%s' AND Bo_Ref = '%s'";
 			ArrayList<String> args = new ArrayList<String>();
 			
 			args.add(this.getId());
@@ -340,9 +340,9 @@ public class ProcessModel {
 			try {
 				args.clear();
 
-				if(rs.first()){
+				if(rs != null && rs.first()){
 					// Already exists
-					query = "UPDATE DataAssociationBusinessObjects SET BoSAPId = '%s',BoAction = '%s',BoMin = '%s',BoMax = '%s',BoName = '%s',BoneededAttributes = '%s' WHERE ProcessModelId = '%s' AND ActivityId = '%s' AND BoId = '%s'";
+					query = "UPDATE Data_Association_Business_Objects SET Business_object = '%s',Action = '%s',Min = '%s',Max = '%s',BoName = '%s',Req_Attributes = '%s' WHERE Process_Model_Ref = '%s' AND Activity_Ref = '%s' AND Bo_Ref = '%s'";
 					
 					if( currentBo.getSAPId() != null ){
 						args.add(currentBo.getSAPId());
@@ -392,7 +392,7 @@ public class ProcessModel {
 				}
 				else{
 					// Don't exists
-					query = "INSERT INTO DataAssociationBusinessObjects (ProcessModelId, ActivityId, BoId, BoSAPId, BoAction, BoMin, BoMax, BoName, BoneededAttributes) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
+					query = "INSERT INTO Data_Association_Business_Objects (Process_Model_Ref, Activity_Ref, Bo_Ref, Business_object, Action, Min, Max, BoName, Req_Attributes) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')";
 				
 					args.add(this.getId());
 					args.add(da.activityId);
