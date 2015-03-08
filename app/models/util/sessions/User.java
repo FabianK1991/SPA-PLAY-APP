@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import play.mvc.Controller;
-
-import controllers.Application;
-
 import models.core.ProcessInstance;
 import models.core.ProcessModel;
 import models.util.db.DBHandler;
+import play.mvc.Controller;
+import controllers.Application;
+import controllers.AuthController;
 
 public class User {
 	
@@ -93,7 +92,9 @@ public class User {
 			try{
 				this.currentProcess = new ProcessInstance(filling.get(5));
 			}catch (Exception e){
-				this.getCurrentProcessInstance();
+				if (AuthController.getSession() != null) {
+					this.getCurrentProcessInstance();
+				}
 			}
 			
 			return true;
