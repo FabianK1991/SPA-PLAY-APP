@@ -1,4 +1,3 @@
-
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -6,11 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import models.spa.api.ProcessInstance;
 import models.spa.api.ProcessModel;
 import models.spa.example.MailProcess;
 import models.spa.api.process.buildingblock.*;
 import models.spa.api.process.buildingblock.instance.*;
+import models.spa.rest.entities.Process;
+import models.spa.rest.entities.BusinessObject;
+import models.spa.rest.entities.ProcessInstance;
 
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ public class SPATest {
 		}
 	}
 	
-	private ProcessInstance createTestModelInstance(ProcessModel pm){
+	private models.spa.api.ProcessInstance createTestModelInstance(ProcessModel pm){
 		try {
 			return MailProcess.createProcessInstances(pm);
 		} catch (Exception e) {
@@ -43,13 +44,15 @@ public class SPATest {
 		ProcessModel pm = createTestModel();
 		
 		try {
+			pm.delete();
 			pm.store();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Error in store!");
 		}
-		
+	
 		try {
+			new ProcessModel();
 			ProcessModel pmNew = ProcessModel.getProcess(pm.getId());
 			if(pmNew == null){
 				throw new Exception();
@@ -87,6 +90,7 @@ public class SPATest {
 		pm.setKeywords(testKeywords);
 		
 		try {
+			pm.delete();
 			pm.store();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -148,21 +152,22 @@ public class SPATest {
 	public void getProcessIDsBO() {
 		// Process.getProcessIDsBO
 		ProcessModel pm = createTestModel();
-		Set<BusinessObject> bos = pm.getBusinessObjects();
+		Set<models.spa.api.process.buildingblock.BusinessObject> bos = pm.getBusinessObjects();
 		
 		try {
+			pm.delete();
 			pm.store();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Error in store!");
 		}
 		HashSet<String> boUris = new HashSet<String>();
-		for(BusinessObject bo: bos){
+		for(models.spa.api.process.buildingblock.BusinessObject bo: bos){
 			boUris.add(bo.getId());
 		}
 		List<ProcessModel> processModels = null;
 		try {
-			ProcessModel.searchByBusinessObjects(boUris);
+			processModels = ProcessModel.searchByBusinessObjects(boUris);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			fail("Error while searching for process model with business object(s)");
@@ -191,9 +196,10 @@ public class SPATest {
 	public void getProcessModelInstanceById() {
 		// ProcessInstance.getProcessInstance
 		ProcessModel pm = createTestModel();
-		ProcessInstance pi = createTestModelInstance(pm);
+		models.spa.api.ProcessInstance pi = createTestModelInstance(pm);
 		
 		try {
+			pi.delete();
 			pi.store();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -201,7 +207,7 @@ public class SPATest {
 		}
 		
 		try {
-			ProcessInstance piNew = ProcessInstance.getProcessInstance(pm, pi.getId());
+			models.spa.api.ProcessInstance piNew = models.spa.api.ProcessInstance.getProcessInstance(pm, pi.getId());
 			if(piNew == null) throw new Exception();
 		} catch (Exception e1) {
 			fail("Error in retrieving the Process Model by an ID");
@@ -220,16 +226,39 @@ public class SPATest {
 	public void getProcessInstanceIDsPID() {
 		// ProcessInstance.getProcessInstanceIDsPID
 		ProcessModel pm = createTestModel();
-		ProcessInstance pi = createTestModelInstance(pm);
+		models.spa.api.ProcessInstance pi = createTestModelInstance(pm);
 		
 		try {
+			pi.delete();
 			pi.store();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Error in store!");
 		}
 		
-		fail("Not yet implemented!");
+		Set<String> ids = null;
+		try {
+			ids = ProcessInstance.getProcessInstanceIDsPID(pm.getId());
+		} catch (Exception e1) {
+			fail("Error while retrieving the ProcessInstance Ids by the Process Ids");
+			e1.printStackTrace();
+		}
+		
+		try {
+			boolean containsFlag = false;
+			for(String id : ids) {
+				if(id.equals(pi.getId())){
+					containsFlag = true;
+				}
+			}
+			
+			if(!containsFlag){
+				fail("Process Instance id was lost");
+			}
+		} catch (Exception e) {
+			fail("The retrieved id set of the process instance ids was null");
+			e.printStackTrace();
+		}
 		
 		try {
 			pi.delete();
@@ -242,19 +271,45 @@ public class SPATest {
 	@Test
 	public void getProcessInstanceIDsBOI() {
 		// ProcessInstance.getProcessInstanceIDsBOI
-		ProcessInstance pm = createTestModelInstance(createTestModel());
+		ProcessModel pm = createTestModel();
+		models.spa.api.ProcessInstance pi = createTestModelInstance(pm);
+		
+		Set<String> boiIDs = new HashSet<String>();
+		
+		System.out.println(pi.getBusinessObjects().size());
+		for(BusinessObjectInstance boi:pi.getBusinessObjects()){
+			boiIDs.add(boi.getId());
+		}
+		
 		
 		try {
-			pm.store();
+			pi.delete();
+			pi.store();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Error in store!");
 		}
 		
-		fail("Not yet implemented!");
+		try {
+			Set<String> processInstanceIDs = ProcessInstance.getProcessInstanceIDsBOI(boiIDs);
+			
+			boolean containsFlag = false;
+			
+			for(String piID : processInstanceIDs){
+				if(piID.equals(pi.getId())){
+					containsFlag = true;
+				}
+			}
+			if(!containsFlag){
+				fail("Process Instance could not be retrieved by business object instance id");
+			}
+		} catch (Exception e1) {
+			fail("The return value was null");
+			e1.printStackTrace();
+		}
 		
 		try {
-			pm.delete();
+			pi.delete();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Error in delete!");
@@ -269,6 +324,7 @@ public class SPATest {
 		ProcessModel pm = createTestModel();
 		
 		try {
+			pm.delete();
 			pm.store();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -282,9 +338,9 @@ public class SPATest {
 			fail("Error in retrieval");
 		}
 		
-		for(BusinessObject boOld: pm.getAllBusisnessObjects()){
+		for(models.spa.api.process.buildingblock.BusinessObject boOld: pm.getAllBusisnessObjects()){
 			boolean containsFlag = false;
-			for(BusinessObject boNew: newPM.getAllBusisnessObjects()){
+			for(models.spa.api.process.buildingblock.BusinessObject boNew: newPM.getAllBusisnessObjects()){
 				if (boNew.getId().equals(boOld.getId())){
 					containsFlag = true;
 				}
@@ -307,16 +363,50 @@ public class SPATest {
 	public void getBusinessObjectByKeywords() {
 		// BusinessObject.getBusinessObjectByKeywords
 		ProcessModel pm = createTestModel();
-		BusinessObject bo = new BusinessObject(pm);
+		models.spa.api.process.buildingblock.BusinessObject bo = new models.spa.api.process.buildingblock.BusinessObject(pm);
+		
+		HashSet<String> testKeywords = new HashSet<String>();
+		
+		for(int i = 0;  i < (int)(3 + Math.random()*5); i++){
+			String word = "";
+			for(int j = 0; j < (int)(5 + Math.random()*4); j++){
+				char c = (char) (97 + (int)(Math.random() * 26));
+				word = word + c;
+			}
+			testKeywords.add(word);
+		}
+		
+		bo.setKeywords(testKeywords);
+		
+		Set<models.spa.api.process.buildingblock.BusinessObject> needForSetBusinessObject = new HashSet<models.spa.api.process.buildingblock.BusinessObject>();
+		needForSetBusinessObject.add(bo);
+		
+		pm.setBusinessObjects(needForSetBusinessObject);
 		
 		try {
+			pm.delete();
 			pm.store();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Error in store!");
 		}
 		
-		fail("Not yet implemented!");
+		try {
+			Set<String> boids = BusinessObject.getBusinessObjectByKeywords(testKeywords);
+			
+			boolean containsFlag = false;
+			for(String boid : boids){
+				if(boid.equals(bo.getId())){
+					containsFlag = true;
+				}
+			}
+			if(!containsFlag){
+				fail("Could not get BusinessObject by keyword");
+			}
+		} catch (Exception e1) {
+			fail("Some null pointer by the RestApi");
+			e1.printStackTrace();
+		}
 		
 		try {
 			pm.delete();
@@ -328,18 +418,36 @@ public class SPATest {
 	
 	@Test
 	public void getBusinessObjectsByProcessID() {
+		
 		// BusinessObject.getBusinessObjectsByProcessID
 		ProcessModel pm = createTestModel();
-		BusinessObject bo = new BusinessObject(pm);
+		Set<models.spa.api.process.buildingblock.BusinessObject> businessObjects = pm.getAllBusisnessObjects();
 		
 		try {
+			pm.delete();
 			pm.store();
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail("Error in store!");
 		}
 
-		fail("Not yet implemented!");
+		try {
+			Set<String> boIDs = BusinessObject.getBusinessObjectsByProcessID(pm.getId());
+			int count = businessObjects.size();
+			for (String boID : boIDs) {
+				for(models.spa.api.process.buildingblock.BusinessObject bo : businessObjects){
+					if(bo.getId().equals(boID)){
+						count--;
+					}
+				}
+			}
+			if(count != 0){
+				fail("Businessobjects were not retrieved correctly for a given process ID");
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		try {
 			pm.delete();
@@ -348,6 +456,4 @@ public class SPATest {
 			fail("Error in delete!");
 		}
 	}
-	
-	
 }
