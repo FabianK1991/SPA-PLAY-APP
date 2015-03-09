@@ -1,0 +1,32 @@
+@import core._
+@(user: util.sessions.User = AuthController.getUser())
+
+<div class="process_selector">
+
+	@defining(user.getProcessInstances()) { processInstances =>
+	
+		@if(processInstances.length > 0) {
+		
+			<form action="@routes.ProcessController.setCurrentProcess" method="post">
+			
+				<select name="process_instance">
+				
+					@selectors.options.process_instance(processInstances, user.getCurrentProcessInstance())
+				
+				</select>
+			
+			</form>
+		
+		} else {
+			<div class="warning no-process_instance">
+			
+				There are no processes currently running. Please start a new process.
+			
+			</div>
+			
+			@selectors.process_model()
+		}
+	
+	}
+
+</div>

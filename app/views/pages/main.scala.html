@@ -1,0 +1,14 @@
+@import core._
+
+@design("Process Guidance") {
+	
+   	@defining(AuthController.getUser()) { user =>
+    
+   	 	@selectors.process_instance(user)
+    	
+    	@process.viewer(user.getCurrentProcessInstance())
+    }
+
+}
+
+

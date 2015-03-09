@@ -2,7 +2,6 @@ package models.core;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,17 +9,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.xml.parsers.DocumentBuilderFactory;
+import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
+import models.core.exceptions.ProcessModelNotFoundException;
+import models.util.parsing.ProcessParser;
 
 import org.apache.commons.io.FileUtils;
 
+import play.Logger;
 import play.mvc.Http.MultipartFormData.FilePart;
 import controllers.Application;
-import models.core.exceptions.ActivityInstanceNotFoundException;
-import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
-import models.core.exceptions.ProcessInstanceNotFoundException;
-import models.core.exceptions.ProcessModelNotFoundException;
-import models.util.parsing.ProcessParser;
 
 public class ProcessModel {
 	models.spa.api.ProcessModel pm;
@@ -262,7 +259,7 @@ public class ProcessModel {
 	
 	private void loadBusinessObjectDataAssociations(){
 		Application.db.connect();
-		String query = "SELECT * FROM Data_Association_Business_Objects WHERE Process_Model_Ref = '%s'";
+		String query = "SELECT * FROM data_association_business_objects WHERE process_model_ref = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		
@@ -273,30 +270,30 @@ public class ProcessModel {
 		try {
 			if(rs.first()){
 				do{
-					this.dataAssoc.add(new DataAssociation(rs.getString("Activity_Ref"), rs.getString("Business_object")));
+					this.dataAssoc.add(new DataAssociation(rs.getString("activity_ref"), rs.getString("bo_ref")));
 					
-					BusinessObject bo = this.getBoById(rs.getString("Bo_Ref"));
+					BusinessObject bo = this.getBoById(rs.getString("bo_ref"));
 					
 					if( bo == null ){
-						bo = new BusinessObject(rs.getString("Bo_Ref"));
+						bo = new BusinessObject(rs.getString("bo_ref"));
 						
-						if( rs.getString("Business_object").length() > 0 ){
-							bo.setSAPId(rs.getString("Business_object"));
+						if( rs.getString("business_object").length() > 0 ){
+							bo.setSAPId(rs.getString("business_object"));
 						}
-						if( rs.getString("Action").length() > 0 ){
-							bo.setAction(rs.getString("Action"));
+						if( rs.getString("action").length() > 0 ){
+							bo.setAction(rs.getString("action"));
 						}
-						if( rs.getString("Min").length() > 0 ){
-							bo.setMin(rs.getString("Min"));
+						if( rs.getString("min").length() > 0 ){
+							bo.setMin(rs.getString("min"));
 						}
-						if( rs.getString("Max").length() > 0 ){
-							bo.setMax(rs.getString("Max"));
-						}
+						if( rs.getString("max").length() > 0 ){
+							bo.setMax(rs.getString("max"));
+						}/*
 						if( rs.getString("BoName").length() > 0 ){
 							bo.setName(rs.getString("BoName"));
-						}
-						if( rs.getString("Req_Attributes").length() > 0 ){
-							bo.setNeededAttributes(rs.getString("Req_Attributes").split(","));
+						}*/
+						if( rs.getString("req_attributes").length() > 0 ){
+							bo.setNeededAttributes(rs.getString("req_attributes").split(","));
 						}
 						
 						this.bos.add(bo);
@@ -328,7 +325,7 @@ public class ProcessModel {
 			BusinessObject currentBo = this.getBoById(da.boId);
 			
 			// Check if already in database
-			String query = "SELECT * FROM Data_Association_Business_Objects WHERE Process_Model_Ref = '%s' AND Activity_Ref = '%s' AND Bo_Ref = '%s'";
+			String query = "SELECT * FROM data_association_business_objects WHERE process_model_ref = '%s' AND activity_ref = '%s' AND bo_ref = '%s'";
 			ArrayList<String> args = new ArrayList<String>();
 			
 			args.add(this.getId());

@@ -2,11 +2,12 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+# Pages
 GET     /                           controllers.Page.index()
+GET     /login                     	controllers.Page.login(email:String ?= "")
+GET    	/addProcessModel			controllers.Page.addProcessModel()
 
 # Login page
-GET     /login                     	controllers.Page.login(email:String ?= "")
 POST    /login                     	controllers.AuthController.login()
 
 # Process Instance Management
@@ -23,6 +24,3 @@ GET     /webjars/*file             	controllers.WebJarAssets.at(file)
 
 # Map the JS resource paths
 GET     /*file                      controllers.Assets.versioned(path="/public", file: Asset)
-
-#GET     /lib/require.js             controllers.WebJarAssets.requirejs()
-#GET     /requireJsConf.js       controllers.Application.requireJsConfig()

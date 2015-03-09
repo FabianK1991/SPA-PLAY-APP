@@ -79,22 +79,20 @@ public class SAPServerSimulator {
 	 * @param id The BO id
 	 * @return A list of attribute ids
 	 */
-	public List<String> getBusinessObjectAttributes(int id){
+	public List<String> getBusinessObjectAttributes(String id){
 		Application.db.connect();
 		
-		String query = "SELECT attribute FROM business_object_attributes WHERE business_object = '%s' ORDER BY order ASC";
+		String query = "SELECT attribute FROM business_object_attributes WHERE business_object = '%s' ORDER BY `order` ASC";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(String.valueOf(id));
+		args.add(getBusinessObjectDatabaseId(id));
 		
 		List<String> resultList = new ArrayList<String>();
 		ResultSet rs = Application.db.exec(query, args, true);
 		
 		try {
-			if(rs.first()){
-				do{
-					resultList.add(rs.getString("attribute"));
-				}while(rs.next());
+			while(rs.next()){
+				resultList.add(rs.getString("attribute"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -200,7 +198,7 @@ public class SAPServerSimulator {
 	public String getAttributeName(int AttributeId){
 		Application.db.connect();
 		
-		String query = "SELECT id FROM attributes WHERE name = '%s'";
+		String query = "SELECT name FROM attributes WHERE id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(String.valueOf(AttributeId));
@@ -209,7 +207,7 @@ public class SAPServerSimulator {
 		
 		try {
 			if(rs.first()){
-				return rs.getString("id");
+				return rs.getString("name");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -8,8 +8,6 @@ import models.util.db.SAPServerSimulator;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import views.html.requireJsConfig;
-
 public class Application extends Controller {
 	
 	public static DBHandler db = new DBHandler();
@@ -35,9 +33,5 @@ public class Application extends Controller {
         }
          
         return sb.toString();
-    }
-    
-    public static Result requireJsConfig() {
-    	return ok(requireJsConfig.render()).as("application/javascript");
     }
 }

@@ -1,0 +1,51 @@
+@import core._
+@(activity: Activity, businessObjects: List[BusinessObject])
+
+<div class="task_description">
+
+	This task requires from you to select up to @businessObjects.get(0).getMax() @businessObjects.get(0).getSAPId()
+
+</div>
+
+<div class="task_data">
+
+	<table class="dataTable">
+	
+		@defining(businessObjects.get(0).getNeededAttributesList()) { boAttributes =>
+			
+			<thead>
+			
+				<tr>
+				
+					@for(attr <- boAttributes) {
+					
+						<td>@attr</td>
+					
+					}
+					
+				</tr>
+			
+			</thead>
+			
+			<tbody>
+			
+				@for(boInstance <- BusinessObjectInstance.getAll(businessObjects.get(0))) {
+					
+					<tr>
+					
+						@for(attr <- boAttributes) {
+						
+							<td>@*@boInstance.getAttributeValue(attr)*@</td>
+						
+						}
+					
+					</tr>
+					
+				}
+			
+			</tbody>
+		}
+	
+	</table>
+
+</div>

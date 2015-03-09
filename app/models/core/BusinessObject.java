@@ -56,7 +56,7 @@ public class BusinessObject {
 	 * => List should be ordered ASCending by column order
 	 */
 	public List<BusinessObjectAttribute> getAttributes() {
-		List<String> attr = Application.sss.getBusinessObjectAttributes(Integer.parseInt(this.id));
+		List<String> attr = Application.sss.getBusinessObjectAttributes(this.getSAPId());
 		
 		ArrayList<BusinessObjectAttribute> resultList = new ArrayList<BusinessObjectAttribute>();
 		
@@ -78,6 +78,14 @@ public class BusinessObject {
 	
 	public void setMax(String max){
 		this.max = max;
+	}
+	
+	public String getMin(){
+		return this.min;
+	}
+	
+	public String getMax(){
+		return this.max;
 	}
 	
 	public String getName(){
@@ -104,7 +112,20 @@ public class BusinessObject {
 	public String getMaxQuantity() {
 		return this.max;
 	}
-
+	
+	/*
+	 * TODO
+	 * Better: public List<BusinessObjectAttribute> getNeededAttributes() {}
+	 */
+	public List<String> getNeededAttributesList() {
+		List<String> re = new ArrayList<String>();
+		
+		for (String attr : neededAttributes) {
+			re.add(attr);
+		}
+		return re;
+	}
+	
 	public String[] getNeededAttributes() {
 		return neededAttributes;
 	}

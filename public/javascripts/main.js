@@ -106,3 +106,10 @@ require(['bpmn-viewer'], function(BpmnViewer) {
 	  $.get("/process/" + $(this).data('process_model'), getLoadingCallback($(this)), 'text');
   });
 });
+
+require(['datatables'], function(DataTables) {
+    $('table.dataTable')
+        .DataTable({
+            "lengthMenu": [ [10, 25, 50], [10, 25, 50] ]
+        });
+});

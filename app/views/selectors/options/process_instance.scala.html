@@ -1,0 +1,6 @@
+@import core._
+@(processInstances: List[ProcessInstance], currentInstance: ProcessInstance)
+
+@for(instance <- processInstances) {
+	<option @if(instance.equals(currentInstance)) {selected="selected" }value="@instance.getId()">@instance.getName() (@instance.getCurrentActivities().get(0).getTime())</option>
+}

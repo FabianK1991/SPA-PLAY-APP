@@ -56,6 +56,8 @@ public class Activity {
 	 * 
 	 */
 	public String getAction() {
+		Logger.info(this.pm.getActionForActivity(this.activity.getId()));
+		Logger.info(this.pm.getActionForActivity(this.activity.getId()));
 		return this.pm.getActionForActivity(this.activity.getId());
 	}
 	

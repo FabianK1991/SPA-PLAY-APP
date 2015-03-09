@@ -7,6 +7,7 @@
         <title>@title</title>
         
         <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.dataTables.min.css"))">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         
         @Html(org.webjars.play.RequireJS.setup(routes.Assets.versioned("javascripts/main.js").url))
@@ -21,7 +22,11 @@ requirejs.config({"paths":{"bpmn-viewer":["@routes.WebJarAssets.at(WebJarAssets.
     </head>
     <body>
         
-		@content
+		<div id="general">
+		
+			@content
+		
+		</div>
   		
     </body>
 </html>

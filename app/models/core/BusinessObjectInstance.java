@@ -1,14 +1,14 @@
 package models.core;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import controllers.Application;
-import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.exceptions.ForbiddenBusinessObjectAttributeException;
 import models.util.parsing.ProcessParser;
+import controllers.Application;
 
 public class BusinessObjectInstance {
 	private ActivityInstance ai;
@@ -164,5 +164,13 @@ public class BusinessObjectInstance {
 		String id = UUID.randomUUID().toString().replace('-', '0');
 		
 		return id;
+	}
+	
+	/*
+	 * TODO for Christian
+	 * ASAP!!!
+	 */
+	public static List<BusinessObjectInstance> getAll(BusinessObject bo) {
+		return new ArrayList<BusinessObjectInstance>();
 	}
 }
