@@ -6,24 +6,18 @@
     <head>
         <title>@title</title>
         
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         
-        <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.css"))'>
+        @Html(org.webjars.play.RequireJS.setup(routes.Assets.versioned("javascripts/main.js").url))
         
-		<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
-		<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.js"))'></script>
-		
-		<!-- dependencies -->
-  <script src="/assets/javascripts/bpmn-js-seed-master/bower_components/jquery/dist/jquery.js"></script>
-  <script src="/assets/javascripts/bpmn-js-seed-master/bower_components/jquery-mousewheel/jquery.mousewheel.js"></script>
-  <script src="/assets/javascripts/bpmn-js-seed-master/bower_components/lodash/dist/lodash.js"></script>
-  <script src="/assets/javascripts/bpmn-js-seed-master/bower_components/sax/lib/sax.js"></script>
-  <script src="/assets/javascripts/bpmn-js-seed-master/bower_components/Snap.svg/dist/snap.svg.js"></script>
+<script>
+/* Fixing broken bpmn-js 0.8.0 dependencies!!! */
+requirejs.config({"paths":{"sax":["@routes.WebJarAssets.at(WebJarAssets.locate("sax.js")).url.replaceAll(".js$", "")","sax"]}})
+requirejs.config({"paths":{"bpmn-viewer":["@routes.WebJarAssets.at(WebJarAssets.locate("bpmn-viewer.js")).url.replaceAll(".js$", "")","bpmn-viewer"]},"shim":{"bpmn-viewer":["jquery","jquery-mousewheel","lodash","sax", "snap-svg"]}})
 
-  <!-- bpmn-js viewer -->
-  <script src="/assets/javascripts/bpmn-js-seed-master/bower_components/bpmn-js/dist/bpmn-viewer.js"></script>
-        
+</script>
+    
     </head>
     <body>
         
@@ -31,5 +25,3 @@
   		
     </body>
 </html>
-
-<script data-main="@routes.Assets.at("javascripts/main.js")" type="text/javascript" src="@routes.Assets.at("lib/requirejs/require.js")"></script>

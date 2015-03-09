@@ -5,9 +5,10 @@ import java.security.NoSuchAlgorithmException;
 
 import models.util.db.DBHandler;
 import models.util.db.SAPServerSimulator;
-import play.mvc.*;
-import play.Logger;
-import views.html.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+import views.html.requireJsConfig;
 
 public class Application extends Controller {
 	
@@ -34,5 +35,9 @@ public class Application extends Controller {
         }
          
         return sb.toString();
+    }
+    
+    public static Result requireJsConfig() {
+    	return ok(requireJsConfig.render()).as("application/javascript");
     }
 }

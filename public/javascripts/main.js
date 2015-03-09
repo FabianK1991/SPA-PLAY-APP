@@ -1,3 +1,5 @@
+
+
 /*
 
 require({
@@ -33,7 +35,6 @@ require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
 */
 
 
-
 /**
  * bpmn-js-seed - async
  *
@@ -44,7 +45,7 @@ require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
  * The reason for this is that most modern web browsers do not allow AJAX requests ($.get and the like)
  * of file system resources.
  */
-(function(BpmnViewer, $) {
+require(['bpmn-viewer'], function(BpmnViewer) {
 	
 	var getLoadingCallback = function(obj) {
         var bpmnViewer = new BpmnViewer({
@@ -104,6 +105,4 @@ require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
 	  // load external diagram file via AJAX and import it
 	  $.get("/process/" + $(this).data('process_model'), getLoadingCallback($(this)), 'text');
   });
-
-
-})(window.BpmnJS, window.jQuery);
+});
