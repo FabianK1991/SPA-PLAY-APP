@@ -178,6 +178,32 @@ public class ProcessParser {
 				
 		        pm.getSPAProcessModel().getNodes().add(xor);
 				break;
+			case "parallelGateway":
+				//System.out.println("Gaytway!");
+				Gateway and = new Gateway(pm.getSPAProcessModel(), GatewayType.AND);
+				and.setId(nsm + ((Element)n).getAttribute("id"));
+		        
+		        System.out.println(((Element)n).getAttribute("id"));
+		        
+		        if( ((Element)n).getAttribute("name") != null ){
+		        	and.setName(((Element)n).getAttribute("name"));
+		        }
+				
+		        pm.getSPAProcessModel().getNodes().add(and);
+				break;
+			case "inclusiveGateway":
+				//System.out.println("Gaytway!");
+				Gateway or = new Gateway(pm.getSPAProcessModel(), GatewayType.OR);
+				or.setId(nsm + ((Element)n).getAttribute("id"));
+		        
+		        System.out.println(((Element)n).getAttribute("id"));
+		        
+		        if( ((Element)n).getAttribute("name") != null ){
+		        	or.setName(((Element)n).getAttribute("name"));
+		        }
+				
+		        pm.getSPAProcessModel().getNodes().add(or);
+				break;
 			case "sequenceFlow":
 				//System.out.println("Flow!");
 				//this.createFlow((Element)n, pm);
