@@ -169,13 +169,13 @@ public class SAPServerSimulator {
 	 * @param SAPName the business object sap name
 	 * @return the value of the attribute
 	 */
-	public String getBusinessObjectDatabaseId(String SAPName){
+	public String getBusinessObjectDatabaseId(String SAPId){
 		Application.db.connect();
 		
 		String query = "SELECT id FROM business_objects WHERE sap_id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(SAPName);
+		args.add(SAPId);
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		

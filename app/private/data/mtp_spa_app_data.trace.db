@@ -8724,3 +8724,145 @@ SELECT name FROM business_object_attributes WHERE id = '12' [42122-175]
 	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
 	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
 	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+03-10 01:47:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unbekannter Datentyp: "AUTO"
+Unknown data type: "AUTO"; SQL statement:
+Alter table BUSINESS_OBJECT_INSTANCE_ATTRIBUTES add column id auto increment not null [50004-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3853)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3716)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5289)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5128)
+	at org.h2.command.Parser.parseAlter(Parser.java:4552)
+	at org.h2.command.Parser.parsePrepared(Parser.java:325)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:168)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-10 01:47:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Feld "ID" nicht gefunden
+Column "ID" not found; SQL statement:
+Alter table busINESS_OBJECT_INSTANCE_ATTRIBUTES  add primary key (id) [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.table.Table.getColumn(Table.java:626)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:75)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:104)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:70)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-10 01:47:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Unbekannter Datentyp: "NOT"
+Unknown data type: "NOT"; SQL statement:
+Alter table BUSINESS_OBJECT_INSTANCE_ATTRIBUTES add column id not null auto increment [50004-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3853)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3716)
+	at org.h2.command.Parser.parseAlterTableAddColumn(Parser.java:5289)
+	at org.h2.command.Parser.parseAlterTable(Parser.java:5128)
+	at org.h2.command.Parser.parseAlter(Parser.java:4552)
+	at org.h2.command.Parser.parsePrepared(Parser.java:325)
+	at org.h2.command.Parser.parse(Parser.java:298)
+	at org.h2.command.Parser.parse(Parser.java:270)
+	at org.h2.command.Parser.prepareCommand(Parser.java:235)
+	at org.h2.engine.Session.prepareLocal(Session.java:436)
+	at org.h2.engine.Session.prepareCommand(Session.java:379)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:168)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-10 01:47:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Feld "ID" nicht gefunden
+Column "ID" not found; SQL statement:
+Alter table busINESS_OBJECT_INSTANCE_ATTRIBUTES  add primary key (id) [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.table.Table.getColumn(Table.java:626)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:75)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:104)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:70)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-10 01:48:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "ALTER TABLE BUSINESS_OBJECT_INSTANCE_ATTRIBUTES ADD COLUMN ID INT (11) NOT NULL AUTO[*] INCREMENT "
+Syntax error in SQL statement "ALTER TABLE BUSINESS_OBJECT_INSTANCE_ATTRIBUTES ADD COLUMN ID INT (11) NOT NULL AUTO[*] INCREMENT "; SQL statement:
+Alter table BUSINESS_OBJECT_INSTANCE_ATTRIBUTES add column id int (11) not null auto increment [42000-175]
+03-10 01:48:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Feld "ID" nicht gefunden
+Column "ID" not found; SQL statement:
+Alter table busINESS_OBJECT_INSTANCE_ATTRIBUTES  add primary key (id) [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.table.Table.getColumn(Table.java:626)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:75)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:104)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:70)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:253)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:745)
+03-10 01:53:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "BUSINESS_OBEJCT_INSTANCES" nicht gefunden
+Table "BUSINESS_OBEJCT_INSTANCES" not found; SQL statement:
+INSERT INTO `business_obejct_instances` (`id`, `business_object`, `time`) VALUES
+(1,	1,	'2015-03-10 01:28:14'),
+(2,	2,	'2015-03-10 01:28:23'),
+(3,	3,	'2015-03-10 01:28:26'),
+(4,	4,	'2015-03-10 01:28:29'),
+(5,	5,	'2015-03-10 01:28:32'),
+(6,	6,	'2015-03-10 01:28:36'),
+(7,	7,	'2015-03-10 01:29:09'),
+(8,	8,	'2015-03-10 01:29:09'),
+(9,	9,	'2015-03-10 01:29:25'),
+(10,	10,	'2015-03-10 01:29:25'),
+(11,	11,	'2015-03-10 01:29:25'),
+(12,	12,	'2015-03-10 01:29:25') [42102-175]
