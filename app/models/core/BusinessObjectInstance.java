@@ -1,5 +1,7 @@
 package models.core;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -167,10 +169,29 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
-	 * TODO for Christian
-	 * ASAP!!!
+	 * TODO for Fabian 
 	 */
 	public static List<BusinessObjectInstance> getAll(BusinessObject bo) {
-		return new ArrayList<BusinessObjectInstance>();
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(Application.sss.getBusinessObjectDatabaseId(bo.getSAPId()));
+		
+		String query = "SELECT * FROM `business_object_instances` WHERE `business_object` = '%s'";
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		ArrayList<BusinessObjectInstance> returnList = new ArrayList<BusinessObjectInstance>();
+		try {
+			while(rs.next()){
+				rs.getString("id");
+			}
+			//validate code and fill return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		return returnList;
 	}
 }
