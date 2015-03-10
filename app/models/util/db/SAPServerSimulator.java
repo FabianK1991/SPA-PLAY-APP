@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import models.core.BusinessObject;
 import models.core.BusinessObjectAttribute;
+import models.core.BusinessObjectInstance;
+import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import controllers.Application;
 
 public class SAPServerSimulator {
@@ -99,6 +102,33 @@ public class SAPServerSimulator {
 		}
 		
 		return resultList;
+	}
+	
+	public List<BusinessObjectInstance> getAllBusinessObjectInstances(BusinessObject bo){
+		String sapId = Application.sss.getBusinessObjectDatabaseId(bo.getSAPId());
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(sapId);
+		
+		String query = "SELECT * FROM `business_objects_instances` WHERE `attribute` = '66' AND `value` = '%s'";
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		ArrayList<BusinessObjectInstance> returnList = new ArrayList<BusinessObjectInstance>();
+		
+		try {
+			while(rs.next()){
+				returnList.add(new BusinessObjectInstance(rs.getString("bo_instance"), bo));
+			}
+			//validate code and fill return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BusinessObjectInstanceNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return returnList;
 	}
 	
 	/*

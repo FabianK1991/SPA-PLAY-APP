@@ -72,6 +72,11 @@ public class BusinessObjectInstance {
 		this.databaseId = Integer.parseInt(this.boi.getId().substring(ProcessParser.nsboi.length()));
 	}
 	
+	public BusinessObjectInstance(String databaseId, BusinessObject bo) throws BusinessObjectInstanceNotFoundException {
+		this.bo = ai.getActivity().getBusinessObjectById(this.boi.getBusinessObject());
+		this.databaseId = Integer.parseInt(this.boi.getId().substring(ProcessParser.nsboi.length()));
+	}
+	
 	/*
 	 * Deletes a BusinessObjectInstance and removes all references to it stored in SPA
 	 */
@@ -169,29 +174,8 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
-	 * TODO for Fabian 
 	 */
 	public static List<BusinessObjectInstance> getAll(BusinessObject bo) {
-		ArrayList<String> args = new ArrayList<String>();
-		args.add(Application.sss.getBusinessObjectDatabaseId(bo.getSAPId()));
-		
-		String query = "SELECT * FROM `business_object_instances` WHERE `business_object` = '%s'";
-		
-		ResultSet rs = Application.db.exec(query, args, true);
-		ArrayList<BusinessObjectInstance> returnList = new ArrayList<BusinessObjectInstance>();
-		try {
-			while(rs.next()){
-				rs.getString("id");
-			}
-			//validate code and fill return list;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-		return returnList;
+		return Application.sss.getAllBusinessObjectInstances(bo);
 	}
 }
