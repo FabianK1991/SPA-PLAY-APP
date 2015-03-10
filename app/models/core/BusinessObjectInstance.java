@@ -73,8 +73,8 @@ public class BusinessObjectInstance {
 	}
 	
 	public BusinessObjectInstance(String databaseId, BusinessObject bo) throws BusinessObjectInstanceNotFoundException {
-		this.bo = ai.getActivity().getBusinessObjectById(this.boi.getBusinessObject());
-		this.databaseId = Integer.parseInt(this.boi.getId().substring(ProcessParser.nsboi.length()));
+		this.bo = bo;
+		this.databaseId = Integer.parseInt(databaseId);
 	}
 	
 	/*
