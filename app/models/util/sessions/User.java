@@ -92,7 +92,7 @@ public class User {
 			try{
 				this.currentProcess = new ProcessInstance(filling.get(5));
 			}catch (Exception e){
-				if (AuthController.getSession() != null) {
+				if (AuthController.getSession() != null && AuthController.getUser() != null) {
 					this.getCurrentProcessInstance();
 				}
 			}

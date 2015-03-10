@@ -120,8 +120,9 @@ var jsSet = function() {
                                 
                                 jsSet();
                             },
-                            error: function() {
-                                alert('AJAX error!');
+                            error: function(re) {
+                                alert('Request error:\n\n' + re.responseText);
+                                $('.loader', target).remove();
                             }
                         });
                         return false;

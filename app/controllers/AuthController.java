@@ -7,10 +7,13 @@ import models.util.http.Parameters;
 import models.util.sessions.Session;
 import models.util.sessions.User;
 import play.Logger;
-import play.mvc.*;
+import play.mvc.Controller;
 import play.mvc.Http.Cookie;
-import views.html.*;
+import play.mvc.Result;
+import play.mvc.With;
+import views.html.pages.main;
 
+@With(ActionController.class)
 public class AuthController extends Controller {
 	
 	private static Session s;
@@ -58,10 +61,11 @@ public class AuthController extends Controller {
 			Logger.debug(Parameters.get("email"));
 			
 			if(u.createSession(Parameters.get("passwd"))){
-				return ok("1|Login succesful!");
+				AuthController.s = u.getSession();
+				return ok(main.render());
 			}
 		}
-		return ok("0|Login failed!");
+		return badRequest("Login failed!");
 	}
 	
 	/**
@@ -69,7 +73,6 @@ public class AuthController extends Controller {
 	 * @author Christian
 	 * @return A redirect to the Login-Screen.
 	 */
-	@With(ActionController.class)
 	public static Result logout(){
 		AuthController.s = new Session(request().cookies().get("sessid").value());
 		AuthController.s.getUser().setSession(null);

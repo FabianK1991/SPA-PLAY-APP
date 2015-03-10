@@ -16,6 +16,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.With;
 import views.html.process.activity_instances;
+import views.html.pages.main;
 
 @With(ActionController.class)
 public class ProcessController extends Controller {
@@ -57,7 +58,7 @@ public class ProcessController extends Controller {
 		}
     	AuthController.getUser().createProcessInstance(processModel);
     	
-    	return ok("Process started");
+    	return ok(main.render());
     }
     
     public static Result setCurrentProcess() {
@@ -69,7 +70,7 @@ public class ProcessController extends Controller {
 			processInstance = new ProcessInstance(processInstanceID);
 			AuthController.getUser().setCurrentProcess(processInstance);
 			
-			return ok("Process started");
+			return ok(main.render());
 		} catch (ProcessInstanceNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

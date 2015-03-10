@@ -19,7 +19,7 @@
 				
 					@for(attr <- boAttributes) {
 					
-						<td>@attr</td>
+						<td>@attr.replaceAll("([a-z0-9])([A-Z])","$1 $2")</td>
 					
 					}
 					

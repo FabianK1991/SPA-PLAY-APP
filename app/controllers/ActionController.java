@@ -1,5 +1,6 @@
 package controllers;
 import models.util.http.Parameters;
+import play.Logger;
 import play.api.mvc.Call;
 import play.libs.F.Promise;
 import play.mvc.Action;
@@ -12,8 +13,11 @@ public class ActionController extends Action.Simple {
 		Parameters.clearRequestData();
 		
 		Call loginPage = routes.Page.login("");
+		Call loginAction = routes.AuthController.login();
+
+		String request = ctx.request().toString().replace("?contentonly", "");
 		
-		boolean isLoginPage = ctx.request().toString().equals(loginPage.method() + " " + loginPage.url());
+		boolean isLoginPage = request.equals(loginPage.method() + " " + loginPage.url()) || request.equals(loginAction.method() + " " + loginAction.url());
 		
 		if (AuthController.check() == false && isLoginPage == false) {
 	        return Promise.pure(Results.redirect(loginPage));
