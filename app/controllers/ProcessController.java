@@ -15,6 +15,7 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.With;
+import views.html.process.activity_instances;
 
 @With(ActionController.class)
 public class ProcessController extends Controller {
@@ -88,7 +89,7 @@ public class ProcessController extends Controller {
 			
 			processInstance.setCurrentActivities(activity.getNextActivities());
 			
-			return ok("Current Activity updated!");
+			return ok(activity_instances.render(processInstance));
 		} catch (ProcessInstanceNotFoundException e1) {
 			return notFound("Process Instance not found! (ID: " + processInstanceID + ")");
 		}
@@ -108,7 +109,7 @@ public class ProcessController extends Controller {
 			}
 			processInstance.setCurrentActivities(newCurrentActivities);
 			
-			return ok("Current Activity updated!");
+			return ok(activity_instances.render(processInstance));
 		} catch (ProcessInstanceNotFoundException e) {
 			e.printStackTrace();
 			return notFound("Process Instance not found! (ID: " + processInstanceID + ")");

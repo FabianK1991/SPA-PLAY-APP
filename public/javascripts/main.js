@@ -34,82 +34,101 @@ require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
 
 */
 
-
-/**
- * bpmn-js-seed - async
- *
- * This is an example script that loads a bpmn diagram <diagram.bpmn> and opens
- * it using the bpmn-js viewer.
- *
- * YOU NEED TO SERVE THIS FOLDER VIA A WEB SERVER (i.e. Apache) FOR THE EXAMPLE TO WORK.
- * The reason for this is that most modern web browsers do not allow AJAX requests ($.get and the like)
- * of file system resources.
- */
-require(['bpmn-viewer'], function(BpmnViewer) {
-	
-	var getLoadingCallback = function(obj) {
-        var bpmnViewer = new BpmnViewer({
-            container: obj
-        });
+markCurrentActivities = function(BpmnViewer, obj) {
+    var activityNodes = $('g[data-element-id]:gt(1)', obj);
+    
+    activityNodes.each(function() {
+        $(this).attr('class', $(this).attr('class').replace('current-activity', ''));
+    })
+    
+    $('.activity_instance').each(function() {
+        var currentActivityNode = $('g[data-element-id="' + $(this).data('activity_id') + '"]', obj);
         
-        // import function
-        return function(xml) {
-            // import diagram
-            bpmnViewer.importXML(xml, function(err) {
+        currentActivityNode.attr('class', currentActivityNode.attr('class') + ' current-activity');
+    });
+};
+
+var jsSet = function() {
+    require(['bpmn-viewer'], function(BpmnViewer) {
+        
+        var getLoadingCallback = function(obj) {
+            var bpmnViewer = new BpmnViewer({
+                container: obj
+            });
             
-                if (err) {
-                    return console.error('could not import BPMN 2.0 diagram', err);
-                }
+            // import function
+            return function(xml) {
+                // import diagram
+                bpmnViewer.importXML(xml, function(err) {
                 
-                $('.loader', obj).remove();
-                
-                var canvas = bpmnViewer.get('canvas'),
-                  overlays = bpmnViewer.get('overlays');
-                
-                
-                // zoom to fit full viewport
-                canvas.zoom(0.6);
-                
-                $('.activity_instance').each(function() {
-                    var currentActivityNode = $('g[data-element-id="' + $(this).data('activity_id') + '"]', obj);
+                    if (err) {
+                        return console.error('could not import BPMN 2.0 diagram', err);
+                    }
                     
-                    currentActivityNode.attr('class', currentActivityNode.attr('class') + ' current-activity');
+                    $('.loader', obj).remove();
+                    
+                    var canvas = bpmnViewer.get('canvas'),
+                      overlays = bpmnViewer.get('overlays');
+                    
+                    
+                    // zoom to fit full viewport
+                    canvas.zoom(0.6);
+                    
+                    markCurrentActivities(BpmnViewer, obj);
                 });
-                
-                var activityNodes = $('g[data-element-id]:gt(1)', obj);
-                
-                activityNodes.on('click', function(e) {
-                    if ($.inArray($(this).data('element-id'), obj.data('next_activities').split(',')) != -1) {
+            };
+        };
+        
+        $('.process_model')
+            .each(function() {
+                if ($(this).data('set') != 1) {
+                    $.get("/process/" + $(this).data('process_model'), getLoadingCallback($(this)), 'text');
+                }
+                markCurrentActivities(BpmnViewer, $(this));
+            }).data('set', 1);
+    });
+
+    require(['datatables'], function(DataTables) {
+        $('table.dataTable')
+            .each(function() {
+                if ($(this).data('set') != 1) {
+                    $(this).DataTable({
+                        "lengthMenu": [ [10, 25, 50], [10, 25, 50] ]
+                    });
+                }
+            }).data('set', 1);
+    });
+
+    require(['jquery-ui'], function() {
+        $('form:not(.upload)')
+            .each(function() {
+                if ($(this).data('set') != 1) {
+                    $(this).on('submit', function(e) {
+                        e.preventDefault();
+                        
+                        var target = $($(this).data('target'));
+                        
+                        target.prepend('<div class="loader">Receiving data</loader>');
+                        
                         $.ajax({
-                            url: '/setCurrentActivity',
-                            type: 'POST',
-                            complete: function(re) {
-                                console.log(re);
+                            type: $(this).attr('method'),
+                            url: $(this).attr('action') + '?contentonly',
+                            data: $(this).serialize(),
+                            success: function(re) {
+                                $('.loader', target).remove();
+                                target.html(re);
+                                
+                                jsSet();
                             },
                             error: function() {
-                                console.log('error');
-                            },
-                            data: {process_instance: obj.data('process_instance'), activity_id: $(this).data('element-id')}
+                                alert('AJAX error!');
+                            }
                         });
-                    }
-                });
-            });
-        };
-	};
-    
-	$('.process_model').each(function() {
-	  // create viewer
-	  
-	
-	
-	  // load external diagram file via AJAX and import it
-	  $.get("/process/" + $(this).data('process_model'), getLoadingCallback($(this)), 'text');
-  });
-});
+                        return false;
+                    });
+                }
+            }).data('set', 1);
+    });
+};
 
-require(['datatables'], function(DataTables) {
-    $('table.dataTable')
-        .DataTable({
-            "lengthMenu": [ [10, 25, 50], [10, 25, 50] ]
-        });
-});
+jsSet();

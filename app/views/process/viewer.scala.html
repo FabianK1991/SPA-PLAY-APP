@@ -36,20 +36,30 @@
 								<input type="hidden" name="process_instance" value="@processInstance.getId()">
 								<input type="hidden" name="current_activity" value="@activity.getRawId()">
 							
-								<div class="gateway_condition">
+								<h2>
 								
-									@nextGateway.getCondition()
+									@activity.getName()
 								
-								</div>
+								</h2>
 								
+								<div class="content">
+								
+									<div class="task_description gateway_condition">
+									
+										@nextGateway.getCondition()
+									
+									</div>
+									
 								@nextGateway.getType() match {
         							case "XOR" 	=> 	{@actions.gateways.xor(nextGateway)}
         							case "OR" 	=> 	{@actions.gateways.or(nextGateway)}
         							case "AND" 	=> 	{@actions.gateways.and(nextGateway)}
         							case _ 		=>	{@actions.gateways._none(nextGateway)}
     							}
+    								
+    								<input type="submit" value="Next">
     							
-    							<input type="submit" value="Weiter">
+    							</div>
     						
     						</form>
     					
@@ -111,7 +121,7 @@
 
 	<div class="none">
 	
-		You are currently not executing a process.
+		You are currently not running any processes.
 	
 	</div>
 

@@ -1,32 +1,37 @@
 @(title: String)(content: Html)
 
-<!DOCTYPE html>
+@if(Controller.request().getQueryString("contentonly") != null) {
 
-<html>
-    <head>
-        <title>@title</title>
-        
-        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
-        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.dataTables.min.css"))">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        
-        @Html(org.webjars.play.RequireJS.setup(routes.Assets.versioned("javascripts/main.js").url))
-        
-<script>
-/* Fixing broken bpmn-js 0.8.0 dependencies!!! */
-requirejs.config({"paths":{"sax":["@routes.WebJarAssets.at(WebJarAssets.locate("sax.js")).url.replaceAll(".js$", "")","sax"]}})
-requirejs.config({"paths":{"bpmn-viewer":["@routes.WebJarAssets.at(WebJarAssets.locate("bpmn-viewer.js")).url.replaceAll(".js$", "")","bpmn-viewer"]},"shim":{"bpmn-viewer":["jquery","jquery-mousewheel","lodash","sax", "snap-svg"]}})
+	@content
 
-</script>
-    
-    </head>
-    <body>
-        
-		<div id="general">
-		
-			@content
-		
-		</div>
-  		
-    </body>
-</html>
+} else {
+
+	<!DOCTYPE html>
+	<html>
+    	<head>
+        	<title>@title</title>
+        	
+        	<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+        	<link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.dataTables.min.css"))">
+        	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        	
+        	@Html(org.webjars.play.RequireJS.setup(routes.Assets.versioned("javascripts/main.js").url))
+        	
+			<script>
+				/* Fixing broken bpmn-js 0.8.0 dependencies!!! */
+				requirejs.config({"paths":{"sax":["@routes.WebJarAssets.at(WebJarAssets.locate("sax.js")).url.replaceAll(".js$", "")","sax"]}})
+				requirejs.config({"paths":{"bpmn-viewer":["@routes.WebJarAssets.at(WebJarAssets.locate("bpmn-viewer.js")).url.replaceAll(".js$", "")","bpmn-viewer"]},"shim":{"bpmn-viewer":["jquery","jquery-mousewheel","lodash","sax", "snap-svg"]}})
+			</script>
+   	 	</head>
+    	<body>
+        	
+			<div id="general">
+			
+				@content
+			
+			</div>
+  				
+   	 	</body>
+	</html>
+
+}
