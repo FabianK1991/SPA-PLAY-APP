@@ -117,12 +117,18 @@ public class BusinessObject {
 	 * TODO
 	 * Better: public List<BusinessObjectAttribute> getNeededAttributes() {}
 	 */
-	public List<String> getNeededAttributesList() {
-		List<String> re = new ArrayList<String>();
+	public List<BusinessObjectAttribute> getNeededAttributesList() {
+		List<BusinessObjectAttribute> attr = this.getAttributes();
+		List<BusinessObjectAttribute> re = new ArrayList<BusinessObjectAttribute>();
 		
-		for (String attr : neededAttributes) {
-			re.add(attr);
+		for (String att : neededAttributes) {
+			for(BusinessObjectAttribute ba : attr){
+				if( att.equals(ba.getName()) ){
+					re.add(ba);
+				}
+			}
 		}
+		
 		return re;
 	}
 	
