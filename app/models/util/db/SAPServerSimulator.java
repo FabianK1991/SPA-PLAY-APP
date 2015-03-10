@@ -110,7 +110,7 @@ public class SAPServerSimulator {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(sapId);
 		
-		String query = "SELECT * FROM `business_objects_instances` WHERE `attribute` = '66' AND `value` = '%s'";
+		String query = "SELECT * FROM `business_objects_instance_attributes` WHERE `attribute` = '66' AND `value` = '%s'";
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		ArrayList<BusinessObjectInstance> returnList = new ArrayList<BusinessObjectInstance>();
