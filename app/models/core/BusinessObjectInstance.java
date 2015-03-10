@@ -152,6 +152,24 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
+	 * Be careful this.databaseId and this.bo have to be set!!!
+	 */
+	public void linkToActivityInstance(ActivityInstance ai){
+		this.boi = new models.spa.api.process.buildingblock.instance.BusinessObjectInstance(this.ai.getSPAActivityInstance().getPi());
+		
+		this.boi.setId(ProcessParser.nsboi + this.databaseId);
+		this.boi.setBusinessObject(this.bo.getId());
+		
+		this.ai.getSPAActivityInstance().getBoi().add(this.boi);
+		
+		try {
+			this.ai.getSPAActivityInstance().getPi().update();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*
 	 * Returns a list of documents related to this BusinessObjectInstance,
 	 * e.g. BusinessObjectInstance="BILL-1" (BusinessObject="Bill") and documents like PDF-bill,...
 	 */
