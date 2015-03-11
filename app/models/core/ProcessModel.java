@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
+import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.parsing.ProcessParser;
 
@@ -95,6 +96,17 @@ public class ProcessModel {
 	 * TODO for Christian ASAP
 	 */
 	public int getNumInstances(){
+		String query = "SELECT COUNT(*) AS NUM  FROM user_process_instances WHERE `process_model` = '%s'";
+		ArrayList<String> args = new ArrayList<>();
+		args.add(this.getId());
+		ResultSet rs = Application.db.exec(query, args, true);
+		try {
+			rs.first();
+			return Integer.parseInt(rs.getString("num"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	
@@ -102,7 +114,23 @@ public class ProcessModel {
 	 * TODO for Fabi
 	 */
 	public List<ProcessInstance> getInstances(){
-		return null;
+		ArrayList<ProcessInstance> resList = new ArrayList<ProcessInstance>();
+		String query = "SELECT * FROM user_process_instances WHERE `process_model` = '%s'";
+		ArrayList<String> args = new ArrayList<>();
+		args.add(this.getId());
+		ResultSet rs = Application.db.exec(query, args, true);
+		try {
+			while(rs.next()){
+				resList.add(new ProcessInstance(rs.getString("process")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProcessInstanceNotFoundException e) {
+			
+		}
+		
+		return resList;
 	}
 	
 	/*
