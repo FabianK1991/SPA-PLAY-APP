@@ -66,7 +66,8 @@ public class AuthController extends Controller {
 			
 			if(u.createSession(Parameters.get("passwd"))){
 				AuthController.s = u.getSession();
-				return ok(ajax_concat.render(main.render(), auth_header.render()));
+				
+				return ok(ajax_concat.render(main.render(), auth_header.render(1), routes.Page.index().url()));
 			}
 		}
 		return badRequest("Login failed!");

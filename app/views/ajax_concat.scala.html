@@ -1,8 +1,13 @@
 @import core._
-@(element1: Html, element2: Html = null)
+@(element1: Html, element2: Html = null, url: String = null)
 
 @element1
 
-@if(element2 != null && Controller.request().getQueryString("contentonly") == null) {
-	|@element2
+@if(Controller.request().getQueryString("contentonly") != null) {
+	@if(element2 != null) {
+		|@element2
+	}
+	@if(url != null) {
+		|@url
+	}
 }

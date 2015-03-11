@@ -1,6 +1,7 @@
 @import core._
+@(check: Integer = 0)
 
-@if(AuthController.check()) {
+@if(AuthController.check() || check == 1) {
 	@defining(AuthController.getUser()) { user =>
 		
 	<div class="account_info">
@@ -31,7 +32,7 @@
     		
     			<li>
     			
-    				<a href="">Manage Process Models</a>
+    				<a href="@routes.Page.manageProcessModels">Manage Process Models</a>
     			
     			</li>
     			

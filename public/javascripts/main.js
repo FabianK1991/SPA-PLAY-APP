@@ -199,20 +199,37 @@ var jsSet = function() {
                             success: function(re) {
                                 re = re.split('|');
                                 
-                                for (key in targets) {
-                                    var target = targets[key];
+                                var i = 0;
+                                
+                                while (i < targets.length) {
+                                    var target = targets[i];
                                     
                                     $('.loader', target).remove();
                                     
-                                    if (re[key] !== undefined) {
-                                        target.html(re[key]);
+                                    if (re[i] !== undefined) {
+                                        target.html(re[i]);
+                                    }
+                                    i++;
+                                }
+                                console.log(re);
+                                if (re[i] !== undefined) {
+                                    $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
+                                    
+                                    if (window.history.pushState) {
+                                        window.history.pushState(null, null, re[i]);
+                                    }
+                                    else {
+                                        window.location = location.href.substr(0, strpos(location.href, '#')) + '#' + re[i];
                                     }
                                 }
                                 jsSet();
                             },
                             error: function(re) {
                                 alert('Request error:\n\n' + re.responseText);
-                                $('.loader', target).remove();
+                                
+                                for (key in targets) {
+                                    $('.loader', targets[key]).remove();
+                                }
                             }
                         });
                         return false;

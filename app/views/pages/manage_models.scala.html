@@ -1,0 +1,63 @@
+@import core._
+
+@design("Process Models") {
+	<table class="dataTable">
+	
+		<thead>
+		
+			<tr>
+			
+				<td>
+				
+					Model-ID
+				
+				</td>
+				
+				<td>
+				
+					Name
+				
+				</td>
+				
+				<td>
+				
+					Sessions
+				
+				</td>
+			
+			</tr>
+		
+		</thead>
+		
+		<tbody>
+		
+			@for(processModel <- ProcessModel.getAll()) {
+			
+				<tr>
+				
+					<td>
+					
+						@processModel.getId()
+					
+					</td>
+					
+					<td>
+					
+						@processModel.getName()
+					
+					</td>
+					
+					<td>
+					
+						@processModel.getNumInstances()
+					
+					</td>
+				
+				</tr>
+			
+			}
+		
+		</tbody>
+	
+	</table>
+}

@@ -278,6 +278,11 @@ position: relative;
 overflow: hidden;
 }
 
+#header, #header * {
+-webkit-transition: all 1s; /* Safari */
+transition: all 1s;
+}
+
 .view-login #header {
 height: 40vh;
 text-align: center;
@@ -291,9 +296,12 @@ max-width: 370px;
 height: 100%;
 max-height: 220px;
 position: relative;
+float: none;
 margin: auto;
+left: auto;
 right: auto;
 top: 20px;
+bottom: 0;
 }
 
 .view-login #header .account_info {
@@ -309,11 +317,9 @@ display: none;
 }
 
 #header .logo {
-position: absolute;
-left: auto;
-right: 10px;
-top: 10px;
-bottom: 0;
+float: right;
+margin-top: 10px;
+margin-right: 10px;
 }
 
 #header .logo img {
