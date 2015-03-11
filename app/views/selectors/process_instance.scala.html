@@ -7,7 +7,7 @@
 	
 		@if(processInstances.length > 0) {
 		
-			<form action="@routes.ProcessController.setCurrentProcess" method="post">
+			<form action="@routes.ProcessController.setCurrentProcess" method="post" data-target="#content">
 			
 				<select name="process_instance">
 				

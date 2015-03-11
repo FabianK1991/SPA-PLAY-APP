@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import models.core.ProcessInstance;
 import models.core.exceptions.ProcessInstanceNotFoundException;
+import models.util.parsing.ProcessParser;
 import models.util.sessions.Session;
 import models.util.sessions.User;
 import play.Logger;
@@ -137,7 +138,7 @@ public class DBHandler {
 					if(c.equals(ProcessInstance.class)){
 						ProcessInstance pi;
 						try {
-							pi = new ProcessInstance(rs.getString("process"));
+							pi = new ProcessInstance(ProcessParser.nsmi + rs.getString("process"));
 							pi.setUser(new User(rs.getString("user")));
 							
 							try {
@@ -191,10 +192,10 @@ public class DBHandler {
 				args.add(DBHandler.format.format(((Session) o).getTime()).toString());
 				args.add(DBHandler.format.format(((Session) o).getUpdate()).toString());
 			}else if(o instanceof ProcessInstance){
-				query = "INSERT INTO `user_process_instances` (`user`, `process`, `process_model) VALUES ('%s', '%s', %s)";
+				query = "INSERT INTO `user_process_instances` (`user`, `process`, `process_model`) VALUES ('%s', '%s', '%s')";
 				args.add(((ProcessInstance) o).getUser().getId());
-				args.add(((ProcessInstance) o).getId());
-				args.add(((ProcessInstance) o).getProcess());
+				args.add(((ProcessInstance) o).getRawId());
+				args.add(((ProcessInstance) o).getProcessModel().getRawId());
 			}
 			this.exec(query, args, false);
 			return true;

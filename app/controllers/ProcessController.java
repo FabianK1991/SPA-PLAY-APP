@@ -15,8 +15,10 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.process.activity_instances;
+import play.twirl.api.Html;
 import views.html.pages.main;
+import views.html.process.activity_instances;
+import views.html.ajax_concat;
 
 @With(ActionController.class)
 public class ProcessController extends Controller {
@@ -38,7 +40,7 @@ public class ProcessController extends Controller {
     	if (filepart != null) {Logger.debug(Parameters.get("process_name"));
     		ProcessModel.createFromBPMN_File(filepart, Parameters.get("process_name"));
     		
-    		return ok("File uploaded");
+    		return redirect(routes.Page.manageProcessModels());
     	}
     	else {
     		flash("error", "Missing file");
@@ -58,7 +60,7 @@ public class ProcessController extends Controller {
 		}
     	AuthController.getUser().createProcessInstance(processModel);
     	
-    	return ok(main.render());
+    	return ok(ajax_concat.render(main.render(), null, routes.Page.index().url()));
     }
     
     public static Result setCurrentProcess() {
@@ -70,7 +72,7 @@ public class ProcessController extends Controller {
 			processInstance = new ProcessInstance(processInstanceID);
 			AuthController.getUser().setCurrentProcess(processInstance);
 			
-			return ok(main.render());
+			return ok(ajax_concat.render(main.render(), null, routes.Page.index().url()));
 		} catch (ProcessInstanceNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

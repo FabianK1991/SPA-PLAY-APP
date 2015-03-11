@@ -179,6 +179,12 @@ var jsSet = function() {
         $('form:not(.upload)')
             .each(function() {
                 if ($(this).data('set') != 1) {
+                    if ($(this).parent().is('.process_selector')) {
+                        $('select', this).on('change', function() {
+                            console.log('auto-submit');
+                            $(this).submit();
+                        });
+                    }
                     $(this).on('submit', function(e) {
                         e.preventDefault();
                         

@@ -8,6 +8,8 @@ import java.util.List;
 import models.core.ProcessInstance;
 import models.core.ProcessModel;
 import models.util.db.DBHandler;
+import models.util.parsing.ProcessParser;
+import play.Logger;
 import play.mvc.Controller;
 import controllers.Application;
 import controllers.AuthController;
@@ -43,8 +45,9 @@ public class User {
 				e.printStackTrace();
 			}
 			try{
-				this.currentProcess = new ProcessInstance(filling.get(5));
+				this.currentProcess = new ProcessInstance(ProcessParser.nsmi + filling.get(5));
 			}catch (Exception e){
+				e.printStackTrace();
 			}
 			if(Session.o != null){
 				this.session = Session.o;
@@ -61,7 +64,8 @@ public class User {
 	}
 	
 	public void setCurrentProcess(ProcessInstance pi){
-		Application.db.update(this, "current_process", pi.getId());
+		this.currentProcess = pi;
+		Application.db.update(this, "current_process", pi.getRawId());
 	}
 	
 	
@@ -90,7 +94,7 @@ public class User {
 				
 			}
 			try{
-				this.currentProcess = new ProcessInstance(filling.get(5));
+				this.currentProcess = new ProcessInstance(ProcessParser.nsmi + filling.get(5));
 			}catch (Exception e){
 				if (AuthController.getSession() != null && AuthController.getUser() != null) {
 					this.getCurrentProcessInstance();

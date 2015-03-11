@@ -98,7 +98,40 @@ public class ProcessModel {
 	public int getNumInstances(){
 		String query = "SELECT COUNT(*) AS NUM  FROM user_process_instances WHERE `process_model` = '%s'";
 		ArrayList<String> args = new ArrayList<>();
-		args.add(this.getId());
+		args.add(this.getRawId());
+		ResultSet rs = Application.db.exec(query, args, true);
+		try {
+			rs.first();
+			return Integer.parseInt(rs.getString("num"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	/*
+	 * TODO for Christian ASAP
+	 */
+	public int getNumActiveInstances(){
+		String query = "SELECT COUNT(*) AS NUM  FROM user_process_instances WHERE `process_model` = '%s' AND `archive` = false";
+		ArrayList<String> args = new ArrayList<>();
+		args.add(this.getRawId());
+		ResultSet rs = Application.db.exec(query, args, true);
+		try {
+			rs.first();
+			return Integer.parseInt(rs.getString("num"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public int getNumArchivedInstances(){
+		String query = "SELECT COUNT(*) AS NUM  FROM user_process_instances WHERE `process_model` = '%s' AND `archive` = true";
+		ArrayList<String> args = new ArrayList<>();
+		args.add(this.getRawId());
 		ResultSet rs = Application.db.exec(query, args, true);
 		try {
 			rs.first();
@@ -117,7 +150,7 @@ public class ProcessModel {
 		ArrayList<ProcessInstance> resList = new ArrayList<ProcessInstance>();
 		String query = "SELECT * FROM user_process_instances WHERE `process_model` = '%s'";
 		ArrayList<String> args = new ArrayList<>();
-		args.add(this.getId());
+		args.add(this.getRawId());
 		ResultSet rs = Application.db.exec(query, args, true);
 		try {
 			while(rs.next()){
@@ -142,6 +175,10 @@ public class ProcessModel {
 	
 	public void setName(String name) {
 		this.pm.setName(name);
+	}
+	
+	public String getRawId() {
+		return this.getId().replace(ProcessParser.nsm, "");
 	}
 	
 	/*

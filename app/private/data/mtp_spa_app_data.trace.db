@@ -10328,3 +10328,23 @@ Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht ex
 The connection was not closed by the application and is garbage collected [90018-175]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
 	... 39 more
+03-11 05:01:38 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'http://masterteamproject/instance/1c9638050e20b0448b0a7ec0986beaa5e564', null)"
+Syntax error in SQL statement "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'http://masterteamproject/instance/1c9638050e20b0448b0a7ec0986beaa5e564', null)"; SQL statement:
+INSERT INTO `user_process_instances` (`user`, `process`, `process_model) VALUES ('1', 'http://masterteamproject/instance/1c9638050e20b0448b0a7ec0986beaa5e564', null) [42000-175]
+03-11 05:01:45 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'http://masterteamproject/instance/2f527cf70666e04d0c0b75b023d66486131d', null)"
+Syntax error in SQL statement "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'http://masterteamproject/instance/2f527cf70666e04d0c0b75b023d66486131d', null)"; SQL statement:
+INSERT INTO `user_process_instances` (`user`, `process`, `process_model) VALUES ('1', 'http://masterteamproject/instance/2f527cf70666e04d0c0b75b023d66486131d', null) [42000-175]
+03-11 05:02:04 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'http://masterteamproject/instance/83b87626044b304f310afb3089cc6b2ebe4b', null)"
+Syntax error in SQL statement "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'http://masterteamproject/instance/83b87626044b304f310afb3089cc6b2ebe4b', null)"; SQL statement:
+INSERT INTO `user_process_instances` (`user`, `process`, `process_model) VALUES ('1', 'http://masterteamproject/instance/83b87626044b304f310afb3089cc6b2ebe4b', null) [42000-175]
+03-11 05:06:56 jdbc[40]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', '1798ba490dbda0463d0a0ff0163be84b6452', a087ace1-5ddd-4aaf-af8e-9e78b0e2d844)"
+Syntax error in SQL statement "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', '1798ba490dbda0463d0a0ff0163be84b6452', a087ace1-5ddd-4aaf-af8e-9e78b0e2d844)"; SQL statement:
+INSERT INTO `user_process_instances` (`user`, `process`, `process_model) VALUES ('1', '1798ba490dbda0463d0a0ff0163be84b6452', a087ace1-5ddd-4aaf-af8e-9e78b0e2d844) [42000-175]
+03-11 05:07:35 jdbc[47]: exception
+org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'aafc939e0b78704e2b0a033068e832ffe7dd', 'a087ace1-5ddd-4aaf-af8e-9e78b0e2d844')"
+Syntax error in SQL statement "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'aafc939e0b78704e2b0a033068e832ffe7dd', 'a087ace1-5ddd-4aaf-af8e-9e78b0e2d844')"; SQL statement:
+INSERT INTO `user_process_instances` (`user`, `process`, `process_model) VALUES ('1', 'aafc939e0b78704e2b0a033068e832ffe7dd', 'a087ace1-5ddd-4aaf-af8e-9e78b0e2d844') [42000-175]

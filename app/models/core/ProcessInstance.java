@@ -239,6 +239,10 @@ public class ProcessInstance {
 	public void setId(String id) {
 		this.pi.setId(id);
 	}
+	
+	public String getRawId() {
+		return this.getId().replace(ProcessParser.nsmi, "");
+	}
 
 	public User getUser() {
 		return user;
