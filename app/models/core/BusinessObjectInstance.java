@@ -135,7 +135,7 @@ public class BusinessObjectInstance {
 	 * Should return null if the attribute is not set
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
-	public Object getAttributeValue(BusinessObjectAttribute attribute) throws ForbiddenBusinessObjectAttributeException {
+	public String getAttributeValue(BusinessObjectAttribute attribute) throws ForbiddenBusinessObjectAttributeException {
 		if(this.isAttributeAllowed(attribute.getName())){
 			return Application.sss.getBusinessObjectAttribute(this.databaseId, attribute);
 		}

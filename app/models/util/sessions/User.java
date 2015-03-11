@@ -34,8 +34,8 @@ public class User {
 		this.id = id;
 		ArrayList<String> filling = Application.db.select(this, true);
 		if(filling != null){
-			this.name = filling.get(1);
-			this.email = filling.get(2);
+			this.email = filling.get(1);
+			this.name = filling.get(2);
 			this.passwd = filling.get(3);
 			try {
 				this.time = DBHandler.format.parse(filling.get(4));
@@ -80,8 +80,8 @@ public class User {
 		ArrayList<String> filling = Application.db.select(this, false);
 		if(filling != null){
 			this.id = filling.get(0);
-			this.name = filling.get(1);
-			this.email = filling.get(2);
+			this.email = filling.get(1);
+			this.name = filling.get(2);
 			this.passwd = filling.get(3);
 			try {
 				this.time = DBHandler.format.parse(filling.get(4));

@@ -1,0 +1,55 @@
+@import core._
+
+@if(AuthController.check()) {
+	@defining(AuthController.getUser()) { user =>
+		
+	<div class="account_info">
+		
+		<img class="user_img" src="@routes.Assets.at("images/users/" + user.getId() + ".jpg")" alt="" />
+			
+		<div class="user_data">
+		
+			<div class="user_name">
+			
+				@user.getName()
+			
+			</div>
+			
+			<div class="user_email">
+			
+				@user.getEmail()
+			
+			</div>
+		
+		</div>
+		
+	</div>
+	
+    	<div class="nav">
+    	
+    		<ul>
+    		
+    			<li>
+    			
+    				<a href="">Manage Process Models</a>
+    			
+    			</li>
+    			
+    			<li>
+    			
+    				<a href="">Running Processes</a>
+    			
+    			</li>
+    		
+    		</ul>
+    		
+    		<div class="nav-label">
+    		
+    			Menu
+    		
+    		</div>
+    	
+    	</div>
+		
+	}
+}

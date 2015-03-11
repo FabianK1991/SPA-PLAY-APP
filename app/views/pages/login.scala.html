@@ -2,7 +2,7 @@
 @(email: String)
 
 @design("Login") {
-	<form class="login-form" action="@routes.AuthController.login" method="post" data-target="#general">
+	<form class="login-form" action="@routes.AuthController.login" method="post" data-target="#content|.auth_header">
 	
 		<input type="text" name="email" value="email" />
 		

@@ -3,6 +3,7 @@ package models.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.util.parsing.ProcessParser;
 import controllers.Application;
 
 public class BusinessObject {
@@ -135,12 +136,16 @@ public class BusinessObject {
 	public String[] getNeededAttributes() {
 		return neededAttributes;
 	}
-
+	
 	public void setNeededAttributes(String[] neededAttributes) {
 		this.neededAttributes = neededAttributes;
 	}
 	
 	public String getId(){
 		return this.id;
+	}
+	
+	public String getRawId() {
+		return this.getId().replace(ProcessParser.nsm, "");
 	}
 }

@@ -1,0 +1,25 @@
+@import core._
+@(content: Html)
+
+	<div id="header">
+    			
+    	<div class="auth_header">
+    	
+    		@auth_header()
+    	
+    	</div>
+    	
+    	<a class="logo" href="/">
+    	
+    		<img class="logo_img" src="@routes.Assets.at("images/logo.png")" alt="Smart PG" />
+    		<img class="logo_img-large" src="@routes.Assets.at("images/logo-large.png")" alt="Smart PG" />
+    	
+    	</a>
+    
+    </div>
+    
+    <div id="content">
+	
+		@content
+	
+	</div>

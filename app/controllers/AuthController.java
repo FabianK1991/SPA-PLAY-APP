@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.Date;
 
+import models.core.ProcessModel;
+import models.core.exceptions.ProcessModelNotFoundException;
 import models.util.db.DBHandler;
 import models.util.http.Parameters;
 import models.util.sessions.Session;
@@ -12,6 +14,8 @@ import play.mvc.Http.Cookie;
 import play.mvc.Result;
 import play.mvc.With;
 import views.html.pages.main;
+import views.html.ajax_concat;
+import views.html.auth_header;
 
 @With(ActionController.class)
 public class AuthController extends Controller {
@@ -62,7 +66,7 @@ public class AuthController extends Controller {
 			
 			if(u.createSession(Parameters.get("passwd"))){
 				AuthController.s = u.getSession();
-				return ok(main.render());
+				return ok(ajax_concat.render(main.render(), auth_header.render()));
 			}
 		}
 		return badRequest("Login failed!");

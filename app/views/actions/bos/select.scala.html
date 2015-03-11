@@ -19,7 +19,7 @@
 				
 					@for(attr <- boAttributes) {
 					
-						<td>@attr.replaceAll("([a-z0-9])([A-Z])","$1 $2")</td>
+						<td>@attr.getName().replaceAll("([a-z0-9])([A-Z])","$1 $2")</td>
 					
 					}
 					
@@ -35,7 +35,7 @@
 					
 						@for(attr <- boAttributes) {
 						
-							<td>@*@boInstance.getAttributeValue(attr)*@</td>
+							<td>@boInstance.getAttributeValue(attr)</td>
 						
 						}
 					

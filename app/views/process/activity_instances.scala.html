@@ -58,10 +58,11 @@
                                         @activity.getName()
                                     
                                     </h2>
+                                	
+                                    @defining(activity.getBusinessObjects()) { businessObjects =>
                                     
-                                    <div class="content">
-                                
-                                        @defining(activity.getBusinessObjects()) { businessObjects =>
+                                    	<div class="content" data-business_objects="@for(bo <- businessObjects){@bo.getRawId(),}">
+                                    	
                                             @activity.getAction() match {
                                                 case "select" 	=> 	{@actions.bos.select(activity, businessObjects)}
                                                 case "update" 	=> 	{@actions.bos.update(activity, businessObjects)}
@@ -70,11 +71,12 @@
                                                 case _ 			=>	{@actions.bos._none(activity)}
                                             }
                                             @documents.viewer()
-                                        }
-                                
-                                        <input type="submit" value="Next">
+                                			
+                                        	<input type="submit" value="Next">
                                         
-                                    </div>
+                                    	</div>
+                                    
+                                    }
                                 
                                 </div>
                         

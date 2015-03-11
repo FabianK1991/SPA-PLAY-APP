@@ -92,6 +92,20 @@ public class ProcessModel {
 	}
 	
 	/*
+	 * TODO for Christian ASAP
+	 */
+	public int getNumInstances(){
+		return 0;
+	}
+	
+	/*
+	 * TODO for Fabi
+	 */
+	public List<ProcessInstance> getInstances(){
+		return null;
+	}
+	
+	/*
 	 * Returns the name of this ProcessModel
 	 */
 	public String getName() {

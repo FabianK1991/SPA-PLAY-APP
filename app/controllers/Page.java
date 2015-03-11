@@ -6,6 +6,7 @@ import play.mvc.Result;
 import views.html.pages.login;
 import views.html.pages.main;
 import views.html.pages.add_model;
+import views.html.pages.manage_models;
 
 @With(ActionController.class)
 public class Page extends Controller {
@@ -20,6 +21,10 @@ public class Page extends Controller {
     
     public static Result addProcessModel() {
         return ok(add_model.render());
+    }
+    
+    public static Result manageProcessModels() {
+        return ok(manage_models.render());
     }
 
 }
