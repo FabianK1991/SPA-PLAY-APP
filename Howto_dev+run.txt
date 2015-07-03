@@ -1,0 +1,7 @@
+1) Download and Unpack "Typesafe Activator"
+2) Run "Typesafe Activator"
+3) Add an existing project by selecting the main folder of this application (where this file is contained in)
+4) Open the project in "Typesafe Activator" (might happen automatically)
+5) Run the application by pressing the Run-icon in the UI of "Typesafe Activator"
+
+Changes made by Eclipse or another IDE will be compiled automatically with the next HTTP request. "Typesafe Activator" provides a browser-based IDE for quick changes. Logs will be displayed in "Typesafe Activator" unter "Run" while compilation and dependency logs will also be shown in "Build". Unit and integration tests can be executed via "Test".

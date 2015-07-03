@@ -1,0 +1,25 @@
+New log file opened at Sat Jul 04 00:18:47 CEST 2015 by 7424@LG-Lenovo
+Taking next connection to: 55285
+New client attempting to connect on port: 55286-55285
+  Address = /192.168.1.102:55285
+This client on port 55286 has uuid c2f90206-c666-44a0-8699-4b5372a39458 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-c2f90206-c666-44a0-8699-4b5372a39458
+Taking next connection to: 55285
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 55285
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 55285
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 55285
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 55285
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 55285
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 55285

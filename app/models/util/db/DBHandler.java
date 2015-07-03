@@ -39,7 +39,7 @@ public class DBHandler {
 			if(this.connection != null && this.connection.isValid(0)){
 				return true;
 			}
-			this.connection = DB.getConnection();
+			this.connection = DB.getConnection("app_h2");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

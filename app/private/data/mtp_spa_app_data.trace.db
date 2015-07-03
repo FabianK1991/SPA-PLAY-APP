@@ -10348,3 +10348,47 @@ INSERT INTO `user_process_instances` (`user`, `process`, `process_model) VALUES 
 org.h2.jdbc.JdbcSQLException: Syntax Fehler in SQL Befehl "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'aafc939e0b78704e2b0a033068e832ffe7dd', 'a087ace1-5ddd-4aaf-af8e-9e78b0e2d844')"
 Syntax error in SQL statement "INSERT INTO `user_process_instances` (`user`, `process`, [*]`process_model) VALUES ('1', 'aafc939e0b78704e2b0a033068e832ffe7dd', 'a087ace1-5ddd-4aaf-af8e-9e78b0e2d844')"; SQL statement:
 INSERT INTO `user_process_instances` (`user`, `process`, `process_model) VALUES ('1', 'aafc939e0b78704e2b0a033068e832ffe7dd', 'a087ace1-5ddd-4aaf-af8e-9e78b0e2d844') [42000-175]
+07-03 22:08:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Feld "DUMP.SQL" nicht gefunden
+Column "DUMP.SQL" not found; SQL statement:
+script to dump.sql [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:144)
+	at org.h2.command.dml.ScriptBase.getFileName(ScriptBase.java:90)
+	at org.h2.command.dml.ScriptBase.deleteStore(ScriptBase.java:108)
+	at org.h2.command.dml.ScriptCommand.query(ScriptCommand.java:155)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:91)
+	at org.h2.command.Command.executeQuery(Command.java:196)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:177)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+07-03 22:09:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Feld "DUMP" nicht gefunden
+Column "DUMP" not found; SQL statement:
+script to dump [42122-175]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:332)
+	at org.h2.message.DbException.get(DbException.java:172)
+	at org.h2.message.DbException.get(DbException.java:149)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:144)
+	at org.h2.command.dml.ScriptBase.getFileName(ScriptBase.java:90)
+	at org.h2.command.dml.ScriptBase.deleteStore(ScriptBase.java:108)
+	at org.h2.command.dml.ScriptCommand.query(ScriptCommand.java:155)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:91)
+	at org.h2.command.Command.executeQuery(Command.java:196)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:177)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:156)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1321)
+	at org.h2.server.web.WebApp.query(WebApp.java:1010)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:972)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:959)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
