@@ -83,14 +83,17 @@ public class BusinessObjectServer {
 	 * @return A list of attribute ids
 	 */
 	public List<String> getBusinessObjectAttributes(String id){
+		List<String> resultList = new ArrayList<String>();
+		
+		/*TODO: Fabi
+		
 		Application.db.connect();
 		
-		String query = "SELECT attribute FROM business_object_attributes WHERE business_object = '%s' ORDER BY `order` ASC";
+		String query = "SELECT attribute FROM business_object_properties WHERE business_object = '%s' ORDER BY `order` ASC";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(getBusinessObjectDatabaseId(id));
 		
-		List<String> resultList = new ArrayList<String>();
 		ResultSet rs = Application.db.exec(query, args, true);
 		
 		try {
@@ -100,11 +103,13 @@ public class BusinessObjectServer {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 		return resultList;
 	}
 	
 	public List<BusinessObjectInstance> getAllBusinessObjectInstances(BusinessObject bo){
+		ArrayList<BusinessObjectInstance> returnList = new ArrayList<BusinessObjectInstance>();
+		/*TODO: Fabi
 		String sapId = Application.sss.getBusinessObjectDatabaseId(bo.getSAPId());
 		
 		ArrayList<String> args = new ArrayList<String>();
@@ -113,7 +118,6 @@ public class BusinessObjectServer {
 		String query = "SELECT * FROM `business_object_instance_attributes` WHERE `attribute` = '66' AND `value` = '%s'";
 		
 		ResultSet rs = Application.db.exec(query, args, true);
-		ArrayList<BusinessObjectInstance> returnList = new ArrayList<BusinessObjectInstance>();
 		
 		try {
 			while(rs.next()){
@@ -127,7 +131,7 @@ public class BusinessObjectServer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+*/
 		return returnList;
 	}
 	
@@ -173,6 +177,7 @@ public class BusinessObjectServer {
 	 * @return the value of the attribute
 	 */
 	public String getBusinessObjectAttribute(int id, BusinessObjectAttribute boa){
+		/*TODO: Fabi
 		Application.db.connect();
 		
 		String query = "SELECT value FROM business_object_instance_attributes WHERE bo_instance = '%s' AND attribute = '%s'";
@@ -190,7 +195,7 @@ public class BusinessObjectServer {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 		return null;
 	}
 	
@@ -252,6 +257,7 @@ public class BusinessObjectServer {
 	 * @return
 	 */
 	public void deleteBusinessObjectInstance(int id){
+		/*TODO: Fabi
 		Application.db.connect();
 		
 		String query = "DELETE FROM business_object_instances WHERE id = '%s'";
@@ -260,5 +266,6 @@ public class BusinessObjectServer {
 		args.add(String.valueOf(id));
 		
 		Application.db.exec(query, args, false);
+		*/
 	}
 }

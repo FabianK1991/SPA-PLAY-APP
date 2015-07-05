@@ -1,4 +1,4 @@
-package models.util.sessions;
+package models.util.session;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -17,12 +17,13 @@ import controllers.AuthController;
 public class User {
 	
 	private String id;
-	private String name;
+	private String role;
 	private String email;
+	private String name;
 	private String passwd;
 	private Date time;
 	private Session session;
-	private ProcessInstance currentProcess;
+	private ProcessInstance currentProcessInstance;
 	
 	
 	/**
@@ -36,16 +37,17 @@ public class User {
 		this.id = id;
 		ArrayList<String> filling = Application.db.select(this, true);
 		if(filling != null){
-			this.email = filling.get(1);
-			this.name = filling.get(2);
-			this.passwd = filling.get(3);
+			this.role = filling.get(1);
+			this.email = filling.get(2);
+			this.name = filling.get(3);
+			this.passwd = filling.get(4);
 			try {
-				this.time = DBHandler.format.parse(filling.get(4));
+				this.time = DBHandler.format.parse(filling.get(5));
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 			try{
-				this.currentProcess = new ProcessInstance(ProcessParser.nsmi + filling.get(5));
+				this.currentProcessInstance = new ProcessInstance(ProcessParser.nsmi + filling.get(6));
 			}catch (Exception e){
 				e.printStackTrace();
 			}
@@ -63,8 +65,8 @@ public class User {
 		this.name = name;
 	}
 	
-	public void setCurrentProcess(ProcessInstance pi){
-		this.currentProcess = pi;
+	public void setCurrentProcessInstance(ProcessInstance pi){
+		this.currentProcessInstance = pi;
 		Application.db.update(this, "current_process", pi.getRawId());
 	}
 	
@@ -84,17 +86,18 @@ public class User {
 		ArrayList<String> filling = Application.db.select(this, false);
 		if(filling != null){
 			this.id = filling.get(0);
-			this.email = filling.get(1);
-			this.name = filling.get(2);
-			this.passwd = filling.get(3);
+			this.role = filling.get(1);
+			this.email = filling.get(2);
+			this.name = filling.get(3);
+			this.passwd = filling.get(4);
 			try {
-				this.time = DBHandler.format.parse(filling.get(4));
+				this.time = DBHandler.format.parse(filling.get(5));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				
 			}
 			try{
-				this.currentProcess = new ProcessInstance(ProcessParser.nsmi + filling.get(5));
+				this.currentProcessInstance = new ProcessInstance(ProcessParser.nsmi + filling.get(6));
 			}catch (Exception e){
 				if (AuthController.getSession() != null && AuthController.getUser() != null) {
 					this.getCurrentProcessInstance();
@@ -175,18 +178,18 @@ public class User {
 	}
 	
 	public ProcessInstance getCurrentProcessInstance() {
-		if (this.currentProcess == null) {
+		if (this.currentProcessInstance == null) {
 			List<ProcessInstance> processInstances = getProcessInstances();
 			
 			if (processInstances.size() > 0) {
 				ProcessInstance firstProcess = processInstances.get(0);
 				
-				setCurrentProcess(firstProcess);
+				setCurrentProcessInstance(firstProcess);
 				
 				return firstProcess;
 			}
 		}
-		return this.currentProcess;
+		return this.currentProcessInstance;
 	}
 	
 	/*

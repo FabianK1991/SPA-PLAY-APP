@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.process.ProcessInstance;
 import models.core.util.parsing.ProcessParser;
-import models.util.sessions.Session;
-import models.util.sessions.User;
+import models.util.session.Session;
+import models.util.session.User;
 import play.Logger;
 import play.db.DB;
 import controllers.Application;
@@ -126,9 +126,9 @@ public class DBHandler {
 				if(mode){
 					User u = AuthController.getUser();
 					String userid = u.getId();
-					query = "SELECT * FROM `user_process_instances` WHERE `user` = '"+ userid +"' ORDER BY `time`";
+					query = "SELECT * FROM `process_instances` WHERE `user` = '"+ userid +"' ORDER BY `time`";
 				}else{
-					query = "SELECT * FROM `user_process_instances` ORDER BY `time`";
+					query = "SELECT * FROM `process_instances` ORDER BY `time`";
 				}
 				
 			}
@@ -149,7 +149,7 @@ public class DBHandler {
 							}
 							reObj.add(pi);
 						} catch (ProcessInstanceNotFoundException e1) {
-							this.exec("DELETE FROM `user_process_instances` WHERE `process` = '" + rs.getString("process") + "'", null, false);
+							this.exec("DELETE FROM `process_instances` WHERE `process` = '" + rs.getString("process") + "'", null, false);
 						}
 					}
 				}
@@ -192,7 +192,7 @@ public class DBHandler {
 				args.add(DBHandler.format.format(((Session) o).getTime()).toString());
 				args.add(DBHandler.format.format(((Session) o).getUpdate()).toString());
 			}else if(o instanceof ProcessInstance){
-				query = "INSERT INTO `user_process_instances` (`user`, `process`, `process_model`) VALUES ('%s', '%s', '%s')";
+				query = "INSERT INTO `process_instances` (`user`, `process`, `process_model`) VALUES ('%s', '%s', '%s')";
 				args.add(((ProcessInstance) o).getUser().getId());
 				args.add(((ProcessInstance) o).getRawId());
 				args.add(((ProcessInstance) o).getProcessModel().getRawId());
@@ -278,7 +278,7 @@ public class DBHandler {
 		try {
 			Statement stmt = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			
-			Logger.debug(secureQuery.toString());
+			Logger.info(secureQuery.toString());
 			
 			if(read){
 				ResultSet rs = stmt.executeQuery(secureQuery.toString());
@@ -289,7 +289,7 @@ public class DBHandler {
 			}
 
 		} catch (Exception e) {
-			Logger.debug(e.toString());
+			Logger.info(e.toString());
 			return null;
 		}
 	}

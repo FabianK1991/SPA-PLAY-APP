@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import play.Logger;
 import controllers.Application;
 import controllers.AuthController;
 import models.spa.api.process.buildingblock.Flow;
@@ -20,7 +21,7 @@ import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.core.util.parsing.ProcessParser;
 import models.util.db.DBHandler;
-import models.util.sessions.User;
+import models.util.session.User;
 
 public class ProcessInstance {
 	

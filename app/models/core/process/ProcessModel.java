@@ -98,7 +98,7 @@ public class ProcessModel {
 	 * TODO for Christian ASAP
 	 */
 	public int getNumInstances(){
-		String query = "SELECT COUNT(*) AS NUM  FROM user_process_instances WHERE `process_model` = '%s'";
+		String query = "SELECT COUNT(*) AS NUM  FROM process_instances WHERE `process_model` = '%s'";
 		ArrayList<String> args = new ArrayList<>();
 		args.add(this.getRawId());
 		ResultSet rs = Application.db.exec(query, args, true);
@@ -116,7 +116,7 @@ public class ProcessModel {
 	 * TODO for Christian ASAP
 	 */
 	public int getNumActiveInstances(){
-		String query = "SELECT COUNT(*) AS NUM  FROM user_process_instances WHERE `process_model` = '%s' AND `archive` = false";
+		String query = "SELECT COUNT(*) AS NUM  FROM process_instances WHERE `process_model` = '%s' AND `status` = 'running'";
 		ArrayList<String> args = new ArrayList<>();
 		args.add(this.getRawId());
 		ResultSet rs = Application.db.exec(query, args, true);
@@ -131,7 +131,7 @@ public class ProcessModel {
 	}
 	
 	public int getNumArchivedInstances(){
-		String query = "SELECT COUNT(*) AS NUM  FROM user_process_instances WHERE `process_model` = '%s' AND `archive` = true";
+		String query = "SELECT COUNT(*) AS NUM  FROM process_instances WHERE `process_model` = '%s' AND `status` = 'completed'";
 		ArrayList<String> args = new ArrayList<>();
 		args.add(this.getRawId());
 		ResultSet rs = Application.db.exec(query, args, true);
@@ -150,7 +150,7 @@ public class ProcessModel {
 	 */
 	public List<ProcessInstance> getInstances(){
 		ArrayList<ProcessInstance> resList = new ArrayList<ProcessInstance>();
-		String query = "SELECT * FROM user_process_instances WHERE `process_model` = '%s'";
+		String query = "SELECT * FROM process_instances WHERE `process_model` = '%s'";
 		ArrayList<String> args = new ArrayList<>();
 		args.add(this.getRawId());
 		ResultSet rs = Application.db.exec(query, args, true);
@@ -339,52 +339,54 @@ public class ProcessModel {
 	}
 	
 	private void loadBusinessObjectDataAssociations(){
-		Application.db.connect();
-		String query = "SELECT * FROM data_association_business_objects WHERE process_model_ref = '%s'";
-		
-		ArrayList<String> args = new ArrayList<String>();
-		
-		args.add(this.getId());
-		
-		ResultSet rs = Application.db.exec(query, args, true);
-		
-		try {
-			if(rs.first()){
-				do{
-					this.dataAssoc.add(new DataAssociation(rs.getString("activity_ref"), rs.getString("bo_ref")));
-					
-					BusinessObject bo = this.getBoById(rs.getString("bo_ref"));
-					
-					if( bo == null ){
-						bo = new BusinessObject(rs.getString("bo_ref"));
-						
-						if( rs.getString("business_object").length() > 0 ){
-							bo.setSAPId(rs.getString("business_object"));
-						}
-						if( rs.getString("action").length() > 0 ){
-							bo.setAction(rs.getString("action"));
-						}
-						if( rs.getString("min").length() > 0 ){
-							bo.setMin(rs.getString("min"));
-						}
-						if( rs.getString("max").length() > 0 ){
-							bo.setMax(rs.getString("max"));
-						}/*
-						if( rs.getString("BoName").length() > 0 ){
-							bo.setName(rs.getString("BoName"));
-						}*/
-						if( rs.getString("req_attributes").length() > 0 ){
-							bo.setNeededAttributes(rs.getString("req_attributes").split(","));
-						}
-						
-						this.bos.add(bo);
-					}
-				} while(rs.next());
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return;
-		}
+		return;
+		//TODO: Fabi
+//		Application.db.connect();
+//		String query = "SELECT * FROM data_association_business_objects WHERE process_model_ref = '%s'";
+//		
+//		ArrayList<String> args = new ArrayList<String>();
+//		
+//		args.add(this.getId());
+//		
+//		ResultSet rs = Application.db.exec(query, args, true);
+//		
+//		try {
+//			if(rs.first()){
+//				do{
+//					this.dataAssoc.add(new DataAssociation(rs.getString("activity_ref"), rs.getString("bo_ref")));
+//					
+//					BusinessObject bo = this.getBoById(rs.getString("bo_ref"));
+//					
+//					if( bo == null ){
+//						bo = new BusinessObject(rs.getString("bo_ref"));
+//						
+//						if( rs.getString("business_object").length() > 0 ){
+//							bo.setSAPId(rs.getString("business_object"));
+//						}
+//						if( rs.getString("action").length() > 0 ){
+//							bo.setAction(rs.getString("action"));
+//						}
+//						if( rs.getString("min").length() > 0 ){
+//							bo.setMin(rs.getString("min"));
+//						}
+//						if( rs.getString("max").length() > 0 ){
+//							bo.setMax(rs.getString("max"));
+//						}/*
+//						if( rs.getString("BoName").length() > 0 ){
+//							bo.setName(rs.getString("BoName"));
+//						}*/
+//						if( rs.getString("req_attributes").length() > 0 ){
+//							bo.setNeededAttributes(rs.getString("req_attributes").split(","));
+//						}
+//						
+//						this.bos.add(bo);
+//					}
+//				} while(rs.next());
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			return;
+//		}
 	}
 	
 	/* TABLE FORMAT CREATE TABLE DataAssociationBusinessObjects (

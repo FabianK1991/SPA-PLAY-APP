@@ -70,7 +70,7 @@ public class ProcessController extends Controller {
     	
 		try {
 			processInstance = new ProcessInstance(processInstanceID);
-			AuthController.getUser().setCurrentProcess(processInstance);
+			AuthController.getUser().setCurrentProcessInstance(processInstance);
 			
 			return ok(ajax_concat.render(main.render(), null, routes.Page.index().url()));
 		} catch (ProcessInstanceNotFoundException e) {

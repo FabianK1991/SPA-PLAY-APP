@@ -1,10 +1,11 @@
-package models.util.sessions;
+package models.util.session;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import play.Logger;
 import controllers.Application;
 
 public class Session {
@@ -28,6 +29,7 @@ public class Session {
 		Session.o = this;
 		this.id = id;
 		ArrayList<String> filling = Application.db.select(this, true);
+		
 		if(filling != null){
 			this.user = new User(filling.get(1));
 			this.key = filling.get(2);
