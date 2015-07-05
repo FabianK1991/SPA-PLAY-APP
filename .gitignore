@@ -1,10 +1,12 @@
 logs
 project/project
 project/target
+app-2.11
 target
 tmp
 .history
 dist
+/.sbtserver
 /.idea
 /*.iml
 /out
@@ -14,13 +16,5 @@ dist
 /RUNNING_PID
 /.settings
 /bin/
-/app/private/bdwp.txt
-app/models/util/db/DBHandler.java
-app/private/data/mtp_spa_app_data.trace.db
-<<<<<<< HEAD
-=======
-app/private/data/mtp_spa_app_data.lock.db
->>>>>>> origin/master
-app/private/data/mtp_spa_app_data.trace.db
-app/private/data/mtp_spa_app_data.trace.db
-app/private/data/mtp_spa_app_data.trace.db
+data/h2database/mtp_spa_app_data.trace.db
+data/h2database/mtp_spa_app_data.lock.db

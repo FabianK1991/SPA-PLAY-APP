@@ -2,8 +2,8 @@ package controllers;
 
 import java.util.Date;
 
-import models.core.ProcessModel;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.core.process.ProcessModel;
 import models.util.db.DBHandler;
 import models.util.http.Parameters;
 import models.util.sessions.Session;

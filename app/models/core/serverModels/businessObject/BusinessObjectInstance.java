@@ -1,4 +1,4 @@
-package models.core;
+package models.core.serverModels.businessObject;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +9,9 @@ import java.util.UUID;
 
 import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.exceptions.ForbiddenBusinessObjectAttributeException;
-import models.util.parsing.ProcessParser;
+import models.core.process.ActivityInstance;
+import models.core.serverModels.document.Document;
+import models.core.util.parsing.ProcessParser;
 import controllers.Application;
 
 public class BusinessObjectInstance {

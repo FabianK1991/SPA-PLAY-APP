@@ -1,4 +1,4 @@
-package models.core;
+package models.core.process;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import models.core.DataAssociation;
 import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
-import models.util.parsing.ProcessParser;
+import models.core.serverModels.businessObject.BusinessObject;
+import models.core.util.parsing.ProcessParser;
 
 import org.apache.commons.io.FileUtils;
 

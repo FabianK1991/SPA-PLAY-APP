@@ -1,9 +1,9 @@
-package models.core;
+package models.core.serverModels.businessObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import models.util.parsing.ProcessParser;
+import models.core.util.parsing.ProcessParser;
 import controllers.Application;
 
 public class BusinessObject {

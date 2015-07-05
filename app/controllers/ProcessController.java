@@ -2,13 +2,13 @@ package controllers;
 
 import java.util.ArrayList;
 
-import models.core.Activity;
-import models.core.ProcessInstance;
-import models.core.ProcessModel;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.core.process.Activity;
+import models.core.process.ProcessInstance;
+import models.core.process.ProcessModel;
+import models.core.util.parsing.ProcessParser;
 import models.util.http.Parameters;
-import models.util.parsing.ProcessParser;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;

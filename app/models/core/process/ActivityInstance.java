@@ -1,4 +1,4 @@
-package models.core;
+package models.core.process;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,9 @@ import java.util.UUID;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
-import models.util.parsing.ProcessParser;
+import models.core.serverModels.businessObject.BusinessObject;
+import models.core.serverModels.businessObject.BusinessObjectInstance;
+import models.core.util.parsing.ProcessParser;
 
 public class ActivityInstance {
 	// reference to the activity

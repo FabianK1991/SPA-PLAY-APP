@@ -1,12 +1,13 @@
-package models.core;
+package models.core.process;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import play.Logger;
+import models.core.serverModels.businessObject.BusinessObject;
+import models.core.util.parsing.ProcessParser;
 import models.spa.api.process.buildingblock.*;
-import models.util.parsing.ProcessParser;
 
 @SuppressWarnings("unused")
 public class Activity {

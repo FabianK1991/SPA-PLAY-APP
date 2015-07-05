@@ -8,9 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import models.core.ProcessInstance;
 import models.core.exceptions.ProcessInstanceNotFoundException;
-import models.util.parsing.ProcessParser;
+import models.core.process.ProcessInstance;
+import models.core.util.parsing.ProcessParser;
 import models.util.sessions.Session;
 import models.util.sessions.User;
 import play.Logger;
@@ -39,7 +39,7 @@ public class DBHandler {
 			if(this.connection != null && this.connection.isValid(0)){
 				return true;
 			}
-			this.connection = DB.getConnection("app_h2");
+			this.connection = DB.getConnection("app_mysql");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

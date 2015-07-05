@@ -1,4 +1,4 @@
-package models.core;
+package models.core.serverModels.document;
 
 import java.io.File;
 

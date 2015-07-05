@@ -1,4 +1,4 @@
-package models.core;
+package models.core.process;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,8 +18,8 @@ import models.spa.api.process.buildingblock.Flow;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.core.util.parsing.ProcessParser;
 import models.util.db.DBHandler;
-import models.util.parsing.ProcessParser;
 import models.util.sessions.User;
 
 public class ProcessInstance {

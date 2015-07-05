@@ -3,15 +3,15 @@ package controllers;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import models.core.servers.BusinessObjectServer;
 import models.util.db.DBHandler;
-import models.util.db.SAPServerSimulator;
 import play.mvc.Controller;
 import play.mvc.Result;
 
 public class Application extends Controller {
 	
 	public static DBHandler db = new DBHandler();
-	public static SAPServerSimulator sss = new SAPServerSimulator();
+	public static BusinessObjectServer sss = new BusinessObjectServer();
 
     public static String sha1(String input) {
     	if (input == null) {

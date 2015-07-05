@@ -1,40 +1,25 @@
-New log file opened at Sun Jul 05 15:08:57 CEST 2015 by 9152@LG-Lenovo
-Taking next connection to: 64289
-New client attempting to connect on port: 64290-64289
-  Address = /192.168.1.102:64289
-This client on port 64290 has uuid ffd37b85-d462-4513-bff3-01f1f2201a05 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-ffd37b85-d462-4513-bff3-01f1f2201a05
-Taking next connection to: 64289
-New client attempting to connect on port: 64349-64289
-  Address = /192.168.1.102:64289
-Handshake exception on socket: 64349
+New log file opened at Sun Jul 05 20:11:02 CEST 2015 by 15352@LG-Lenovo
+Taking next connection to: 49900
+New client attempting to connect on port: 49901-49900
+  Address = /192.168.1.105:49900
+This client on port 49901 has uuid 83dda9dd-1d88-49aa-a795-71998fcb5f34 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-83dda9dd-1d88-49aa-a795-71998fcb5f34
+Taking next connection to: 49900
+New client attempting to connect on port: 49902-49900
+  Address = /192.168.1.105:49900
+Handshake exception on socket: 49902
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
 	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
+Caused by: java.io.EOFException
 	at java.io.DataInputStream.readInt(Unknown Source)
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 64289
-New client attempting to connect on port: 64350-64289
-  Address = /192.168.1.102:64289
-This client on port 64350 has uuid 5bf3658e-cac0-4629-ad4a-060a62f0e7fe configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-ffd37b85-d462-4513-bff3-01f1f2201a05, play-fork-run-5bf3658e-cac0-4629-ad4a-060a62f0e7fe
-Taking next connection to: 64289
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 64289
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 64289
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 64289
+Taking next connection to: 49900
+New client attempting to connect on port: 49903-49900
+  Address = /192.168.1.105:49900
+This client on port 49903 has uuid c6bcf07d-51d4-4e94-ace3-27fd04cad8f9 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-83dda9dd-1d88-49aa-a795-71998fcb5f34, activator-c6bcf07d-51d4-4e94-ace3-27fd04cad8f9
+Taking next connection to: 49900

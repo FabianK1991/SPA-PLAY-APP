@@ -1,4 +1,4 @@
-package models.core;
+package models.core.serverModels.businessObject;
 
 import controllers.Application;
 

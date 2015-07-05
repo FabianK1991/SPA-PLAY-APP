@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import models.core.ProcessInstance;
-import models.core.ProcessModel;
+import models.core.process.ProcessInstance;
+import models.core.process.ProcessModel;
+import models.core.util.parsing.ProcessParser;
 import models.util.db.DBHandler;
-import models.util.parsing.ProcessParser;
 import play.Logger;
 import play.mvc.Controller;
 import controllers.Application;

@@ -1,10 +1,10 @@
-package models.core;
+package models.core.process;
 
 import java.util.HashMap;
 import java.util.Set;
 
+import models.core.util.parsing.ProcessParser;
 import models.spa.api.process.buildingblock.Flow;
-import models.util.parsing.ProcessParser;
 
 
 public class Gateway {

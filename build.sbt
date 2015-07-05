@@ -1,6 +1,6 @@
 name := "Smart Process API - PlayApp"
 
-version := "0.0.2"
+version := "0.0.3"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 

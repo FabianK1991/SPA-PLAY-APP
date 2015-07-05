@@ -1,4 +1,4 @@
-package models.util.parsing;
+package models.core.util.parsing;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,12 +12,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import models.core.Activity;
-import models.core.BusinessObject;
 import models.core.DataAssociation;
-import models.core.ProcessModel;
 import models.core.exceptions.IncorrectNumberOfProcessModelsExeption;
 import models.core.exceptions.ProcessModelNotFoundException;
+import models.core.process.Activity;
+import models.core.process.ProcessModel;
+import models.core.serverModels.businessObject.BusinessObject;
 import models.spa.api.process.buildingblock.Event;
 import models.spa.api.process.buildingblock.Flow;
 import models.spa.api.process.buildingblock.Gateway;

@@ -1,4 +1,4 @@
-@import core._
+@import core.process._
 @(processInstance: ProcessInstance = AuthController.getUser().getCurrentProcessInstance())
 
 @defining(processInstance.getCurrentActivities()) { activityInstances =>
