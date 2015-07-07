@@ -14,6 +14,8 @@ import models.core.serverModels.document.Document;
 import models.core.util.parsing.ProcessParser;
 import controllers.Application;
 
+import java.util.HashMap;
+
 public class BusinessObjectInstance {
 	private ActivityInstance ai;
 	private BusinessObject bo;
@@ -77,6 +79,16 @@ public class BusinessObjectInstance {
 	public BusinessObjectInstance(String databaseId, BusinessObject bo) throws BusinessObjectInstanceNotFoundException {
 		this.bo = bo;
 		this.databaseId = Integer.parseInt(databaseId);
+	}
+	
+	private String bo_name;
+	private String bo_id;
+	private HashMap<String,String> values;
+	
+	public BusinessObjectInstance(String bo_name, String bo_id, HashMap<String,String> values){
+		this.bo_name = bo_name;
+		this.bo_id = bo_id;
+		this.values = values;
 	}
 	
 	/*

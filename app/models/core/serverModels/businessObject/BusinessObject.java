@@ -5,6 +5,9 @@ import java.util.List;
 
 import models.core.util.parsing.ProcessParser;
 import controllers.Application;
+import models.core.serverModels.businessObject.BusinessObjectInstance;
+import java.util.HashMap;
+import play.Logger;
 
 public class BusinessObject {
 	private String id;
@@ -17,6 +20,44 @@ public class BusinessObject {
 	private String name;
 	
 	private String[] neededAttributes;
+	
+	public static List<BusinessObjectInstance> getAll(String bo) throws Exception{
+		List<String> properties = Application.sss.getBusinessObjectProperties(bo);
+		List<String> properties_names = Application.sss.getBusinessObjectPropertiesNames(bo);
+		
+		ArrayList<List<String>> valueList = new ArrayList<List<String>>();
+		
+		for(int i=0;i<properties.size();i++){
+			valueList.add(Application.sss.getBusinessObjectProperty(properties.get(i)));
+		}
+		
+		// now create the processinstances
+		List<BusinessObjectInstance> pis = new ArrayList<BusinessObjectInstance>();
+		
+		// loop over value entries
+		for(int i=0;i<valueList.get(0).size();i++){
+			HashMap<String,String> values = new HashMap<String,String>();
+			
+			// loop over properties
+			for(int j=0;j<valueList.size();j++){
+				values.put(properties_names.get(j), valueList.get(j).get(i));
+			}
+			
+			for (String name: values.keySet()){
+	            String key =name.toString();
+	            String value = values.get(name).toString();  
+	            Logger.info(key + " " + value);  
+			} 
+			
+			pis.add(new BusinessObjectInstance(bo, properties_names.get(0), values));
+		}
+		
+		return pis;
+	}
+	
+	public static List<String> getBusinessObjectProperties(String bo){
+		return Application.sss.getBusinessObjectPropertiesNames(bo);
+	}
 	
 	public BusinessObject(String id){
 		this.id = id;
@@ -57,7 +98,7 @@ public class BusinessObject {
 	 * => List should be ordered ASCending by column order
 	 */
 	public List<BusinessObjectAttribute> getAttributes() {
-		List<String> attr = Application.sss.getBusinessObjectAttributes(this.getSAPId());
+		List<String> attr = Application.sss.getBusinessObjectProperties(this.getSAPId());
 		
 		ArrayList<BusinessObjectAttribute> resultList = new ArrayList<BusinessObjectAttribute>();
 		
