@@ -49,7 +49,7 @@ public class User {
 			try{
 				this.currentProcessInstance = new ProcessInstance(ProcessParser.nsmi + filling.get(6));
 			}catch (Exception e){
-				e.printStackTrace();
+				this.currentProcessInstance = null;
 			}
 			if(Session.o != null){
 				this.session = Session.o;
@@ -99,6 +99,8 @@ public class User {
 			try{
 				this.currentProcessInstance = new ProcessInstance(ProcessParser.nsmi + filling.get(6));
 			}catch (Exception e){
+				this.currentProcessInstance = null;
+				
 				if (AuthController.getSession() != null && AuthController.getUser() != null) {
 					this.getCurrentProcessInstance();
 				}
@@ -179,14 +181,21 @@ public class User {
 	
 	public ProcessInstance getCurrentProcessInstance() {
 		if (this.currentProcessInstance == null) {
-			List<ProcessInstance> processInstances = getProcessInstances();
-			
-			if (processInstances.size() > 0) {
-				ProcessInstance firstProcess = processInstances.get(0);
-				
-				setCurrentProcessInstance(firstProcess);
-				
-				return firstProcess;
+			try {
+				Logger.info("get all process instances");
+				List<ProcessInstance> processInstances = getProcessInstances();
+				Logger.info("#instances: " +processInstances.size());
+				if (processInstances.size() > 0) {
+					ProcessInstance firstProcess = processInstances.get(0);
+					
+					setCurrentProcessInstance(firstProcess);
+					
+					return firstProcess;
+				}
+			}
+			catch(Exception e) {
+				Logger.info("#instances failed! ");
+				e.printStackTrace();
 			}
 		}
 		return this.currentProcessInstance;

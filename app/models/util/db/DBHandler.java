@@ -133,12 +133,13 @@ public class DBHandler {
 				
 			}
 			ResultSet rs = this.exec(query, null, true);
+			Logger.info("got DB results");
+			
 			try {
 				while(rs.next()){
 					if(c.equals(ProcessInstance.class)){
-						ProcessInstance pi;
 						try {
-							pi = new ProcessInstance(ProcessParser.nsmi + rs.getString("process"));
+							ProcessInstance pi = new ProcessInstance(ProcessParser.nsmi + rs.getString("process"));
 							pi.setUser(new User(rs.getString("user")));
 							
 							try {
@@ -149,6 +150,7 @@ public class DBHandler {
 							}
 							reObj.add(pi);
 						} catch (ProcessInstanceNotFoundException e1) {
+							Logger.info("found process instance in DB but not in SPA");
 							this.exec("DELETE FROM `process_instances` WHERE `process` = '" + rs.getString("process") + "'", null, false);
 						}
 					}
@@ -157,6 +159,7 @@ public class DBHandler {
 				e.printStackTrace();
 			}
 		}
+		Logger.info("return instances " + reObj.toString());
 		return reObj;
 	}
 	
@@ -280,7 +283,7 @@ public class DBHandler {
 			
 			Logger.info(secureQuery.toString());
 			
-			if(read){
+			if(read){Logger.info("read query");
 				ResultSet rs = stmt.executeQuery(secureQuery.toString());
 				return rs;
 			} else{
