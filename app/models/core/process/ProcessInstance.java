@@ -48,17 +48,12 @@ public class ProcessInstance {
 	 * Instantiates a ProcessInstance
 	 */
 	public ProcessInstance(String id) throws ProcessInstanceNotFoundException {
-		try {Logger.info("get process instance with ID: " + id);
+		try {
 			this.pi = models.spa.api.ProcessInstance.getProcessInstance(null, id);
 			
 			this.pm = new ProcessModel(this.pi.getProcessModel());
-			
 			this.user = AuthController.getUser();
-			
-			//TODO: Fabian
-			Logger.info("will always be reached!!!");
 		} catch (Exception e) {
-			Logger.info("not found process_instance-id: " + id);
 			throw new ProcessInstanceNotFoundException();
 		}
 	}
@@ -95,7 +90,6 @@ public class ProcessInstance {
 	 * Returns the reference to the ProcessModel used as template by the static method ProcessInstance.create()
 	 */
 	public ProcessModel getProcessModel() {
-		Logger.info("get process model" + this.getId());
 		return this.pm;
 	}
 	

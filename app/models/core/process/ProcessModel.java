@@ -245,9 +245,7 @@ public class ProcessModel {
 			pms = models.spa.api.ProcessModel.getAllProcesses();
 			
 			for( models.spa.api.ProcessModel pm : pms ){
-				Logger.info("process model id : " + pm);
-				ProcessModel model = new ProcessModel(pm);
-				resultList.add(model);
+				resultList.add(new ProcessModel(pm));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
