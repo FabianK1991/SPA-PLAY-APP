@@ -28,6 +28,8 @@ import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
+import models.core.exceptions.ProcessInstanceNotFoundException;
+
 
 public class ProcessInstance
 {
@@ -48,8 +50,11 @@ public class ProcessInstance
 
     public String getId()
     {
+    	
         if(id == null) {
-            id = "http://spa.instance/p" + System.nanoTime() + new Random().nextInt(1000);
+        	// CHANGED BY MASTER TEAM PROJECT!
+            //id = "http://spa.instance/p" + System.nanoTime() + new Random().nextInt(1000);
+        	return null;
         }
 
         int x = Math.max(id.lastIndexOf("/"), id.lastIndexOf("#"));

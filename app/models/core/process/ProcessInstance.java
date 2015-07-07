@@ -53,6 +53,10 @@ public class ProcessInstance {
 			
 			this.pi = models.spa.api.ProcessInstance.getProcessInstance(null, id);
 			
+			if( this.pi.getId() == null ){
+				throw new ProcessInstanceNotFoundException();
+			}
+			
 			this.pm = new ProcessModel(this.pi.getProcessModel());
 			this.user = AuthController.getUser();
 			
