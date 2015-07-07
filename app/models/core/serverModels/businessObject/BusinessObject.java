@@ -45,7 +45,12 @@ public class BusinessObject {
 			
 			for (String name: values.keySet()){
 	            String key =name.toString();
-	            String value = values.get(name).toString();  
+	            String value = "null";  
+	            
+	            if( values.get(name) != null ){
+	            	value = values.get(name).toString(); 
+	            }
+	            
 	            Logger.info(key + " " + value);  
 			} 
 			

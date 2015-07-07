@@ -301,7 +301,19 @@ public class BusinessObjectServer {
 				tables.add(rs.getString("table"));
 				columns.add(rs.getString("column"));
 				
-				final_query = "SELECT t0." + rs.getString("column") + " FROM ";
+				final_query = "SELECT ";
+				
+				String[] retrieve_columns = rs.getString("column").split(",");
+				
+				for(int i=0;i<retrieve_columns.length;i++){
+					final_query += "t0." + retrieve_columns[i] + " ";
+					
+					if( i+1 != retrieve_columns.length ){
+						final_query += ",";
+					}
+				}
+				
+				final_query += " FROM ";
 				
 				if( parent != null ){
 					// dig deeper yo
@@ -358,8 +370,19 @@ public class BusinessObjectServer {
 				ArrayList<String> final_result = new ArrayList<String>();
 				
 				while(rs.next()){
-					Logger.info(rs.getString(columns.get(0)));
-					final_result.add(rs.getString(columns.get(0)));
+					//Logger.info(rs.getString(columns.get(0)));
+					
+					String valueString = "";
+					
+					for(int i=0;i<retrieve_columns.length;i++){
+						valueString += rs.getString(retrieve_columns[i]);
+						
+						if( i+1 != retrieve_columns.length ){
+							valueString += ";";
+						}
+					}
+					
+					final_result.add(valueString);
 				}
 				
 				return final_result;
