@@ -55,6 +55,8 @@ public class ProcessInstance {
 			
 			this.pm = new ProcessModel(this.pi.getProcessModel());
 			this.user = AuthController.getUser();
+			
+			Logger.info("will be reached even if process instance does not exist!");
 		} catch (Exception e) {
 			throw new ProcessInstanceNotFoundException();
 		}
