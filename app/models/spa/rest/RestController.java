@@ -11,6 +11,8 @@ import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Set;
 
+import play.Logger;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -48,6 +50,8 @@ public class RestController
                                                                         @Override
                                                                         public Set<String> handleResponse(final HttpResponse response) throws IOException
                                                                         {
+                                                                        	Logger.info("responseHandlerList: " + response.getEntity().getContent());
+                                                                        	
                                                                             StatusLine statusLine = response.getStatusLine();
                                                                             HttpEntity entity = response.getEntity();
                                                                             if(statusLine.getStatusCode() >= 300) { throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase()); }
@@ -71,6 +75,8 @@ public class RestController
                                                                         @Override
                                                                         public Model handleResponse(final HttpResponse response) throws IOException
                                                                         {
+                                                                        	Logger.info("responseHandlerRDF: " + response.getEntity().getContent());
+                                                                        	
                                                                             StatusLine statusLine = response.getStatusLine();
                                                                             HttpEntity entity = response.getEntity();
                                                                             if(statusLine.getStatusCode() >= 300) { throw new HttpResponseException(statusLine.getStatusCode(), statusLine.getReasonPhrase()); }
@@ -78,7 +84,7 @@ public class RestController
 
                                                                             // String m = IOUtils.toString(entity.getContent(), "UTF-8");
                                                                             // InputStream stream = new ByteArrayInputStream(m.getBytes(StandardCharsets.UTF_8));
-
+                                                                            
                                                                             Model model = ModelFactory.createDefaultModel();
                                                                             model.read(entity.getContent(), null, "TURTLE");
 
@@ -161,6 +167,8 @@ public class RestController
 
     public static Model getModelByID(String operation, String id) throws Exception
     {
+    	Logger.info("getModelByID: " + operation + " - " + id);
+    	
         CloseableHttpClient client = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(uri + operation + URLEncoder.encode(id, "UTF-8"));
         return client.execute(httpget, responseHandlerRDF);
@@ -169,6 +177,8 @@ public class RestController
 
     public static Set<String> getIDsByID(String operation, String id) throws Exception
     {
+    	Logger.info("getIDsByID: " + operation + " - " + id);
+    	
         HttpGet httpget = new HttpGet(uri + operation + URLEncoder.encode(id, "UTF-8"));
         CloseableHttpClient client = HttpClients.createDefault();
         Set<String> ids = client.execute(httpget, responseHandlerList);

@@ -65,6 +65,9 @@ public class ProcessModel {
 		try {
 			this.id = id;
 			this.pm = models.spa.api.ProcessModel.getProcess(id);
+			
+			Logger.info("Process id: " + id);
+			
 			this.dataAssoc = new ArrayList<DataAssociation>();
 			this.bos = new ArrayList<BusinessObject>();
 			

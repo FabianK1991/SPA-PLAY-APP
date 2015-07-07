@@ -49,6 +49,8 @@ public class ProcessInstance {
 	 */
 	public ProcessInstance(String id) throws ProcessInstanceNotFoundException {
 		try {
+			Logger.info("TEST!!!" + id);
+			
 			this.pi = models.spa.api.ProcessInstance.getProcessInstance(null, id);
 			
 			this.pm = new ProcessModel(this.pi.getProcessModel());
