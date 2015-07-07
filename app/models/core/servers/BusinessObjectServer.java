@@ -1,11 +1,16 @@
 package models.core.servers;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import play.Logger;
+import play.db.DB;
 
 import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.serverModels.businessObject.BusinessObject;
@@ -14,6 +19,65 @@ import models.core.serverModels.businessObject.BusinessObjectInstance;
 import controllers.Application;
 
 public class BusinessObjectServer {
+	private Connection connection;
+	
+	/**
+	 * Exectues a given query on the database.
+	 * @author Christian
+	 * @param query The query to be executed.
+	 * @param args A list of arguments that replace the place holders in the queryString.
+	 * @param read Read something from the database with read = true. Write something with read = false.
+	 * @return
+	 */
+	public ResultSet exec(String query, ArrayList<String> args, boolean read) {
+		String secureQuery;
+		if(args != null){
+			int i = 0;
+			while(i < args.size()) {
+				args.set(i, args.get(i));
+				i++;
+			}
+			secureQuery = String.format(query, args.toArray());
+		}else{
+			secureQuery = query;
+		}
+
+		try {
+			Statement stmt = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			
+			Logger.info(secureQuery.toString());
+			
+			if(read){
+				ResultSet rs = stmt.executeQuery(secureQuery.toString());
+				return rs;
+			} else{
+				stmt.execute(secureQuery.toString());
+				return null;
+			}
+
+		} catch (Exception e) {
+			Logger.info(e.toString());
+			return null;
+		}
+	}
+	
+	/**
+	 * Connects to the database.
+	 * @author Fabian
+	 * @return true if successfully connected, false otherwise.
+	 */
+	public boolean connect(){
+		try {	
+			if(this.connection != null && this.connection.isValid(0)){
+				return true;
+			}
+			this.connection = DB.getConnection("app_mysql_sap");
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 	/*
 	 * Creates a new BO Instance in the database
@@ -84,12 +148,10 @@ public class BusinessObjectServer {
 	 */
 	public List<String> getBusinessObjectAttributes(String id){
 		List<String> resultList = new ArrayList<String>();
-		
-		/*TODO: Fabi
-		
+
 		Application.db.connect();
 		
-		String query = "SELECT attribute FROM business_object_properties WHERE business_object = '%s' ORDER BY `order` ASC";
+		String query = "SELECT id FROM business_object_properties WHERE business_object = '%s' ORDER BY `order` ASC";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(getBusinessObjectDatabaseId(id));
@@ -98,12 +160,13 @@ public class BusinessObjectServer {
 		
 		try {
 			while(rs.next()){
-				resultList.add(rs.getString("attribute"));
+				Logger.info(rs.getString("id"));
+				resultList.add(rs.getString("id"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		*/
+		
 		return resultList;
 	}
 	
@@ -177,6 +240,10 @@ public class BusinessObjectServer {
 	 * @return the value of the attribute
 	 */
 	public String getBusinessObjectAttribute(int id, BusinessObjectAttribute boa){
+		this.connect();
+		
+		
+		
 		/*TODO: Fabi
 		Application.db.connect();
 		
@@ -233,7 +300,7 @@ public class BusinessObjectServer {
 	public String getAttributeName(int AttributeId){
 		Application.db.connect();
 		
-		String query = "SELECT name FROM attributes WHERE id = '%s'";
+		String query = "SELECT name FROM business_object_properties WHERE id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(String.valueOf(AttributeId));
