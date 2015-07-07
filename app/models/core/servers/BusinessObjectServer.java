@@ -146,7 +146,7 @@ public class BusinessObjectServer {
 	 * @param id The BO id
 	 * @return A list of attribute ids
 	 */
-	public List<String> getBusinessObjectAttributes(String id){
+	public List<String> getBusinessObjectProperties(String id){
 		List<String> resultList = new ArrayList<String>();
 
 		Application.db.connect();
@@ -162,6 +162,30 @@ public class BusinessObjectServer {
 			while(rs.next()){
 				Logger.info(rs.getString("id"));
 				resultList.add(rs.getString("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return resultList;
+	}
+	
+	public List<String> getBusinessObjectPropertiesNames(String id){
+		List<String> resultList = new ArrayList<String>();
+
+		Application.db.connect();
+		
+		String query = "SELECT name FROM business_object_properties WHERE business_object = '%s' ORDER BY `order` ASC";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(getBusinessObjectDatabaseId(id));
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			while(rs.next()){
+				//Logger.info(rs.getString("name"));
+				resultList.add(rs.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -233,6 +257,120 @@ public class BusinessObjectServer {
 		}
 	}
 	
+	private String getPropertyLocation(String id){
+		Application.db.connect();
+		
+		String result = null;
+		String query = "SELECT property_location FROM business_object_properties WHERE id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(id);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				//Logger.info(rs.getString("property_location"));
+				result = rs.getString("property_location");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public List<String> getBusinessObjectProperty(String property_id) throws Exception{
+		this.connect();
+		String property_location = this.getPropertyLocation(property_id);
+		
+		String query = "SELECT `parent`,`table`,`column` FROM property_locations WHERE id = '%s'";
+		String final_query = null;
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(property_location);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				String parent = rs.getString("parent");
+				ArrayList<String> tables = new ArrayList<String>();
+				ArrayList<String> columns = new ArrayList<String>();
+				
+				tables.add(rs.getString("table"));
+				columns.add(rs.getString("column"));
+				
+				final_query = "SELECT t0." + rs.getString("column") + " FROM ";
+				
+				if( parent != null ){
+					// dig deeper yo
+					while( true ){
+						args.clear();
+						args.add(parent);
+						
+						rs = Application.db.exec(query, args, true);
+						
+						if(rs.next()){
+							Logger.info("Table: " + rs.getString("table"));
+							Logger.info("Column: " + rs.getString("column"));
+							
+							parent = rs.getString("parent");
+							tables.add(rs.getString("table"));
+							columns.add(rs.getString("column"));
+							
+							if( parent == null ){
+								break;
+							}
+						}
+						else{
+							throw new Exception("Parent: " + parent + " not found!");
+						}
+					}
+					
+					final_query += tables.get(tables.size()-1) + " as t" + (tables.size()-1) + " LEFT JOIN ";
+					
+					for(int i=tables.size()-2;i>=0;i--){
+						String[] aColumns = columns.get(i+1).split(",");
+						
+						final_query += tables.get(i) + " as t" + i + " ON ";
+						
+						for(int j=0;j<aColumns.length;j++){
+							final_query += "t" + (i+1) + "." + aColumns[j] + " = t" + (i) + "." + aColumns[j];
+							
+							if( j+1 != aColumns.length ){
+								final_query += " AND ";
+							}
+						}
+						
+						if( i!=0 ){
+							final_query += " LEFT JOIN ";
+						}
+					}
+					
+					//Logger.info(final_query);
+				}
+				else{
+					final_query += tables.get(0) + " as t0 ";
+				}
+				
+				rs = this.exec(final_query, null, true);
+				ArrayList<String> final_result = new ArrayList<String>();
+				
+				while(rs.next()){
+					Logger.info(rs.getString(columns.get(0)));
+					final_result.add(rs.getString(columns.get(0)));
+				}
+				
+				return final_result;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	/*
 	 * @author Fabian
 	 * @param the bo instance id
@@ -241,8 +379,6 @@ public class BusinessObjectServer {
 	 */
 	public String getBusinessObjectAttribute(int id, BusinessObjectAttribute boa){
 		this.connect();
-		
-		
 		
 		/*TODO: Fabi
 		Application.db.connect();
