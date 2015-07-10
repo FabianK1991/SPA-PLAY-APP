@@ -45,6 +45,7 @@ position: absolute;
 top: 0px;
 bottom: 0px;
 overflow: hidden;
+overflow-y: scroll;
 }
 
 @media (min-width: 600px) {
@@ -335,14 +336,6 @@ height: 100%;
 display: none;
 }
 
-#content {
-width: 100%;
-position: absolute;
-top: 110px;
-left: 0;
-right: 0;
-bottom: 0;
-}
 
 .account_info {
 display: table;

@@ -1,13 +1,13 @@
-New log file opened at Tue Jul 07 16:39:59 CEST 2015 by 8940@LG-Lenovo
-Taking next connection to: 58913
-New client attempting to connect on port: 58914-58913
-  Address = /192.168.1.103:58913
-This client on port 58914 has uuid 80a86f38-3182-48b6-8031-b840a3eac91c configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-80a86f38-3182-48b6-8031-b840a3eac91c
-Taking next connection to: 58913
-New client attempting to connect on port: 58932-58913
-  Address = /192.168.1.103:58913
-Handshake exception on socket: 58932
+New log file opened at Fri Jul 10 19:46:10 CEST 2015 by 5232@LG-Lenovo
+Taking next connection to: 57670
+New client attempting to connect on port: 57671-57670
+  Address = /192.168.1.105:57670
+This client on port 57671 has uuid 8c1e8f40-241b-4018-a753-7d3f5a775a66 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-8c1e8f40-241b-4018-a753-7d3f5a775a66
+Taking next connection to: 57670
+New client attempting to connect on port: 57672-57670
+  Address = /192.168.1.105:57670
+Handshake exception on socket: 57672
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
@@ -23,45 +23,55 @@ Caused by: java.net.SocketException: Software caused connection abort: recv fail
 	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
 	... 2 more
-Taking next connection to: 58913
-New client attempting to connect on port: 58933-58913
-  Address = /192.168.1.103:58913
-This client on port 58933 has uuid bde86186-ba56-4cf9-97ad-4713918c35ba configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-80a86f38-3182-48b6-8031-b840a3eac91c, play-fork-run-bde86186-ba56-4cf9-97ad-4713918c35ba
-Taking next connection to: 58913
+Taking next connection to: 57670
+New client attempting to connect on port: 57673-57670
+  Address = /192.168.1.105:57670
+Handshake exception on socket: 57673
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 57670
+New client attempting to connect on port: 57674-57670
+  Address = /192.168.1.105:57670
+This client on port 57674 has uuid ca7aaec8-661c-4f4d-9f28-f98981ef4e4c configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-8c1e8f40-241b-4018-a753-7d3f5a775a66, activator-ca7aaec8-661c-4f4d-9f28-f98981ef4e4c
+Taking next connection to: 57670
+New client attempting to connect on port: 57683-57670
+  Address = /192.168.1.105:57670
+Handshake exception on socket: 57683
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.io.EOFException
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 57670
+New client attempting to connect on port: 57684-57670
+  Address = /192.168.1.105:57670
+This client on port 57684 has uuid e0393cc9-eb62-4aeb-8323-03988fbb10fa configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-8c1e8f40-241b-4018-a753-7d3f5a775a66, play-fork-run-e0393cc9-eb62-4aeb-8323-03988fbb10fa
+Taking next connection to: 57670
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
+Taking next connection to: 57670
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
+Taking next connection to: 57670
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 58913
+Taking next connection to: 57670

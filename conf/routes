@@ -7,6 +7,7 @@ GET     /                           controllers.Page.index()
 GET     /login                     	controllers.Page.login(email:String ?= "")
 GET    	/manageProcessModels		controllers.Page.manageProcessModels()
 GET    	/addProcessModel			controllers.Page.addProcessModel()
+GET    	/processModeler				controllers.Page.processModeler(model:String ?= "")
 
 # Login page
 POST    /login                     	controllers.AuthController.login()
