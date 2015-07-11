@@ -1,7 +1,37 @@
-New log file opened at Sat Jul 11 15:09:01 CEST 2015 by 4524@LG-Lenovo
-Taking next connection to: 65012
-New client attempting to connect on port: 65013-65012
-  Address = /192.168.1.105:65012
-This client on port 65013 has uuid 9b21d0bf-4c0d-480c-a6ea-6ce3f25b0b6c configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-9b21d0bf-4c0d-480c-a6ea-6ce3f25b0b6c
-Taking next connection to: 65012
+New log file opened at Sat Jul 11 15:12:30 CEST 2015 by 4404@LG-Lenovo
+Taking next connection to: 65073
+New client attempting to connect on port: 65074-65073
+  Address = /192.168.1.105:65073
+This client on port 65074 has uuid a88674b7-0f06-4d20-901c-a2758aee7f8f configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-a88674b7-0f06-4d20-901c-a2758aee7f8f
+Taking next connection to: 65073
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 65073
+New client attempting to connect on port: 65088-65073
+  Address = /192.168.1.105:65073
+Handshake exception on socket: 65088
+sbt.impl.ipc.HandshakeException: Unable to perform handshake
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
+	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
+	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+Caused by: java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 65073
+New client attempting to connect on port: 65089-65073
+  Address = /192.168.1.105:65073
+This client on port 65089 has uuid fedaf57a-4ed0-4c12-b17a-72da2b0d24c8 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-a88674b7-0f06-4d20-901c-a2758aee7f8f, play-fork-run-fedaf57a-4ed0-4c12-b17a-72da2b0d24c8
+Taking next connection to: 65073
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 65073

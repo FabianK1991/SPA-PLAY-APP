@@ -16,10 +16,6 @@ public class DocumentServer {
 		
 	}
 	
-	public static void addRelatedDocument(Document document) {
-		
-	}
-	
 	public static void getAllDocuments() {
 		
 	}

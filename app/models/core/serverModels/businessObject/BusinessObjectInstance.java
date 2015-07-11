@@ -18,6 +18,8 @@ import controllers.Application;
 
 import java.util.HashMap;
 
+import play.mvc.Http.MultipartFormData.FilePart;
+
 public class BusinessObjectInstance {
 	private ActivityInstance ai;
 	private BusinessObject bo;
@@ -202,14 +204,6 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
-	 * Returns a list of documents related to this BusinessObjectInstance,
-	 * e.g. BusinessObjectInstance="BILL-1" (BusinessObject="Bill") and documents like PDF-bill,...
-	 */
-	public List<Document> getDocuments() {
-		return null;
-	}
-	
-	/*
 	 * Creates and returns BusinessObjectInstance referencing the "template" of a BusinessObject,
 	 * e.g. BusinessObjectInstance.create(new BusinessObject('bill'))
 	 */
@@ -228,5 +222,21 @@ public class BusinessObjectInstance {
 	 */
 	public static List<BusinessObjectInstance> getAll(BusinessObject bo) {
 		return null;
+	}
+	
+	/*
+	 * Returns a list of documents related to this BusinessObjectInstance,
+	 * e.g. BusinessObjectInstance="BILL-1" (BusinessObject="Bill") and documents like PDF-bill,...
+	 */
+	public List<Document> getRelatedDocuments() {
+		return null;
+	}
+	
+	/*
+	 * Returns a list of documents related to this BusinessObjectInstance,
+	 * e.g. BusinessObjectInstance="BILL-1" (BusinessObject="Bill") and documents like PDF-bill,...
+	 */
+	public void addRelatedDocument(FilePart file, String fileName) {
+		
 	}
 }

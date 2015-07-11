@@ -34,9 +34,9 @@
 					
 					<tr>
 					
-						@for(attr <- boAttributes) {
+						for(attr <- boAttributes) {
 						
-							<td>@boInstance.getAttributeValue(attr)</td>
+							<td>boInstance.getPropertyValue(attr)</td>
 						
 						}
 					
