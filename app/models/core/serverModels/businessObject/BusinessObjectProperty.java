@@ -11,11 +11,11 @@ public class BusinessObjectProperty {
 	 * All available BusinessObjectAttributes can be found in database "attributes" (columns: id, name)
 	 */
 	public BusinessObjectProperty(String id) {
-		this.id = id;
+		this.name = name;
 	}
 	
 	public String getId(){
-		return this.id;
+		return null;
 	}
 	
 	/*
@@ -23,9 +23,9 @@ public class BusinessObjectProperty {
 	 * 
 	 */
 	public String getName() {
-		if(this.name == null){
+		/*if(this.name == null){
 			this.name = Application.sss.getAttributeName(Integer.parseInt(this.id));
-		}
+		}*/
 		
 		return this.name;
 	}

@@ -32,6 +32,33 @@ public class Phase {
 		return this.name;
 	}
 	
+	public void setName(String name){
+		Application.db.connect();
+		
+		String query = "UPDATE process_phases SET name = '%s' WHERE id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(name);
+		args.add(this.getId());
+		
+		Application.db.exec(query, args, false);
+
+		return;
+	}
+	
+	public void delete(){
+		Application.db.connect();
+		
+		String query = "DELETE FROM process_phases WHERE id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.getId());
+		
+		Application.db.exec(query, args, false);
+
+		return;
+	}
+	
 	/*
 	 * TODO: Fabi
 	 * see DB table: process_phase_activities

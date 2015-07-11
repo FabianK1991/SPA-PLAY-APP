@@ -595,4 +595,19 @@ public class ProcessModel {
 		
 		return null;
 	}
+	
+	public void addPhase(String name, int order){
+		Application.db.connect();
+		
+		String query = "INSERT INTO process_phases (name,process,order) VALUES ('%s','%s','%s')";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(name);
+		args.add(this.getId());
+		args.add(Integer.toString(order));
+		
+		Application.db.exec(query, args, false);
+
+		return;
+	}
 }
