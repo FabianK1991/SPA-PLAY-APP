@@ -1,0 +1,12 @@
+@import models.core.serverModels.businessObject._
+@(bo: BusinessObject, multiple: Boolean = false, selectedProperties: List[String] = null)
+
+<select name="bo_properties[]"@if(multiple){ multiple}>
+
+	@for(propertyName <- bo.getPropertyNames()) {
+	
+		<option value="@propertyName"@if(selectedProperties != null && selectedProperties.contains(propertyName)){selected}>@propertyName</option>
+	
+	}
+
+</select>

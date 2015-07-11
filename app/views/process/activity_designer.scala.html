@@ -1,0 +1,37 @@
+@import core.process._
+@(activity: Activity = null)
+
+<div class="activity_designer">
+	
+	<form class="auto-submit" action="@routes.ActivityDesigner.changeActivityName()" method="@routes.ActivityDesigner.changeActivityName().method">
+	
+		<input type="text" name="activity_name" value="@activity.getName()" />
+	
+	</form>
+	
+	<form class="auto-submit" action="@routes.ActivityDesigner.changeActivityType()" method="@routes.ActivityDesigner.changeActivityType().method">
+	
+		<select name="acitivty_type">
+		
+		@defining(activity.getType()) { activityType =>
+		
+		@for((typeId, typeName) <- Activity.getTypes()) {
+		
+			<option value="@typeId"@if(typeId.equals(activityType)){selected}>@typeName</option>
+		
+		}
+		
+		}
+		
+		</select>
+	
+	</form>
+	
+	<div class="activity_config">
+	
+		@activity_config(activity)
+	
+	</div>
+	
+</div>
+

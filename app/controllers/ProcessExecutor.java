@@ -21,7 +21,7 @@ import views.html.process.activity_instances;
 import views.html.ajax_concat;
 
 @With(ActionController.class)
-public class ProcessController extends Controller {
+public class ProcessExecutor extends Controller {
 	public static Result xmlProcess(String processID) {
     	ProcessModel processModel;
 		try {

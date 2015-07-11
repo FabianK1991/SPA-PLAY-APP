@@ -60,6 +60,18 @@ public class BusinessObject {
 		return pis;
 	}
 	
+	/*
+	 * TODO: Fabi
+	 * returns all types of Business Objects
+	 */
+	public static List<BusinessObject> getAll() {
+		return null;
+	}
+	
+	public List<String> getPropertyNames(){
+		return Application.sss.getBusinessObjectPropertiesNames(this.getId());
+	}
+	
 	public static List<String> getBusinessObjectProperties(String bo){
 		return Application.sss.getBusinessObjectPropertiesNames(bo);
 	}
@@ -102,13 +114,13 @@ public class BusinessObject {
 	 * database "business_object_attributes" (columns: id, business_object, attribute, order)
 	 * => List should be ordered ASCending by column order
 	 */
-	public List<BusinessObjectAttribute> getAttributes() {
+	public List<BusinessObjectProperty> getAttributes() {
 		List<String> attr = Application.sss.getBusinessObjectProperties(this.getSAPId());
 		
-		ArrayList<BusinessObjectAttribute> resultList = new ArrayList<BusinessObjectAttribute>();
+		ArrayList<BusinessObjectProperty> resultList = new ArrayList<BusinessObjectProperty>();
 		
 		for (String a : attr) {
-			BusinessObjectAttribute boa = new BusinessObjectAttribute(a);
+			BusinessObjectProperty boa = new BusinessObjectProperty(a);
 			resultList.add(boa);
 		}
 		
@@ -164,12 +176,12 @@ public class BusinessObject {
 	 * TODO
 	 * Better: public List<BusinessObjectAttribute> getNeededAttributes() {}
 	 */
-	public List<BusinessObjectAttribute> getNeededAttributesList() {
-		List<BusinessObjectAttribute> attr = this.getAttributes();
-		List<BusinessObjectAttribute> re = new ArrayList<BusinessObjectAttribute>();
+	public List<BusinessObjectProperty> getNeededAttributesList() {
+		List<BusinessObjectProperty> attr = this.getAttributes();
+		List<BusinessObjectProperty> re = new ArrayList<BusinessObjectProperty>();
 		
 		for (String att : neededAttributes) {
-			for(BusinessObjectAttribute ba : attr){
+			for(BusinessObjectProperty ba : attr){
 				if( att.equals(ba.getName()) ){
 					re.add(ba);
 				}

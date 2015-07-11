@@ -1,0 +1,23 @@
+@import core.process._
+@(activity: Activity = null)
+
+@activity.getType match {
+    case "bo_select" => {
+    	@activityConfigs.bo_create(activity)
+  	}
+	case "bo_update" => {
+    	@activityConfigs.bo_update(activity)
+  	}
+    case "bo_create" => {
+    	@activityConfigs.bo_create(activity)
+  	}
+  	case "bo_delete" => {
+    	@activityConfigs.bo_delete(activity)
+  	}
+  	case "document_upload" => {
+    	@activityConfigs.document_upload(activity)
+  	}
+  	case "gateway_decision" => {
+    	@activityConfigs.gateway_decision(activity)
+  	}
+}

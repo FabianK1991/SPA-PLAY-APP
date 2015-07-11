@@ -1,11 +1,13 @@
 package controllers;
 
 import models.core.process.ProcessModel;
+import models.core.util.parsing.ProcessParser;
 import play.mvc.Controller;
 import play.mvc.With;
 import play.mvc.Result;
 import views.html.pages.login;
 import views.html.pages.main;
+import views.html.pages.process_executor;
 import views.html.pages.add_model;
 import views.html.pages.manage_models;
 import views.html.pages.process_modeler;
@@ -15,6 +17,10 @@ public class Page extends Controller {
 
     public static Result index() {
     	return ok(main.render());
+    }
+    
+    public static Result processExecutor() {
+    	return ok(process_executor.render());
     }
     
     public static Result login(String email) {
@@ -33,7 +39,7 @@ public class Page extends Controller {
     	ProcessModel processModel = null;
     	
     	try {
-    		processModel = new ProcessModel(modelId);
+    		processModel = new ProcessModel(ProcessParser.nsm + modelId);
     	}
     	catch (Exception e) {
     		

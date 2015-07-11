@@ -12,13 +12,24 @@ GET    	/processModeler				controllers.Page.processModeler(model:String ?= "")
 # Login page
 POST    /login                     	controllers.AuthController.login()
 
-# Process Instance Management
-POST    /uploadProcess				controllers.ProcessController.uploadProcess()
-POST    /startProcess             	controllers.ProcessController.startProcess()
-GET     /process/*processID			controllers.ProcessController.xmlProcess(processID)
-POST    /setCurrentProcess			controllers.ProcessController.setCurrentProcess()
-POST    /performActivity			controllers.ProcessController.performActivity()
-POST    /performGatewayAction		controllers.ProcessController.performGatewayAction()
+# Process Designer: Phase Designer
+POST    /createPhase				controllers.PhaseDesigner.createPhase(model:String ?= "")
+POST    /deletePhase				controllers.PhaseDesigner.deletePhase(model:String ?= "")
+
+# Process Designer: Activity Designer
+POST    /changeActivityName			controllers.ActivityDesigner.changeActivityName(activity:String ?= "")
+POST    /changeActivityType			controllers.ActivityDesigner.changeActivityType(activity:String ?= "")
+POST    /changeBusinessObject		controllers.ActivityDesigner.changeBusinessObject(activity:String ?= "")
+POST    /changeBO_Properties		controllers.ActivityDesigner.changeBO_Properties(activity:String ?= "")
+POST    /changeObjectAmount			controllers.ActivityDesigner.changeObjectAmount(activity:String ?= "")
+
+# Process Executor
+POST    /uploadProcess				controllers.ProcessExecutor.uploadProcess()
+POST    /startProcess             	controllers.ProcessExecutor.startProcess()
+GET     /process/*processID			controllers.ProcessExecutor.xmlProcess(processID)
+POST    /setCurrentProcess			controllers.ProcessExecutor.setCurrentProcess()
+POST    /performActivity			controllers.ProcessExecutor.performActivity()
+POST    /performGatewayAction		controllers.ProcessExecutor.performGatewayAction()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

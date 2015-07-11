@@ -562,4 +562,12 @@ public class ProcessModel {
 		}
 		return id;
 	}
+	
+	/*
+	 * TODO: Fabi
+	 * see table: process_phases
+	 */
+	public ArrayList<Phase> getPhases() {
+		return null;
+	}
 }

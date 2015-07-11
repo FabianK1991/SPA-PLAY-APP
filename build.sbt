@@ -12,13 +12,14 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "mysql" % "mysql-connector-java" % "5.1.18",
+  "org.apache.directory.studio" % "org.apache.commons.io" % "2.4",
   "org.webjars" %% "webjars-play" % "2.3.0-2",
-  "org.webjars" % "webjars-locator" % "0.17",
-  "org.webjars" % "requirejs" % "2.1.16",
-  "org.webjars" % "jquery-ui" % "1.11.3",
-  "org.webjars" % "datatables" % "1.10.5",
-  "org.webjars" % "bpmn-js" % "0.8.0",
-  "org.apache.directory.studio" % "org.apache.commons.io" % "2.4"
+  "org.webjars" % "webjars-locator" % "0.26",
+  "org.webjars" % "requirejs" % "2.1.18",
+  "org.webjars" % "jquery-ui" % "1.11.4",
+  "org.webjars" % "datatables" % "1.10.7",
+  "org.webjars" % "bpmn-js" % "0.10.3",
+  "org.webjars" % "chosen" % "1.3.0"
 )
 
 fork in run := true

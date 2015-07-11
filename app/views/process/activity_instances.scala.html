@@ -10,7 +10,7 @@
                 
                     @if(nextGateway != null) {
                     
-                        <form class="action_gateway" action="@routes.ProcessController.performGatewayAction()" method="post" data-target=".workbench_main">
+                        <form class="action_gateway" action="@routes.ProcessExecutor.performGatewayAction()" method="@routes.ProcessExecutor.performGatewayAction().method" data-target=".workbench_main">
                         
                             <input type="hidden" name="process_instance" value="@processInstance.getId()">
                             <input type="hidden" name="current_activity" value="@activity.getRawId()">
@@ -46,7 +46,7 @@
                     
                         @defining(activityInstance.getActivity()) { activity =>
                         
-                            <form action="@routes.ProcessController.performActivity()" method="post" data-target=".workbench_main">
+                            <form action="@routes.ProcessExecutor.performActivity()" method="@routes.ProcessExecutor.performActivity().method" data-target=".workbench_main">
                             
                                 <input type="hidden" name="process_instance" value="@processInstance.getId()">
                                 <input type="hidden" name="current_activity" value="@activity.getRawId()">
@@ -59,15 +59,15 @@
                                     
                                     </h2>
                                 	
-                                    @defining(activity.getBusinessObjects()) { businessObjects =>
+                                    @defining(activity.getBusinessObject()) { businessObject =>
                                     
-                                    	<div class="content" data-business_objects="@for(bo <- businessObjects){@bo.getRawId(),}">
+                                    	<div class="content" data-business_objects="@businessObject.getRawId()">
                                     	
-                                            @activity.getAction() match {
-                                                case "select" 	=> 	{@actions.bos.select(activity, businessObjects)}
-                                                case "update" 	=> 	{@actions.bos.update(activity, businessObjects)}
-                                                case "create" 	=> 	{@actions.bos.create(activity, businessObjects)}
-                                                case "delete" 	=> 	{@actions.bos.delete(activity, businessObjects)}
+                                            @activity.getType() match {
+                                                case "select" 	=> 	{@actions.bos.select(activity, businessObject)}
+                                                case "update" 	=> 	{@actions.bos.update(activity, businessObject)}
+                                                case "create" 	=> 	{@actions.bos.create(activity, businessObject)}
+                                                case "delete" 	=> 	{@actions.bos.delete(activity, businessObject)}
                                                 case _ 			=>	{@actions.bos._none(activity)}
                                             }
                                             @documents.viewer()

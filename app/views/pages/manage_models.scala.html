@@ -1,89 +1,62 @@
 @import core.process._
-
 @design("Process Models") {
-	<div class="process_model_manager">
-	
+
+<div class="process_model_manager">
+
 	<table class="dataTable">
-	
+
 		<thead>
-		
+
 			<tr>
-			
-				<td>
-				
-					Model-ID
-				
-				</td>
-				
-				<td>
-				
-					Name
-				
-				</td>
-				
-				<td>
-				
-					Active
-				
-				</td>
-				
-				<td>
-				
-					Archived
-				
-				</td>
-			
+
+				<td>Model-ID</td>
+
+				<td>Name</td>
+
+				<td>Active</td>
+
+				<td>Archived</td>
+
 			</tr>
-		
+
 		</thead>
-		
+
 		<tbody>
-		
+
 			@for(processModel <- ProcessModel.getAll()) {
-			
-				<tr>
-				
-					<td>
-					
-						@processModel.getRawId()
-					
-					</td>
-					
-					<td>
-						
-			<form action="@routes.ProcessController.startProcess" method="post" data-target="#content">
-			
-				<input type="hidden" name="process_model" value="@processModel.getId()" />
-				
-				<input type="submit" value="Start" />
-			
-			</form>
-					
-						@processModel.getName()
-					
-					</td>
-					
-					<td>
-					
-						@processModel.getNumActiveInstances()
-					
-					</td>
-					
-					<td>
-					
-						@processModel.getNumArchivedInstances()
-					
-					</td>
-				
-				</tr>
-			
+
+			<tr>
+
+				<td><a href="@routes.Page.processModeler(processModel.getRawId())">@processModel.getRawId()</a></td>
+
+				<td>
+
+					<form action="@routes.ProcessExecutor.startProcess"
+						method="@routes.ProcessExecutor.startProcess.method"
+						data-target="#content">
+
+						<input type="hidden" name="process_model"
+							value="@processModel.getId()" /> <input type="submit"
+							value="Start" />
+
+					</form> <a href="@routes.Page.processModeler(processModel.getRawId())">@processModel.getName()</a>
+
+				</td>
+
+				<td>@processModel.getNumActiveInstances()</td>
+
+				<td>@processModel.getNumArchivedInstances()</td>
+
+			</tr>
+
 			}
-		
+
 		</tbody>
-	
+
 	</table>
-	
-	</div>
-	
-	@process.model_uploader();
+
+</div>
+
+@process.model_uploader()
+
 }

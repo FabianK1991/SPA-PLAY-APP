@@ -14,7 +14,7 @@ import play.db.DB;
 
 import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.serverModels.businessObject.BusinessObject;
-import models.core.serverModels.businessObject.BusinessObjectAttribute;
+import models.core.serverModels.businessObject.BusinessObjectProperty;
 import models.core.serverModels.businessObject.BusinessObjectInstance;
 import controllers.Application;
 
@@ -229,7 +229,7 @@ public class BusinessObjectServer {
 	 * @param value the value to set to the attribute
 	 * @return
 	 */
-	public void setBusinessObjectAttribute(int id, BusinessObjectAttribute boa, String Value){
+	public void setBusinessObjectAttribute(int id, BusinessObjectProperty boa, String Value){
 		Application.db.connect();
 		
 		// Check if attribute exists
@@ -400,7 +400,7 @@ public class BusinessObjectServer {
 	 * @param boa the object attribute
 	 * @return the value of the attribute
 	 */
-	public String getBusinessObjectAttribute(int id, BusinessObjectAttribute boa){
+	public String getBusinessObjectAttribute(int id, BusinessObjectProperty boa){
 		this.connect();
 		
 		/*TODO: Fabi

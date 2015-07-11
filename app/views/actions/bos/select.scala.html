@@ -1,10 +1,10 @@
 @import core.process._
 @import core.serverModels.businessObject._
-@(activity: Activity, businessObjects: List[BusinessObject])
+@(activity: Activity, businessObject: BusinessObject)
 
 <div class="task_description">
 
-	This task requires from you to select up to @businessObjects.get(0).getMax() @businessObjects.get(0).getSAPId()
+	This task requires from you to select up to @businessObject.getMax() @businessObject.getSAPId()
 
 </div>
 
@@ -12,7 +12,7 @@
 
 	<table class="dataTable">
 	
-		@defining(businessObjects.get(0).getNeededAttributesList()) { boAttributes =>
+		@defining(businessObject.getNeededAttributesList()) { boAttributes =>
 			
 			<thead>
 			
@@ -30,7 +30,7 @@
 			
 			<tbody>
 			
-				@for(boInstance <- BusinessObjectInstance.getAll(businessObjects.get(0))) {
+				@for(boInstance <- BusinessObjectInstance.getAll(businessObject)) {
 					
 					<tr>
 					

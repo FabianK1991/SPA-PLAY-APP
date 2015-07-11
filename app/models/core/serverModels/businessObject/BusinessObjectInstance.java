@@ -132,7 +132,7 @@ public class BusinessObjectInstance {
 	 * 
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
-	public void setAttribute(BusinessObjectAttribute attribute, Object value) throws ForbiddenBusinessObjectAttributeException {
+	public void setAttribute(BusinessObjectProperty attribute, Object value) throws ForbiddenBusinessObjectAttributeException {
 		if(this.isAttributeAllowed(attribute.getName())){
 			Application.sss.setBusinessObjectAttribute(this.databaseId, attribute, (String)value);
 		}
@@ -149,7 +149,7 @@ public class BusinessObjectInstance {
 	 * Should return null if the attribute is not set
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
-	public String getAttributeValue(BusinessObjectAttribute attribute) throws ForbiddenBusinessObjectAttributeException {
+	public String getAttributeValue(BusinessObjectProperty attribute) throws ForbiddenBusinessObjectAttributeException {
 		if(this.isAttributeAllowed(attribute.getName())){
 			return Application.sss.getBusinessObjectAttribute(this.databaseId, attribute);
 		}

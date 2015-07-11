@@ -1,0 +1,21 @@
+@import core.process._
+@(processModel: ProcessModel = null)
+
+<div class="phase_designer">
+
+	<ul class="phase-list>
+	
+	@for(phase <- processModel.getPhases()) {
+	
+		<li data-delete="@routes.PhaseDesigner.deletePhase(processModel.getRawId())" data-phase_id="@phase.getId()">@phase.getName()</li>
+	
+	}
+	
+	</ul>
+	
+	<form action="@routes.PhaseDesigner.createPhase(processModel.getRawId())">
+		<input type="text" name="phase_name" value="Create a new phase..." />
+		<input type="submit" value="+" />
+	</form>
+
+</div>

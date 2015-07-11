@@ -43,13 +43,13 @@ public class User {
 			this.passwd = filling.get(4);
 			try {
 				this.time = DBHandler.format.parse(filling.get(5));
-			} catch (ParseException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			try{
 				this.currentProcessInstance = new ProcessInstance(ProcessParser.nsmi + filling.get(6));
 			}catch (Exception e){
-				e.printStackTrace();
+				
 			}
 			if(Session.o != null){
 				this.session = Session.o;

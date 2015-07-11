@@ -17,7 +17,7 @@ require({
 });
 
 require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
-     $('.process_model').each(function() {
+     $('.process_model_viewer').each(function() {
 	     new Bpmn().renderUrl("/process/" + $(this).data('process_model'), {
 	        diagramElement : $(this).get(0),
 	      	overlayHtml : '<div style="position: relative; top:100%"></div>'
@@ -35,7 +35,7 @@ require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
 */
 
 var markCurrentActivities = function(BpmnViewer, obj) {
-    var diagram = $('.process_model-inner', obj);
+    var diagram = $('.process_model', obj);
     var activityNodes = $('g[data-element-id]:gt(1)', obj);
     
     activityNodes.each(function() {
@@ -116,7 +116,7 @@ var jsSet = function() {
         
         var getLoadingCallback = function(obj) {
             var bpmnViewer = new BpmnViewer({
-                container: $('.process_model-inner', obj)
+                container: $('.process_model', obj)
             });
             
             // import function
@@ -142,7 +142,7 @@ var jsSet = function() {
                     */
                     var viewport = $('g.viewport', obj)[0].getBoundingClientRect();
                     
-                    $('.process_model-inner', obj).data('w', viewport.width).data('h', viewport.height).css({width: viewport.width + 'px', height: viewport.height + 'px'});
+                    $('.process_model', obj).data('w', viewport.width).data('h', viewport.height).css({width: viewport.width + 'px', height: viewport.height + 'px'});
                     
                     markCurrentActivities(BpmnViewer, obj);
                     
@@ -153,7 +153,7 @@ var jsSet = function() {
             };
         };
         
-        $('.process_model')
+        $('.process_model_viewer')
             .each(function() {
                 if ($(this).data('set') != 1) {
                     $.get("/process/" + $(this).data('process_model'), getLoadingCallback($(this)), 'text');

@@ -2,7 +2,7 @@ package models.core.serverModels.businessObject;
 
 import controllers.Application;
 
-public class BusinessObjectAttribute {
+public class BusinessObjectProperty {
 	private String id;
 	private String name;
 	
@@ -10,7 +10,7 @@ public class BusinessObjectAttribute {
 	 * Instantiates a BusinessObjectAttribute
 	 * All available BusinessObjectAttributes can be found in database "attributes" (columns: id, name)
 	 */
-	public BusinessObjectAttribute(String id) {
+	public BusinessObjectProperty(String id) {
 		this.id = id;
 	}
 	

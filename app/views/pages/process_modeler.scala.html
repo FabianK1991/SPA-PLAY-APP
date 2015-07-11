@@ -3,6 +3,25 @@
 
 @design("Process Modeler") {
 
+	@process.model_viewer(processModel)
+
+<div class="workbench">
+	<ul>
+		<li><a href="#phase-designer">Phase Designer</a></li>
+		<li><a href="#activity-designer">Activity Designer</a></li>
+	</ul>
 	
+	<section id="phase-designer">
+		
+		@process.phase_designer(processModel)
+		
+	</section>
+	
+	<section id="activity-designer">
+		
+		Please click on an activity to edit it!
+
+	</section>
+</div>
 
 }

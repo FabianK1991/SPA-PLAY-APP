@@ -1,0 +1,48 @@
+@import core.process._
+
+@design("Process Guidance") {
+   	@defining(AuthController.getUser()) { user =>
+   	 	@defining(user.getCurrentProcessInstance()) { processInstance =>
+    	
+    		<div class="process_viewer">
+    		
+    			@selectors.process_instance(user)
+
+				@if(processInstance != null) {
+					@defining(processInstance.getProcessModel()) { processModel =>
+					
+						@process.model_viewer(processModel)
+					
+					}
+					
+					<div class="workbench">
+					
+						<div class="workbench_main">
+						
+							@process.activity_instances(processInstance)
+						
+						</div>
+						
+						<div class="workbench_sidebar">
+						
+						</div>
+					
+					</div>
+				
+				} else {
+				
+					<div class="none">
+					
+						You are currently not executing a process.
+					
+					</div>
+				
+				}
+				
+			</div>
+
+		}
+    }
+}
+
+

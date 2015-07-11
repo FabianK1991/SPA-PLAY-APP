@@ -1,0 +1,16 @@
+@import models.core.serverModels.businessObject._
+@(selectedBO: BusinessObject = null, multiple: Boolean = false)
+
+<select name="business_objects[]"@if(multiple){ multiple}>
+	
+	@for(businessObject <- BusinessObject.getAll()) {
+	
+		@defining(businessObject.getId()) { boId =>
+		
+			<option value="@boId"@if(selectedBO != null && boId.equals(selectedBO.getRawId())){selected}>@businessObject.getName()</option>
+		
+		}
+	
+	}
+
+</select>
