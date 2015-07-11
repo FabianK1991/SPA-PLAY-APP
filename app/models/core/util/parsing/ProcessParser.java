@@ -213,6 +213,9 @@ public class ProcessParser {
 			case "association":
 				break;
 			// create bo
+				
+			// NOT PARSED ANYMORE!!!
+			/*
 			case "dataObjectReference":
 				//System.out.println("BO!!");
 				Element ele = (Element)n;
@@ -254,7 +257,7 @@ public class ProcessParser {
 				}
 				
 				pm.bos.add(bo);
-				break;
+				break;*/
 			default:
 		}
 	}

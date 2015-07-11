@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.Map;
+import java.util.Iterator;
 
 import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.exceptions.ForbiddenBusinessObjectAttributeException;
@@ -85,10 +87,11 @@ public class BusinessObjectInstance {
 	private String bo_id;
 	private HashMap<String,String> values;
 	
-	public BusinessObjectInstance(String bo_name, String bo_id, HashMap<String,String> values){
+	public BusinessObjectInstance(BusinessObject bo, String bo_name, String bo_id, HashMap<String,String> values){
 		this.bo_name = bo_name;
 		this.bo_id = bo_id;
 		this.values = values;
+		this.bo = bo;
 	}
 	
 	/*
@@ -132,7 +135,8 @@ public class BusinessObjectInstance {
 	 * 
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
-	public void setAttribute(BusinessObjectProperty attribute, Object value) throws ForbiddenBusinessObjectAttributeException {
+	public void setPropertyValue(BusinessObjectProperty attribute, Object value) throws ForbiddenBusinessObjectAttributeException {
+		//todo fabian
 		if(this.isAttributeAllowed(attribute.getName())){
 			Application.sss.setBusinessObjectAttribute(this.databaseId, attribute, (String)value);
 		}
@@ -149,13 +153,27 @@ public class BusinessObjectInstance {
 	 * Should return null if the attribute is not set
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
-	public String getAttributeValue(BusinessObjectProperty attribute) throws ForbiddenBusinessObjectAttributeException {
-		if(this.isAttributeAllowed(attribute.getName())){
+	public String getPropertyValue(BusinessObjectProperty property) throws ForbiddenBusinessObjectAttributeException {
+		//todo fabian
+		/*if(this.isAttributeAllowed(attribute.getName())){
 			return Application.sss.getBusinessObjectAttribute(this.databaseId, attribute);
 		}
 		else{
 			throw new ForbiddenBusinessObjectAttributeException();
-		}
+		}*/
+		
+		Iterator it = this.values.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        //System.out.println(pair.getKey() + " = " + pair.getValue());
+	        if( property.getName().equals(pair.getKey()) ){
+	        	return pair.getValue().toString();
+	        }
+	        
+	        it.remove(); // avoids a ConcurrentModificationException
+	    }
+	    
+	    return null;
 	}
 	
 	/*
@@ -206,8 +224,9 @@ public class BusinessObjectInstance {
 	}
 	
 	/*
+	 * MOVED TO CLASS BUSINESS OBJECT
 	 */
 	public static List<BusinessObjectInstance> getAll(BusinessObject bo) {
-		return Application.sss.getAllBusinessObjectInstances(bo);
+		return null;
 	}
 }

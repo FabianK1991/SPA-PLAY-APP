@@ -2,12 +2,17 @@ package models.core.serverModels.businessObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Iterator;
 
 import models.core.util.parsing.ProcessParser;
 import controllers.Application;
 import models.core.serverModels.businessObject.BusinessObjectInstance;
 import java.util.HashMap;
 import play.Logger;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class BusinessObject {
 	private String id;
@@ -21,7 +26,9 @@ public class BusinessObject {
 	
 	private String[] neededAttributes;
 	
-	public static List<BusinessObjectInstance> getAll(String bo) throws Exception{
+	public List<BusinessObjectInstance> getAllInstances() throws Exception{
+		String bo = this.getRawId();
+		
 		List<String> properties = Application.sss.getBusinessObjectProperties(bo);
 		List<String> properties_names = Application.sss.getBusinessObjectPropertiesNames(bo);
 		
@@ -54,7 +61,7 @@ public class BusinessObject {
 	            Logger.info(key + " " + value);  
 			} 
 			
-			pis.add(new BusinessObjectInstance(bo, properties_names.get(0), values));
+			pis.add(new BusinessObjectInstance(this, bo, properties_names.get(0), values));
 		}
 		
 		return pis;
@@ -65,6 +72,27 @@ public class BusinessObject {
 	 * returns all types of Business Objects
 	 */
 	public static List<BusinessObject> getAll() {
+		Application.db.connect();
+		
+		String query = "SELECT sap_id FROM business_objects";
+		
+		ArrayList<String> args = new ArrayList<String>();		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			ArrayList<BusinessObject> resultList = new ArrayList<BusinessObject>();
+			
+			while(rs.next()){
+				BusinessObject a = new BusinessObject(rs.getString("sap_id"));
+				
+				resultList.add(a);
+			}
+			
+			return resultList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 	
@@ -72,8 +100,19 @@ public class BusinessObject {
 		return Application.sss.getBusinessObjectPropertiesNames(this.getId());
 	}
 	
-	public static List<String> getBusinessObjectProperties(String bo){
-		return Application.sss.getBusinessObjectPropertiesNames(bo);
+	public List<BusinessObjectProperty> getBusinessObjectProperties(){
+		String bo = this.getRawId();
+		
+		List<String> l = Application.sss.getBusinessObjectPropertiesNames(bo);
+		List<BusinessObjectProperty> resultList = new ArrayList<BusinessObjectProperty>();
+		
+		for(int i=0;i<l.size();i++){
+			BusinessObjectProperty bop = new BusinessObjectProperty(l.get(i));
+			
+			resultList.add(bop);
+		}
+		
+		return resultList;
 	}
 	
 	public BusinessObject(String id){
@@ -115,6 +154,7 @@ public class BusinessObject {
 	 * => List should be ordered ASCending by column order
 	 */
 	public List<BusinessObjectProperty> getAttributes() {
+		// DEPRECATED ONLY IN HERE BECAUSE IT AVOIDS COMPILING ERRORS!!!
 		List<String> attr = Application.sss.getBusinessObjectProperties(this.getSAPId());
 		
 		ArrayList<BusinessObjectProperty> resultList = new ArrayList<BusinessObjectProperty>();
