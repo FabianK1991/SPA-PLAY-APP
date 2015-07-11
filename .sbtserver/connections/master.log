@@ -1,37 +1,7 @@
-New log file opened at Sat Jul 11 15:00:54 CEST 2015 by 16368@LG-Lenovo
-Taking next connection to: 64762
-New client attempting to connect on port: 64763-64762
-  Address = /192.168.1.105:64762
-This client on port 64763 has uuid 7280c82e-c2b5-4bef-8ef8-0d6c8e9283d8 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
-Connected Clients: activator-7280c82e-c2b5-4bef-8ef8-0d6c8e9283d8
-Taking next connection to: 64762
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 64762
-New client attempting to connect on port: 64858-64762
-  Address = /192.168.1.105:64762
-Handshake exception on socket: 64858
-sbt.impl.ipc.HandshakeException: Unable to perform handshake
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
-	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
-	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
-Caused by: java.net.SocketException: Software caused connection abort: recv failed
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.net.SocketInputStream.read(Unknown Source)
-	at java.io.BufferedInputStream.fill(Unknown Source)
-	at java.io.BufferedInputStream.read(Unknown Source)
-	at java.io.DataInputStream.readInt(Unknown Source)
-	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
-	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
-	... 2 more
-Taking next connection to: 64762
-New client attempting to connect on port: 64859-64762
-  Address = /192.168.1.105:64762
-This client on port 64859 has uuid 60a01ee1-5c8a-4b4b-b857-12b5a2b5bc85 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
-Connected Clients: activator-7280c82e-c2b5-4bef-8ef8-0d6c8e9283d8, play-fork-run-60a01ee1-5c8a-4b4b-b857-12b5a2b5bc85
-Taking next connection to: 64762
-Checking to see if clients are empty...
-We have 1 non-daemon clients, continuing serving connections.
-Taking next connection to: 64762
+New log file opened at Sat Jul 11 15:09:01 CEST 2015 by 4524@LG-Lenovo
+Taking next connection to: 65012
+New client attempting to connect on port: 65013-65012
+  Address = /192.168.1.105:65012
+This client on port 65013 has uuid 9b21d0bf-4c0d-480c-a6ea-6ce3f25b0b6c configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-9b21d0bf-4c0d-480c-a6ea-6ce3f25b0b6c
+Taking next connection to: 65012

@@ -752,3 +752,10 @@ margin-right: 1%;
 .view-processModeler .workbench {
 width: 40%;
 }
+
+
+
+/* Process Modeler - Overview */
+body.view-manageProcessModels {
+overflow-y: scroll;
+}
