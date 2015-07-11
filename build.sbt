@@ -11,6 +11,8 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   javaWs,
+  "edu.stanford.protege" % "org.protege.editor.owl.codegeneration" % "1.0.2",
+  "net.sourceforge.owlapi" % "owlapi-distribution" % "3.5.0",
   "mysql" % "mysql-connector-java" % "5.1.18",
   "org.apache.directory.studio" % "org.apache.commons.io" % "2.4",
   "org.webjars" %% "webjars-play" % "2.3.0-2",
