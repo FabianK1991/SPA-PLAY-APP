@@ -568,6 +568,31 @@ public class ProcessModel {
 	 * see table: process_phases
 	 */
 	public ArrayList<Phase> getPhases() {
+		Application.db.connect();
+		
+		String query = "SELECT id,name FROM process_phases WHERE process = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.getId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		
+		try {
+			ArrayList<Phase> resultList = new ArrayList<Phase>();
+			
+			while(rs.next()){
+				Phase t = new Phase(rs.getString("id"), rs.getString("name"), this);
+				
+				resultList.add(t);
+			}
+			
+			return resultList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 		return null;
 	}
 }

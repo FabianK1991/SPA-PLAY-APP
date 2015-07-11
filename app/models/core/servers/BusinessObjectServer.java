@@ -194,6 +194,10 @@ public class BusinessObjectServer {
 		return resultList;
 	}
 	
+	/*
+	 * MOVED TO BUSINESS OBJECT!!
+	 * 
+	 */
 	public List<BusinessObjectInstance> getAllBusinessObjectInstances(BusinessObject bo){
 		ArrayList<BusinessObjectInstance> returnList = new ArrayList<BusinessObjectInstance>();
 		/*TODO: Fabi
