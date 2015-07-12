@@ -78,7 +78,6 @@ margin: 2%;
 padding: 0.3em 0.2em;
 line-height: 1.1em;
 vertical-align: middle;
-text-align: center;
 font-size: 1em;
 border-top: 1px solid #E7E7E7;
 border-left: 1px solid #E7E7E7;
@@ -87,6 +86,7 @@ border-bottom: 1px solid transparent;
 -webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 -moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+border-radius: 5px;
 }
 
 input[type="file"] {
@@ -102,14 +102,13 @@ background-color: #52B415;
 -webkit-box-shadow: 1px 1px 1px 0px rgba(190, 190, 190, 0.5);
 -moz-box-shadow: 1px 1px 1px 0px rgba(190, 190, 190, 0.5);
 box-shadow: 1px 1px 1px 0px rgba(190, 190, 190, 0.5);
+border-radius: 5px;
 }
 
 input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"]:focus {
 -webkit-box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 -moz-box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
-border-right: 1px solid #E7E7E7;
-border-bottom: 1px solid #E7E7E7;
 cursor: pointer;
 }
 
@@ -133,19 +132,13 @@ z-index: 5;
 margin: 0;
 }
 
-.process_model_viewer, .workbench > * {
-background-color: #ffffff;
-border-top: 1px solid rgba(0, 0, 0, 0.2);
-border-left: 1px solid rgba(0, 0, 0, 0.2);
-
--webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
--moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
-
-overflow: hidden;
+.process_model_viewer {
+width: 100%;
+height: 100%;
 }
 
 .process_model {
+position: absolute;
 -webkit-transition: all 1s; /* Safari */
 transition: all 1s;
 }
@@ -166,18 +159,6 @@ fill: #52B415;
 
 .process_model .current-activity text {
 fill: #ffffff;
-}
-
-.workbench {
-height: 48%;
-position: relative;
-margin-top: 1.5%;
-}
-
-.workbench > * {
-position: absolute;
-top: 0;
-bottom: -1px;
 }
 
 .workbench_main {
@@ -247,7 +228,7 @@ text-align: center;
 }
 
 a {
-color: rgb(249, 255, 0);
+color: #52B415;
 }
 
 
@@ -362,7 +343,7 @@ clear: both;
 
 
 
-.nav {
+.nav.fixed {
 width: auto;
 max-width: 30%;
 position: fixed;
@@ -373,11 +354,11 @@ z-index: 1;
 cursor: pointer;
 }
 
-.nav:hover ul {
+.nav.fixed:hover ul {
 height: 4.1em;/* 2 + 1.3*|a| */
 }
 
-.nav ul {
+.nav.fixed ul {
 height: 0em;
 list-style: none;
 overflow: hidden;
@@ -385,7 +366,7 @@ overflow: hidden;
 transition: height 1s;
 }
 
-.nav a {
+.nav.fixed a {
 display: block;
 padding-left: 10px;
 padding-right: 10px;
@@ -394,15 +375,15 @@ padding-bottom: 0.3em;
 color: #ffffff;
 }
 
-.nav a:hover {
+.nav.fixed a:hover {
 background-color: #6FD32E;
 }
 
-.nav li:first-child a {
+.nav.fixed li:first-child a {
 padding-top: 0.5em;
 }
 
-.nav li:last-child a {
+.nav.fixed li:last-child a {
 padding-bottom: 1em;
 }
 
@@ -731,13 +712,20 @@ width: 100%;
 
 /* Process Modeler */
 .view-processModeler #content {
-display: table;
 position: absolute;
 top: 100px;
 margin-top: 1%;
 left: 0;
 right: 0;
 bottom: 0;
+}
+
+.process_modeler {
+display: table;
+width: 100%;
+height: 100%;
+border-spacing: 1vw;
+table-layout: fixed;
 }
 
 .view-processModeler .process_model_viewer, .view-processModeler .workbench {
@@ -753,9 +741,118 @@ margin-right: 1%;
 width: 40%;
 }
 
+.workbench > section:not(:target) {
+display: none;
+}
+
+.workbench > section > * {
+padding: 2%;
+}
+
 
 
 /* Process Modeler - Overview */
 body.view-manageProcessModels {
 overflow-y: scroll;
+}
+
+
+
+/* General Layout Components */
+form {
+position: relative;
+}
+
+form.add input[type="text"] {
+padding-left: 2.5em;
+}
+
+form.add input[type="submit"] {
+position: absolute;
+top: 0px;
+width: 1em;
+height: 1.05em;
+line-height: 0.4em;
+padding-left: 0.22em;
+font-size: 2em;
+box-shadow: none;
+}
+
+.box {
+margin: 1%;
+
+background-color: #ffffff;
+border-top: 1px solid rgba(0, 0, 0, 0.2);
+border-left: 1px solid rgba(0, 0, 0, 0.2);
+
+-webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+-moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+
+overflow: hidden;
+}
+
+.nav.horizontal {
+display: table;
+width: 100%;
+height: auto;
+border-spacing: 0;
+table-layout: fixed;
+background-color: #52B415;
+}
+
+.nav.horizontal > * {
+display: table-cell;
+text-align: center;
+}
+
+.nav.horizontal * {
+color: #ffffff;
+}
+
+.nav.horizontal > * > * {
+display: block;
+width: 100%;
+height: 100%;
+padding: 0.7em 0.2em;
+}
+
+.nav.horizontal > .active {
+background-color: #ffffff;
+color: #52B415;
+}
+
+.nav.horizontal > .active:not(:last-child) {
+border-right: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.nav.horizontal > *:not(.active):not(:last-child) {
+box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.nav.horizontal > *:not(.active):last-child {
+box-shadow: inset 1px -1px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.nav.horizontal .active * {
+color: #52B415;
+}
+
+.nav.horizontal > *:not(.active):hover {
+background-color: rgba(255, 255, 255, 0.2);
+}
+
+.chosen-container {
+width: 442px!important;
+margin: 2%!important;
+font-size: 1em!important;
+}
+
+.chosen-container > * {
+padding: 0.3em 0.2em!important;
+height: auto!important;
+}
+
+.chosen-container div b {
+background-position: 0 0.45em!important;
 }

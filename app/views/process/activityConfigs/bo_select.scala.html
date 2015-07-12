@@ -1,29 +1,34 @@
 @import core.process._
-@(activity: models.core.process.Activity = null)
+@(activity: Activity = null)
 
 <form class="auto-submit"
-	action="@routes.ActivityDesigner.changeBusinessObject(activity.getRawId())"
-	method="@routes.ActivityDesigner.changeBusinessObject(activity.getRawId()).method">
+	action="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId()).method">
 
 	<label for="business_object">Which kind of Business Object needs to be selected?</label>
 	
-	@selectors.business_objects(activity.getBusinessObject)
+	@selectors.business_objects(activity.getBusinessObject())
 
 </form>
 
 <form class="auto-submit"
-	action="@routes.ActivityDesigner.changeBO_Properties(activity.getRawId())"
-	method="@routes.ActivityDesigner.changeBO_Properties(activity.getRawId()).method">
+	action="@routes.ActivityDesigner.changeBO_Properties(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeBO_Properties(activity.getModel().getRawId(), activity.getRawId()).method"
+	data-target=".bo_property_selector">
 
 	<label for="business_object">Which properties need to be shown for selection?</label>
 	
-	@selectors.bo_properties(activity.getBusinessObject, true, activity.getBO_Properties())
+	<div class="bo_property_selector">
 	
+		@selectors.bo_properties(activity.getBusinessObject(), true, activity.getBO_Properties())
+	
+	</div>
+
 </form>
 
 <form class="auto-submit"
-	action="@routes.ActivityDesigner.changeObjectAmount(activity.getRawId())"
-	method="@routes.ActivityDesigner.changeObjectAmount(activity.getRawId()).method">
+	action="@routes.ActivityDesigner.changeObjectAmount(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeObjectAmount(activity.getModel().getRawId(), activity.getRawId()).method">
 
 	<label for="min_amount">How many Business Object should be selected?</label>
 	<input type="number" name="min_amount" value="@activity.getObjectAmountMin()" />

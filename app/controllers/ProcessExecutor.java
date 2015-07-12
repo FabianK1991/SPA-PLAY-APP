@@ -25,7 +25,7 @@ public class ProcessExecutor extends Controller {
 	public static Result xmlProcess(String processID) {
     	ProcessModel processModel;
 		try {
-			processModel = new ProcessModel(processID);
+			processModel = new ProcessModel(ProcessParser.nsm + processID);
 			
 			return ok(processModel.getBPMN_XML());
 		} catch (ProcessModelNotFoundException e) {

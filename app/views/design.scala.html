@@ -13,6 +13,7 @@
         	
         	<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
         	<link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.dataTables.min.css"))">
+        	<link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("chosen.min.css"))">
         	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         	
         	@Html(org.webjars.play.RequireJS.setup(routes.Assets.versioned("javascripts/main.js").url))

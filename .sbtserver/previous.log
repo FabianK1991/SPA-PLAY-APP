@@ -1,5 +1,5 @@
-New log file opened at Sat Jul 11 15:09:01 CEST 2015 by 4524@LG-Lenovo
-jvm 4524@LG-Lenovo
+New log file opened at Sat Jul 11 19:48:04 CEST 2015 by 6628@LG-Lenovo
+jvm 6628@LG-Lenovo
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\micro_000\play-workspace\SPA-PLAY-APP\project, returning: (spa-play-app-build)
 Loading project definition from C:\Users\micro_000\play-workspace\SPA-PLAY-APP\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@225101b0, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@54643580, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -65,9 +65,9 @@ Set current project to Smart Process API - PlayApp (in build file:/C:/Users/micr
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
-> compile
-Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@12377899, check cycles: false
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@3642b748, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -84,18 +84,131 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 3 s, completed 11.07.2015 15:09:17
-> server-post-command-cleanup
-> server-handle-next-server-request
-Received execution starting without a waiting first ExecutionStarting(2)
-Received execution starting without a waiting first ExecutionStarting(2)
-Use 'last' for the full log.
-> server-post-command-error-handler
+Total time: 3 s, completed 11.07.2015 22:57:43
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@7c4ce790, check cycles: false
-Total time: 0 s, completed 11.07.2015 15:09:17
+Running task... Cancel: sbt.server.ServerTaskCancellation@57f9768, check cycles: false
+Total time: 0 s, completed 11.07.2015 22:57:43
 > server-post-command-cleanup
 > server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@157e6fec, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed 11.07.2015 22:57:44
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@6b9e8dba, check cycles: false
+Total time: 0 s, completed 11.07.2015 22:57:44
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@5863381f, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed 12.07.2015 02:29:17
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@adaf8db, check cycles: false
+Total time: 0 s, completed 12.07.2015 02:29:17
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@283d41df, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 2 s, completed 12.07.2015 09:58:48
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@3f967981, check cycles: false
+Total time: 0 s, completed 12.07.2015 09:58:48
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@16e6b245, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 2 s, completed 12.07.2015 10:01:58
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@71fa4ea9, check cycles: false
+Total time: 0 s, completed 12.07.2015 10:01:58
+> server-post-command-cleanup
+> server-handle-next-server-request
+Done executing sbt server engine, result Right(Exit(0))
+Closing listening server socket
+Waiting for socket thread
+Waiting for request processor thread
+Waiting for command engine result
+Returning control to sbt launcher with result Exit(0)
+Closing the 6628@LG-Lenovo logs at Sun Jul 12 10:01:58 CEST 2015, goodbye.

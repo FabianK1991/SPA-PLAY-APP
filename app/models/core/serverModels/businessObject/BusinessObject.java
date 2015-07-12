@@ -8,7 +8,9 @@ import java.util.Iterator;
 import models.core.util.parsing.ProcessParser;
 import controllers.Application;
 import models.core.serverModels.businessObject.BusinessObjectInstance;
+
 import java.util.HashMap;
+
 import play.Logger;
 
 import java.sql.ResultSet;
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 
 public class BusinessObject {
 	private String id;
+	private String dbId;
 	private String SAPId;
 	
 	private String action;
@@ -74,7 +77,7 @@ public class BusinessObject {
 	public static List<BusinessObject> getAll() {
 		Application.db.connect();
 		
-		String query = "SELECT sap_id FROM business_objects";
+		String query = "SELECT sap_id, id FROM business_objects";
 		
 		ArrayList<String> args = new ArrayList<String>();		
 		ResultSet rs = Application.db.exec(query, args, true);
@@ -83,13 +86,13 @@ public class BusinessObject {
 			ArrayList<BusinessObject> resultList = new ArrayList<BusinessObject>();
 			
 			while(rs.next()){
-				BusinessObject a = new BusinessObject(rs.getString("sap_id"));
+				BusinessObject a = new BusinessObject(rs.getString("id"));
 				
 				resultList.add(a);
 			}
 			
 			return resultList;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -115,8 +118,23 @@ public class BusinessObject {
 		return resultList;
 	}
 	
-	public BusinessObject(String id){
-		this.id = id;
+	public BusinessObject(String dbId) throws Exception{
+		this.dbId = dbId;
+		
+		String query = "SELECT sap_id FROM business_objects WHERE id = '%s' LIMIT 1";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(dbId);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				this.SAPId = rs.getString("sap_id");
+			}
+		} catch (SQLException e) {
+			throw new Exception("Business Object not found!");
+		}
 	}
 	
 	public BusinessObject(String id, String action, String min, String max){
@@ -144,6 +162,10 @@ public class BusinessObject {
 	
 	public String getSAPId(){
 		return SAPId;
+	}
+	
+	public String getDBId(){
+		return this.dbId;
 	}
 	
 	/*

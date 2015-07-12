@@ -146,6 +146,21 @@ var jsSet = function() {
                     
                     markCurrentActivities(BpmnViewer, obj);
                     
+                    if (obj.parents('.process_modeler').length > 0) {
+                        $('g[data-element-id^="Task_"]')
+                            .each(function() {
+                                var submitForm = $('<form>').attr('method', 'get').attr('action', '/activityDesigner?model=' + obj.data('process_model') + '&activity=' + $(this).data('element-id')).data('target', '#activity-designer');
+                                
+                                $(this).append(submitForm);
+                            })
+                            .on('click', function() {
+                                if (location.hash == '#activity-designer') {
+                                    $('form', this).trigger('submit');
+                                }
+                            });
+                        
+                        jsSet();
+                    }
                     $(window).resize(function() {
                         markCurrentActivities(BpmnViewer, obj);
                     });
@@ -176,10 +191,24 @@ var jsSet = function() {
     });
 
     require(['jquery-ui'], function() {
+        $('.nav > *')
+            .each(function() {
+                if ($(this).data('set') != 1) {
+                    if ($('a', this).prop('href') == location.href) {
+                        $(this).addClass('active');
+                    }
+                    $(this).on('click', function() {
+                        $('> *', $(this).parent()).removeClass('active');
+                        $(this).addClass('active');
+                    })
+                }
+            })
+            .data('set', 1);
+        
         $('form:not(.upload)')
             .each(function() {
                 if ($(this).data('set') != 1) {
-                    if ($(this).parent().is('.process_selector')) {
+                    if ($(this).hasClass('auto-submit')) {
                         $('select', this).on('change', function() {
                             console.log('auto-submit');
                             $(this).submit();
@@ -190,17 +219,31 @@ var jsSet = function() {
                         
                         var targets = new Array();
                         
-                        var targetNodes = $(this).data('target').split('|');
+                        var targetData = $(this).data('target');
                         
-                        for (key in targetNodes) {
-                            var target = $(targetNodes[key]);
+                        if (targetData != null) {
+                            var targetNodes = targetData.split('|');
                             
-                            targets[key] = target;
-                            target.prepend('<div class="loader">Receiving data</loader>');
+                            for (key in targetNodes) {
+                                var target = $(targetNodes[key]);
+                                
+                                targets[key] = target;
+                                target.prepend('<div class="loader">Receiving data</loader>');
+                            }
                         }
+                        requestURL = $(this).attr('action');
+
+                        if (requestURL.indexOf('?') == -1) {
+                            requestURL = requestURL + '?';
+                        }
+                        else {
+                            requestURL = requestURL + '&';
+                        }
+                        requestURL = requestURL + 'contentonly';
+                        
                         $.ajax({
                             type: $(this).attr('method'),
-                            url: $(this).attr('action') + '?contentonly',
+                            url: requestURL,
                             data: $(this).serialize(),
                             success: function(re) {
                                 re = re.split('|');
@@ -217,8 +260,8 @@ var jsSet = function() {
                                     }
                                     i++;
                                 }
-                                console.log(re);
-                                if (re[i] !== undefined) {
+                                
+                                if (re[i] !== undefined && re[i] != '') {
                                     $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
                                     
                                     if (window.history.pushState) {
@@ -242,6 +285,10 @@ var jsSet = function() {
                     });
                 }
             }).data('set', 1);
+    });
+    
+    require(['chosen'], function() {
+        $('select').chosen();
     });
 };
 

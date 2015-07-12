@@ -3,7 +3,7 @@
 
 <div class="phase_designer">
 
-	<ul class="phase-list>
+	<ul class="phase-list">
 	
 	@for(phase <- processModel.getPhases()) {
 	
@@ -13,7 +13,7 @@
 	
 	</ul>
 	
-	<form action="@routes.PhaseDesigner.createPhase(processModel.getRawId())">
+	<form class="add" action="@routes.PhaseDesigner.createPhase(processModel.getRawId())" method="@routes.PhaseDesigner.createPhase(processModel.getRawId()).method">
 		<input type="text" name="phase_name" value="Create a new phase..." />
 		<input type="submit" value="+" />
 	</form>
