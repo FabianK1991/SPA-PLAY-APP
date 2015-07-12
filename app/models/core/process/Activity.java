@@ -238,20 +238,28 @@ public class Activity {
 		Application.db.connect();
 		
 		String databaseID = Application.sss.getBusinessObjectDatabaseId(businessObject.getId());
-		String query = "INSERT INTO process_activities (process_model,activity_id,activity_type,business_object,bo_properties,min_amount,max_amount) VALUES ('%s','%s','%s','%s','%s','%s','%s')";
+		//String query = "INSERT INTO process_activities (process_model,activity_id,activity_type,business_object,bo_properties,min_amount,max_amount) VALUES ('%s','%s','%s','%s','%s','%s','%s')";
+		String query = "UPDATE process_activities SET activity_type = '%s',business_object = '%s',bo_properties = '%s',min_amount = '%s',max_amount = '%s' WHERE process_model = '%s' AND activity_id = '%s'";
+		
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		
 		args.add(type);
 		args.add(databaseID);
 		
+		String propertyString = "";
+		
 		for(int i=0;i<properties.length;i++){
-			args.add(properties[i]);
+			propertyString += properties[i];
+			
 		}
 		
+		args.add(propertyString);
 		args.add(min);
 		args.add(max);
+		
+		args.add(this.pm.getRawId());
+		args.add(this.getId());
 		
 		Application.db.exec(query, args, false);
 
