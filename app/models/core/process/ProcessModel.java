@@ -570,10 +570,10 @@ public class ProcessModel {
 	public ArrayList<Phase> getPhases() {
 		Application.db.connect();
 		
-		String query = "SELECT id,name FROM process_phases WHERE process = '%s'";
+		String query = "SELECT id,name FROM process_phases WHERE process = '%s' ORDER BY `order`";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -599,15 +599,36 @@ public class ProcessModel {
 	public void addPhase(String name, int order){
 		Application.db.connect();
 		
-		String query = "INSERT INTO process_phases (name,process,order) VALUES ('%s','%s','%s')";
+		String query = "INSERT INTO process_phases (name,process,`order`) VALUES ('%s','%s','%s')";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(name);
-		args.add(this.getId());
+		args.add(this.getRawId());
 		args.add(Integer.toString(order));
 		
 		Application.db.exec(query, args, false);
 
 		return;
+	}
+	
+	public int getNumPhases() {
+		Application.db.connect();
+		
+		String query = "SELECT count(*) as num_phases FROM process_phases WHERE process = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.getRawId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		
+		try {
+			if(rs.next()){
+				return rs.getInt("num_phases");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

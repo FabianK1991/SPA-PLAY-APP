@@ -1,8 +1,11 @@
 package models.core.process;
 
 import java.util.ArrayList;
+
 import controllers.Application;
 import models.core.process.ProcessModel;
+import models.core.util.parsing.ProcessParser;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -18,6 +21,29 @@ public class Phase {
 		this.pm = pm;
 	}
 	
+	public Phase(String phaseId) throws Exception {
+		Application.db.connect();
+		
+		String query = "SELECT name, process FROM process_phases WHERE id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(phaseId);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			ArrayList<Activity> resultList = new ArrayList<Activity>();
+			
+			if(rs.next()){
+				this.id = phaseId;
+				this.name = rs.getString("name");
+				this.pm = new ProcessModel(ProcessParser.nsm + rs.getString("process"));
+			}
+		} catch (Exception e) {
+			throw new Exception("Phase not found!");
+		}
+	}
+
 	/*
 	 * TODO: Fabi
 	 */
@@ -77,7 +103,7 @@ public class Phase {
 			ArrayList<Activity> resultList = new ArrayList<Activity>();
 			
 			while(rs.next()){
-				Activity a = new Activity(rs.getString("activity"), this.pm);
+				Activity a = new Activity(ProcessParser.nsm + rs.getString("activity"), this.pm);
 				
 				resultList.add(a);
 			}
@@ -100,7 +126,7 @@ public class Phase {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.getId());
-		args.add(a.getId());
+		args.add(a.getRawId());
 		
 		Application.db.exec(query, args, false);
 
@@ -117,10 +143,14 @@ public class Phase {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.getId());
-		args.add(a.getId());
+		args.add(a.getRawId());
 		
 		Application.db.exec(query, args, false);
 
 		return;
+	}
+	
+	public ProcessModel getProcessModel() {
+		return this.pm;
 	}
 }

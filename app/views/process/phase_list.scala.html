@@ -1,0 +1,28 @@
+@import core.process._
+@(processModel: ProcessModel = null)
+
+@if(processModel == null || processModel.getNumPhases() == 0) {
+
+	<div class="info">
+	
+		No phases have been defined yet!
+	
+	</div>
+
+} else {
+
+<ol class="phase-list">
+
+@for(phase <- processModel.getPhases()) {
+
+	<li data-delete="@routes.PhaseDesigner.deletePhase(phase.getId())"
+		data-activities="@for(activity <- phase.getActivities()){@activity.getRawId()|}"
+		data-add-activity="@routes.PhaseDesigner.addActivity(phase.getId(), "_placeholder_")"
+		data-delete-activity="@routes.PhaseDesigner.deleteActivity(phase.getId(), "_placeholder_")"
+		data-phase_id="@phase.getId()">@phase.getName()</li>
+
+	}
+
+</ol>
+
+}

@@ -40,7 +40,7 @@ var markCurrentActivities = function(BpmnViewer, obj) {
     
     activityNodes.each(function() {
         $(this).attr('class', $(this).attr('class').replace('current-activity', ''));
-    })
+    });
     
     $('.activity_instance').each(function() {
         var currentActivityNodes = $('g[data-element-id="' + $(this).data('activity_id') + '"]', obj);
@@ -161,7 +161,30 @@ getLoadingCallback = function(BpmnViewer, obj) {
                             if (location.hash == '#activity-designer') {
                                 $('form', this).trigger('submit');
                             }
-                        });
+                            else {
+                                var phase = $('.phase-list .selected');
+                                
+                                if (phase.length == 1) {
+                                    var activityId = $(this).attr('data-element-id');
+                                    
+                                    if ($(this).attr('class').indexOf('phase-activity') != -1) {
+                                        $('.delete-form').attr('method', 'post').attr('action', phase.data('delete-activity').replace('_placeholder_', activityId)).submit();
+                                        
+                                        phase.data('activities', phase.data('activities').replace(activityId + '|', ''));
+                                        
+                                        $(this).attr('class', $(this).attr('class').replace('phase-activity', ''));
+                                    }
+                                    else {
+                                        $('.delete-form').attr('method', 'post').attr('action', phase.data('add-activity').replace('_placeholder_', activityId)).submit();
+                                        
+                                        phase.data('activities', phase.data('activities') + activityId + '|');
+                                        
+                                        $(this).attr('class', $(this).attr('class') + ' phase-activity');
+                                    }
+                                }
+                            }
+                        })
+                        .css('cursor', 'pointer');
                     
                     jsSet();
                 }
@@ -218,12 +241,42 @@ var jsSet = function() {
             $.mobile.ajaxFormsEnabled = false;
             $.extend($.mobile, {autoInitializePage: false});
         });
+        
+        if ($('body').data('dialog-delete') === undefined) {
+            $('body').append($('<form>').addClass('delete-form'));
+            
+            var dialog = $.ui.dialog({
+                resizable: false,
+                modal: true,
+                autoOpen: false,
+                buttons: {
+                    "Delete": function() {
+                        var obj = $('body').data('delete-object');
+                        
+                        var deleteForm = $('.delete-form').attr('method', 'post').attr('action', obj.data('delete'));
+                        
+                        deleteForm.submit();
+                        
+                        obj.remove();
+                        
+                        $('body').data('dialog-delete').close();
+                    },
+                    Cancel: function() {
+                        $('body').data('dialog-delete').close();
+                    }
+                }
+            }, $('#dialog-delete'));
+            
+            $('body').data('dialog-delete', dialog);
+        }
+        
         require(['jquery-mobile'], function() {
             $('.nav > *')
                 .each(function() {
                     if ($(this).data('set') != 1) {
                         if ($('a', this).prop('href') == location.href) {
                             $(this).addClass('active');
+                            location.href = $('a', this).prop('href');
                         }
                         $(this).on('vclick', function() {
                             $('> *', $(this).parent()).removeClass('active');
@@ -289,7 +342,7 @@ var jsSet = function() {
                                     re = re.split('||');
                                     
                                     var i = 0;
-                                    console.log(targets);
+                                    
                                     while (i < targets.length) {
                                         var target = targets[i];
                                         
@@ -325,6 +378,63 @@ var jsSet = function() {
                         });
                     }
                 }).data('set', 1);
+            
+            $('*[data-delete]:not(.delete-set)')
+                .prepend('<div class="delete-button">x</div>')
+                .on('tap', function() {
+                    var isHover = $(this).hasClass('hover');
+                    
+                    $('*').removeClass('hover');
+                    
+                    if (isHover == false) {
+                        $(this).addClass('hover');
+                    }
+                })
+                .addClass('delete-set');
+            
+            $('.delete-button:not(.set)')
+                .on('vclick', function() {
+                    var obj = $(this).parent();
+                    
+                    $('body').data('delete-object', obj);
+                    
+                    $('body').data('dialog-delete').open();
+                })
+                .addClass('set');
+            
+            $('.phase-list li:not(.set)')
+                .on('vclick', function() {
+                    var isSelected = $(this).hasClass('selected');
+                    
+                    $('.phase-list li').removeClass('selected');
+                    
+                    $('g[data-element-id*="Task_"]').each(function() {
+                        $(this).attr('class', $(this).attr('class').replace('phase-activity', ''));
+                    });
+                    
+                    if (isSelected) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        $(this).addClass('selected');
+                        
+                        phaseActivities = $(this).data('activities').split('|');
+                        
+                        $('g[data-element-id*="Task_"]')
+                            .each(function() {
+                                if ($.inArray($(this).attr('data-element-id'), phaseActivities) != -1) {
+                                    $(this).attr('class', $(this).attr('class') + ' phase-activity');
+                                }
+                            });
+                    }
+                })
+                .addClass('set');
+            
+            $('.process_modeler .nav a[href="#activity-designer"]:not(.set)')
+                .on('vclick', function() {
+                    $('.phase-list li.selected').trigger('vclick');
+                })
+                .addClass('set');
         });
     });
     
@@ -347,7 +457,8 @@ activatePanZoom = function(modelViewers) {
                     $zoomIn: $(".zoom-in", this),
                     $zoomOut: $(".zoom-out", this),
                     $zoomRange: $(".zoom-range", this),
-                    $reset: $(".reset", this)
+                    $reset: $(".reset", this),
+                    contain: 'invert'
                 })
                 .addClass('zoom-ready');
         });

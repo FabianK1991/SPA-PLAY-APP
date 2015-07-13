@@ -12,6 +12,7 @@
         	<title>@title</title>
         	
         	<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+        	<link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.css"))">
         	<link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.dataTables.min.css"))">
         	<link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("chosen.min.css"))">
         	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
@@ -19,6 +20,7 @@
         	@Html(org.webjars.play.RequireJS.setup(routes.Assets.versioned("javascripts/main.js").url))
         	
 			<script>
+        		/*Add missing dependencies for jquery plugins*/
 				requirejs.config({"paths":{"jquery-panzoom":"@routes.Assets.at("javascripts/jquery.panzoom.min.js").url.replaceAll(".js$", "")"},"shim":{"jquery-panzoom":["jquery"]}})
 				
 				/* Fixing broken bpmn-js 0.8.0 dependencies!!! */
@@ -27,8 +29,15 @@
 			</script>
    	 	</head>
     	<body class="view-@Controller.request().path().substring(1)">
-    	
-    		<div id="general">
+
+			<div id="dialog-delete" title="Do you want to delete this element?">
+				<p>
+					<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+					You are about to delete this element. Do you want to proceed?
+				</p>
+			</div>
+			
+			<div id="general">
     		
     			@general(content)
 			

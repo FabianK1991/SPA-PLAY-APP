@@ -16,6 +16,8 @@ POST    /login                     	controllers.AuthController.login()
 # Process Designer: Phase Designer
 POST    /createPhase				controllers.PhaseDesigner.createPhase(model:String ?= "")
 POST    /deletePhase				controllers.PhaseDesigner.deletePhase(model:String ?= "")
+POST    /addPhaseActivity			controllers.PhaseDesigner.addActivity(phase:String ?= "", activity:String ?= "")
+POST    /deletePhaseActivity		controllers.PhaseDesigner.deleteActivity(phase:String ?= "", activity:String ?= "")
 
 # Process Designer: Activity Designer
 POST    /changeActivityName			controllers.ActivityDesigner.changeActivityName(model:String ?= "", activity:String ?= "")
