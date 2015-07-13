@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "webjars-locator" % "0.26",
   "org.webjars" % "requirejs" % "2.1.18",
   "org.webjars" % "jquery-ui" % "1.11.4",
+  "org.webjars" % "jquery-mobile" % "1.4.5",
   "org.webjars" % "datatables" % "1.10.7",
   "org.webjars" % "bpmn-js" % "0.10.3",
   "org.webjars" % "chosen" % "1.3.0"

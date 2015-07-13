@@ -1,7 +1,7 @@
 @import models.core.serverModels.businessObject._
 @(bo: BusinessObject, multiple: Boolean = false, selectedProperties: List[String] = null)
 
-<select name="bo_properties[]"@if(multiple){ multiple}>
+<select name="bo_properties[]"@if(multiple){ multiple} data-placeholder="Select all required properties...">
 
 	@for(propertyName <- bo.getPropertyNames()) {
 	

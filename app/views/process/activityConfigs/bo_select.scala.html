@@ -3,35 +3,22 @@
 
 <form class="auto-submit"
 	action="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId())"
-	method="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId()).method">
+	method="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId()).method"
+	data-target=".bo_property_changer|.bo_quantity_changer">
 
 	<label for="business_object">Which kind of Business Object needs to be selected?</label>
-	
 	@selectors.business_objects(activity.getBusinessObject())
 
 </form>
 
-<form class="auto-submit"
-	action="@routes.ActivityDesigner.changeBO_Properties(activity.getModel().getRawId(), activity.getRawId())"
-	method="@routes.ActivityDesigner.changeBO_Properties(activity.getModel().getRawId(), activity.getRawId()).method"
-	data-target=".bo_property_selector">
+<div class="bo_property_changer">
 
-	<label for="business_object">Which properties need to be shown for selection?</label>
-	
-	<div class="bo_property_selector">
-	
-		@selectors.bo_properties(activity.getBusinessObject(), true, activity.getBO_Properties())
-	
-	</div>
+	@util.bo_property_changer(activity)
 
-</form>
+</div>
 
-<form class="auto-submit"
-	action="@routes.ActivityDesigner.changeObjectAmount(activity.getModel().getRawId(), activity.getRawId())"
-	method="@routes.ActivityDesigner.changeObjectAmount(activity.getModel().getRawId(), activity.getRawId()).method">
+<div class="bo_quantity_changer">
 
-	<label for="min_amount">How many Business Object should be selected?</label>
-	<input type="number" name="min_amount" value="@activity.getObjectAmountMin()" />
-	<input type="number" name="max_amount" value="@activity.getObjectAmountMax()" />
+	@util.bo_quantity_changer(activity)
 
-</form>
+</div>

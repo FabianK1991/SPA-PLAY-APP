@@ -93,7 +93,7 @@ input[type="file"] {
 margin: 2%;
 }
 
-input[type="submit"] {
+input[type="submit"], button {
 max-width: 32%;
 margin-left: 66%;
 font-weight: 600;
@@ -105,7 +105,7 @@ box-shadow: 1px 1px 1px 0px rgba(190, 190, 190, 0.5);
 border-radius: 5px;
 }
 
-input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"]:focus {
+input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"]:focus, button:hover, button:active, button:focus {
 -webkit-box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 -moz-box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
@@ -749,6 +749,10 @@ display: none;
 padding: 2%;
 }
 
+.activity-config, .activity-config > * {
+position: relative;
+}
+
 
 
 /* Process Modeler - Overview */
@@ -756,6 +760,43 @@ body.view-manageProcessModels {
 overflow-y: scroll;
 }
 
+.bo-quantity-changer input {
+display: inline-block;
+width: 3em!important;
+}
+
+
+/* Process Model Viewer */
+.zoom-control {
+display: table;
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+border-spacing: 0.8em;
+}
+
+.zoom-control > * {
+display: table-cell;
+position: relative;
+margin: 0!important;
+padding-left: 0!important;
+vertical-align: middle;
+}
+
+.zoom-control .zoom-out {
+padding-bottom: 0.2em;
+}
+
+.zoom-control .zoom-range {
+width: auto!important;
+box-shadow: none!important;
+vertical-align: -0.77em!important;
+}
+
+.zoom-control .reset {
+display: none;
+}
 
 
 /* General Layout Components */
@@ -767,7 +808,7 @@ form.add input[type="text"] {
 padding-left: 2.5em;
 }
 
-form.add input[type="submit"] {
+form.add input[type="submit"], button {
 position: absolute;
 top: 0px;
 width: 1em;
@@ -843,7 +884,6 @@ background-color: rgba(255, 255, 255, 0.2);
 }
 
 .chosen-container {
-width: 442px!important;
 margin: 2%!important;
 font-size: 1em!important;
 }
@@ -855,4 +895,9 @@ height: auto!important;
 
 .chosen-container div b {
 background-position: 0 0.45em!important;
+}
+
+.chosen-container-single .search-choice-close {
+top: 0.70em!important;
+font-size: inherit!important;
 }

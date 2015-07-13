@@ -152,7 +152,7 @@ public class ProcessParser {
 				// add activity to process model
 				pm.getSPAProcessModel().getNodes().add(a);
 				
-				this.insertActivity(pm.getId(), a.getId());
+				this.insertActivity(pm.getRawId(), a.getId().replace(ProcessParser.nsm, ""));
 				
 				// Input Association
 				NodeList dataAssociations = el.getElementsByTagNameNS("*", "sourceRef");

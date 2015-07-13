@@ -1,5 +1,5 @@
-New log file opened at Sat Jul 11 19:48:04 CEST 2015 by 6628@LG-Lenovo
-jvm 6628@LG-Lenovo
+New log file opened at Mon Jul 13 15:22:08 CEST 2015 by 5428@LG-Lenovo
+jvm 5428@LG-Lenovo
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\micro_000\play-workspace\SPA-PLAY-APP\project, returning: (spa-play-app-build)
 Loading project definition from C:\Users\micro_000\play-workspace\SPA-PLAY-APP\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@54643580, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@2183c689, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -65,9 +65,9 @@ Set current project to Smart Process API - PlayApp (in build file:/C:/Users/micr
 > iflast shell
 > server-send-ready-for-request
 > server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
-Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@3642b748, check cycles: false
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@6a79ded, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -84,18 +84,12 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 3 s, completed 11.07.2015 22:57:43
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@57f9768, check cycles: false
-Total time: 0 s, completed 11.07.2015 22:57:43
+Total time: 3 s, completed 13.07.2015 15:22:30
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@157e6fec, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@33344a2, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -112,18 +106,18 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 1 s, completed 11.07.2015 22:57:44
+Total time: 2 s, completed 13.07.2015 15:22:32
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@6b9e8dba, check cycles: false
-Total time: 0 s, completed 11.07.2015 22:57:44
+Running task... Cancel: sbt.server.ServerTaskCancellation@492f3abd, check cycles: false
+Total time: 0 s, completed 13.07.2015 15:22:32
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@5863381f, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@9de64af, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -140,18 +134,30 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 1 s, completed 12.07.2015 02:29:17
+Total time: 1 s, completed 13.07.2015 15:22:33
 > server-post-command-cleanup
 > server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@adaf8db, check cycles: false
-Total time: 0 s, completed 12.07.2015 02:29:17
+> backgroundRun
+Evaluating tasks: compile:backgroundRun
+Running task... Cancel: sbt.server.ServerTaskCancellation@2f4a4fae, check cycles: false
+Total time: 1 s, completed 13.07.2015 15:22:44
 > server-post-command-cleanup
 > server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
-Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@283d41df, check cycles: false
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkConfig
+Evaluating tasks: *:playForkConfig
+Running task... Cancel: sbt.server.ServerTaskCancellation@3ca1a81d, check cycles: false
+Total time: 2 s, completed 13.07.2015 15:22:56
+> server-post-command-cleanup
+> server-handle-next-server-request
+> root/playForkNotifyStart http://localhost:9000
+Evaluating tasks: *:playForkNotifyStart
+Running task... Cancel: sbt.server.ServerTaskCancellation@40864d7f, check cycles: false
+Total time: 0 s, completed 13.07.2015 15:22:58
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1a58dfbf, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -168,18 +174,15 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 2 s, completed 12.07.2015 09:58:48
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 7 s, completed 13.07.2015 15:23:09
 > server-post-command-cleanup
 > server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@3f967981, check cycles: false
-Total time: 0 s, completed 12.07.2015 09:58:48
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
-Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@16e6b245, check cycles: false
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@74b89a6, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -196,13 +199,660 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 2 s, completed 12.07.2015 10:01:58
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:25:31
 > server-post-command-cleanup
 > server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@71fa4ea9, check cycles: false
-Total time: 0 s, completed 12.07.2015 10:01:58
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@6c3ee2d, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:27:14
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@3689cc9f, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 6 s, completed 13.07.2015 15:27:43
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@61176aca, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:28:05
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@4f3041f2, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:28:50
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@54d628f0, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:30:08
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@66ba7878, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:30:55
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@5a1c8381, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:33:07
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@388886bd, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:35:42
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@62401ea5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:36:17
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@2aa158bd, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:36:59
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@2f356252, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:37:55
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@45793f83, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:39:54
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@25492f06, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:40:24
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@a828070, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:40:53
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1d86edd5, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 6 s, completed 13.07.2015 15:44:03
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@3c78de5d, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:45:01
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@abc9f4a, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:45:43
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@55cfd5dd, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:46:37
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1a1d3171, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:49:00
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@1e5e7589, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:50:28
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@488e725f, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 3 s, completed 13.07.2015 15:50:52
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@15dfccc0, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:52:48
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@7b6798aa, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 5 s, completed 13.07.2015 15:53:23
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@61a622ae, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 4 s, completed 13.07.2015 15:54:12
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@191c6240, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 3 s, completed 13.07.2015 15:58:34
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@16aefdc7, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 3 s, completed 13.07.2015 16:00:14
 > server-post-command-cleanup
 > server-handle-next-server-request
 Done executing sbt server engine, result Right(Exit(0))
@@ -211,4 +861,4 @@ Waiting for socket thread
 Waiting for request processor thread
 Waiting for command engine result
 Returning control to sbt launcher with result Exit(0)
-Closing the 6628@LG-Lenovo logs at Sun Jul 12 10:01:58 CEST 2015, goodbye.
+Closing the 5428@LG-Lenovo logs at Mon Jul 13 16:01:54 CEST 2015, goodbye.

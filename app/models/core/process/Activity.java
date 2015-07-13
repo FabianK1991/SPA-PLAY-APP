@@ -88,7 +88,7 @@ public class Activity {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -118,7 +118,7 @@ public class Activity {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(type);
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 		return;
@@ -130,17 +130,17 @@ public class Activity {
 	public BusinessObject getBusinessObject() {
 		Application.db.connect();
 		
-		String query = "SELECT s.sap_id FROM business_objects as s INNER JOIN process_activities as a ON s.id = a.business_object WHERE a.process_model = '%s' AND a.activity_id = '%s'";
+		String query = "SELECT business_object FROM process_activities WHERE process_model = '%s' AND activity_id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
 		try {
 			if(rs.next()){
-				return new BusinessObject(rs.getString("sap_id"));
+				return new BusinessObject(rs.getString("business_object"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -160,7 +160,7 @@ public class Activity {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -168,8 +168,8 @@ public class Activity {
 			if(rs.next()){
 				return Arrays.asList(rs.getString("bo_properties").split(","));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			//e.printStackTrace();
 		}
 		
 		return null;
@@ -186,7 +186,7 @@ public class Activity {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -212,7 +212,7 @@ public class Activity {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -259,7 +259,7 @@ public class Activity {
 		args.add(max);
 		
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 
@@ -277,12 +277,12 @@ public class Activity {
 		this.bo = businessObject;
 		
 		String databaseID = Application.sss.getBusinessObjectDatabaseId(businessObject.getId());
-		String query = "UPDATE process_activities SET business_object = '%s' WHERE process_model = '%s' AND activity_id = '%s'";
+		String query = "UPDATE process_activities SET business_object = '%s', bo_properties = '', max_amount = 0, min_amount = 0 WHERE process_model = '%s' AND activity_id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.bo.getDBId());
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 
@@ -311,7 +311,7 @@ public class Activity {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(joined);
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 		return;
@@ -329,7 +329,7 @@ public class Activity {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(Integer.toString(amount));
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 		return;
@@ -347,7 +347,7 @@ public class Activity {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(Integer.toString(amount));
 		args.add(this.pm.getRawId());
-		args.add(this.getId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 		return;

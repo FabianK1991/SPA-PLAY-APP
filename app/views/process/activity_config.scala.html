@@ -1,9 +1,9 @@
 @import core.process._
 @(activity: Activity = null)
 
-@activity.getType match {
+@activity.getType() match {
     case "bo_select" => {
-    	@activityConfigs.bo_create(activity)
+    	@activityConfigs.bo_select(activity)
   	}
 	case "bo_update" => {
     	@activityConfigs.bo_update(activity)

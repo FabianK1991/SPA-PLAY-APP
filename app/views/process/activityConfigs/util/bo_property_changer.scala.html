@@ -1,0 +1,41 @@
+@import models.core.process._
+@(activity: Activity = null)
+
+@defining(activity.getBusinessObject()) { bo =>
+
+@if(bo != null) {
+
+<form class="auto-submit"
+	action="@routes.ActivityDesigner.changeBO_Properties(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeBO_Properties(activity.getModel().getRawId(), activity.getRawId()).method">
+
+	<label for="business_object">
+
+		@activity.getType() match {
+			case "bo_select" => {
+		    	Which properties should be shown in the selection table?
+		  	}
+			case "bo_update" => {
+		    	Which properties need to be updated?
+		  	}
+		    case "bo_create" => {
+		    	Which properties should be defined before creation?
+		  	}
+		  	case _ => {
+		    	Which properties should be displayed?
+		  	}
+		}
+	
+	</label>
+	
+	<div class="bo_property_selector">
+	
+		@selectors.bo_properties(bo, true, activity.getBO_Properties())
+	
+	</div>
+
+</form>
+
+}
+
+}

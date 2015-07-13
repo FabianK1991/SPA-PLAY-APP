@@ -100,11 +100,11 @@ public class BusinessObject {
 	}
 	
 	public List<String> getPropertyNames(){
-		return Application.sss.getBusinessObjectPropertiesNames(this.getId());
+		return Application.sss.getBusinessObjectPropertiesNames(this.getDBId());
 	}
 	
 	public List<BusinessObjectProperty> getBusinessObjectProperties(){
-		String bo = this.getRawId();
+		String bo = this.getDBId();
 		
 		List<String> l = Application.sss.getBusinessObjectPropertiesNames(bo);
 		List<BusinessObjectProperty> resultList = new ArrayList<BusinessObjectProperty>();
@@ -121,7 +121,7 @@ public class BusinessObject {
 	public BusinessObject(String dbId) throws Exception{
 		this.dbId = dbId;
 		
-		String query = "SELECT sap_id FROM business_objects WHERE id = '%s' LIMIT 1";
+		String query = "SELECT sap_id, name FROM business_objects WHERE id = '%s' LIMIT 1";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(dbId);
@@ -131,6 +131,10 @@ public class BusinessObject {
 		try {
 			if(rs.next()){
 				this.SAPId = rs.getString("sap_id");
+				this.name = rs.getString("name");
+			}
+			else {
+				throw new Exception("Business Object not found!");
 			}
 		} catch (SQLException e) {
 			throw new Exception("Business Object not found!");

@@ -19,6 +19,8 @@
         	@Html(org.webjars.play.RequireJS.setup(routes.Assets.versioned("javascripts/main.js").url))
         	
 			<script>
+				requirejs.config({"paths":{"jquery-panzoom":"@routes.Assets.at("javascripts/jquery.panzoom.min.js").url.replaceAll(".js$", "")"},"shim":{"jquery-panzoom":["jquery"]}})
+				
 				/* Fixing broken bpmn-js 0.8.0 dependencies!!! */
 				requirejs.config({"paths":{"sax":["@routes.WebJarAssets.at(WebJarAssets.locate("sax.js")).url.replaceAll(".js$", "")","sax"]}})
 				requirejs.config({"paths":{"bpmn-viewer":["@routes.WebJarAssets.at(WebJarAssets.locate("bpmn-viewer.js")).url.replaceAll(".js$", "")","bpmn-viewer"]},"shim":{"bpmn-viewer":["jquery","jquery-mousewheel","lodash","sax", "snap-svg"]}})

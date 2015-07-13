@@ -111,72 +111,92 @@ var markCurrentActivities = function(BpmnViewer, obj) {
     });
 };
 
-var jsSet = function() {
-    require(['bpmn-viewer'], function(BpmnViewer) {
-        
-        var getLoadingCallback = function(obj) {
+getLoadingCallback = function(BpmnViewer, obj) {
+        try {
             var bpmnViewer = new BpmnViewer({
                 container: $('.process_model', obj)
             });
-            
-            // import function
-            return function(xml) {
-                // import diagram
-                bpmnViewer.importXML(xml, function(err) {
-                
-                    if (err) {
-                        return console.error('could not import BPMN 2.0 diagram', err);
-                    }
-                    
-                    $('.loader', obj).remove();
-                    
-                    var canvas = bpmnViewer.get('canvas'),
-                      overlays = bpmnViewer.get('overlays');
-                    
-                    
-                    // zoom to fit full viewport
-                    /*currently no zooming!
-                    canvas.zoom(0.6);
-                    
-                    $('g.viewport', obj).attr('transform', '');
-                    */
-                    var viewport = $('g.viewport', obj)[0].getBoundingClientRect();
-                    
-                    $('.process_model', obj).data('w', viewport.width).data('h', viewport.height).css({width: viewport.width + 'px', height: viewport.height + 'px'});
-                    
-                    markCurrentActivities(BpmnViewer, obj);
-                    
-                    if (obj.parents('.process_modeler').length > 0) {
-                        $('g[data-element-id^="Task_"]')
-                            .each(function() {
-                                var submitForm = $('<form>').attr('method', 'get').attr('action', '/activityDesigner?model=' + obj.data('process_model') + '&activity=' + $(this).data('element-id')).data('target', '#activity-designer');
-                                
-                                $(this).append(submitForm);
-                            })
-                            .on('click', function() {
-                                if (location.hash == '#activity-designer') {
-                                    $('form', this).trigger('submit');
-                                }
-                            });
-                        
-                        jsSet();
-                    }
-                    $(window).resize(function() {
-                        markCurrentActivities(BpmnViewer, obj);
-                    });
-                });
-            };
-        };
+        }
+        catch(e) {
+            console.log(e);
+            return false;
+        }
         
+        // import function
+        return function(xml) {
+            // import diagram
+            bpmnViewer.importXML(xml, function(err) {
+            
+                if (err) {
+                    return console.error('could not import BPMN 2.0 diagram', err);
+                }
+                
+                $('.loader', obj).remove();
+                
+                var canvas = bpmnViewer.get('canvas'),
+                  overlays = bpmnViewer.get('overlays');
+                
+                
+                // zoom to fit full viewport
+                /*currently no zooming!
+                canvas.zoom(0.6);
+                
+                $('g.viewport', obj).attr('transform', '');
+                */
+                var viewport = $('g.viewport', obj)[0].getBoundingClientRect();
+                
+                $('.process_model', obj).data('w', viewport.width).data('h', viewport.height).css({width: viewport.width + 'px', height: viewport.height + 'px'});
+                
+                markCurrentActivities(BpmnViewer, obj);
+                activatePanZoom(obj);
+                
+                if (obj.parents('.process_modeler').length > 0) {
+                    $('g[data-element-id*="Task_"]')
+                        .each(function() {
+                            var submitForm = $('<form>').attr('method', 'get').attr('action', '/activityDesigner?model=' + obj.data('process_model') + '&activity=' + $(this).data('element-id')).data('target', '#activity-designer');
+                            
+                            $(this).append(submitForm);
+                        })
+                        .on('vclick', function() {
+                            if (location.hash == '#activity-designer') {
+                                $('form', this).trigger('submit');
+                            }
+                        });
+                    
+                    jsSet();
+                }
+                $(window).resize(function() {
+                    markCurrentActivities(BpmnViewer, obj);
+                });
+            });
+        };
+    };
+
+loadBPMNviewers = function() {
+    
+};
+
+var jsSet = function() {
+    require(['bpmn-viewer', 'jquery-panzoom'], function(BpmnViewer) {
         $('.process_model_viewer')
             .each(function() {
                 if ($(this).data('set') != 1) {
-                    $.get("/process/" + $(this).data('process_model'), getLoadingCallback($(this)), 'text');
+                    callbackFunction = getLoadingCallback(BpmnViewer, $(this));
+                    
+                    if (callbackFunction == false) {console.log('no callback...');
+                        setTimeout(function() {
+                            loadBPMNviewers();
+                        }, 200);
+                        return false;                       
+                    }
+                    $.get("/process/" + $(this).data('process_model'), callbackFunction, 'text');
+                    
+                    $(this).data('set', 1);
                 }
                 if ($('.loader', this).length == 0) {
-                    markCurrentActivities(BpmnViewer, $(this));
+                    //markCurrentActivities(BpmnViewer, $(this));
                 }
-            }).data('set', 1);
+            });
     });
 
     require(['datatables'], function(DataTables) {
@@ -191,105 +211,146 @@ var jsSet = function() {
     });
 
     require(['jquery-ui'], function() {
-        $('.nav > *')
-            .each(function() {
-                if ($(this).data('set') != 1) {
-                    if ($('a', this).prop('href') == location.href) {
-                        $(this).addClass('active');
+        $(document).bind("mobileinit", function () {
+            $.mobile.linkBindingEnabled = false;
+            $.mobile.ajaxEnabled = false;
+            $.mobile.ajaxLinksEnabled = false;
+            $.mobile.ajaxFormsEnabled = false;
+            $.extend($.mobile, {autoInitializePage: false});
+        });
+        require(['jquery-mobile'], function() {
+            $('.nav > *')
+                .each(function() {
+                    if ($(this).data('set') != 1) {
+                        if ($('a', this).prop('href') == location.href) {
+                            $(this).addClass('active');
+                        }
+                        $(this).on('vclick', function() {
+                            $('> *', $(this).parent()).removeClass('active');
+                            $(this).addClass('active');
+                        })
                     }
-                    $(this).on('click', function() {
-                        $('> *', $(this).parent()).removeClass('active');
-                        $(this).addClass('active');
-                    })
-                }
-            })
-            .data('set', 1);
-        
-        $('form:not(.upload)')
-            .each(function() {
-                if ($(this).data('set') != 1) {
-                    if ($(this).hasClass('auto-submit')) {
-                        $('select', this).on('change', function() {
-                            console.log('auto-submit');
-                            $(this).submit();
-                        });
-                    }
-                    $(this).on('submit', function(e) {
-                        e.preventDefault();
-                        
-                        var targets = new Array();
-                        
-                        var targetData = $(this).data('target');
-                        
-                        if (targetData != null) {
-                            var targetNodes = targetData.split('|');
+                })
+                .data('set', 1);
+            
+            $('form:not(.upload)')
+                .each(function() {
+                    if ($(this).data('set') != 1) {
+                        if ($(this).hasClass('auto-submit')) {
+                            $('select', this).on('change', function() {
+                                $(this).parents('form').submit();
+                            });
+                            $('input', this).on('change', function() {
+                                var form = $(this).parents('form');
+                                
+                                oldCT = form.data('auto-submit-ct');
+                                
+                                if (oldCT !== undefined) {
+                                    clearTimeout(oldCT);
+                                }
+                                var ct = setTimeout(function() {
+                                    form.submit();
+                                }, 1000);
+                                form.data('auto-submit-ct', ct);
+                            });
+                        }
+                        $(this).on('submit', function(e) {
+                            e.preventDefault();
                             
-                            for (key in targetNodes) {
-                                var target = $(targetNodes[key]);
+                            var targets = new Array();
+                            
+                            var targetData = $(this).data('target');
+                            
+                            if (targetData != null) {
+                                var targetNodes = targetData.split('|');
                                 
-                                targets[key] = target;
-                                target.prepend('<div class="loader">Receiving data</loader>');
+                                for (key in targetNodes) {
+                                    var target = $(targetNodes[key]);
+                                    
+                                    targets[key] = target;
+                                    target.prepend('<div class="loader">Receiving data</loader>');
+                                }
                             }
-                        }
-                        requestURL = $(this).attr('action');
+                            requestURL = $(this).attr('action');
 
-                        if (requestURL.indexOf('?') == -1) {
-                            requestURL = requestURL + '?';
-                        }
-                        else {
-                            requestURL = requestURL + '&';
-                        }
-                        requestURL = requestURL + 'contentonly';
-                        
-                        $.ajax({
-                            type: $(this).attr('method'),
-                            url: requestURL,
-                            data: $(this).serialize(),
-                            success: function(re) {
-                                re = re.split('|');
-                                
-                                var i = 0;
-                                
-                                while (i < targets.length) {
-                                    var target = targets[i];
-                                    
-                                    $('.loader', target).remove();
-                                    
-                                    if (re[i] !== undefined) {
-                                        target.html(re[i]);
-                                    }
-                                    i++;
-                                }
-                                
-                                if (re[i] !== undefined && re[i] != '') {
-                                    $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
-                                    
-                                    if (window.history.pushState) {
-                                        window.history.pushState(null, null, re[i]);
-                                    }
-                                    else {
-                                        window.location = location.href.substr(0, strpos(location.href, '#')) + '#' + re[i];
-                                    }
-                                }
-                                jsSet();
-                            },
-                            error: function(re) {
-                                alert('Request error:\n\n' + re.responseText);
-                                
-                                for (key in targets) {
-                                    $('.loader', targets[key]).remove();
-                                }
+                            if (requestURL.indexOf('?') == -1) {
+                                requestURL = requestURL + '?';
                             }
+                            else {
+                                requestURL = requestURL + '&';
+                            }
+                            requestURL = requestURL + 'contentonly';
+                            
+                            $.ajax({
+                                type: $(this).attr('method'),
+                                url: requestURL,
+                                data: $(this).serialize(),
+                                success: function(re) {
+                                    re = re.split('||');
+                                    
+                                    var i = 0;
+                                    console.log(targets);
+                                    while (i < targets.length) {
+                                        var target = targets[i];
+                                        
+                                        $('.loader', target).remove();
+                                        
+                                        if (re[i] !== undefined) {
+                                            target.html(re[i]);
+                                        }
+                                        i++;
+                                    }
+                                    
+                                    if (re[i] !== undefined && re[i] != '') {
+                                        $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
+                                        
+                                        if (window.history.pushState) {
+                                            window.history.pushState(null, null, re[i]);
+                                        }
+                                        else {
+                                            window.location = location.href.substr(0, strpos(location.href, '#')) + '#' + re[i];
+                                        }
+                                    }
+                                    jsSet();
+                                },
+                                error: function(re) {
+                                    alert('Request error:\n\n' + re.responseText);
+                                    
+                                    for (key in targets) {
+                                        $('.loader', targets[key]).remove();
+                                    }
+                                }
+                            });
+                            return false;
                         });
-                        return false;
-                    });
-                }
-            }).data('set', 1);
+                    }
+                }).data('set', 1);
+        });
     });
     
     require(['chosen'], function() {
-        $('select').chosen();
+        $('body:not(.view-manageProcessModels) select')
+            .each(function() {
+                if ($('option[selected], option.default', this).length == 0) {
+                    $(this).prepend('<option class="default" selected></option>');
+                }
+            })
+            .chosen({allow_single_deselect: false});
     });
+};
+
+activatePanZoom = function(modelViewers) {
+    modelViewers
+        .each(function() {
+            $('.process_model', this)
+                .panzoom({
+                    $zoomIn: $(".zoom-in", this),
+                    $zoomOut: $(".zoom-out", this),
+                    $zoomRange: $(".zoom-range", this),
+                    $reset: $(".reset", this)
+                })
+                .addClass('zoom-ready');
+        });
 };
 
 jsSet();
