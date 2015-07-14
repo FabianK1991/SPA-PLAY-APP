@@ -30,7 +30,7 @@ public class BusinessObject {
 	private String[] neededAttributes;
 	
 	public List<BusinessObjectInstance> getAllInstances() throws Exception{
-		String bo = this.getRawId();
+		String bo = this.getSAPId(); //this.getRawId();
 		
 		List<String> properties = Application.sss.getBusinessObjectProperties(bo);
 		List<String> properties_names = Application.sss.getBusinessObjectPropertiesNames(bo);
@@ -45,26 +45,33 @@ public class BusinessObject {
 		List<BusinessObjectInstance> pis = new ArrayList<BusinessObjectInstance>();
 		
 		// loop over value entries
-		for(int i=0;i<valueList.get(0).size();i++){
-			HashMap<String,String> values = new HashMap<String,String>();
-			
-			// loop over properties
-			for(int j=0;j<valueList.size();j++){
-				values.put(properties_names.get(j), valueList.get(j).get(i));
+		if( valueList.size() > 0 ){
+			for(int i=0;i<valueList.get(0).size();i++){
+				HashMap<String,String> values = new HashMap<String,String>();
+				
+				// loop over properties
+				for(int j=0;j<valueList.size();j++){
+					if( valueList.get(j).size() > i ){
+						values.put(properties_names.get(j), valueList.get(j).get(i));
+					}
+					else{
+						values.put(properties_names.get(j), null);
+					}
+				}
+				
+				for (String name: values.keySet()){
+		            String key =name.toString();
+		            String value = "null";  
+		            
+		            if( values.get(name) != null ){
+		            	value = values.get(name).toString(); 
+		            }
+		            
+		            Logger.info(key + " " + value);  
+				} 
+				
+				pis.add(new BusinessObjectInstance(this, bo, properties_names.get(0), values));
 			}
-			
-			for (String name: values.keySet()){
-	            String key =name.toString();
-	            String value = "null";  
-	            
-	            if( values.get(name) != null ){
-	            	value = values.get(name).toString(); 
-	            }
-	            
-	            Logger.info(key + " " + value);  
-			} 
-			
-			pis.add(new BusinessObjectInstance(this, bo, properties_names.get(0), values));
 		}
 		
 		return pis;

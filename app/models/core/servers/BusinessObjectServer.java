@@ -178,7 +178,7 @@ public class BusinessObjectServer {
 		String query = "SELECT name FROM business_object_properties WHERE business_object = '%s' ORDER BY `order` ASC";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(id);
+		args.add(getBusinessObjectDatabaseId(id));
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -256,7 +256,7 @@ public class BusinessObjectServer {
 		this.connect();
 		String property_location = this.getPropertyLocation(property_id);
 		
-		String query = "SELECT `parent`,`table`,`column` FROM property_locations WHERE id = '%s'";
+		String query = "SELECT `parent`,`table`,`column`,`join_column` FROM property_locations WHERE id = '%s'";
 		String final_query = null;
 		
 		ArrayList<String> args = new ArrayList<String>();
@@ -269,9 +269,17 @@ public class BusinessObjectServer {
 				String parent = rs.getString("parent");
 				ArrayList<String> tables = new ArrayList<String>();
 				ArrayList<String> columns = new ArrayList<String>();
+				ArrayList<String> join_column = new ArrayList<String>();
 				
 				tables.add(rs.getString("table"));
 				columns.add(rs.getString("column"));
+				
+				if( rs.getString("join_column") != null ){
+					join_column.add(rs.getString("join_column"));
+				}
+				else{
+					join_column.add("null");
+				}
 				
 				final_query = "SELECT ";
 				
@@ -303,6 +311,13 @@ public class BusinessObjectServer {
 							tables.add(rs.getString("table"));
 							columns.add(rs.getString("column"));
 							
+							if( rs.getString("join_column") != null ){
+								join_column.add(rs.getString("join_column"));
+							}
+							else{
+								join_column.add("null");
+							}
+							
 							if( parent == null ){
 								break;
 							}
@@ -320,7 +335,12 @@ public class BusinessObjectServer {
 						final_query += tables.get(i) + " as t" + i + " ON ";
 						
 						for(int j=0;j<aColumns.length;j++){
-							final_query += "t" + (i+1) + "." + aColumns[j] + " = t" + (i) + "." + aColumns[j];
+							if( join_column.get(i).equals("null") ){
+								final_query += "t" + (i+1) + "." + aColumns[j] + " = t" + (i) + "." + aColumns[j];
+							}
+							else{
+								final_query += "t" + (i+1) + "." + aColumns[j] + " = t" + (i) + "." + join_column.get(i);
+							}
 							
 							if( j+1 != aColumns.length ){
 								final_query += " AND ";
@@ -363,7 +383,7 @@ public class BusinessObjectServer {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return new ArrayList<String>();
 	}
 	
 	/*

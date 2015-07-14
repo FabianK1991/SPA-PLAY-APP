@@ -1,5 +1,5 @@
-New log file opened at Wed Jul 15 00:08:47 CEST 2015 by 5768@LG-Lenovo
-jvm 5768@LG-Lenovo
+New log file opened at Wed Jul 15 00:35:40 CEST 2015 by 10308@LG-Lenovo
+jvm 10308@LG-Lenovo
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\micro_000\play-workspace\SPA-PLAY-APP\project, returning: (spa-play-app-build)
 Loading project definition from C:\Users\micro_000\play-workspace\SPA-PLAY-APP\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@42637bfd, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@4d359837, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -67,181 +67,32 @@ Set current project to Smart Process API - PlayApp (in build file:/C:/Users/micr
 > server-handle-next-server-request
 > compile
 Evaluating tasks: compile:compile
-Running task... Cancel: sbt.server.ServerTaskCancellation@20b873bf, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@5d1ac891, check cycles: false
 
 Initial source changes: 
 	removed:Set()
 	added: Set()
-	modified: Set()
+	modified: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\pages\process_executor.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\process_execution.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\DocumentType.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\activity_instances.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\controllers\Page.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\businessObject\BusinessObject.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\BusinessObjectServer.java)
 Removed products: Set()
 External API changes: API Changes: Set()
 Modified binary dependencies: Set()
-Initial directly invalidated sources: Set()
+Initial directly invalidated sources: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\pages\process_executor.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\process_execution.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\DocumentType.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\activity_instances.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\controllers\Page.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\businessObject\BusinessObject.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\BusinessObjectServer.java)
 
 Sources indirectly invalidated by:
 	product: Set()
 	binary dep: Set()
 	external source: Set()
-All initially invalidated sources: Set()
+All initially invalidated sources: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\pages\process_executor.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\process_execution.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\DocumentType.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\activity_instances.template.scala, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\controllers\Page.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\businessObject\BusinessObject.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\BusinessObjectServer.java)
 
-Total time: 4 s, completed 15.07.2015 00:09:11
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@200aaa09, check cycles: false
-Total time: 0 s, completed 15.07.2015 00:09:11
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
-Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@2970e01f, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set()
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set()
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set()
-
-Total time: 2 s, completed 15.07.2015 00:09:13
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@353ef27f, check cycles: false
-Total time: 0 s, completed 15.07.2015 00:09:13
-> server-post-command-cleanup
-> server-handle-next-server-request
-> backgroundRun
-Evaluating tasks: compile:backgroundRun
-Running task... Cancel: sbt.server.ServerTaskCancellation@7ad1a74, check cycles: false
-Total time: 1 s, completed 15.07.2015 00:09:48
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkConfig
-Evaluating tasks: *:playForkConfig
-Running task... Cancel: sbt.server.ServerTaskCancellation@12e4f016, check cycles: false
-Total time: 2 s, completed 15.07.2015 00:10:01
-> server-post-command-cleanup
-> server-handle-next-server-request
-> root/playForkNotifyStart http://localhost:9000
-Evaluating tasks: *:playForkNotifyStart
-Running task... Cancel: sbt.server.ServerTaskCancellation@600ca516, check cycles: false
-Total time: 0 s, completed 15.07.2015 00:10:03
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
-Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@14210025, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set()
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set()
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set()
-
-Copy resource mappings: 
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
-Total time: 8 s, completed 15.07.2015 00:10:16
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
-Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@18f4c9cf, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set()
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set()
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set()
-
-Copy resource mappings: 
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
-Total time: 7 s, completed 15.07.2015 00:13:21
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
-Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@22892db6, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set()
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set()
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set()
-
-Copy resource mappings: 
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
-Total time: 6 s, completed 15.07.2015 00:14:33
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
-Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@1e220fbd, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\process_execution.template.scala)
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\process_execution.template.scala)
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\twirl\main\views\html\process\process_execution.template.scala)
-
-Read from stdout: Compiling 1 Scala source to C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes...
-Compiling 1 Scala source to C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes...
+Read from stdout: Compiling 3 Scala sources and 7 Java sources to C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes...
+Compiling 3 Scala sources and 7 Java sources to C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes...
 Getting compiler-interface from component compiler for Scala 2.11.1
 Other repositories:
 Default repositories:
 Getting compiler-interface from component compiler for Scala 2.11.1
 Other repositories:
 Default repositories:
-Running cached compiler 83756a8, interfacing (CompilerInterface) with Scala compiler version 2.11.1
+Running cached compiler 74c5eebe, interfacing (CompilerInterface) with Scala compiler version 2.11.1
 Calling Scala compiler with arguments  (CompilerInterface):
 	-deprecation
 	-unchecked
@@ -251,22 +102,63 @@ Calling Scala compiler with arguments  (CompilerInterface):
 	C:\Program Files\Java\jre1.8.0_45\lib\resources.jar;C:\Program Files\Java\jre1.8.0_45\lib\rt.jar;C:\Program Files\Java\jre1.8.0_45\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_45\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_45\lib\jce.jar;C:\Program Files\Java\jre1.8.0_45\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_45\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_45\classes;C:\Users\micro_000\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.11.1.jar
 	-classpath
 	C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\commons-codec-1.6.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\commons-csv-1.0.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\commons-io-2.4.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\commons-lang3-3.1.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\commons-logging-1.1.3.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\fluent-hc-4.3.5.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\httpclient-4.3.5.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\httpclient-cache-4.3.5.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\httpcore-4.3.2.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\httpmime-4.3.5.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jackson-annotations-2.3.0.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jackson-core-2.3.3.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jackson-databind-2.3.3.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jcl-over-slf4j-1.7.6.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jena-arq-2.12.1.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jena-core-2.12.1.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jena-iri-1.1.1.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jena-sdb-1.5.1.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jena-tdb-1.1.1.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\jsonld-java-0.5.0.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\libthrift-0.9.1.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\log4j-1.2.17.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\minimal-json-0.9.1.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\mysql-connector-java-5.1.34-bin.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\slf4j-api-1.7.6.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\xercesImpl-2.11.0.jar;C:\Users\micro_000\play-workspace\SPA-PLAY-APP\lib\xml-apis-1.4.01.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\twirl-api_2.11\jars\twirl-api_2.11-1.0.2.jar;C:\Users\micro_000\.ivy2\cache\org.scala-lang.modules\scala-xml_2.11\bundles\scala-xml_2.11-1.0.1.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play_2.11\jars\play_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\build-link\jars\build-link-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-exceptions\jars\play-exceptions-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-iteratees_2.11\jars\play-iteratees_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\org.scala-stm\scala-stm_2.11\jars\scala-stm_2.11-0.7.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe\config\bundles\config-1.2.1.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-json_2.11\jars\play-json_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-functional_2.11\jars\play-functional_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-datacommons_2.11\jars\play-datacommons_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\joda-time\joda-time\jars\joda-time-2.3.jar;C:\Users\micro_000\.ivy2\cache\org.joda\joda-convert\jars\joda-convert-1.6.jar;C:\Users\micro_000\.ivy2\cache\com.fasterxml.jackson.core\jackson-annotations\bundles\jackson-annotations-2.3.2.jar;C:\Users\micro_000\.ivy2\cache\org.scala-lang\scala-reflect\jars\scala-reflect-2.11.1.jar;C:\Users\micro_000\.ivy2\cache\org.scala-lang.modules\scala-parser-combinators_2.11\bundles\scala-parser-combinators_2.11-1.0.1.jar;C:\Users\micro_000\.ivy2\cache\io.netty\netty\bundles\netty-3.9.3.Final.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.netty\netty-http-pipelining\jars\netty-http-pipelining-1.1.2.jar;C:\Users\micro_000\.ivy2\cache\org.slf4j\jul-to-slf4j\jars\jul-to-slf4j-1.7.6.jar;C:\Users\micro_000\.ivy2\cache\org.slf4j\jcl-over-slf4j\jars\jcl-over-slf4j-1.7.6.jar;C:\Users\micro_000\.ivy2\cache\ch.qos.logback\logback-core\jars\logback-core-1.1.1.jar;C:\Users\micro_000\.ivy2\cache\ch.qos.logback\logback-classic\jars\logback-classic-1.1.1.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.akka\akka-actor_2.11\jars\akka-actor_2.11-2.3.4.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.akka\akka-slf4j_2.11\jars\akka-slf4j_2.11-2.3.4.jar;C:\Users\micro_000\.ivy2\cache\commons-codec\commons-codec\jars\commons-codec-1.9.jar;C:\Users\micro_000\.ivy2\cache\xerces\xercesImpl\jars\xercesImpl-2.11.0.jar;C:\Users\micro_000\.ivy2\cache\xml-apis\xml-apis\jars\xml-apis-1.4.01.jar;C:\Users\micro_000\.ivy2\cache\javax.transaction\jta\jars\jta-1.1.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-java_2.11\jars\play-java_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\org.yaml\snakeyaml\bundles\snakeyaml-1.13.jar;C:\Users\micro_000\.ivy2\cache\org.hibernate\hibernate-validator\jars\hibernate-validator-5.0.3.Final.jar;C:\Users\micro_000\.ivy2\cache\javax.validation\validation-api\jars\validation-api-1.1.0.Final.jar;C:\Users\micro_000\.ivy2\cache\com.fasterxml\classmate\bundles\classmate-1.0.0.jar;C:\Users\micro_000\.ivy2\cache\org.jboss.logging\jboss-logging\jars\jboss-logging-3.2.0.Final.jar;C:\Users\micro_000\.ivy2\cache\org.springframework\spring-context\jars\spring-context-4.0.3.RELEASE.jar;C:\Users\micro_000\.ivy2\cache\org.springframework\spring-core\jars\spring-core-4.0.3.RELEASE.jar;C:\Users\micro_000\.ivy2\cache\org.springframework\spring-beans\jars\spring-beans-4.0.3.RELEASE.jar;C:\Users\micro_000\.ivy2\cache\org.javassist\javassist\bundles\javassist-3.19.0-GA.jar;C:\Users\micro_000\.ivy2\cache\org.reflections\reflections\jars\reflections-0.9.8.jar;C:\Users\micro_000\.ivy2\cache\com.google.guava\guava\bundles\guava-16.0.1.jar;C:\Users\micro_000\.ivy2\cache\dom4j\dom4j\jars\dom4j-1.6.1.jar;C:\Users\micro_000\.ivy2\cache\com.google.code.findbugs\jsr305\jars\jsr305-2.0.3.jar;C:\Users\micro_000\.ivy2\cache\org.apache.tomcat\tomcat-servlet-api\jars\tomcat-servlet-api-8.0.5.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-java-jdbc_2.11\jars\play-java-jdbc_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-jdbc_2.11\jars\play-jdbc_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.jolbox\bonecp\bundles\bonecp-0.8.0.RELEASE.jar;C:\Users\micro_000\.ivy2\cache\com.h2database\h2\jars\h2-1.3.175.jar;C:\Users\micro_000\.ivy2\cache\tyrex\tyrex\jars\tyrex-1.0.1.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-java-ebean_2.11\jars\play-java-ebean_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\org.avaje.ebeanorm\avaje-ebeanorm\jars\avaje-ebeanorm-3.3.4.jar;C:\Users\micro_000\.ivy2\cache\org.avaje.ebeanorm\avaje-ebeanorm-agent\jars\avaje-ebeanorm-agent-3.2.2.jar;C:\Users\micro_000\.ivy2\cache\org.hibernate.javax.persistence\hibernate-jpa-2.0-api\jars\hibernate-jpa-2.0-api-1.0.1.Final.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-cache_2.11\jars\play-cache_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\net.sf.ehcache\ehcache-core\jars\ehcache-core-2.6.8.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-java-ws_2.11\jars\play-java-ws_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.typesafe.play\play-ws_2.11\jars\play-ws_2.11-2.3.8.jar;C:\Users\micro_000\.ivy2\cache\com.ning\async-http-client\jars\async-http-client-1.8.15.jar;C:\Users\micro_000\.ivy2\cache\oauth.signpost\signpost-core\jars\signpost-core-1.2.1.2.jar;C:\Users\micro_000\.ivy2\cache\oauth.signpost\signpost-commonshttp4\jars\signpost-commonshttp4-1.2.1.2.jar;C:\Users\micro_000\.ivy2\cache\org.apache.httpcomponents\httpcore\jars\httpcore-4.0.1.jar;C:\Users\micro_000\.ivy2\cache\org.apache.httpcomponents\httpclient\jars\httpclient-4.0.1.jar;C:\Users\micro_000\.ivy2\cache\edu.stanford.protege\org.protege.editor.owl.codegeneration\bundles\org.protege.editor.owl.codegeneration-1.0.2.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.cobertura\cobertura\jars\cobertura-2.0.jar;C:\Users\micro_000\.ivy2\cache\oro\oro\jars\oro-2.0.8.jar;C:\Users\micro_000\.ivy2\cache\asm\asm\jars\asm-3.3.1.jar;C:\Users\micro_000\.ivy2\cache\asm\asm-tree\jars\asm-tree-3.3.1.jar;C:\Users\micro_000\.ivy2\cache\asm\asm-commons\jars\asm-commons-3.3.1.jar;C:\Users\micro_000\.ivy2\cache\org.apache.ant\ant\jars\ant-1.7.0.jar;C:\Users\micro_000\.ivy2\cache\org.apache.ant\ant-launcher\jars\ant-launcher-1.7.0.jar;C:\Users\micro_000\.ivy2\cache\commons-cli\commons-cli\jars\commons-cli-1.2.jar;C:\Users\micro_000\.ivy2\cache\edu.stanford.protege\org.protege.common\bundles\org.protege.common-4.3.0.jar;C:\Users\micro_000\.ivy2\cache\org.apache.felix\org.apache.felix.main\bundles\org.apache.felix.main-4.0.3.jar;C:\Users\micro_000\.ivy2\cache\org.apache.felix\org.apache.felix.framework\bundles\org.apache.felix.framework-4.0.3.jar;C:\Users\micro_000\.ivy2\cache\log4j\log4j\bundles\log4j-1.2.16.jar;C:\Users\micro_000\.ivy2\cache\com.jgoodies\looks\jars\looks-2.2.2.jar;C:\Users\micro_000\.ivy2\cache\edu.stanford.protege\org.protege.editor.core.application\bundles\org.protege.editor.core.application-4.3.0.jar;C:\Users\micro_000\.ivy2\cache\org.eclipse.equinox\registry\jars\registry-3.3.0-v20070522.jar;C:\Users\micro_000\.ivy2\cache\org.eclipse.equinox\common\jars\common-3.6.200-v20130402-1505.jar;C:\Users\micro_000\.ivy2\cache\com.googlecode.mdock\mdock\bundles\mdock-1.1.jar;C:\Users\micro_000\.ivy2\cache\org.testng\testng\jars\testng-6.8.jar;C:\Users\micro_000\.ivy2\cache\junit\junit\jars\junit-4.10.jar;C:\Users\micro_000\.ivy2\cache\org.hamcrest\hamcrest-core\jars\hamcrest-core-1.1.jar;C:\Users\micro_000\.ivy2\cache\org.beanshell\bsh\jars\bsh-2.0b4.jar;C:\Users\micro_000\.ivy2\cache\com.beust\jcommander\jars\jcommander-1.27.jar;C:\Users\micro_000\.ivy2\cache\edu.stanford.protege\org.protege.editor.owl\bundles\org.protege.editor.owl-4.3.0.jar;C:\Users\micro_000\.ivy2\cache\org.eclipse.equinox\org.eclipse.equinox.registry\jars\org.eclipse.equinox.registry-3.5.0.v20100503.jar;C:\Users\micro_000\.ivy2\cache\org.eclipse.core\org.eclipse.core.jobs\jars\org.eclipse.core.jobs-3.5.0.v20100515.jar;C:\Users\micro_000\.ivy2\cache\org.eclipse.equinox\org.eclipse.equinox.common\jars\org.eclipse.equinox.common-3.6.0.v20100503.jar;C:\Users\micro_000\.ivy2\cache\org.eclipse.osgi\org.eclipse.osgi\jars\org.eclipse.osgi-3.6.0.v20100517.jar;C:\Users\micro_000\.ivy2\cache\edu.stanford.protege\protege-owlapi-extensions\bundles\protege-owlapi-extensions-3.2.4.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\owlapi-distribution\bundles\owlapi-distribution-3.5.0.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\owlapi-apibinding\bundles\owlapi-apibinding-3.5.0.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\owlapi-api\bundles\owlapi-api-3.5.0.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\owlapi-impl\bundles\owlapi-impl-3.5.0.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\owlapi-parsers\bundles\owlapi-parsers-3.5.0.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\owlapi-oboformat\bundles\owlapi-oboformat-3.5.0.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\owlapi-tools\bundles\owlapi-tools-3.5.0.jar;C:\Users\micro_000\.ivy2\cache\org.apache.felix\org.osgi.core\bundles\org.osgi.core-1.4.0.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\owlapi-contract\jars\owlapi-contract-3.5.0.jar;C:\Users\micro_000\.ivy2\cache\net.sourceforge.owlapi\jfact\jars\jfact-1.0.0.jar;C:\Users\micro_000\.ivy2\cache\edu.stanford.protege\org.protege.xmlcatalog\bundles\org.protege.xmlcatalog-1.0.3.jar;C:\Users\micro_000\.ivy2\cache\xml-resolver\xml-resolver\jars\xml-resolver-1.2.jar;C:\Users\micro_000\.ivy2\cache\com.hermit-reasoner\org.semanticweb.hermit\jars\org.semanticweb.hermit-1.3.8.3.jar;C:\Users\micro_000\.ivy2\cache\commons-logging\commons-logging\jars\commons-logging-1.1.3.jar;C:\Users\micro_000\.ivy2\cache\org.apache.ws.commons.axiom\axiom-api\jars\axiom-api-1.2.14.jar;C:\Users\micro_000\.ivy2\cache\org.apache.geronimo.specs\geronimo-activation_1.1_spec\bundles\geronimo-activation_1.1_spec-1.1.jar;C:\Users\micro_000\.ivy2\cache\org.apache.geronimo.specs\geronimo-javamail_1.4_spec\bundles\geronimo-javamail_1.4_spec-1.7.1.jar;C:\Users\micro_000\.ivy2\cache\jaxen\jaxen\jars\jaxen-1.1.4.jar;C:\Users\micro_000\.ivy2\cache\org.apache.geronimo.specs\geronimo-stax-api_1.0_spec\bundles\geronimo-stax-api_1.0_spec-1.0.1.jar;C:\Users\micro_000\.ivy2\cache\org.apache.james\apache-mime4j-core\jars\apache-mime4j-core-0.7.2.jar;C:\Users\micro_000\.ivy2\cache\org.apache.ws.commons.axiom\axiom-c14n\bundles\axiom-c14n-1.2.14.jar;C:\Users\micro_000\.ivy2\cache\org.apache.ws.commons.axiom\axiom-impl\bundles\axiom-impl-1.2.14.jar;C:\Users\micro_000\.ivy2\cache\org.codehaus.woodstox\woodstox-core-asl\jars\woodstox-core-asl-4.1.4.jar;C:\Users\micro_000\.ivy2\cache\org.codehaus.woodstox\stax2-api\jars\stax2-api-3.1.1.jar;C:\Users\micro_000\.ivy2\cache\org.apache.ws.commons.axiom\axiom-dom\bundles\axiom-dom-1.2.14.jar;C:\Users\micro_000\.ivy2\cache\dk.brics.automaton\automaton\jars\automaton-1.11-8.jar;C:\Users\micro_000\.ivy2\cache\mysql\mysql-connector-java\jars\mysql-connector-java-5.1.18.jar;C:\Users\micro_000\.ivy2\cache\org.apache.directory.studio\org.apache.commons.io\jars\org.apache.commons.io-2.4.jar;C:\Users\micro_000\.ivy2\cache\commons-io\commons-io\jars\commons-io-2.4.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\webjars-play_2.11\jars\webjars-play_2.11-2.3.0-2.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\requirejs\jars\requirejs-2.1.18.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\webjars-locator\jars\webjars-locator-0.26.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\webjars-locator-core\jars\webjars-locator-core-0.26.jar;C:\Users\micro_000\.ivy2\cache\org.slf4j\slf4j-api\jars\slf4j-api-1.7.7.jar;C:\Users\micro_000\.ivy2\cache\org.apache.commons\commons-compress\jars\commons-compress-1.9.jar;C:\Users\micro_000\.ivy2\cache\com.fasterxml.jackson.core\jackson-databind\bundles\jackson-databind-2.3.3.jar;C:\Users\micro_000\.ivy2\cache\com.fasterxml.jackson.core\jackson-core\bundles\jackson-core-2.3.3.jar;C:\Users\micro_000\.ivy2\cache\org.apache.commons\commons-lang3\jars\commons-lang3-3.4.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\jquery-ui\jars\jquery-ui-1.11.4.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\jquery-mobile\jars\jquery-mobile-1.4.5.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\datatables\jars\datatables-1.10.7.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\bpmn-js\jars\bpmn-js-0.10.3.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\lodash\jars\lodash-2.4.1-6.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\sax\jars\sax-0.6.0.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\Snap.svg\jars\Snap.svg-0.3.0.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\jquery-mousewheel\jars\jquery-mousewheel-3.1.11.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\jquery\jars\jquery-2.1.0-2.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\hammerjs\jars\hammerjs-2.0.3.jar;C:\Users\micro_000\.ivy2\cache\org.webjars\chosen\jars\chosen-1.3.0.jar
-Scala compilation took 11.814878424 s
+Scala compilation took 10.611816764 s
+Java compilation took 2.918806041 s
+Java analysis took 0.536716019 s
+Java compile + analysis took 3.552142782 s
+Invalidating C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java...
+Invalidating (transitively) by inheritance from C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java...
+Initial set of included nodes: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java)
+Invalidated by transitive inheritance dependency: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java)
+The C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java source file has the following regular definitions changed:
+	getRelatedDocuments.
+All member reference dependencies will be considered within this context.
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\DocumentServer.java
+Invalidating C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java...
+Invalidating (transitively) by inheritance from C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java...
+Initial set of included nodes: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java)
+Invalidated by transitive inheritance dependency: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java)
+The C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java source file has the following regular definitions changed:
+	getDataPropertyValue.
+All member reference dependencies will be considered within this context.
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\util\OntologyHelper.java
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\DocumentType.java
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java
+Invalidating C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java...
+Invalidating (transitively) by inheritance from C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java...
+Initial set of included nodes: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java)
+Invalidated by transitive inheritance dependency: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java)
+The C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java source file has the following regular definitions changed:
+	loadFromOntology, <init>.
+All member reference dependencies will be considered within this context.
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\ontology\OntologyHandler.java
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\Document.java
+Name hashing optimization doesn't apply to non-Scala dependency: C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\DocumentServer.java
+New invalidations:
+	Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\DocumentServer.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\DocumentType.java)
+Initial set of included nodes: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\DocumentServer.java, C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\serverModels\document\DocumentType.java)
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\DocumentServer.java)
+Read from stdout: Compiling 2 Java sources to C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes...
+Compiling 2 Java sources to C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes...
+Java compilation took 1.619750173 s
+Java analysis took 0.08986165 s
+Java compile + analysis took 1.776157349 s
 New invalidations:
 	Set()
 Initial set of included nodes: Set()
 Previously invalidated, but (transitively) depend on new invalidations:
 	Set()
 All newly invalidated sources after taking into account (previously) recompiled sources:Set()
-Copy resource mappings: 
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
-Total time: 22 s, completed 15.07.2015 00:26:27
+Total time: 24 s, completed 15.07.2015 00:36:28
 > server-post-command-cleanup
 > server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
-Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@11fceb45, check cycles: false
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@3ab37c08, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -283,15 +175,18 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Copy resource mappings: 
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
-Total time: 7 s, completed 15.07.2015 00:27:22
+Total time: 2 s, completed 15.07.2015 00:36:30
 > server-post-command-cleanup
 > server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
-Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@250b57e9, check cycles: false
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
+Evaluating tasks: compile:mainClass
+Running task... Cancel: sbt.server.ServerTaskCancellation@265644ce, check cycles: false
+Total time: 0 s, completed 15.07.2015 00:36:30
+> server-post-command-cleanup
+> server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
+Evaluating tasks: compile:discoveredMainClasses
+Running task... Cancel: sbt.server.ServerTaskCancellation@1144cecc, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -308,34 +203,6 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Copy resource mappings: 
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
-Total time: 7 s, completed 15.07.2015 00:27:57
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
-Evaluating tasks: *:playForkReload
-Running task... Cancel: sbt.server.ServerTaskCancellation@31f5aed4, check cycles: false
-
-Initial source changes: 
-	removed:Set()
-	added: Set()
-	modified: Set()
-Removed products: Set()
-External API changes: API Changes: Set()
-Modified binary dependencies: Set()
-Initial directly invalidated sources: Set()
-
-Sources indirectly invalidated by:
-	product: Set()
-	binary dep: Set()
-	external source: Set()
-All initially invalidated sources: Set()
-
-Copy resource mappings: 
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
-	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
-Total time: 6 s, completed 15.07.2015 00:29:37
+Total time: 1 s, completed 15.07.2015 00:36:31
 > server-post-command-cleanup
 > server-handle-next-server-request

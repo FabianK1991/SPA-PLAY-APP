@@ -13,6 +13,7 @@ import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -75,6 +76,10 @@ public class OntologyHelper {
         OWLDataFactory factory = OntologyManager.factory;        
         set.add(factory.getOWLDataPropertyAssertionAxiom(dataProp, ind, value));
         return set;
+    }
+    
+    public static Set<OWLLiteral> getDataPropertyValue(OWLNamedIndividual ind, OWLDataProperty dataProp){
+        return ind.getDataPropertyValues(dataProp, OntologyManager.ontology);
     }
     
     public static Set<OWLAxiom> addObjectPropertyAssertion(OWLNamedIndividual boInd, OWLClass boClass, OWLNamedIndividual docInd){

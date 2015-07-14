@@ -4,20 +4,22 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import models.ontology.OntologyManager;
+import models.ontology.util.OntologyHelper;
 
-import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLClassExpression;
 
 public class DocumentType {
 
     public static ArrayList<String> getDocumentTypes(){
         ArrayList<String> res = new ArrayList<String>();
-        Set<OWLClass> classes = OntologyManager.ontology.getClassesInSignature();
+        Set<OWLClassExpression> classes = OntologyHelper.getClassForName("Document").getSubClasses(OntologyManager.ontology);
         
-        for(OWLClass classy:classes){
-            String fragment = classy.getIRI().getFragment();
-            if(fragment.contains("Document") && !fragment.equals("Document")){
+        for(OWLClassExpression classy : classes){
+            for(OWLClassExpression subClass : classy.asOWLClass().getSubClasses(OntologyManager.ontology)){
+                String fragment = subClass.asOWLClass().getIRI().getFragment();
                 res.add(fragment.replaceAll("(.)([A-Z])", "$1 $2"));
             }
+            
         }
         
         return res;
