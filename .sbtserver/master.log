@@ -15152,3 +15152,61 @@ Copy resource mappings:
 Total time: 5 s, completed 14.07.2015 01:48:23
 > server-post-command-cleanup
 > server-handle-next-server-request
+> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/*:playForkReload
+Evaluating tasks: *:playForkReload
+Running task... Cancel: sbt.server.ServerTaskCancellation@6fdad1c9, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\BusinessObjectServer.java)
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\BusinessObjectServer.java)
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\app\models\core\servers\BusinessObjectServer.java)
+
+Read from stdout: Compiling 1 Java source to C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes...
+Compiling 1 Java source to C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes...
+Java compilation took 3.688718787 s
+Java analysis took 0.111930734 s
+Java compile + analysis took 4.006716734 s
+New invalidations:
+	Set()
+Initial set of included nodes: Set()
+Previously invalidated, but (transitively) depend on new invalidations:
+	Set()
+All newly invalidated sources after taking into account (previously) recompiled sources:Set()
+Copy resource mappings: 
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\application.conf,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\application.conf)
+	(C:\Users\micro_000\play-workspace\SPA-PLAY-APP\conf\routes,C:\Users\micro_000\play-workspace\SPA-PLAY-APP\target\scala-2.11\classes\routes)
+Total time: 7 s, completed 14.07.2015 02:04:02
+> server-post-command-cleanup
+> server-handle-next-server-request
+> compile
+Evaluating tasks: compile:compile
+Running task... Cancel: sbt.server.ServerTaskCancellation@2fb4c531, check cycles: false
+
+Initial source changes: 
+	removed:Set()
+	added: Set()
+	modified: Set()
+Removed products: Set()
+External API changes: API Changes: Set()
+Modified binary dependencies: Set()
+Initial directly invalidated sources: Set()
+
+Sources indirectly invalidated by:
+	product: Set()
+	binary dep: Set()
+	external source: Set()
+All initially invalidated sources: Set()
+
+Total time: 1 s, completed 14.07.2015 02:04:03
+> server-post-command-cleanup
+> server-handle-next-server-request
