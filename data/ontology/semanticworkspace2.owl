@@ -1,0 +1,466 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/semanticworkspace"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/semanticworkspace">
+    <Prefix name="" IRI="http://www.semanticweb.org/semanticworkspace#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="semanticworkspace" IRI="http://www.semanticweb.org/semanticworkspace#"/>
+    <Declaration>
+        <Class IRI="#BUS1001"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BUS1001_Document"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BUS2012"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BUS2012_Document"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BillOfMaterial"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BusinessObject"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CompanyDescription"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Document"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EBAN"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EBAN_Document"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LFA1"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LFA1_Document"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MaterialDrawing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PurchaseOrderForm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PurchaseRequisitionForm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#T001"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#T001_Document"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#VendorDescription"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToBO"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToBUS2012"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToBUS2012_Document"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToDocument"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToEBAN"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToEBAN_Document"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToLFA1"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToLFA1_Document"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToT001"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#description"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#id"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#image"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#path"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Document"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#relatedToBO"/>
+            <Class IRI="#BusinessObject"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="#BUS1001"/>
+        <Class IRI="#BusinessObject"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BUS1001_Document"/>
+        <Class IRI="#Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BUS2012"/>
+        <Class IRI="#BusinessObject"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BUS2012_Document"/>
+        <Class IRI="#Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BillOfMaterial"/>
+        <Class IRI="#BUS1001_Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CompanyDescription"/>
+        <Class IRI="#T001_Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EBAN"/>
+        <Class IRI="#BusinessObject"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EBAN_Document"/>
+        <Class IRI="#Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LFA1"/>
+        <Class IRI="#BusinessObject"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LFA1_Document"/>
+        <Class IRI="#Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MaterialDrawing"/>
+        <Class IRI="#BUS1001_Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PurchaseOrderForm"/>
+        <Class IRI="#BUS2012_Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PurchaseRequisitionForm"/>
+        <Class IRI="#EBAN_Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#T001"/>
+        <Class IRI="#BusinessObject"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#T001_Document"/>
+        <Class IRI="#Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#VendorDescription"/>
+        <Class IRI="#LFA1_Document"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#BusinessObject"/>
+        <Class IRI="#Document"/>
+    </DisjointClasses>
+    <DisjointUnion>
+        <Class IRI="#BusinessObject"/>
+        <Class IRI="#BUS1001"/>
+        <Class IRI="#BUS2012"/>
+        <Class IRI="#EBAN"/>
+        <Class IRI="#LFA1"/>
+        <Class IRI="#T001"/>
+    </DisjointUnion>
+    <DisjointUnion>
+        <Class IRI="#Document"/>
+        <Class IRI="#BUS1001_Document"/>
+        <Class IRI="#BUS2012_Document"/>
+        <Class IRI="#EBAN_Document"/>
+        <Class IRI="#LFA1_Document"/>
+        <Class IRI="#T001_Document"/>
+    </DisjointUnion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <ObjectProperty IRI="#relatedToBO"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <ObjectProperty IRI="#relatedToDocument"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToBUS2012"/>
+        <ObjectProperty IRI="#relatedToBO"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToBUS2012_Document"/>
+        <ObjectProperty IRI="#relatedToDocument"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToEBAN"/>
+        <ObjectProperty IRI="#relatedToBO"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToEBAN_Document"/>
+        <ObjectProperty IRI="#relatedToDocument"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToLFA1"/>
+        <ObjectProperty IRI="#relatedToBO"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToLFA1_Document"/>
+        <ObjectProperty IRI="#relatedToDocument"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <ObjectProperty IRI="#relatedToBO"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <ObjectProperty IRI="#relatedToDocument"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#relatedToBO"/>
+        <ObjectProperty IRI="#relatedToDocument"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#relatedToBUS2012"/>
+        <ObjectProperty IRI="#relatedToBUS2012_Document"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#relatedToEBAN_Document"/>
+        <ObjectProperty IRI="#relatedToEBAN"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#relatedToLFA1_Document"/>
+        <ObjectProperty IRI="#relatedToLFA1"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+    </InverseObjectProperties>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToBO"/>
+        <Class IRI="#Document"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <Class IRI="#BUS1001_Document"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <Class IRI="#BUS1001"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToBUS2012"/>
+        <Class IRI="#BUS2012_Document"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToBUS2012_Document"/>
+        <Class IRI="#BUS2012"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToDocument"/>
+        <Class IRI="#BusinessObject"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToEBAN"/>
+        <Class IRI="#EBAN_Document"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToEBAN_Document"/>
+        <Class IRI="#EBAN"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToLFA1"/>
+        <Class IRI="#LFA1_Document"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToLFA1_Document"/>
+        <Class IRI="#LFA1"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <Class IRI="#T001_Document"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <Class IRI="#T001"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToBO"/>
+        <Class IRI="#BusinessObject"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <Class IRI="#BUS1001"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <Class IRI="#BUS1001_Document"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToBUS2012"/>
+        <Class IRI="#BUS2012"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToBUS2012_Document"/>
+        <Class IRI="#BUS2012_Document"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToDocument"/>
+        <Class IRI="#Document"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToEBAN"/>
+        <Class IRI="#EBAN"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToEBAN_Document"/>
+        <Class IRI="#EBAN_Document"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToLFA1"/>
+        <Class IRI="#LFA1"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToLFA1_Document"/>
+        <Class IRI="#LFA1_Document"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <Class IRI="#T001"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <Class IRI="#T001_Document"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#description"/>
+        <Class IRI="#Document"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#id"/>
+        <Class IRI="#Document"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#image"/>
+        <Class IRI="#Document"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#name"/>
+        <Class IRI="#Document"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#path"/>
+        <Class IRI="#Document"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#description"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#id"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#image"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#path"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#BUS1001</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Material.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#BUS1001_Document</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Material Document.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#BUS2012</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Purchase Order.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#BUS2012_Document</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Purchase Order Document.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#EBAN</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Purchase Requisition</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#EBAN_Document</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Purchase Requisition Document.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#LFA1</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Vendor</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#LFA1_Document</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Vendor Document.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#T001</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Company Code.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#T001_Document</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Corresponds to Company Code Document.</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

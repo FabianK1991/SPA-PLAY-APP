@@ -3,13 +3,20 @@ package models.core.serverModels.document;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-
-import org.apache.commons.io.FileUtils;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import models.core.serverModels.businessObject.BusinessObject;
 import models.core.serverModels.businessObject.BusinessObjectInstance;
-import models.ontology.OntologyManager;
+import models.ontology.util.OntologyHelper;
+
+import org.apache.commons.io.FileUtils;
+import org.semanticweb.owlapi.model.OWLDataProperty;
+import org.semanticweb.owlapi.model.OWLDataPropertyExpression;
+import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
+
 import play.mvc.Http.MultipartFormData.FilePart;
 
 public class Document {
@@ -24,9 +31,10 @@ public class Document {
     
     
     public Document(FilePart file, String name){
-        String id = System.currentTimeMillis() + (int)(Math.random()*100) + "" + (int)(Math.random()*100);
+        String id = UUID.randomUUID().toString();
+        String filetype = name.split("\\.")[name.split("\\.").length-1];
         File content = file.getFile();    
-        File f = new File(DOC_PATH + id + "+--++--+" + name);
+        File f = new File(DOC_PATH + id + "." + filetype);
 
         if( !f.exists() ){
             try {
@@ -46,12 +54,28 @@ public class Document {
         
     }
     
-    private Document loadFromOntology(){
-        
-        
-        
-        return null;
+    public Document(OWLNamedIndividual ind, Map<OWLDataPropertyExpression, Set<OWLLiteral>> dataPropertyValues) {
+        ArrayList<String> images = new ArrayList<String>();
+        this.id = ind.getIRI().getFragment();
+        for(OWLDataPropertyExpression dpExp: dataPropertyValues.keySet()){
+            OWLDataProperty dp = dpExp.asOWLDataProperty();
+            if(dp.getIRI().getFragment().equals("description")){
+                this.description = OntologyHelper.getDataPropertyValue(ind, dp).iterator().next().getLiteral();
+            } 
+            else if(dp.getIRI().getFragment().equals("filepath")){
+                this.filepath = OntologyHelper.getDataPropertyValue(ind, dp).iterator().next().getLiteral();
+            }
+            else if(dp.getIRI().getFragment().equals("name")){
+                this.name = OntologyHelper.getDataPropertyValue(ind, dp).iterator().next().getLiteral();
+            }
+            else{
+                images.add(OntologyHelper.getDataPropertyValue(ind, dp).iterator().next().getLiteral());
+            }
+        }
+        this.images = images;
     }
+
+    
     
 	private ArrayList<String> parseImages() {
         // TODO Auto-generated method stub
