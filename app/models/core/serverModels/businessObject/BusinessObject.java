@@ -67,7 +67,7 @@ public class BusinessObject {
 		            	value = values.get(name).toString(); 
 		            }
 		            
-		            Logger.info(key + " " + value);  
+		            //Logger.info(key + " " + value);  
 				} 
 				
 				pis.add(new BusinessObjectInstance(this, bo, properties_names.get(0), values));

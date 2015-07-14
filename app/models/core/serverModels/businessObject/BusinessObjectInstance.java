@@ -232,6 +232,10 @@ public class BusinessObjectInstance {
 	public void addRelatedDocument(FilePart file, String fileName) {
 		
 	}
+	
+	public String getInstanceId(){
+		return this.values.get(this.bo_id);
+	}
 
     public int getDatabaseId() {
         return databaseId;
