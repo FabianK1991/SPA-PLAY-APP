@@ -17,6 +17,7 @@ import controllers.Application;
 import controllers.AuthController;
 import models.spa.api.process.buildingblock.Flow;
 import models.core.exceptions.ActivityInstanceNotFoundException;
+import models.core.exceptions.PhaseNotFoundException;
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.core.util.parsing.ProcessParser;
@@ -170,6 +171,10 @@ public class ProcessInstance {
 				 */
 			}
 		}
+	}
+	
+	public Phase getCurrentPhase() throws PhaseNotFoundException {
+		return this.getCurrentActivities().get(0).getActivity().getPhase();
 	}
 	
 	/*

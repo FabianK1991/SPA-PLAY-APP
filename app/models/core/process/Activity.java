@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Arrays;
 
+import models.core.exceptions.PhaseNotFoundException;
 import models.core.serverModels.businessObject.BusinessObject;
 import models.core.util.parsing.ProcessParser;
 import models.spa.api.process.buildingblock.Flow;
@@ -15,6 +16,7 @@ import play.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import controllers.Application;
 
 @SuppressWarnings("unused")
@@ -74,6 +76,27 @@ public class Activity {
 	public String getBPMN_ID() {
 		
 		return activity.getId();
+	}
+	
+	public Phase getPhase() throws PhaseNotFoundException {
+		Application.db.connect();
+		
+		String query = "SELECT id FROM process_phase_activities WHERE activity = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.getRawId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				return new Phase(rs.getString("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	/*

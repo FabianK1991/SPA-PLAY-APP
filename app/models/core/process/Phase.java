@@ -3,6 +3,7 @@ package models.core.process;
 import java.util.ArrayList;
 
 import controllers.Application;
+import models.core.exceptions.PhaseNotFoundException;
 import models.core.process.ProcessModel;
 import models.core.util.parsing.ProcessParser;
 
@@ -21,7 +22,7 @@ public class Phase {
 		this.pm = pm;
 	}
 	
-	public Phase(String phaseId) throws Exception {
+	public Phase(String phaseId) throws PhaseNotFoundException {
 		Application.db.connect();
 		
 		String query = "SELECT name, process FROM process_phases WHERE id = '%s'";
@@ -32,15 +33,13 @@ public class Phase {
 		ResultSet rs = Application.db.exec(query, args, true);
 		
 		try {
-			ArrayList<Activity> resultList = new ArrayList<Activity>();
-			
 			if(rs.next()){
 				this.id = phaseId;
 				this.name = rs.getString("name");
 				this.pm = new ProcessModel(ProcessParser.nsm + rs.getString("process"));
 			}
 		} catch (Exception e) {
-			throw new Exception("Phase not found!");
+			throw new PhaseNotFoundException();
 		}
 	}
 
