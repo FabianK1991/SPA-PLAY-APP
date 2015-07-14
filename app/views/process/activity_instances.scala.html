@@ -1,92 +1,88 @@
 @import core.process._
 @(processInstance: ProcessInstance = AuthController.getUser().getCurrentProcessInstance())
 
+<div class="activity_instances">
+
 @defining(processInstance.getCurrentActivities()) { activityInstances =>
 	@for(activityInstance <- activityInstances) {
 		@defining(activityInstance.getActivity()) { activity =>
-            @defining(activity.getNextGateway()) { nextGateway =>
-                
-                <div class="activity_instance" data-activity_id="@activity.getRawId()" data-next_activities="@for(nextActivity <- activity.getNextActivities()){@nextActivity.getRawId(),}">
-                
-                    @if(nextGateway != null) {
-                    
-                        <form class="action_gateway" action="@routes.ProcessExecutor.performGatewayAction()" method="@routes.ProcessExecutor.performGatewayAction().method" data-target=".workbench_main">
-                        
-                            <input type="hidden" name="process_instance" value="@processInstance.getId()">
-                            <input type="hidden" name="current_activity" value="@activity.getRawId()">
-                        
-                            <h2>
-                            
-                                @activity.getName()
-                            
-                            </h2>
-                            
-                            <div class="content">
-                            
-                                <div class="task_description gateway_condition">
-                                
-                                    @nextGateway.getCondition()
-                                
-                                </div>
-                            
-                                @nextGateway.getType() match {
-                                    case "XOR" 	=> 	{@actions.gateways.xor(nextGateway)}
-                                    case "OR" 	=> 	{@actions.gateways.or(nextGateway)}
-                                    case "AND" 	=> 	{@actions.gateways.and(nextGateway)}
-                                    case _ 		=>	{@actions.gateways._none(nextGateway)}
-                                }
-                                
-                                <input type="submit" value="Next">
-                            
-                            </div>
-                                
-                        </form>
-                            
-                    } else {
-                    
-                        @defining(activityInstance.getActivity()) { activity =>
-                        
-                            <form action="@routes.ProcessExecutor.performActivity()" method="@routes.ProcessExecutor.performActivity().method" data-target=".workbench_main">
-                            
-                                <input type="hidden" name="process_instance" value="@processInstance.getId()">
-                                <input type="hidden" name="current_activity" value="@activity.getRawId()">
-                                
-                                <div class="task_area">
-                                
-                                    <h2>
-                                    
-                                        @activity.getName()
-                                    
-                                    </h2>
-                                	
-                                    @defining(activity.getBusinessObject()) { businessObject =>
-                                    
-                                    	<div class="content" data-business_objects="@businessObject.getRawId()">
-                                    	
-                                            @activity.getType() match {
-                                                case "select" 	=> 	{@actions.bos.select(activity, businessObject)}
-                                                case "update" 	=> 	{@actions.bos.update(activity, businessObject)}
-                                                case "create" 	=> 	{@actions.bos.create(activity, businessObject)}
-                                                case "delete" 	=> 	{@actions.bos.delete(activity, businessObject)}
-                                                case _ 			=>	{@actions.bos._none(activity)}
-                                            }
-                                            @documents.viewer()
-                                			
-                                        	<input type="submit" value="Next">
-                                        
-                                    	</div>
-                                    
-                                    }
-                                
-                                </div>
-                        
-                            </form>
-                        }
-                    }
-                    
-                </div>
-            
+		
+		<div class="activity-instance" data-activity_id="@activity.getRawId()"">
+		
+			<div class="activity-description">
+			
+			@activity.getType() match {
+	            case "bo_select" 	=> 	{Please select between @activity.getObjectAmountMin() and @activity.getObjectAmountMax() business objects from the table displayed blow.}
+	            case "bo_update" 	=> 	{}
+	            case "bo_create" 	=> 	{}
+	            case "bo_delete" 	=> 	{}
+	            case _ 			=>	{}
             }
-        }
+			
+			</div>
+			
+			<div class="activity-operators">
+			
+			@activity.getType() match {
+	            case "bo_select" 	=> 	{
+					
+					<table class="dataTable">
+				
+					@defining(activity.getBO_Properties()) { boProperties =>
+						
+						<thead>
+						
+							<tr>
+							
+							@for(property <- boProperties) {
+							
+								<td>@property.replaceAll("^([A-Za-z])", "$1".toUpperCase())</td>
+							
+							}
+								
+							</tr>
+						
+						</thead>
+						
+						<tbody>
+						
+						@defining(activity.getBusinessObject()) { businessObject =>
+						
+							@for(boInstance <- businessObject.getAllInstances())) {
+								
+								<tr>
+								
+									@for(property <- boProperties) {
+									
+										<td>@boInstance.getPropertyValue(property)</td>
+									
+									}
+								
+								</tr>
+								
+							}
+						
+						}
+						
+						</tbody>
+					}
+				
+					</table>
+					
+				}
+	            case "bo_update" 	=> 	{}
+	            case "bo_create" 	=> 	{}
+	            case "bo_delete" 	=> 	{}
+	            case _ 			=>	{}
+            }
+			
+			</div>
+		
+		</div>
+		
+		}
 	}
 }
+
+
+</div>

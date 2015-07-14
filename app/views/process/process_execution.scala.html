@@ -1,0 +1,72 @@
+@import core.process._
+@(processInstance: ProcessInstance = null)
+
+@if(processInstance != null) {
+
+	<div class="process-phases">
+	
+		@process.phase_list(processInstance.getProcessModel())
+	
+	</div>
+	
+	<div class="workbench">
+	
+		<div class="workbench-sidebar">
+		
+			<div class="recent-activities">
+			
+				<h2>Recent Activities</h2>
+				
+				<div class="current-activity-name">
+				
+					@processInstance.getCurrentActivities().get(0).getActivity().getName()
+				
+				</div>
+				
+				<ul class="completed-activities">
+				@***
+				@for(completedActivityInstance <- processInstance.getCompletedActivityInstances()) {
+				
+					<li>
+					
+						@compeletedActivityInstance.getActivity().getName()
+					
+					</li>
+				
+				}
+				***@
+				</ul>
+			
+			</div>
+			
+			<div class="document-explorer">
+			
+				<h2>Related Documents</h2>
+				
+				<div class="related-documents">
+				
+					
+				
+				</div>
+			
+			</div>
+		
+		</div>
+		
+		<div class="workbench-main">
+		
+			@process.activity_instances(processInstance)
+		
+		</div>
+	
+	</div>
+
+} else {
+
+	<div class="info">
+	
+		You are currently not executing a process.
+	
+	</div>
+
+}

@@ -30,19 +30,6 @@
 			
 			<tbody>
 			
-				@for(boInstance <- BusinessObjectInstance.getAll(businessObject)) {
-					
-					<tr>
-					
-						for(attr <- boAttributes) {
-						
-							<td>boInstance.getPropertyValue(attr)</td>
-						
-						}
-					
-					</tr>
-					
-				}
 			
 			</tbody>
 		}

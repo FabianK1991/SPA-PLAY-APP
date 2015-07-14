@@ -135,10 +135,12 @@ margin: 0;
 .process_model_viewer {
 width: 100%;
 height: 100%;
+background-color: rgba(250,250,250,1);
 }
 
 .process_model {
 position: absolute;
+background-color: #ffffff;
 -webkit-transition: all 1s; /* Safari */
 transition: all 1s;
 }
