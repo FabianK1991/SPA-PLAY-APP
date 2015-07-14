@@ -177,6 +177,54 @@ public class ProcessInstance {
 		return this.getCurrentActivities().get(0).getActivity().getPhase();
 	}
 	
+	public List<ActivityInstance> getCompletedActivities(){
+		Set<models.spa.api.process.buildingblock.instance.ActivityInstance> instances = this.pi.getActivities();
+		List<ActivityInstance> resultList = new ArrayList<ActivityInstance>();
+		
+		models.spa.api.process.buildingblock.instance.ActivityInstance latestInstance = null;
+		
+		for (models.spa.api.process.buildingblock.instance.ActivityInstance instance : instances) {
+			SimpleDateFormat inFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+			
+			try {
+				Date dtIn = inFormat.parse(instance.getDateTime());
+				
+				if( latestInstance == null || dtIn.getTime() > inFormat.parse(latestInstance.getDateTime()).getTime() ){
+					//resultList.clear();
+					latestInstance = instance;
+				}
+				
+				resultList.add(new ActivityInstance(instance.getId(), this));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				continue;
+			} catch (ActivityInstanceNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				continue;
+			}
+	    }
+		
+		if( latestInstance != null ){
+			resultList.remove(latestInstance);
+			
+			return resultList;
+		}
+		else{
+			// get start activity
+			//models.spa.api.process.buildingblock.Activity a = this.getStartActivity();
+			
+			// should be empty anyway
+			resultList.clear();
+			//resultList.add(ActivityInstance.create(this, new Activity(a.getId(), this.pm)));
+			
+			return resultList;
+		}
+	}
+	
 	/*
 	 * Returns the ActivityInstance currently active in the ProcessInstance
 	 */
