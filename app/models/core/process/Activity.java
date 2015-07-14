@@ -76,6 +76,27 @@ public class Activity {
 		return activity.getId();
 	}
 	
+	public Phase getPhase() throws Exception {
+		Application.db.connect();
+		
+		String query = "SELECT id FROM process_phase_activities WHERE activity = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.getRawId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				return new Phase(rs.getString("id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	/*
 	 * Todo fabi
 	 * Returns the type of action (create, update, select, delete) of this Activity

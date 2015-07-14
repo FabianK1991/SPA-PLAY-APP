@@ -172,6 +172,10 @@ public class ProcessInstance {
 		}
 	}
 	
+	public Phase getCurrentPhase() throws Exception {
+		return this.getCurrentActivities().get(0).getActivity().getPhase();
+	}
+	
 	/*
 	 * Returns the ActivityInstance currently active in the ProcessInstance
 	 */

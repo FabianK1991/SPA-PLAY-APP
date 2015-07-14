@@ -32,8 +32,6 @@ public class Phase {
 		ResultSet rs = Application.db.exec(query, args, true);
 		
 		try {
-			ArrayList<Activity> resultList = new ArrayList<Activity>();
-			
 			if(rs.next()){
 				this.id = phaseId;
 				this.name = rs.getString("name");
