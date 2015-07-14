@@ -78,7 +78,6 @@ margin: 2%;
 padding: 0.3em 0.2em;
 line-height: 1.1em;
 vertical-align: middle;
-text-align: center;
 font-size: 1em;
 border-top: 1px solid #E7E7E7;
 border-left: 1px solid #E7E7E7;
@@ -87,13 +86,14 @@ border-bottom: 1px solid transparent;
 -webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 -moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+border-radius: 5px;
 }
 
 input[type="file"] {
 margin: 2%;
 }
 
-input[type="submit"] {
+input[type="submit"], body > *:not(.ui-dialog) button {
 max-width: 32%;
 margin-left: 66%;
 font-weight: 600;
@@ -102,14 +102,13 @@ background-color: #52B415;
 -webkit-box-shadow: 1px 1px 1px 0px rgba(190, 190, 190, 0.5);
 -moz-box-shadow: 1px 1px 1px 0px rgba(190, 190, 190, 0.5);
 box-shadow: 1px 1px 1px 0px rgba(190, 190, 190, 0.5);
+border-radius: 5px;
 }
 
-input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"]:focus {
+input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"]:focus, body > *:not(.ui-dialog) button:hover, body > *:not(.ui-dialog) button:active, body > *:not(.ui-dialog) button:focus {
 -webkit-box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 -moz-box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
 box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
-border-right: 1px solid #E7E7E7;
-border-bottom: 1px solid #E7E7E7;
 cursor: pointer;
 }
 
@@ -133,19 +132,13 @@ z-index: 5;
 margin: 0;
 }
 
-.process_model_viewer, .workbench > * {
-background-color: #ffffff;
-border-top: 1px solid rgba(0, 0, 0, 0.2);
-border-left: 1px solid rgba(0, 0, 0, 0.2);
-
--webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
--moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
-
-overflow: hidden;
+.process_model_viewer {
+width: 100%;
+height: 100%;
 }
 
 .process_model {
+position: absolute;
 -webkit-transition: all 1s; /* Safari */
 transition: all 1s;
 }
@@ -166,18 +159,6 @@ fill: #52B415;
 
 .process_model .current-activity text {
 fill: #ffffff;
-}
-
-.workbench {
-height: 48%;
-position: relative;
-margin-top: 1.5%;
-}
-
-.workbench > * {
-position: absolute;
-top: 0;
-bottom: -1px;
 }
 
 .workbench_main {
@@ -247,7 +228,7 @@ text-align: center;
 }
 
 a {
-color: rgb(249, 255, 0);
+color: #52B415;
 }
 
 
@@ -362,7 +343,7 @@ clear: both;
 
 
 
-.nav {
+.nav.fixed {
 width: auto;
 max-width: 30%;
 position: fixed;
@@ -373,11 +354,11 @@ z-index: 1;
 cursor: pointer;
 }
 
-.nav:hover ul {
+.nav.fixed:hover ul {
 height: 4.1em;/* 2 + 1.3*|a| */
 }
 
-.nav ul {
+.nav.fixed ul {
 height: 0em;
 list-style: none;
 overflow: hidden;
@@ -385,7 +366,7 @@ overflow: hidden;
 transition: height 1s;
 }
 
-.nav a {
+.nav.fixed a {
 display: block;
 padding-left: 10px;
 padding-right: 10px;
@@ -394,15 +375,15 @@ padding-bottom: 0.3em;
 color: #ffffff;
 }
 
-.nav a:hover {
+.nav.fixed a:hover {
 background-color: #6FD32E;
 }
 
-.nav li:first-child a {
+.nav.fixed li:first-child a {
 padding-top: 0.5em;
 }
 
-.nav li:last-child a {
+.nav.fixed li:last-child a {
 padding-bottom: 1em;
 }
 
@@ -731,13 +712,20 @@ width: 100%;
 
 /* Process Modeler */
 .view-processModeler #content {
-display: table;
 position: absolute;
 top: 100px;
 margin-top: 1%;
 left: 0;
 right: 0;
 bottom: 0;
+}
+
+.process_modeler {
+display: table;
+width: 100%;
+height: 100%;
+border-spacing: 1vw;
+table-layout: fixed;
 }
 
 .view-processModeler .process_model_viewer, .view-processModeler .workbench {
@@ -753,9 +741,264 @@ margin-right: 1%;
 width: 40%;
 }
 
+.workbench > section:not(:target) {
+display: none;
+}
+
+.workbench > section > * {
+padding: 2%;
+}
+
+.activity-config, .activity-config > *, .phase-list {
+position: relative;
+}
+
+.phase-list {
+list-style-type: none;
+}
+
+.phase-list li {
+margin-left: 40px;
+  margin-right: 2%;
+  margin-bottom: 3%;
+  padding: 0.4em 0.2em;
+  padding-left: 0.6em;
+  background-color: #52B415;
+  color: #ffffff;
+  font-weight: bold;
+  counter-increment: list;
+  border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+cursor: pointer;
+}
+
+.phase-list li::before {
+  display: block;
+  width: 1.2em;
+  height: inherit;
+  position: absolute;
+  left: 2%;
+  margin-top: -0.4em;
+  padding: inherit;
+  text-align: center;
+  font-weight: normal;
+  background-color: #52B415;
+  border-right: 2px solid rgba(255, 255, 255, 0.5);
+  content: counter(list) ".";
+  border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+
+.phase-list .delete-button {
+background-color: transparent;
+}
+
+.phase-list .delete-button, .phase-list .hover .delete-button {
+background-color: #ffffff;
+color: #52B415;
+}
+
+.phase-list .delete-button:hover {
+background-color: #ffffff;
+color: #900;
+}
+
+.phase-list li.selected, .phase-list li.selected::before {
+background-color: #449911;
+}
+
+/* Mark Phase Activities */
+.process_model .phase-activity .djs-visual rect {
+fill: #52B415;
+}
+
+.process_model .phase-activity text {
+fill: #ffffff;
+}
 
 
 /* Process Modeler - Overview */
 body.view-manageProcessModels {
 overflow-y: scroll;
+}
+
+.bo-quantity-changer input {
+display: inline-block;
+width: 3em!important;
+}
+
+
+/* Process Model Viewer */
+.zoom-control {
+display: table;
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+border-spacing: 0.8em;
+}
+
+.zoom-control > * {
+display: table-cell;
+position: relative!important;
+margin: 0!important;
+padding-left: 0!important;
+vertical-align: middle;
+}
+
+.zoom-control .zoom-out {
+padding-bottom: 0.2em;
+}
+
+.zoom-control .zoom-range {
+width: auto!important;
+box-shadow: none!important;
+vertical-align: -0.77em!important;
+}
+
+.zoom-control .reset {
+display: none;
+}
+
+
+/* General Layout Components */
+form {
+position: relative;
+}
+
+form.add input[type="text"] {
+padding-left: 2.5em;
+}
+form.add input[type="submit"], body > *:not(.ui-dialog) button {
+position: absolute;
+top: 0px;
+width: 1em;
+height: 1.05em;
+line-height: 0.4em;
+padding-left: 0.22em;
+font-size: 2em;
+box-shadow: none;
+}
+
+form.add input[type="submit"] {
+border-top-right-radius: 0px;
+border-bottom-right-radius: 0px;
+}
+
+.box {
+margin: 1%;
+
+background-color: #ffffff;
+border-top: 1px solid rgba(0, 0, 0, 0.2);
+border-left: 1px solid rgba(0, 0, 0, 0.2);
+
+-webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+-moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+
+overflow: hidden;
+}
+
+.nav.horizontal {
+display: table;
+width: 100%;
+height: auto;
+border-spacing: 0;
+table-layout: fixed;
+background-color: #52B415;
+}
+
+.nav.horizontal > * {
+display: table-cell;
+text-align: center;
+}
+
+.nav.horizontal * {
+color: #ffffff;
+}
+
+.nav.horizontal > * > * {
+display: block;
+width: 100%;
+height: 100%;
+padding: 0.7em 0.2em;
+}
+
+.nav.horizontal > .active {
+background-color: #ffffff;
+color: #52B415;
+}
+
+.nav.horizontal > .active:not(:last-child) {
+border-right: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.nav.horizontal > *:not(.active):not(:last-child) {
+box-shadow: inset -1px -1px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.nav.horizontal > *:not(.active):last-child {
+box-shadow: inset 1px -1px 1px 0px rgba(0, 0, 0, 0.4);
+}
+
+.nav.horizontal .active * {
+color: #52B415;
+}
+
+.nav.horizontal > *:not(.active):hover {
+background-color: rgba(255, 255, 255, 0.2);
+}
+
+.chosen-container {
+margin: 2%!important;
+font-size: 1em!important;
+}
+
+.chosen-container > * {
+padding: 0.3em 0.2em!important;
+height: auto!important;
+}
+
+.chosen-container div b {
+background-position: 0 0.45em!important;
+}
+
+.chosen-container-single .search-choice-close {
+top: 0.70em!important;
+font-size: inherit!important;
+}
+
+
+
+/* Dialogs for Confirmation */
+#dialog-delete {
+display: none;
+font-size: 0.8em;
+}
+
+
+/* Delete Button */
+.delete-button {
+  display: none;
+  width: 1.1em;
+  height: 1.1em;
+  float: right;
+  line-height: 0.5em;
+  vertical-align: middle;
+  margin-right: 0.2em;
+  padding: 0.2em 0.3em;
+  background-color: #900;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover, .hover > .delete-button {
+background-color: #900;
+}
+
+*:hover > .delete-button, .hover > .delete-button {
+display: inline-block;
 }

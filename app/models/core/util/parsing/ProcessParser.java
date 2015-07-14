@@ -30,6 +30,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import controllers.Application;
+
 
 public class ProcessParser {
 	
@@ -65,6 +67,20 @@ public class ProcessParser {
 		for(Element e: this.flows){
 			this.createFlow(e, pm);
 		}
+	}
+	
+	private void insertActivity(String pm_id, String activity_id){
+		Application.db.connect();
+		
+		String query = "INSERT INTO process_activities (process_model,activity_id) VALUES ('%s','%s')";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(pm_id);
+		args.add(activity_id);
+		
+		Application.db.exec(query, args, false);
+
+		return;
 	}
 	
 	/*
@@ -114,6 +130,8 @@ public class ProcessParser {
 		
 		switch(name){
 			// Node is a task
+			case "receiveTask":
+			case "sendTask":
 			case "task":
 				//System.out.println("Task!");
 				Element el = (Element)n;
@@ -134,6 +152,7 @@ public class ProcessParser {
 				// add activity to process model
 				pm.getSPAProcessModel().getNodes().add(a);
 				
+				this.insertActivity(pm.getRawId(), a.getId().replace(ProcessParser.nsm, ""));
 				
 				// Input Association
 				NodeList dataAssociations = el.getElementsByTagNameNS("*", "sourceRef");

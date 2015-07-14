@@ -2,32 +2,39 @@
 @(activity: Activity = null)
 
 <div class="activity_designer">
-	
-	<form class="auto-submit" action="@routes.ActivityDesigner.changeActivityName()" method="@routes.ActivityDesigner.changeActivityName().method">
-	
-		<input type="text" name="activity_name" value="@activity.getName()" />
-	
+
+	<form class="auto-submit"
+		action="@routes.ActivityDesigner.changeActivityName(activity.getModel().getRawId(), activity.getRawId())"
+		method="@routes.ActivityDesigner.changeActivityName(activity.getModel().getRawId(), activity.getRawId()).method">
+		
+		<label for="activity_type">Corrently selected activity:</label>
+		<input type="text" name="activity_name" value="@activity.getName()" disabled />
+
 	</form>
-	
-	<form class="auto-submit" action="@routes.ActivityDesigner.changeActivityType()" method="@routes.ActivityDesigner.changeActivityType().method">
-	
-		<select name="acitivty_type">
+
+	<form class="auto-submit"
+		action="@routes.ActivityDesigner.changeActivityType(activity.getModel().getRawId(), activity.getRawId())"
+		method="@routes.ActivityDesigner.changeActivityType(activity.getModel().getRawId(), activity.getRawId()).method"
+		data-target=".activity-config">
 		
-		@defining(activity.getType()) { activityType =>
+		<label for="activity_type">Which kind of activity needs to be performed?</label>
+		<select name="activity_type" data-placeholder="Choose an Activity Type...">
 		
-		@for((typeId, typeName) <- Activity.getTypes()) {
+		@defining(activity.getType()) { activityType => 
 		
+			@for((typeId, typeName) <- Activity.getTypes()) {
+
 			<option value="@typeId"@if(typeId.equals(activityType)){selected}>@typeName</option>
-		
+
+			} 
+			
 		}
-		
-		}
-		
+
 		</select>
-	
+
 	</form>
-	
-	<div class="activity_config">
+
+	<div class="activity-config">
 	
 		@activity_config(activity)
 	

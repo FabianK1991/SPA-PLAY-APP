@@ -40,7 +40,7 @@ var markCurrentActivities = function(BpmnViewer, obj) {
     
     activityNodes.each(function() {
         $(this).attr('class', $(this).attr('class').replace('current-activity', ''));
-    })
+    });
     
     $('.activity_instance').each(function() {
         var currentActivityNodes = $('g[data-element-id="' + $(this).data('activity_id') + '"]', obj);
@@ -111,57 +111,115 @@ var markCurrentActivities = function(BpmnViewer, obj) {
     });
 };
 
-var jsSet = function() {
-    require(['bpmn-viewer'], function(BpmnViewer) {
-        
-        var getLoadingCallback = function(obj) {
+getLoadingCallback = function(BpmnViewer, obj) {
+        try {
             var bpmnViewer = new BpmnViewer({
                 container: $('.process_model', obj)
             });
-            
-            // import function
-            return function(xml) {
-                // import diagram
-                bpmnViewer.importXML(xml, function(err) {
-                
-                    if (err) {
-                        return console.error('could not import BPMN 2.0 diagram', err);
-                    }
-                    
-                    $('.loader', obj).remove();
-                    
-                    var canvas = bpmnViewer.get('canvas'),
-                      overlays = bpmnViewer.get('overlays');
-                    
-                    
-                    // zoom to fit full viewport
-                    /*currently no zooming!
-                    canvas.zoom(0.6);
-                    
-                    $('g.viewport', obj).attr('transform', '');
-                    */
-                    var viewport = $('g.viewport', obj)[0].getBoundingClientRect();
-                    
-                    $('.process_model', obj).data('w', viewport.width).data('h', viewport.height).css({width: viewport.width + 'px', height: viewport.height + 'px'});
-                    
-                    markCurrentActivities(BpmnViewer, obj);
-                    
-                    $(window).resize(function() {
-                        markCurrentActivities(BpmnViewer, obj);
-                    });
-                });
-            };
-        };
+        }
+        catch(e) {
+            console.log(e);
+            return false;
+        }
         
+        // import function
+        return function(xml) {
+            // import diagram
+            bpmnViewer.importXML(xml, function(err) {
+            
+                if (err) {
+                    return console.error('could not import BPMN 2.0 diagram', err);
+                }
+                
+                $('.loader', obj).remove();
+                
+                var canvas = bpmnViewer.get('canvas'),
+                  overlays = bpmnViewer.get('overlays');
+                
+                
+                // zoom to fit full viewport
+                /*currently no zooming!
+                canvas.zoom(0.6);
+                
+                $('g.viewport', obj).attr('transform', '');
+                */
+                var viewport = $('g.viewport', obj)[0].getBoundingClientRect();
+                
+                $('.process_model', obj).data('w', viewport.width).data('h', viewport.height).css({width: viewport.width + 'px', height: viewport.height + 'px'});
+                
+                markCurrentActivities(BpmnViewer, obj);
+                activatePanZoom(obj);
+                
+                if (obj.parents('.process_modeler').length > 0) {
+                    $('g[data-element-id*="Task_"]')
+                        .each(function() {
+                            var submitForm = $('<form>').attr('method', 'get').attr('action', '/activityDesigner?model=' + obj.data('process_model') + '&activity=' + $(this).data('element-id')).data('target', '#activity-designer');
+                            
+                            $(this).append(submitForm);
+                        })
+                        .on('vclick', function() {
+                            if (location.hash == '#activity-designer') {
+                                $('form', this).trigger('submit');
+                            }
+                            else {
+                                var phase = $('.phase-list .selected');
+                                
+                                if (phase.length == 1) {
+                                    var activityId = $(this).attr('data-element-id');
+                                    
+                                    if ($(this).attr('class').indexOf('phase-activity') != -1) {
+                                        $('.delete-form').attr('method', 'post').attr('action', phase.data('delete-activity').replace('_placeholder_', activityId)).submit();
+                                        
+                                        phase.data('activities', phase.data('activities').replace(activityId + '|', ''));
+                                        
+                                        $(this).attr('class', $(this).attr('class').replace('phase-activity', ''));
+                                    }
+                                    else {
+                                        $('.delete-form').attr('method', 'post').attr('action', phase.data('add-activity').replace('_placeholder_', activityId)).submit();
+                                        
+                                        phase.data('activities', phase.data('activities') + activityId + '|');
+                                        
+                                        $(this).attr('class', $(this).attr('class') + ' phase-activity');
+                                    }
+                                }
+                            }
+                        })
+                        .css('cursor', 'pointer');
+                    
+                    jsSet();
+                }
+                $(window).resize(function() {
+                    markCurrentActivities(BpmnViewer, obj);
+                });
+            });
+        };
+    };
+
+loadBPMNviewers = function() {
+    
+};
+
+var jsSet = function() {
+    require(['bpmn-viewer', 'jquery-panzoom'], function(BpmnViewer) {
         $('.process_model_viewer')
             .each(function() {
                 if ($(this).data('set') != 1) {
-                    $.get("/process/" + $(this).data('process_model'), getLoadingCallback($(this)), 'text');
+                    callbackFunction = getLoadingCallback(BpmnViewer, $(this));
+                    
+                    if (callbackFunction == false) {console.log('no callback...');
+                        setTimeout(function() {
+                            loadBPMNviewers();
+                        }, 200);
+                        return false;                       
+                    }
+                    $.get("/process/" + $(this).data('process_model'), callbackFunction, 'text');
+                    
+                    $(this).data('set', 1);
                 }
                 if ($('.loader', this).length == 0) {
-                    markCurrentActivities(BpmnViewer, $(this));
+                    //markCurrentActivities(BpmnViewer, $(this));
                 }
-            }).data('set', 1);
+            });
     });
 
     require(['datatables'], function(DataTables) {
@@ -176,73 +234,234 @@ var jsSet = function() {
     });
 
     require(['jquery-ui'], function() {
-        $('form:not(.upload)')
-            .each(function() {
-                if ($(this).data('set') != 1) {
-                    if ($(this).parent().is('.process_selector')) {
-                        $('select', this).on('change', function() {
-                            console.log('auto-submit');
-                            $(this).submit();
-                        });
+        $(document).bind("mobileinit", function () {
+            $.mobile.linkBindingEnabled = false;
+            $.mobile.ajaxEnabled = false;
+            $.mobile.ajaxLinksEnabled = false;
+            $.mobile.ajaxFormsEnabled = false;
+            $.extend($.mobile, {autoInitializePage: false});
+        });
+        
+        if ($('body').data('dialog-delete') === undefined) {
+            $('body').append($('<form>').addClass('delete-form'));
+            
+            var dialog = $.ui.dialog({
+                resizable: false,
+                modal: true,
+                autoOpen: false,
+                buttons: {
+                    "Delete": function() {
+                        var obj = $('body').data('delete-object');
+                        
+                        var deleteForm = $('.delete-form').attr('method', 'post').attr('action', obj.data('delete'));
+                        
+                        deleteForm.submit();
+                        
+                        obj.remove();
+                        
+                        $('body').data('dialog-delete').close();
+                    },
+                    Cancel: function() {
+                        $('body').data('dialog-delete').close();
                     }
-                    $(this).on('submit', function(e) {
-                        e.preventDefault();
-                        
-                        var targets = new Array();
-                        
-                        var targetNodes = $(this).data('target').split('|');
-                        
-                        for (key in targetNodes) {
-                            var target = $(targetNodes[key]);
-                            
-                            targets[key] = target;
-                            target.prepend('<div class="loader">Receiving data</loader>');
+                }
+            }, $('#dialog-delete'));
+            
+            $('body').data('dialog-delete', dialog);
+        }
+        
+        require(['jquery-mobile'], function() {
+            $('.nav > *')
+                .each(function() {
+                    if ($(this).data('set') != 1) {
+                        if ($('a', this).prop('href') == location.href) {
+                            $(this).addClass('active');
+                            location.href = $('a', this).prop('href');
                         }
-                        $.ajax({
-                            type: $(this).attr('method'),
-                            url: $(this).attr('action') + '?contentonly',
-                            data: $(this).serialize(),
-                            success: function(re) {
-                                re = re.split('|');
+                        $(this).on('vclick', function() {
+                            $('> *', $(this).parent()).removeClass('active');
+                            $(this).addClass('active');
+                        })
+                    }
+                })
+                .data('set', 1);
+            
+            $('form:not(.upload)')
+                .each(function() {
+                    if ($(this).data('set') != 1) {
+                        if ($(this).hasClass('auto-submit')) {
+                            $('select', this).on('change', function() {
+                                $(this).parents('form').submit();
+                            });
+                            $('input', this).on('change', function() {
+                                var form = $(this).parents('form');
                                 
-                                var i = 0;
+                                oldCT = form.data('auto-submit-ct');
                                 
-                                while (i < targets.length) {
-                                    var target = targets[i];
-                                    
-                                    $('.loader', target).remove();
-                                    
-                                    if (re[i] !== undefined) {
-                                        target.html(re[i]);
-                                    }
-                                    i++;
+                                if (oldCT !== undefined) {
+                                    clearTimeout(oldCT);
                                 }
-                                console.log(re);
-                                if (re[i] !== undefined) {
-                                    $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
-                                    
-                                    if (window.history.pushState) {
-                                        window.history.pushState(null, null, re[i]);
-                                    }
-                                    else {
-                                        window.location = location.href.substr(0, strpos(location.href, '#')) + '#' + re[i];
-                                    }
-                                }
-                                jsSet();
-                            },
-                            error: function(re) {
-                                alert('Request error:\n\n' + re.responseText);
+                                var ct = setTimeout(function() {
+                                    form.submit();
+                                }, 1000);
+                                form.data('auto-submit-ct', ct);
+                            });
+                        }
+                        $(this).on('submit', function(e) {
+                            e.preventDefault();
+                            
+                            var targets = new Array();
+                            
+                            var targetData = $(this).data('target');
+                            
+                            if (targetData != null) {
+                                var targetNodes = targetData.split('|');
                                 
-                                for (key in targets) {
-                                    $('.loader', targets[key]).remove();
+                                for (key in targetNodes) {
+                                    var target = $(targetNodes[key]);
+                                    
+                                    targets[key] = target;
+                                    target.prepend('<div class="loader">Receiving data</loader>');
                                 }
                             }
+                            requestURL = $(this).attr('action');
+
+                            if (requestURL.indexOf('?') == -1) {
+                                requestURL = requestURL + '?';
+                            }
+                            else {
+                                requestURL = requestURL + '&';
+                            }
+                            requestURL = requestURL + 'contentonly';
+                            
+                            $.ajax({
+                                type: $(this).attr('method'),
+                                url: requestURL,
+                                data: $(this).serialize(),
+                                success: function(re) {
+                                    re = re.split('||');
+                                    
+                                    var i = 0;
+                                    
+                                    while (i < targets.length) {
+                                        var target = targets[i];
+                                        
+                                        $('.loader', target).remove();
+                                        
+                                        if (re[i] !== undefined) {
+                                            target.html(re[i]);
+                                        }
+                                        i++;
+                                    }
+                                    
+                                    if (re[i] !== undefined && re[i] != '') {
+                                        $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
+                                        
+                                        if (window.history.pushState) {
+                                            window.history.pushState(null, null, re[i]);
+                                        }
+                                        else {
+                                            window.location = location.href.substr(0, strpos(location.href, '#')) + '#' + re[i];
+                                        }
+                                    }
+                                    jsSet();
+                                },
+                                error: function(re) {
+                                    alert('Request error:\n\n' + re.responseText);
+                                    
+                                    for (key in targets) {
+                                        $('.loader', targets[key]).remove();
+                                    }
+                                }
+                            });
+                            return false;
                         });
-                        return false;
+                    }
+                }).data('set', 1);
+            
+            $('*[data-delete]:not(.delete-set)')
+                .prepend('<div class="delete-button">x</div>')
+                .on('tap', function() {
+                    var isHover = $(this).hasClass('hover');
+                    
+                    $('*').removeClass('hover');
+                    
+                    if (isHover == false) {
+                        $(this).addClass('hover');
+                    }
+                })
+                .addClass('delete-set');
+            
+            $('.delete-button:not(.set)')
+                .on('vclick', function() {
+                    var obj = $(this).parent();
+                    
+                    $('body').data('delete-object', obj);
+                    
+                    $('body').data('dialog-delete').open();
+                })
+                .addClass('set');
+            
+            $('.phase-list li:not(.set)')
+                .on('vclick', function() {
+                    var isSelected = $(this).hasClass('selected');
+                    
+                    $('.phase-list li').removeClass('selected');
+                    
+                    $('g[data-element-id*="Task_"]').each(function() {
+                        $(this).attr('class', $(this).attr('class').replace('phase-activity', ''));
                     });
-                }
-            }).data('set', 1);
+                    
+                    if (isSelected) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        $(this).addClass('selected');
+                        
+                        phaseActivities = $(this).data('activities').split('|');
+                        
+                        $('g[data-element-id*="Task_"]')
+                            .each(function() {
+                                if ($.inArray($(this).attr('data-element-id'), phaseActivities) != -1) {
+                                    $(this).attr('class', $(this).attr('class') + ' phase-activity');
+                                }
+                            });
+                    }
+                })
+                .addClass('set');
+            
+            $('.process_modeler .nav a[href="#activity-designer"]:not(.set)')
+                .on('vclick', function() {
+                    $('.phase-list li.selected').trigger('vclick');
+                })
+                .addClass('set');
+        });
     });
+    
+    require(['chosen'], function() {
+        $('body:not(.view-manageProcessModels) select')
+            .each(function() {
+                if ($('option[selected], option.default', this).length == 0) {
+                    $(this).prepend('<option class="default" selected></option>');
+                }
+            })
+            .chosen({allow_single_deselect: false});
+    });
+};
+
+activatePanZoom = function(modelViewers) {
+    modelViewers
+        .each(function() {
+            $('.process_model', this)
+                .panzoom({
+                    $zoomIn: $(".zoom-in", this),
+                    $zoomOut: $(".zoom-out", this),
+                    $zoomRange: $(".zoom-range", this),
+                    $reset: $(".reset", this),
+                    contain: 'invert'
+                })
+                .addClass('zoom-ready');
+        });
 };
 
 jsSet();

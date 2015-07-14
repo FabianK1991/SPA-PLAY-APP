@@ -1,6 +1,8 @@
 package models.util.http;
 
 import java.util.Map;
+
+import play.Logger;
 import play.mvc.Controller;
 
 public class Parameters {
@@ -13,18 +15,32 @@ public class Parameters {
 	 * @param key The key of the part of the POST.
 	 * @return The parameters of the key.
 	 */
-	public static String get(String key){
-		if (requestData == null) {
-			requestData = Controller.request().body().asFormUrlEncoded();
-		}
-		if (requestData == null) {
-			requestData = Controller.request().body().asMultipartFormData().asFormUrlEncoded();
-		}
+	public static String get(String key, int num){
+		String[] data = getAll(key);
 		
-		if(requestData.containsKey(key)){
-			return requestData.get(key)[0];
+		return data[num];
+	}
+	
+	public static String get(String key){
+		return get(key, 0);
+	}
+	
+	public static String[] getAll(String key) {
+		try {
+			if (requestData == null) {
+				requestData = Controller.request().body().asFormUrlEncoded();
+			}
+			if (requestData == null) {
+				requestData = Controller.request().body().asMultipartFormData().asFormUrlEncoded();
+			}
+			if(requestData.containsKey(key)){
+				return requestData.get(key);
+			}
 		}
-		return "";
+		catch(Exception e) {
+			
+		}
+		return new String[0];
 	}
 	
 	public static void clearRequestData() {

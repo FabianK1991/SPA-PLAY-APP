@@ -1,10 +1,19 @@
 @import core.process._
 @(processModel: ProcessModel)
 
-<div class="process_model_viewer" data-process_model="@processModel.getId()">
+<div class="process_model_viewer box" data-process_model="@processModel.getRawId()">
 
 	<div class="loader">Process visualization in progress</div>
 
 	<div class="process_model"></div>
+	
+	<div class="zoom-control">
+	
+		<button class="zoom-out">-</button>
+		<input type="range" class="zoom-range">
+		<button class="zoom-in">+</button>
+		<button class="reset">Reset</button>
+	
+	</div>
 
 </div>

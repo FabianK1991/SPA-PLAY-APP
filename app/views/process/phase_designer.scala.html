@@ -3,19 +3,20 @@
 
 <div class="phase_designer">
 
-	<ul class="phase-list>
+	<div class="phase-list">
 	
-	@for(phase <- processModel.getPhases()) {
+		@phase_list(processModel)
 	
-		<li data-delete="@routes.PhaseDesigner.deletePhase(processModel.getRawId())" data-phase_id="@phase.getId()">@phase.getName()</li>
-	
-	}
-	
-	</ul>
-	
-	<form action="@routes.PhaseDesigner.createPhase(processModel.getRawId())">
+	</div>
+
+	<form class="add"
+		action="@routes.PhaseDesigner.createPhase(processModel.getRawId())"
+		method="@routes.PhaseDesigner.createPhase(processModel.getRawId()).method"
+		data-target=".phase-list">
+		
 		<input type="text" name="phase_name" value="Create a new phase..." />
 		<input type="submit" value="+" />
+	
 	</form>
 
 </div>

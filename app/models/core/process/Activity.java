@@ -21,6 +21,7 @@ import controllers.Application;
 public class Activity {
 	private models.spa.api.process.buildingblock.Activity activity;
 	private ProcessModel pm;
+	private BusinessObject bo;
 	
 	private static final ArrayList<String> gatewayTypes = new ArrayList<String>();
 
@@ -86,8 +87,8 @@ public class Activity {
 		String query = "SELECT activity_type FROM process_activities WHERE process_model = '%s' AND activity_id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -116,8 +117,8 @@ public class Activity {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(type);
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 		return;
@@ -129,19 +130,19 @@ public class Activity {
 	public BusinessObject getBusinessObject() {
 		Application.db.connect();
 		
-		String query = "SELECT s.sap_id FROM business_objects as s INNER JOIN process_activities as a ON s.id = a.business_object WHERE a.process_model = '%s' AND a.activity_id = '%s'";
+		String query = "SELECT business_object FROM process_activities WHERE process_model = '%s' AND activity_id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
 		try {
 			if(rs.next()){
-				return new BusinessObject(rs.getString("sap_id"));
+				return new BusinessObject(rs.getString("business_object"));
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -158,8 +159,8 @@ public class Activity {
 		String query = "SELECT bo_properties FROM process_activities WHERE process_model = '%s' AND activity_id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -167,8 +168,8 @@ public class Activity {
 			if(rs.next()){
 				return Arrays.asList(rs.getString("bo_properties").split(","));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			//e.printStackTrace();
 		}
 		
 		return null;
@@ -184,8 +185,8 @@ public class Activity {
 		String query = "SELECT min_amount FROM process_activities WHERE process_model = '%s' AND activity_id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -210,8 +211,8 @@ public class Activity {
 		String query = "SELECT max_amount FROM process_activities WHERE process_model = '%s' AND activity_id = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -230,26 +231,58 @@ public class Activity {
 	/*
 	 * TODO: Fabi
 	 * sets the type of BusinessObjects that will be [created/updated/selected/deleted] by this Activity
+	 * => I don't think this is useful. Rather implement a create method and use setBO, setMax/Min and setProperties separately
 	 */
 	public void setBusinessObject(BusinessObject businessObject, String[] properties, String min, String max, String type) {
 		// get bo id from name
 		Application.db.connect();
 		
 		String databaseID = Application.sss.getBusinessObjectDatabaseId(businessObject.getId());
-		String query = "INSERT INTO process_activities (process_model,activity_id,activity_type,business_object,bo_properties,min_amount,max_amount) VALUES ('%s','%s','%s','%s','%s','%s','%s')";
+		//String query = "INSERT INTO process_activities (process_model,activity_id,activity_type,business_object,bo_properties,min_amount,max_amount) VALUES ('%s','%s','%s','%s','%s','%s','%s')";
+		String query = "UPDATE process_activities SET activity_type = '%s',business_object = '%s',bo_properties = '%s',min_amount = '%s',max_amount = '%s' WHERE process_model = '%s' AND activity_id = '%s'";
+		
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		
 		args.add(type);
 		args.add(databaseID);
 		
+		String propertyString = "";
+		
 		for(int i=0;i<properties.length;i++){
-			args.add(properties[i]);
+			propertyString += properties[i];
+			
 		}
 		
+		args.add(propertyString);
 		args.add(min);
 		args.add(max);
+		
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
+		
+		Application.db.exec(query, args, false);
+
+		return;
+	}
+	
+	/*
+	 * TODO: Fabi
+	 * sets the type of BusinessObjects that will be [created/updated/selected/deleted] by this Activity
+	 */
+	public void setBusinessObject(BusinessObject businessObject) {
+		// get bo id from name
+		Application.db.connect();
+		
+		this.bo = businessObject;
+		
+		String databaseID = Application.sss.getBusinessObjectDatabaseId(businessObject.getId());
+		String query = "UPDATE process_activities SET business_object = '%s', bo_properties = '', max_amount = 0, min_amount = 0 WHERE process_model = '%s' AND activity_id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.bo.getDBId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 
@@ -277,8 +310,8 @@ public class Activity {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(joined);
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 		return;
@@ -295,8 +328,8 @@ public class Activity {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(Integer.toString(amount));
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 		return;
@@ -313,8 +346,8 @@ public class Activity {
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(Integer.toString(amount));
-		args.add(this.pm.getId());
-		args.add(this.getId());
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
 		
 		Application.db.exec(query, args, false);
 		return;
@@ -359,6 +392,10 @@ public class Activity {
 			}
 		}
 		return null;
+	}
+	
+	public ProcessModel getModel() {
+		return this.pm;
 	}
 	
 	

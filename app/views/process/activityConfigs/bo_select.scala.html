@@ -1,32 +1,24 @@
 @import core.process._
-@(activity: models.core.process.Activity = null)
+@(activity: Activity = null)
 
 <form class="auto-submit"
-	action="@routes.ActivityDesigner.changeBusinessObject(activity.getRawId())"
-	method="@routes.ActivityDesigner.changeBusinessObject(activity.getRawId()).method">
+	action="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId()).method"
+	data-target=".bo_property_changer|.bo_quantity_changer">
 
 	<label for="business_object">Which kind of Business Object needs to be selected?</label>
-	
-	@selectors.business_objects(activity.getBusinessObject)
+	@selectors.business_objects(activity.getBusinessObject())
 
 </form>
 
-<form class="auto-submit"
-	action="@routes.ActivityDesigner.changeBO_Properties(activity.getRawId())"
-	method="@routes.ActivityDesigner.changeBO_Properties(activity.getRawId()).method">
+<div class="bo_property_changer">
 
-	<label for="business_object">Which properties need to be shown for selection?</label>
-	
-	@selectors.bo_properties(activity.getBusinessObject, true, activity.getBO_Properties())
-	
-</form>
+	@util.bo_property_changer(activity)
 
-<form class="auto-submit"
-	action="@routes.ActivityDesigner.changeObjectAmount(activity.getRawId())"
-	method="@routes.ActivityDesigner.changeObjectAmount(activity.getRawId()).method">
+</div>
 
-	<label for="min_amount">How many Business Object should be selected?</label>
-	<input type="number" name="min_amount" value="@activity.getObjectAmountMin()" />
-	<input type="number" name="max_amount" value="@activity.getObjectAmountMax()" />
+<div class="bo_quantity_changer">
 
-</form>
+	@util.bo_quantity_changer(activity)
+
+</div>

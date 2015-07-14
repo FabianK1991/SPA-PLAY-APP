@@ -1,16 +1,18 @@
 package controllers;
 
+import models.core.process.Activity;
 import models.core.process.ProcessModel;
 import models.core.util.parsing.ProcessParser;
 import play.mvc.Controller;
-import play.mvc.With;
 import play.mvc.Result;
+import play.mvc.With;
+import views.html.pages.add_model;
 import views.html.pages.login;
 import views.html.pages.main;
 import views.html.pages.process_executor;
-import views.html.pages.add_model;
-import views.html.pages.manage_models;
 import views.html.pages.process_modeler;
+import views.html.pages.manage_models;
+import views.html.process.activity_designer;
 
 @With(ActionController.class)
 public class Page extends Controller {
@@ -46,5 +48,20 @@ public class Page extends Controller {
     	}
         return ok(process_modeler.render(processModel));
     }
+    
+    public static Result activityDesigner(String modelId, String activityId) {
+    	ProcessModel processModel = null;
+    	Activity activity = null;
+    	
+    	try {
+    		processModel = new ProcessModel(ProcessParser.nsm + modelId);
+    		activity = new Activity(ProcessParser.nsm + activityId, processModel);
+    	}
+    	catch (Exception e) {
+    		
+    	}
+        return ok(activity_designer.render(activity));
+    }
+
 
 }

@@ -8,6 +8,7 @@ GET     /login                     	controllers.Page.login(email:String ?= "")
 GET    	/manageProcessModels		controllers.Page.manageProcessModels()
 GET    	/addProcessModel			controllers.Page.addProcessModel()
 GET    	/processModeler				controllers.Page.processModeler(model:String ?= "")
+GET    	/activityDesigner			controllers.Page.activityDesigner(model:String ?= "", activity:String ?= "")
 
 # Login page
 POST    /login                     	controllers.AuthController.login()
@@ -15,13 +16,15 @@ POST    /login                     	controllers.AuthController.login()
 # Process Designer: Phase Designer
 POST    /createPhase				controllers.PhaseDesigner.createPhase(model:String ?= "")
 POST    /deletePhase				controllers.PhaseDesigner.deletePhase(model:String ?= "")
+POST    /addPhaseActivity			controllers.PhaseDesigner.addActivity(phase:String ?= "", activity:String ?= "")
+POST    /deletePhaseActivity		controllers.PhaseDesigner.deleteActivity(phase:String ?= "", activity:String ?= "")
 
 # Process Designer: Activity Designer
-POST    /changeActivityName			controllers.ActivityDesigner.changeActivityName(activity:String ?= "")
-POST    /changeActivityType			controllers.ActivityDesigner.changeActivityType(activity:String ?= "")
-POST    /changeBusinessObject		controllers.ActivityDesigner.changeBusinessObject(activity:String ?= "")
-POST    /changeBO_Properties		controllers.ActivityDesigner.changeBO_Properties(activity:String ?= "")
-POST    /changeObjectAmount			controllers.ActivityDesigner.changeObjectAmount(activity:String ?= "")
+POST    /changeActivityName			controllers.ActivityDesigner.changeActivityName(model:String ?= "", activity:String ?= "")
+POST    /changeActivityType			controllers.ActivityDesigner.changeActivityType(model:String ?= "", activity:String ?= "")
+POST    /changeBusinessObject		controllers.ActivityDesigner.changeBusinessObject(model:String ?= "", activity:String ?= "")
+POST    /changeBO_Properties		controllers.ActivityDesigner.changeBO_Properties(model:String ?= "", activity:String ?= "")
+POST    /changeObjectAmount			controllers.ActivityDesigner.changeObjectAmount(model:String ?= "", activity:String ?= "")
 
 # Process Executor
 POST    /uploadProcess				controllers.ProcessExecutor.uploadProcess()
