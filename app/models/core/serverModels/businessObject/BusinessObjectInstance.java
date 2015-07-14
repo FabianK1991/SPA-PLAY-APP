@@ -239,12 +239,4 @@ public class BusinessObjectInstance {
 	public void addRelatedDocument(FilePart file, String fileName) {
 		
 	}
-
-    public int getDatabaseId() {
-        return databaseId;
-    }
-
-    public void setDatabaseId(int databaseId) {
-        this.databaseId = databaseId;
-    }
 }
