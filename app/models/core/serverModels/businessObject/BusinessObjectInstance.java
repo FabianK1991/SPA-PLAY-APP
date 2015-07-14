@@ -236,6 +236,10 @@ public class BusinessObjectInstance {
 	public String getInstanceId(){
 		return this.values.get(this.bo_id);
 	}
+	
+	public Map<String,String> getValues(){
+		return this.values;
+	}
 
     public int getDatabaseId() {
         return databaseId;
