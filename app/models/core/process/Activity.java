@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Arrays;
 
+import models.core.exceptions.PhaseNotFoundException;
 import models.core.serverModels.businessObject.BusinessObject;
 import models.core.util.parsing.ProcessParser;
 import models.spa.api.process.buildingblock.Flow;
@@ -15,6 +16,7 @@ import play.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import controllers.Application;
 
 @SuppressWarnings("unused")
@@ -76,7 +78,7 @@ public class Activity {
 		return activity.getId();
 	}
 	
-	public Phase getPhase() throws Exception {
+	public Phase getPhase() throws PhaseNotFoundException {
 		Application.db.connect();
 		
 		String query = "SELECT id FROM process_phase_activities WHERE activity = '%s'";
