@@ -155,7 +155,7 @@ public class BusinessObjectInstance {
 	 * Should return null if the attribute is not set
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
-	public String getPropertyValue(BusinessObjectProperty property) throws ForbiddenBusinessObjectAttributeException {
+	public String getPropertyValue(String propertyName) throws ForbiddenBusinessObjectAttributeException {
 		//todo fabian
 		/*if(this.isAttributeAllowed(attribute.getName())){
 			return Application.sss.getBusinessObjectAttribute(this.databaseId, attribute);
@@ -168,7 +168,7 @@ public class BusinessObjectInstance {
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
 	        //System.out.println(pair.getKey() + " = " + pair.getValue());
-	        if( property.getName().equals(pair.getKey()) ){
+	        if( propertyName.equals(pair.getKey()) ){
 	        	return pair.getValue().toString();
 	        }
 	        
@@ -215,13 +215,6 @@ public class BusinessObjectInstance {
 		String id = UUID.randomUUID().toString().replace('-', '0');
 		
 		return id;
-	}
-	
-	/*
-	 * MOVED TO CLASS BUSINESS OBJECT
-	 */
-	public static List<BusinessObjectInstance> getAll(BusinessObject bo) {
-		return null;
 	}
 	
 	/*

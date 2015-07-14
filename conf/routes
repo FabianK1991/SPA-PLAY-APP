@@ -5,6 +5,7 @@
 # Pages
 GET     /                           controllers.Page.index()
 GET     /login                     	controllers.Page.login(email:String ?= "")
+GET     /processExecutor           	controllers.Page.processExecutor()
 GET    	/manageProcessModels		controllers.Page.manageProcessModels()
 GET    	/addProcessModel			controllers.Page.addProcessModel()
 GET    	/processModeler				controllers.Page.processModeler(model:String ?= "")

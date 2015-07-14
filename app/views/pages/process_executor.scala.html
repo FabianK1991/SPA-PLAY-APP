@@ -4,30 +4,61 @@
    	@defining(AuthController.getUser()) { user =>
    	 	@defining(user.getCurrentProcessInstance()) { processInstance =>
     	
-    		<div class="process_viewer">
+   		<div class="process_executor">
+   		
+   			<div class="workbench box">
+				<ul class="nav horizontal">
+					<li@if(processInstance == null) {class="inactive"}><a href="#current-process">Current Process</a></li>
+					<li><a href="#process-instances">Resume a Process</a></li>
+					<li><a href="#process-models">Start a new Process</a></li>
+				</ul>
+				
+				<section id="current-process">
+					
+					@process.process_execution(processInstance)
+					
+				</section>
+				
+				<section id="process-instances">
+			
+				</section>
+				
+				<section id="process-models">
+			
+				</section>
+			</div>
     		
     			@selectors.process_instance(user)
 
 				@if(processInstance != null) {
+				
 					@defining(processInstance.getProcessModel()) { processModel =>
-					
-						@process.model_viewer(processModel)
-					
-					}
 					
 					<div class="workbench">
 					
-						<div class="workbench_main">
+						@process.activity_instances(processInstance)
+					
+					</div>
+					
+					<div class="workbench-sidebar">
+					
+						<div class="sidebar-model">
 						
-							@process.activity_instances(processInstance)
+							<h2>@processModel.getName()</h2>
+							
+							@process.phase_list(processModel)
 						
 						</div>
 						
-						<div class="workbench_sidebar">
+						<div class="sidebar-documents">
+						
+							<h2>Document Explorer</h2>
 						
 						</div>
 					
 					</div>
+					
+					}
 				
 				} else {
 				

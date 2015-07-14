@@ -20,3 +20,4 @@ data/h2database/mtp_spa_app_data.trace.db
 data/h2database/mtp_spa_app_data.lock.db
 .sbtserver/connections/master.log
 *.log
+.sbtserver/master.log
