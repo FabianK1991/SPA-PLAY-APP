@@ -26,50 +26,7 @@
 				<section id="process-models">
 			
 				</section>
-			</div>
-    		
-    			@selectors.process_instance(user)
-
-				@if(processInstance != null) {
-				
-					@defining(processInstance.getProcessModel()) { processModel =>
-					
-					<div class="workbench">
-					
-						@process.activity_instances(processInstance)
-					
-					</div>
-					
-					<div class="workbench-sidebar">
-					
-						<div class="sidebar-model">
-						
-							<h2>@processModel.getName()</h2>
-							
-							@process.phase_list(processModel)
-						
-						</div>
-						
-						<div class="sidebar-documents">
-						
-							<h2>Document Explorer</h2>
-						
-						</div>
-					
-					</div>
-					
-					}
-				
-				} else {
-				
-					<div class="none">
-					
-						You are currently not executing a process.
-					
-					</div>
-				
-				}
-				
+			
 			</div>
 
 		}

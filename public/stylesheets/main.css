@@ -759,7 +759,7 @@ position: relative;
 list-style-type: none;
 }
 
-.phase-list li {
+.phase-list li, .current-activity-name {
 margin-left: 40px;
   margin-right: 2%;
   margin-bottom: 3%;
@@ -1003,4 +1003,71 @@ background-color: #900;
 
 *:hover > .delete-button, .hover > .delete-button {
 display: inline-block;
+}
+
+
+/* Process Executor */
+.process_executor .phase-list {
+display: table;
+width: 100%;
+}
+
+.process_executor .phase-list li {
+display: table-cell;
+position: relative;
+}
+
+.process_executor .phase-list li:not(:first-child) {
+padding-left: 30px;
+}
+
+.process_executor .phase-list li:after, .process_executor .phase-list li:before, .current-activity-name::after {
+	left: 100%;
+    margin-left: -2px;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+    padding: 0;
+    background-color: transparent!important;
+	position: absolute;
+	pointer-events: none;
+    z-index: 1;
+}
+
+.process_executor .phase-list li:after, .current-activity-name::after {
+	border-color: rgba(82, 180, 21, 0);
+	border-left-color: #52B415;
+	border-width: 1em;
+	margin-top: -1em;
+}
+
+.process_executor .phase-list li:before {
+border-color: rgba(255, 255, 255, 0);
+border-left-color: #ffffff;
+border-width: 1.4em;
+margin-top: -1.4em;
+}
+
+.process_executor .phase-list .delete-button {
+display: none!important;
+}
+
+.process_executor .workspace {
+display: table;
+width: 100%;
+}
+
+.process_executor .workspace > * {
+display: table-cell;
+}
+
+.process_executor .workspace-sidebar {
+width: 30%;
+}
+
+.current-activity-name {
+position: relative;
+margin: 0;
 }

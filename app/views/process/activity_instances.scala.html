@@ -48,19 +48,7 @@
 						
 						@defining(activity.getBusinessObject()) { businessObject =>
 						
-							@for(boInstance <- businessObject.getAllInstances())) {
-								
-								<tr>
-								
-									@for(property <- boProperties) {
-									
-										<td>@boInstance.getPropertyValue(property)</td>
-									
-									}
-								
-								</tr>
-								
-							}
+							
 						
 						}
 						
