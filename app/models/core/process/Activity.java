@@ -81,7 +81,7 @@ public class Activity {
 	public Phase getPhase() throws PhaseNotFoundException {
 		Application.db.connect();
 		
-		String query = "SELECT id FROM process_phase_activities WHERE activity = '%s'";
+		String query = "SELECT process_phase FROM process_phase_activities WHERE activity = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.getRawId());
@@ -90,7 +90,7 @@ public class Activity {
 		
 		try {
 			if(rs.next()){
-				return new Phase(rs.getString("id"));
+				return new Phase(rs.getString("process_phase"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
