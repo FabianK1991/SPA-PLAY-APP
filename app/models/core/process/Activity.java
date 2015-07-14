@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Arrays;
 
 import models.core.serverModels.businessObject.BusinessObject;
+import models.core.serverModels.businessObject.BusinessObjectProperty;
 import models.core.util.parsing.ProcessParser;
 import models.spa.api.process.buildingblock.Flow;
 import models.spa.api.process.buildingblock.Node;
@@ -15,6 +16,7 @@ import play.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import controllers.Application;
 
 @SuppressWarnings("unused")
@@ -153,7 +155,7 @@ public class Activity {
 	 * TODO: Fabi
 	 * returns all properties for a BO type that are shown for example in the select BO table
 	 */
-	public List<String> getBO_Properties() {
+	public List<BusinessObjectProperty> getBO_Properties() {
 		Application.db.connect();
 		
 		String query = "SELECT bo_properties FROM process_activities WHERE process_model = '%s' AND activity_id = '%s'";
@@ -166,7 +168,14 @@ public class Activity {
 		
 		try {
 			if(rs.next()){
-				return Arrays.asList(rs.getString("bo_properties").split(","));
+				String[] props = rs.getString("bo_properties").split(",");
+				ArrayList<BusinessObjectProperty> resultList = new ArrayList<BusinessObjectProperty>();
+				
+				for(int i=0;i<props.length;i++){
+					resultList.add(new BusinessObjectProperty(props[i]));
+				}
+				
+				return resultList;
 			}
 		} catch (Exception e) {
 			//e.printStackTrace();
