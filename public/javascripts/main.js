@@ -439,7 +439,7 @@ var jsSet = function() {
     });
     
     require(['chosen'], function() {
-        $('body:not(.view-manageProcessModels) select')
+        $('select:not([name^="DataTables"])')
             .each(function() {
                 if ($('option[selected], option.default', this).length == 0) {
                     $(this).prepend('<option class="default" selected></option>');
