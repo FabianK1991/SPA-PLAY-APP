@@ -237,6 +237,7 @@ ajaxRequest = function(targetData, requestURL, requestMethod, requestData) {
                 
                 if (re[i] !== undefined) {
                     target.html(re[i]);
+                    target.css('display', 'none');
                 }
                 i++;
             }
@@ -252,6 +253,10 @@ ajaxRequest = function(targetData, requestURL, requestMethod, requestData) {
                 }
             }
             jsSet();
+            
+            setTimeout(function() {
+                target.css('display', '');
+            }, 50);
         },
         error: function(re) {
             alert('Request error:\n\n' + re.responseText);
