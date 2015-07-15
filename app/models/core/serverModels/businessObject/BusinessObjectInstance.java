@@ -30,6 +30,18 @@ public class BusinessObjectInstance {
 	// the id of the instance in the SAP database
 	private int databaseId;
 	
+	public static BusinessObjectInstance getBySAPId(BusinessObject bo, String id){
+		List<BusinessObjectInstance> r = bo.getAllInstances();
+		
+		for(int i=0;i<r.size();i++){
+			if( r.get(i).getInstanceId().equals(id) ) {
+				return r.get(i);
+			}
+		}
+		
+		return null;
+	}
+	
 	/*
 	 * Method to internally (PRIVATE method) create an empty BusinessObjectInstance
 	 * Should be used only by static method BusinessObjectInstance.create()
