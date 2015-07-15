@@ -1,10 +1,8 @@
 package models.ontology;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import models.core.serverModels.businessObject.BusinessObjectInstance;
 import models.core.serverModels.document.Document;
 import models.ontology.util.OntologyHelper;
 
@@ -16,21 +14,22 @@ import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 
 import play.Logger;
+import play.utils.UriEncoding;
 
 public class OntologyHandler {
 
-    public static void addFlowForOntology(BusinessObjectInstance boi, Document doc, String docType){
+    public static void addFlowForOntology(String boiId, String boId, Document doc, String docType){
         OWLOntologyManager manager = OntologyManager.manager;
-        
+        boiId = UriEncoding.encodePathSegment(boiId, "UTF-8");
         HashSet<OWLAxiom> axioms = new HashSet<OWLAxiom>();
-        OWLClass boOWL = OntologyHelper.getClassForName(boi.getBusinessObject().getSAPId());
-        OWLNamedIndividual boiOWL = OntologyHelper.createIndividual("" + boi.getDatabaseId());
+        OWLClass boOWL = OntologyHelper.getClassForName(boId);
+        OWLNamedIndividual boiOWL = OntologyHelper.createIndividual(boiId);
         OWLClass docClassOWL = OntologyHelper.getClassForName(docType);
         OWLNamedIndividual docOWL = OntologyHelper.createIndividual(doc.getId());
         
@@ -47,14 +46,21 @@ public class OntologyHandler {
         
         axioms.addAll(OntologyHelper.addObjectPropertyAssertion(boiOWL, boOWL, docOWL));
         
-        manager.applyChanges(manager.addAxioms(OntologyManager.ontology, axioms));        
+        manager.applyChanges(manager.addAxioms(OntologyManager.ontology, axioms));   
+        
+        try {
+            manager.saveOntology(OntologyManager.ontology);
+        } catch (OWLOntologyStorageException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
-    public static ArrayList<Document> getRelatedDocuments(BusinessObjectInstance boi){
+    public static ArrayList<Document> getRelatedDocuments(String boiId){
         ArrayList<Document> res = new ArrayList<Document>();
         OWLOntology ontology = OntologyManager.ontology;
-        
-        OWLNamedIndividual boiOWL = OntologyHelper.createIndividual("" + boi.getDatabaseId());
+        boiId = UriEncoding.encodePathSegment(boiId, "UTF-8");
+        OWLNamedIndividual boiOWL = OntologyHelper.createIndividual(boiId);
         
         for(OWLObjectPropertyAssertionAxiom axiom : ontology.getObjectPropertyAssertionAxioms(boiOWL)){
             OWLNamedIndividual docOWL = (OWLNamedIndividual)axiom.getObject();

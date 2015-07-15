@@ -10,15 +10,15 @@ import play.mvc.Http.MultipartFormData.FilePart;
 public class DocumentServer {
 	
     public static ArrayList<Document> getRelatedDocuments(BusinessObjectInstance businessObjectInstance) {
-		ArrayList<Document> res = new ArrayList<Document>();
-		
-		
-		return res;
+		String boiId = businessObjectInstance.getInstanceId();
+		return OntologyHandler.getRelatedDocuments(boiId);
 	}
 	
 	public static void addRelatedDocument(BusinessObjectInstance businessObjectInstance, FilePart file, String fileName, String docType) {
 		docType = docType.replace(" ", "");
-	    OntologyHandler.addFlowForOntology(businessObjectInstance, new Document(file, fileName), docType);
+		String boiId = businessObjectInstance .getInstanceId();
+		String boId = businessObjectInstance.getBusinessObject().getSAPId();
+	    OntologyHandler.addFlowForOntology(boiId, boId, new Document(file, fileName, docType), docType);
 	}
 	
 	public static ArrayList<Document> getAllDocuments() {

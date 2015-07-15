@@ -1,14 +1,22 @@
 package controllers;
 
 import java.io.File;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import models.core.process.Activity;
 import models.core.process.ProcessModel;
-import models.core.serverModels.businessObject.BusinessObject;
-import models.core.serverModels.businessObject.BusinessObjectInstance;
+import models.core.serverModels.document.Document;
+import models.core.serverModels.document.DocumentType;
+import models.core.servers.DocumentServer;
 import models.core.util.parsing.ProcessParser;
+import models.ontology.OntologyHandler;
 import models.ontology.OntologyManager;
 
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.client.utils.URIUtils;
+import org.eclipse.core.runtime.URIUtil;
+import org.protege.editor.owl.model.util.URIUtilities;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -18,6 +26,7 @@ import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.With;
+import play.utils.UriEncoding;
 import views.html.pages.add_model;
 import views.html.pages.login;
 import views.html.pages.main;
@@ -30,34 +39,6 @@ import views.html.process.activity_designer;
 public class Page extends Controller {
 
     public static Result index() {
-        try{
-            OWLOntologyManager manager = OntologyManager.manager;
-            OWLOntology ontology= OntologyManager.ontology;
-            OWLDataFactory factory = OntologyManager.factory;
-            
-//            BusinessObjectInstance boi = new BusinessObjectInstance(bo, bo_name, bo_id, values)
-            
-            for(BusinessObject bo: BusinessObject.getAll()){
-                Logger.info(bo.getSAPId());
-                for(BusinessObjectInstance boi : bo.getAllInstances()){
-                    Logger.info("\t" + boi.getDatabaseId());
-                }
-            }
-            
-//            Logger.info(DocumentType.getDocumentTypes().toString());
-//            String docType = "MaterialDrawing";
-//            String path = "data/temp/";
-//            String name = "";
-//            FilePart fp = new FilePart(ACCEPT_CHARSET, ACCEPT, CONTENT_TYPE, new File(path+name));
-//            DocumentServer.addRelatedDocument(boi, file, fileName, docType);
-            
-            
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            Logger.info("failure");
-        }
-        
     	return ok(main.render());
     }
     

@@ -17,6 +17,9 @@ import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectOneOf;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+
+import com.hp.hpl.jena.ontology.Ontology;
 
 import uk.ac.manchester.cs.owl.owlapi.OWLObjectOneOfImpl;
 
@@ -35,6 +38,12 @@ public class OntologyHelper {
     }
     
     public static Set<OWLAxiom> addClassAssertion(OWLClass classy, OWLNamedIndividual individual){
+        try {
+            OntologyManager.manager.saveOntology(OntologyManager.ontology);
+        } catch (OWLOntologyStorageException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         OWLDataFactory factory = OntologyManager.factory;
         HashSet<OWLAxiom> set = new HashSet<OWLAxiom>();
         
@@ -65,13 +74,19 @@ public class OntologyHelper {
             
             set.add(factory.getOWLEquivalentClassesAxiom(factory.getOWLThing(), expres));
             
-//            OntologyManager.manager.removeAxiom(OntologyManager.ontology, eqAxiom); 
+            OntologyManager.manager.removeAxiom(OntologyManager.ontology, eqAxiom); 
         }
   
         return set;
     }
     
     public static Set<OWLAxiom> addDataPropertyValue(OWLNamedIndividual ind, OWLDataProperty dataProp, String value){
+        try {
+            OntologyManager.manager.saveOntology(OntologyManager.ontology);
+        } catch (OWLOntologyStorageException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         HashSet<OWLAxiom> set = new HashSet<OWLAxiom>();
         OWLDataFactory factory = OntologyManager.factory;        
         set.add(factory.getOWLDataPropertyAssertionAxiom(dataProp, ind, value));
@@ -83,6 +98,12 @@ public class OntologyHelper {
     }
     
     public static Set<OWLAxiom> addObjectPropertyAssertion(OWLNamedIndividual boInd, OWLClass boClass, OWLNamedIndividual docInd){
+        try {
+            OntologyManager.manager.saveOntology(OntologyManager.ontology);
+        } catch (OWLOntologyStorageException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         HashSet<OWLAxiom> set = new HashSet<OWLAxiom>();
         OWLDataFactory factory = OntologyManager.factory;
         

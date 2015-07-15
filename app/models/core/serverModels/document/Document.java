@@ -30,11 +30,11 @@ public class Document {
     private ArrayList<String> images = new ArrayList<String>();
     
     
-    public Document(FilePart file, String name){
+    public Document(FilePart file, String name, String docType){
         String id = UUID.randomUUID().toString();
         String filetype = name.split("\\.")[name.split("\\.").length-1];
         File content = file.getFile();    
-        File f = new File(DOC_PATH + id + "." + filetype);
+        File f = new File(DOC_PATH + docType + "/" + id + "." + filetype);
 
         if( !f.exists() ){
             try {
@@ -46,7 +46,7 @@ public class Document {
         this.id = id;
         this.name = name;
         this.description = this.parseDescription(f);
-        this.images.addAll(this.parseImages());
+        this.images = this.parseImages();
         this.filepath = f.toPath().toString();
     }
     
@@ -79,12 +79,16 @@ public class Document {
     
 	private ArrayList<String> parseImages() {
         // TODO Auto-generated method stub
-        return null;
+	    ArrayList<String> res = new ArrayList<String>();
+	    
+	    res.add("noimageyet");
+	    
+        return res;
     }
 
     private String parseDescription(File f) {
         // TODO Auto-generated method stub
-        return null;
+        return "no des yet";
     }
 
     public String getName() {
@@ -104,7 +108,7 @@ public class Document {
 	 * Returns a description of the document
 	 */
 	public ArrayList<String> getImages() {
-		return null;
+		return this.images;
 	}
 	
 	
