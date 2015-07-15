@@ -25,6 +25,12 @@
         <Class IRI="#BUS2012_Document"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#BUS2028"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BUS2028_Document"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#BillOfMaterial"/>
     </Declaration>
     <Declaration>
@@ -58,6 +64,9 @@
         <Class IRI="#PurchaseRequisitionForm"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#SiteDescription"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#T001"/>
     </Declaration>
     <Declaration>
@@ -80,6 +89,12 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#relatedToBUS2012_Document"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToBUS2028"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#relatedToBUS2028_Document"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#relatedToDocument"/>
@@ -124,6 +139,45 @@
             <Class IRI="#BusinessObject"/>
         </ObjectSomeValuesFrom>
     </EquivalentClasses>
+    <EquivalentClasses>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#CHAN"/>
+            <NamedIndividual IRI="#9cd5741e-ff44-4560-a798-4065e1e28d08"/>
+            <NamedIndividual IRI="#6b28c957-b48b-46f5-b801-ef10203c22c8"/>
+            <NamedIndividual IRI="#DXTR"/>
+            <NamedIndividual IRI="#55e52b46-dbb8-46a4-825c-9e2393f1393b"/>
+            <NamedIndividual IRI="#1dad92be-4cd2-4f16-bd4a-6ad0ada43b15"/>
+            <NamedIndividual IRI="#8281b118-8e2a-4df7-a7ca-5d6015ba4b50"/>
+            <NamedIndividual IRI="#b8b98977-e583-4dd4-babb-dafc23d579cc"/>
+            <NamedIndividual IRI="#CAGE"/>
+            <NamedIndividual IRI="#d7d9729d-5d8e-4dda-beec-60bb42ea9a69"/>
+            <NamedIndividual IRI="#00b262bd-edba-4d03-bc78-1b213a6b29be"/>
+            <NamedIndividual IRI="#216ace9a-b420-45bd-8f9a-f09461fa9a14"/>
+            <NamedIndividual IRI="#42592659-ead7-403f-bf04-cc7cbe6aea5a"/>
+            <NamedIndividual IRI="#3245c08b-0976-46a7-88b3-16fb84444ae9"/>
+            <NamedIndividual IRI="#BOLT"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class abbreviatedIRI="owl:Thing"/>
+        <ObjectOneOf>
+            <NamedIndividual IRI="#BRKT;RM00;HD00"/>
+            <NamedIndividual IRI="#DGAM"/>
+            <NamedIndividual IRI="#e61842c9-e26e-45c1-858e-c20d8c784a1f"/>
+            <NamedIndividual IRI="#EPAD"/>
+            <NamedIndividual IRI="#DGAM;RM00;HD00"/>
+            <NamedIndividual IRI="#6e0d4ac9-a2a2-4ca2-8889-535215adc7c6"/>
+            <NamedIndividual IRI="#CHAN;RM00;HD00"/>
+            <NamedIndividual IRI="#FLTR"/>
+            <NamedIndividual IRI="#131de3b9-1939-4d91-b7e3-867c6e626874"/>
+            <NamedIndividual IRI="#BRKT"/>
+            <NamedIndividual IRI="#1daec177-fcba-4f5f-afe9-6444e7a6b26a"/>
+            <NamedIndividual IRI="#DXTR;FG00;HH00"/>
+            <NamedIndividual IRI="#FAID;TG00;HH00"/>
+            <NamedIndividual IRI="#FAID"/>
+        </ObjectOneOf>
+    </EquivalentClasses>
     <SubClassOf>
         <Class IRI="#BUS1001"/>
         <Class IRI="#BusinessObject"/>
@@ -138,6 +192,14 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BUS2012_Document"/>
+        <Class IRI="#Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BUS2028"/>
+        <Class IRI="#BusinessObject"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BUS2028_Document"/>
         <Class IRI="#Document"/>
     </SubClassOf>
     <SubClassOf>
@@ -177,6 +239,10 @@
         <Class IRI="#EBAN_Document"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#SiteDescription"/>
+        <Class IRI="#BUS2028_Document"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#T001"/>
         <Class IRI="#BusinessObject"/>
     </SubClassOf>
@@ -196,6 +262,7 @@
         <Class IRI="#BusinessObject"/>
         <Class IRI="#BUS1001"/>
         <Class IRI="#BUS2012"/>
+        <Class IRI="#BUS2028"/>
         <Class IRI="#EBAN"/>
         <Class IRI="#LFA1"/>
         <Class IRI="#T001"/>
@@ -204,10 +271,577 @@
         <Class IRI="#Document"/>
         <Class IRI="#BUS1001_Document"/>
         <Class IRI="#BUS2012_Document"/>
+        <Class IRI="#BUS2028_Document"/>
         <Class IRI="#EBAN_Document"/>
         <Class IRI="#LFA1_Document"/>
         <Class IRI="#T001_Document"/>
     </DisjointUnion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#BOLT"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#BRKT"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#CAGE"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#CHAN"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#DGAM"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#DXTR"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#EPAD"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#FAID"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BUS1001"/>
+        <NamedIndividual IRI="#FLTR"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CompanyDescription"/>
+        <NamedIndividual IRI="#b8b98977-e583-4dd4-babb-dafc23d579cc"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CompanyDescription"/>
+        <NamedIndividual IRI="#d7d9729d-5d8e-4dda-beec-60bb42ea9a69"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#e61842c9-e26e-45c1-858e-c20d8c784a1f"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CompanyDescription"/>
+        <NamedIndividual IRI="#00b262bd-edba-4d03-bc78-1b213a6b29be"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#1dad92be-4cd2-4f16-bd4a-6ad0ada43b15"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#1daec177-fcba-4f5f-afe9-6444e7a6b26a"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#131de3b9-1939-4d91-b7e3-867c6e626874"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#216ace9a-b420-45bd-8f9a-f09461fa9a14"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CompanyDescription"/>
+        <NamedIndividual IRI="#3245c08b-0976-46a7-88b3-16fb84444ae9"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#42592659-ead7-403f-bf04-cc7cbe6aea5a"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CompanyDescription"/>
+        <NamedIndividual IRI="#55e52b46-dbb8-46a4-825c-9e2393f1393b"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#6b28c957-b48b-46f5-b801-ef10203c22c8"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#6e0d4ac9-a2a2-4ca2-8889-535215adc7c6"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CompanyDescription"/>
+        <NamedIndividual IRI="#8281b118-8e2a-4df7-a7ca-5d6015ba4b50"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MaterialDrawing"/>
+        <NamedIndividual IRI="#9cd5741e-ff44-4560-a798-4065e1e28d08"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#T001"/>
+        <NamedIndividual IRI="#BRKT;RM00;HD00"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#T001"/>
+        <NamedIndividual IRI="#CHAN;RM00;HD00"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#T001"/>
+        <NamedIndividual IRI="#DGAM;RM00;HD00"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#T001"/>
+        <NamedIndividual IRI="#DXTR;FG00;HH00"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#T001"/>
+        <NamedIndividual IRI="#FAID;TG00;HH00"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#BOLT"/>
+        <NamedIndividual IRI="#6e0d4ac9-a2a2-4ca2-8889-535215adc7c6"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#BRKT"/>
+        <NamedIndividual IRI="#216ace9a-b420-45bd-8f9a-f09461fa9a14"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#CAGE"/>
+        <NamedIndividual IRI="#1daec177-fcba-4f5f-afe9-6444e7a6b26a"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#CHAN"/>
+        <NamedIndividual IRI="#131de3b9-1939-4d91-b7e3-867c6e626874"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#DGAM"/>
+        <NamedIndividual IRI="#6b28c957-b48b-46f5-b801-ef10203c22c8"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#DXTR"/>
+        <NamedIndividual IRI="#e61842c9-e26e-45c1-858e-c20d8c784a1f"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#EPAD"/>
+        <NamedIndividual IRI="#1dad92be-4cd2-4f16-bd4a-6ad0ada43b15"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#FAID"/>
+        <NamedIndividual IRI="#9cd5741e-ff44-4560-a798-4065e1e28d08"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001_Document"/>
+        <NamedIndividual IRI="#FLTR"/>
+        <NamedIndividual IRI="#42592659-ead7-403f-bf04-cc7cbe6aea5a"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <NamedIndividual IRI="#b8b98977-e583-4dd4-babb-dafc23d579cc"/>
+        <NamedIndividual IRI="#DXTR;FG00;HH00"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <NamedIndividual IRI="#d7d9729d-5d8e-4dda-beec-60bb42ea9a69"/>
+        <NamedIndividual IRI="#DGAM;RM00;HD00"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#e61842c9-e26e-45c1-858e-c20d8c784a1f"/>
+        <NamedIndividual IRI="#DXTR"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <NamedIndividual IRI="#00b262bd-edba-4d03-bc78-1b213a6b29be"/>
+        <NamedIndividual IRI="#FAID;TG00;HH00"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#1dad92be-4cd2-4f16-bd4a-6ad0ada43b15"/>
+        <NamedIndividual IRI="#EPAD"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#1daec177-fcba-4f5f-afe9-6444e7a6b26a"/>
+        <NamedIndividual IRI="#CAGE"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#131de3b9-1939-4d91-b7e3-867c6e626874"/>
+        <NamedIndividual IRI="#CHAN"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#216ace9a-b420-45bd-8f9a-f09461fa9a14"/>
+        <NamedIndividual IRI="#BRKT"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <NamedIndividual IRI="#3245c08b-0976-46a7-88b3-16fb84444ae9"/>
+        <NamedIndividual IRI="#BRKT;RM00;HD00"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#42592659-ead7-403f-bf04-cc7cbe6aea5a"/>
+        <NamedIndividual IRI="#FLTR"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <NamedIndividual IRI="#55e52b46-dbb8-46a4-825c-9e2393f1393b"/>
+        <NamedIndividual IRI="#BRKT;RM00;HD00"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#6b28c957-b48b-46f5-b801-ef10203c22c8"/>
+        <NamedIndividual IRI="#DGAM"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#6e0d4ac9-a2a2-4ca2-8889-535215adc7c6"/>
+        <NamedIndividual IRI="#BOLT"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001"/>
+        <NamedIndividual IRI="#8281b118-8e2a-4df7-a7ca-5d6015ba4b50"/>
+        <NamedIndividual IRI="#CHAN;RM00;HD00"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToBUS1001"/>
+        <NamedIndividual IRI="#9cd5741e-ff44-4560-a798-4065e1e28d08"/>
+        <NamedIndividual IRI="#FAID"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <NamedIndividual IRI="#BRKT;RM00;HD00"/>
+        <NamedIndividual IRI="#3245c08b-0976-46a7-88b3-16fb84444ae9"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <NamedIndividual IRI="#BRKT;RM00;HD00"/>
+        <NamedIndividual IRI="#55e52b46-dbb8-46a4-825c-9e2393f1393b"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <NamedIndividual IRI="#CHAN;RM00;HD00"/>
+        <NamedIndividual IRI="#8281b118-8e2a-4df7-a7ca-5d6015ba4b50"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <NamedIndividual IRI="#DGAM;RM00;HD00"/>
+        <NamedIndividual IRI="#d7d9729d-5d8e-4dda-beec-60bb42ea9a69"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <NamedIndividual IRI="#DXTR;FG00;HH00"/>
+        <NamedIndividual IRI="#b8b98977-e583-4dd4-babb-dafc23d579cc"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#relatedToT001_Document"/>
+        <NamedIndividual IRI="#FAID;TG00;HH00"/>
+        <NamedIndividual IRI="#00b262bd-edba-4d03-bc78-1b213a6b29be"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#b8b98977-e583-4dd4-babb-dafc23d579cc"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#b8b98977-e583-4dd4-babb-dafc23d579cc"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\CompanyDescription\b8b98977-e583-4dd4-babb-dafc23d579cc.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#b8b98977-e583-4dd4-babb-dafc23d579cc"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#b8b98977-e583-4dd4-babb-dafc23d579cc"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Hamburg Comp.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#d7d9729d-5d8e-4dda-beec-60bb42ea9a69"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#d7d9729d-5d8e-4dda-beec-60bb42ea9a69"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\CompanyDescription\d7d9729d-5d8e-4dda-beec-60bb42ea9a69.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#d7d9729d-5d8e-4dda-beec-60bb42ea9a69"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#d7d9729d-5d8e-4dda-beec-60bb42ea9a69"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Heidelberg comp.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#e61842c9-e26e-45c1-858e-c20d8c784a1f"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#e61842c9-e26e-45c1-858e-c20d8c784a1f"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\e61842c9-e26e-45c1-858e-c20d8c784a1f.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#e61842c9-e26e-45c1-858e-c20d8c784a1f"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#e61842c9-e26e-45c1-858e-c20d8c784a1f"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">DEluxe Touring Bike.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#00b262bd-edba-4d03-bc78-1b213a6b29be"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#00b262bd-edba-4d03-bc78-1b213a6b29be"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\CompanyDescription\00b262bd-edba-4d03-bc78-1b213a6b29be.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#00b262bd-edba-4d03-bc78-1b213a6b29be"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#00b262bd-edba-4d03-bc78-1b213a6b29be"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Hamburg Comp.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#1dad92be-4cd2-4f16-bd4a-6ad0ada43b15"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#1dad92be-4cd2-4f16-bd4a-6ad0ada43b15"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\1dad92be-4cd2-4f16-bd4a-6ad0ada43b15.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#1dad92be-4cd2-4f16-bd4a-6ad0ada43b15"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#1dad92be-4cd2-4f16-bd4a-6ad0ada43b15"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Elbow Pad.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#1daec177-fcba-4f5f-afe9-6444e7a6b26a"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#1daec177-fcba-4f5f-afe9-6444e7a6b26a"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\1daec177-fcba-4f5f-afe9-6444e7a6b26a.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#1daec177-fcba-4f5f-afe9-6444e7a6b26a"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#1daec177-fcba-4f5f-afe9-6444e7a6b26a"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Water bottle cage.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#131de3b9-1939-4d91-b7e3-867c6e626874"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#131de3b9-1939-4d91-b7e3-867c6e626874"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\131de3b9-1939-4d91-b7e3-867c6e626874.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#131de3b9-1939-4d91-b7e3-867c6e626874"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#131de3b9-1939-4d91-b7e3-867c6e626874"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Chain.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#216ace9a-b420-45bd-8f9a-f09461fa9a14"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#216ace9a-b420-45bd-8f9a-f09461fa9a14"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\216ace9a-b420-45bd-8f9a-f09461fa9a14.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#216ace9a-b420-45bd-8f9a-f09461fa9a14"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#216ace9a-b420-45bd-8f9a-f09461fa9a14"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BRAKE_KIT.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#3245c08b-0976-46a7-88b3-16fb84444ae9"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#3245c08b-0976-46a7-88b3-16fb84444ae9"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\CompanyDescription\3245c08b-0976-46a7-88b3-16fb84444ae9.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#3245c08b-0976-46a7-88b3-16fb84444ae9"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#3245c08b-0976-46a7-88b3-16fb84444ae9"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Heidelberg comp.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#42592659-ead7-403f-bf04-cc7cbe6aea5a"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#42592659-ead7-403f-bf04-cc7cbe6aea5a"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\42592659-ead7-403f-bf04-cc7cbe6aea5a.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#42592659-ead7-403f-bf04-cc7cbe6aea5a"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#42592659-ead7-403f-bf04-cc7cbe6aea5a"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Fan Filter.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#55e52b46-dbb8-46a4-825c-9e2393f1393b"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#55e52b46-dbb8-46a4-825c-9e2393f1393b"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\CompanyDescription\55e52b46-dbb8-46a4-825c-9e2393f1393b.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#55e52b46-dbb8-46a4-825c-9e2393f1393b"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#55e52b46-dbb8-46a4-825c-9e2393f1393b"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Heidelberg comp.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#6b28c957-b48b-46f5-b801-ef10203c22c8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#6b28c957-b48b-46f5-b801-ef10203c22c8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\6b28c957-b48b-46f5-b801-ef10203c22c8.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#6b28c957-b48b-46f5-b801-ef10203c22c8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#6b28c957-b48b-46f5-b801-ef10203c22c8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Gear Assembly.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#6e0d4ac9-a2a2-4ca2-8889-535215adc7c6"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#6e0d4ac9-a2a2-4ca2-8889-535215adc7c6"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\6e0d4ac9-a2a2-4ca2-8889-535215adc7c6.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#6e0d4ac9-a2a2-4ca2-8889-535215adc7c6"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#6e0d4ac9-a2a2-4ca2-8889-535215adc7c6"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">BOLT.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#8281b118-8e2a-4df7-a7ca-5d6015ba4b50"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#8281b118-8e2a-4df7-a7ca-5d6015ba4b50"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\CompanyDescription\8281b118-8e2a-4df7-a7ca-5d6015ba4b50.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#8281b118-8e2a-4df7-a7ca-5d6015ba4b50"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#8281b118-8e2a-4df7-a7ca-5d6015ba4b50"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Heidelberg comp.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#description"/>
+        <NamedIndividual IRI="#9cd5741e-ff44-4560-a798-4065e1e28d08"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">no des yet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#filepath"/>
+        <NamedIndividual IRI="#9cd5741e-ff44-4560-a798-4065e1e28d08"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">data\documents\MaterialDrawing\9cd5741e-ff44-4560-a798-4065e1e28d08.pdf</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#image"/>
+        <NamedIndividual IRI="#9cd5741e-ff44-4560-a798-4065e1e28d08"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">noimageyet</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#9cd5741e-ff44-4560-a798-4065e1e28d08"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">First aid kit.pdf</Literal>
+    </DataPropertyAssertion>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#relatedToBUS1001"/>
         <ObjectProperty IRI="#relatedToBO"/>
@@ -222,6 +856,14 @@
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#relatedToBUS2012_Document"/>
+        <ObjectProperty IRI="#relatedToDocument"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToBUS2028"/>
+        <ObjectProperty IRI="#relatedToBO"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#relatedToBUS2028_Document"/>
         <ObjectProperty IRI="#relatedToDocument"/>
     </SubObjectPropertyOf>
     <SubObjectPropertyOf>
@@ -259,6 +901,10 @@
     <InverseObjectProperties>
         <ObjectProperty IRI="#relatedToBUS2012"/>
         <ObjectProperty IRI="#relatedToBUS2012_Document"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#relatedToBUS2028_Document"/>
+        <ObjectProperty IRI="#relatedToBUS2028"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
         <ObjectProperty IRI="#relatedToEBAN_Document"/>
@@ -291,6 +937,14 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#relatedToBUS2012_Document"/>
         <Class IRI="#BUS2012"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToBUS2028"/>
+        <Class IRI="#BUS2028_Document"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#relatedToBUS2028_Document"/>
+        <Class IRI="#BUS2028"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#relatedToDocument"/>
@@ -339,6 +993,14 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#relatedToBUS2012_Document"/>
         <Class IRI="#BUS2012_Document"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToBUS2028"/>
+        <Class IRI="#BUS2028"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#relatedToBUS2028_Document"/>
+        <Class IRI="#BUS2028_Document"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#relatedToDocument"/>

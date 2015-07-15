@@ -1,32 +1,11 @@
 package controllers;
 
-import java.io.File;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-
 import models.core.process.Activity;
 import models.core.process.ProcessModel;
-import models.core.serverModels.document.Document;
-import models.core.serverModels.document.DocumentType;
-import models.core.servers.DocumentServer;
 import models.core.util.parsing.ProcessParser;
-import models.ontology.OntologyHandler;
-import models.ontology.OntologyManager;
-
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.client.utils.URIUtils;
-import org.eclipse.core.runtime.URIUtil;
-import org.protege.editor.owl.model.util.URIUtilities;
-import org.semanticweb.owlapi.model.OWLDataFactory;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
-
-import play.Logger;
 import play.mvc.Controller;
-import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.With;
-import play.utils.UriEncoding;
 import views.html.pages.add_model;
 import views.html.pages.login;
 import views.html.pages.main;
