@@ -535,8 +535,27 @@ padding-top: 0.5em!important;
 padding: 0.2em 0.3em!important;
 }
 
+.dataTable tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+tbody tr.selected {
+  background-color: rgba(82, 180, 21, 1)!important;
+  color: #ffffff!important;
+}
+
+tbody tr:hover:not(.selected) {
+background-color: rgba(82, 180, 21, 0.7)!important;
+  color: #ffffff!important;
+}
+
+tr.selected + tr.selected td, tr.selected + tr:hover td, tr:hover + tr.selected td {
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
 td {
 position: relative;
+border-top: 1px solid transparent;
 }
 
 .td-inner {
@@ -888,6 +907,7 @@ border-bottom-right-radius: 0px;
 }
 
 .box {
+position: relative;
 margin: 1%;
 
 background-color: #ffffff;
@@ -1007,14 +1027,26 @@ display: inline-block;
 
 
 /* Process Executor */
+.view-processExecutor {
+overflow: auto;
+}
+
 .process_executor .phase-list {
-display: table;
-width: 100%;
+  display: table;
+  width: 100%;
+  margin-left: -15px;
+  table-layout: fixed;
 }
 
 .process_executor .phase-list li {
 display: table-cell;
 position: relative;
+border-radius: initial!important;
+cursor: default!important;
+}
+
+.process_executor  .phase-list > *:first-child {
+  border-left: 15px solid #ffffff;
 }
 
 .process_executor .phase-list li:not(:first-child) {
@@ -1023,7 +1055,6 @@ padding-left: 30px;
 
 .process_executor .phase-list li:after, .process_executor .phase-list li:before, .current-activity-name::after {
 	left: 100%;
-    margin-left: -2px;
 	top: 50%;
 	border: solid transparent;
 	content: " ";
@@ -1039,8 +1070,8 @@ padding-left: 30px;
 .process_executor .phase-list li:after, .current-activity-name::after {
 	border-color: rgba(82, 180, 21, 0);
 	border-left-color: #52B415;
-	border-width: 1em;
-	margin-top: -1em;
+  border-width: 1.1em;
+  margin-top: -1.05em;
 }
 
 .process_executor .phase-list li:before {
@@ -1057,17 +1088,110 @@ display: none!important;
 .process_executor .workspace {
 display: table;
 width: 100%;
+min-height: 80vh;
+padding-top: 0px;
 }
 
 .process_executor .workspace > * {
 display: table-cell;
+position: relative;
+vertical-align: top;
 }
 
 .process_executor .workspace-sidebar {
 width: 30%;
+position: relative;
 }
 
 .current-activity-name {
 position: relative;
 margin: 0;
+border-radius: initial!important;
+}
+
+.workspace .box {
+  background-color: #EFEFEF;
+}
+
+.workspace-main {
+padding: 2%;
+overflow: visible;
+}
+
+.workspace-main::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 2em;
+  top: 0;
+  left: -2px;
+  background-color: inherit;
+}
+
+.activity-description {
+margin: 0;
+margin-top: 0.4em;
+margin-bottom: 2%;
+}
+
+.document-explorer {
+position: fixed;
+  max-height: 45vh;
+  left: 3vw;
+  right: 66vw;
+  bottom: 2.95vw;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-top: 5%;
+  margin-right: 5%;
+}
+
+.recent-activities {
+  margin-right: -10px;
+  margin: 0;
+overflow: visible;
+}
+
+.completed-activities {
+  max-height: 5.9em;
+  list-style-type: none;
+  overflow-y: auto;
+}
+
+.completed-activities li {
+  padding: 0.3em 0.6em;
+  margin-top: -1px;
+    border-top: 1px solid rgb(191, 191, 191);
+}
+
+.completed-activities li::before {
+    content: '\2713';
+  float: right;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin-top: -0.28em;
+  color: rgb(82, 180, 21);
+}
+
+.completed-activities > *:first-child {
+  display: none;
+}
+
+.workspace h2 {
+display: block;
+  font-size: 1.2em;
+  padding: 0.15em 0.4em;
+    color: #666666;
+  overflow: hidden;
+}
+
+.process_executor .phase-list .current-phase ~ li {
+background-color: #AEAEAE;
+}
+
+.process_executor .phase-list .current-phase ~ li::after {
+border-left-color: #AEAEAE;
+}
+
+.workspace-sidebar, .workspace-main, .document-explorer {
 }

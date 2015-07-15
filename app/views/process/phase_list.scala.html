@@ -1,5 +1,5 @@
 @import core.process._
-@(processModel: ProcessModel = null)
+@(processModel: ProcessModel = null, currentPhase: Phase = null)
 
 @if(processModel == null || processModel.getNumPhases() == 0) {
 
@@ -19,9 +19,17 @@
 		data-activities="@for(activity <- phase.getActivities()){@activity.getRawId()|}"
 		data-add-activity="@routes.PhaseDesigner.addActivity(phase.getId(), "_placeholder_")"
 		data-delete-activity="@routes.PhaseDesigner.deleteActivity(phase.getId(), "_placeholder_")"
-		data-phase_id="@phase.getId()">@phase.getName()</li>
+		data-phase_id="@phase.getId()"@if(currentPhase != null && currentPhase.getId().equals(phase.getId())){ class="current-phase" }>
+		
+		<span>
+		
+			@phase.getName()
+		
+		</span>
+	
+	</li>
 
-	}
+}
 
 </ol>
 

@@ -32,7 +32,7 @@ POST    /uploadProcess				controllers.ProcessExecutor.uploadProcess()
 POST    /startProcess             	controllers.ProcessExecutor.startProcess()
 GET     /process/*processID			controllers.ProcessExecutor.xmlProcess(processID)
 POST    /setCurrentProcess			controllers.ProcessExecutor.setCurrentProcess()
-POST    /performActivity			controllers.ProcessExecutor.performActivity()
+POST    /performActivity			controllers.ProcessExecutor.performActivity(processInstance:String ?= "", activity:String ?= "")
 POST    /performGatewayAction		controllers.ProcessExecutor.performGatewayAction()
 
 # Map static resources from the /public folder to the /assets URL path

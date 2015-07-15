@@ -9,7 +9,7 @@
 		
 		<div class="activity-instance" data-activity_id="@activity.getRawId()"">
 		
-			<div class="activity-description">
+			<div class="activity-description info">
 			
 			@activity.getType() match {
 	            case "bo_select" 	=> 	{Please select between @activity.getObjectAmountMin() and @activity.getObjectAmountMax() business objects from the table displayed blow.}
@@ -23,6 +23,10 @@
 			
 			<div class="activity-operators">
 			
+			<form action="@routes.ProcessExecutor.performActivity(processInstance.getRawId(), activity.getRawId())"
+				method="@routes.ProcessExecutor.performActivity(processInstance.getRawId(), activity.getRawId()).method"
+				data-target="#current-process">
+			
 			@activity.getType() match {
 	            case "bo_select" 	=> 	{
 					
@@ -34,9 +38,11 @@
 						
 							<tr>
 							
+								<td></td>
+							
 							@for(property <- boProperties) {
 							
-								<td>@property.replaceAll("^([A-Za-z])", "$1".toUpperCase())</td>
+								<td>@property.toUpperCase().charAt(0)@property.substring(1)</td>
 							
 							}
 								
@@ -48,7 +54,25 @@
 						
 						@defining(activity.getBusinessObject()) { businessObject =>
 						
-							
+							@for(boInstance <- businessObject.getAllInstances()) {
+								
+								<tr>
+								
+									<td>
+									
+										<input type="checkbox" name="checkboxvar[]" value="@boInstance.getInstanceId()">
+									
+									</td>
+									
+									@for(property <- boProperties) {
+									
+										<td>@boInstance.getPropertyValue(property)</td>
+									
+									}
+								
+								</tr>
+								
+							}
 						
 						}
 						
@@ -56,6 +80,8 @@
 					}
 				
 					</table>
+					
+					<input type="submit" value="Proceed" />
 					
 				}
 	            case "bo_update" 	=> 	{}

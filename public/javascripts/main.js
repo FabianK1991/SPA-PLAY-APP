@@ -222,17 +222,6 @@ var jsSet = function() {
             });
     });
 
-    require(['datatables'], function(DataTables) {
-        $('table.dataTable')
-            .each(function() {
-                if ($(this).data('set') != 1) {
-                    $(this).DataTable({
-                        "lengthMenu": [ [10, 25, 50], [10, 25, 50] ]
-                    });
-                }
-            }).data('set', 1);
-    });
-
     require(['jquery-ui'], function() {
         $(document).bind("mobileinit", function () {
             $.mobile.linkBindingEnabled = false;
@@ -435,13 +424,39 @@ var jsSet = function() {
                     $('.phase-list li.selected').trigger('vclick');
                 })
                 .addClass('set');
+            
+            $('tbody tr:not(.set)')
+                .on('vclick', function() {
+                    var checkbox = $('input[type="checkbox"]', this);
+                    var checked  = checkbox.prop("checked");
+                    
+                    if (checked) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        $(this).addClass('selected');
+                    }
+                    checkbox.prop("checked", !checked);
+                })
+                .addClass('set');
+            
+            require(['datatables'], function(DataTables) {
+                $('table.dataTable')
+                    .each(function() {
+                        if ($(this).data('set') != 1) {
+                            $(this).DataTable({
+                                "lengthMenu": [ [10, 25, 50], [10, 25, 50] ]
+                            });
+                        }
+                    }).data('set', 1);
+            });
         });
     });
     
     require(['chosen'], function() {
         $('select:not([name^="DataTables"])')
             .each(function() {
-                if ($('option[selected], option.default', this).length == 0) {
+                if ($('option[selected], option.default', this).length == 0 && $(this).is('*:not([multiple])')) {
                     $(this).prepend('<option class="default" selected></option>');
                 }
             })

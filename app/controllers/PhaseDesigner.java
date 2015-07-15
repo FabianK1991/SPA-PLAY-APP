@@ -23,7 +23,7 @@ public class PhaseDesigner extends Controller {
     	catch (Exception e) {
     		
     	}
-    	return ok(phase_list.render(processModel));
+    	return ok(phase_list.render(processModel, null));
     }
     
     public static Result deletePhase(String phaseId) {

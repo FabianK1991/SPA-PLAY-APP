@@ -18,6 +18,7 @@ import play.mvc.With;
 import play.twirl.api.Html;
 import views.html.pages.main;
 import views.html.process.activity_instances;
+import views.html.process.process_execution;
 import views.html.ajax_concat;
 
 @With(ActionController.class)
@@ -81,20 +82,18 @@ public class ProcessExecutor extends Controller {
 		}
     }
     
-    public static Result performActivity() {
-    	String processInstanceID = Parameters.get("process_instance");
-    	String activityID = Parameters.get("current_activity");
+    public static Result performActivity(String processInstanceId, String activityId) {
     	
 		try {
-			ProcessInstance processInstance = new ProcessInstance(processInstanceID);
+			ProcessInstance processInstance = new ProcessInstance(ProcessParser.nsmi + processInstanceId);
 			
-			Activity activity = new Activity(ProcessParser.nsm + activityID, processInstance.getProcessModel());
-			
+			Activity activity = new Activity(ProcessParser.nsm + activityId, processInstance.getProcessModel());
+		    
 			processInstance.setCurrentActivities(activity.getNextActivities());
 			
-			return ok(activity_instances.render(processInstance));
+			return ok(process_execution.render(processInstance));
 		} catch (ProcessInstanceNotFoundException e1) {
-			return notFound("Process Instance not found! (ID: " + processInstanceID + ")");
+			return notFound("Process Instance not found! (ID: " + processInstanceId + ")");
 		}
     }
     

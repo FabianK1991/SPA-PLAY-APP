@@ -30,7 +30,7 @@ public class BusinessObject {
 	private String[] neededAttributes;
 	
 	public List<BusinessObjectInstance> getAllInstances() throws Exception{
-		String bo = this.getSAPId(); //this.getRawId();
+		String bo = this.getDBId(); //this.getRawId();
 		
 		List<String> properties = Application.sss.getBusinessObjectProperties(bo);
 		List<String> properties_names = Application.sss.getBusinessObjectPropertiesNames(bo);
