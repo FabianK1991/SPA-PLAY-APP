@@ -199,6 +199,70 @@ loadBPMNviewers = function() {
     
 };
 
+ajaxRequest = function(targetData, requestURL, requestMethod, requestData) {
+    var targets = new Array();
+    
+    if (targetData != null) {
+        var targetNodes = targetData.split('|');
+        
+        for (key in targetNodes) {
+            var target = $(targetNodes[key]);
+            
+            targets[key] = target;
+            target.prepend('<div class="loader">Receiving data</loader>');
+        }
+    }
+
+    if (requestURL.indexOf('?') == -1) {
+        requestURL = requestURL + '?';
+    }
+    else {
+        requestURL = requestURL + '&';
+    }
+    requestURL = requestURL + 'contentonly';
+    
+    $.ajax({
+        type: requestMethod,
+        url: requestURL,
+        data: requestData,
+        success: function(re) {
+            re = re.split('||');
+            
+            var i = 0;
+            
+            while (i < targets.length) {
+                var target = targets[i];
+                
+                $('.loader', target).remove();
+                
+                if (re[i] !== undefined) {
+                    target.html(re[i]);
+                }
+                i++;
+            }
+            
+            if (re[i] !== undefined && re[i] != '') {
+                $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
+                
+                if (window.history.pushState) {
+                    window.history.pushState(null, null, re[i]);
+                }
+                else {
+                    window.location = location.href.substr(0, strpos(location.href, '#')) + '#' + re[i];
+                }
+            }
+            jsSet();
+        },
+        error: function(re) {
+            alert('Request error:\n\n' + re.responseText);
+            
+            for (key in targets) {
+                $('.loader', targets[key]).remove();
+            }
+        }
+    });
+};
+
 var jsSet = function() {
     require(['bpmn-viewer', 'jquery-panzoom'], function(BpmnViewer) {
         $('.process_model_viewer')
@@ -299,70 +363,8 @@ var jsSet = function() {
                         $(this).on('submit', function(e) {
                             e.preventDefault();
                             
-                            var targets = new Array();
+                            ajaxRequest($(this).data('target'), $(this).attr('action'), $(this).attr('method'), $(this).serialize());
                             
-                            var targetData = $(this).data('target');
-                            
-                            if (targetData != null) {
-                                var targetNodes = targetData.split('|');
-                                
-                                for (key in targetNodes) {
-                                    var target = $(targetNodes[key]);
-                                    
-                                    targets[key] = target;
-                                    target.prepend('<div class="loader">Receiving data</loader>');
-                                }
-                            }
-                            requestURL = $(this).attr('action');
-
-                            if (requestURL.indexOf('?') == -1) {
-                                requestURL = requestURL + '?';
-                            }
-                            else {
-                                requestURL = requestURL + '&';
-                            }
-                            requestURL = requestURL + 'contentonly';
-                            
-                            $.ajax({
-                                type: $(this).attr('method'),
-                                url: requestURL,
-                                data: $(this).serialize(),
-                                success: function(re) {
-                                    re = re.split('||');
-                                    
-                                    var i = 0;
-                                    
-                                    while (i < targets.length) {
-                                        var target = targets[i];
-                                        
-                                        $('.loader', target).remove();
-                                        
-                                        if (re[i] !== undefined) {
-                                            target.html(re[i]);
-                                        }
-                                        i++;
-                                    }
-                                    
-                                    if (re[i] !== undefined && re[i] != '') {
-                                        $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
-                                        
-                                        if (window.history.pushState) {
-                                            window.history.pushState(null, null, re[i]);
-                                        }
-                                        else {
-                                            window.location = location.href.substr(0, strpos(location.href, '#')) + '#' + re[i];
-                                        }
-                                    }
-                                    jsSet();
-                                },
-                                error: function(re) {
-                                    alert('Request error:\n\n' + re.responseText);
-                                    
-                                    for (key in targets) {
-                                        $('.loader', targets[key]).remove();
-                                    }
-                                }
-                            });
                             return false;
                         });
                     }
@@ -437,6 +439,10 @@ var jsSet = function() {
                         $(this).addClass('selected');
                     }
                     checkbox.prop("checked", !checked);
+                    
+                    if ($(this).parents('.activity-operators').length > 0) {
+                        
+                    }
                 })
                 .addClass('set');
             
@@ -450,6 +456,18 @@ var jsSet = function() {
                         }
                     }).data('set', 1);
             });
+            
+            
+            $('a[data-target]:not(.set)')
+                .on('vclick', function(e) {
+                    e.preventDefault();
+                    console.log('link clicked');
+                    console.log($(this))
+                    ajaxRequest($(this).data('target'), $(this).attr('href'), 'get', {});
+                    
+                    return false;
+                })
+                .addClass('set');
         });
     });
     

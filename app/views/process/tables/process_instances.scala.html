@@ -1,0 +1,43 @@
+@import core.process._
+@import java.text.SimpleDateFormat
+@(user: util.session.User = AuthController.getUser())
+
+<table class="dataTable">
+
+	<thead>
+	
+		<tr>
+		
+			<td>Process Name</td>
+			<td>Current Phase</td>
+			<td>Completed Activities</td>
+			<td>Started on</td>
+			<td>Last changed on</td>
+			<td>Last Activity</td>
+		
+		</tr>
+	
+	</thead>
+	
+	<tbody>
+	
+	@for(processInstance <- user.getProcessInstances()) {
+	@defining(processInstance.getCurrentActivities().get(0)) { currentActivityInstance =>
+	
+		<tr>
+		
+			<td><a href="@routes.ProcessExecutor.setCurrentProcess(processInstance.getRawId())" data-target="#content">@processInstance.getProcessModel().getName()</a></td>
+			<td>@processInstance.getCurrentPhase().getName()</td>
+			<td>@(processInstance.getCompletedActivities().size() - 1)</td>
+			<td>@(new SimpleDateFormat("dd.MM.YYYY").format(processInstance.getTime()))</td>
+			<td>@currentActivityInstance.getTime()</td>
+			<td>@currentActivityInstance.getActivity().getName()</td>
+		
+		</tr>
+	
+	}
+	}
+	
+	</tbody>
+
+</table>

@@ -29,11 +29,12 @@ POST    /changeObjectAmount			controllers.ActivityDesigner.changeObjectAmount(mo
 
 # Process Executor
 POST    /uploadProcess				controllers.ProcessExecutor.uploadProcess()
-POST    /startProcess             	controllers.ProcessExecutor.startProcess()
+GET    	/startProcess             	controllers.ProcessExecutor.startProcess(model:String ?= "")
 GET     /process/*processID			controllers.ProcessExecutor.xmlProcess(processID)
-POST    /setCurrentProcess			controllers.ProcessExecutor.setCurrentProcess()
+GET    	/setCurrentProcess			controllers.ProcessExecutor.setCurrentProcess(process:String ?= "")
 POST    /performActivity			controllers.ProcessExecutor.performActivity(processInstance:String ?= "", activity:String ?= "")
 POST    /performGatewayAction		controllers.ProcessExecutor.performGatewayAction()
+GET 	/getDocument				controllers.DocumentExplorer.getDocument(boType:String ?= "", sapId:String ?= "")
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -19,6 +19,7 @@ import play.twirl.api.Html;
 import views.html.pages.main;
 import views.html.process.activity_instances;
 import views.html.process.process_execution;
+import views.html.pages.process_executor;
 import views.html.ajax_concat;
 
 @With(ActionController.class)
@@ -49,36 +50,32 @@ public class ProcessExecutor extends Controller {
     	}
     }
     
-    public static Result startProcess() {
-    	String processID = Parameters.get("process_model");
-    	Logger.info("Loading process " + processID);
+    public static Result startProcess(String processModelId) {
     	ProcessModel processModel;
     	
 		try {
-			processModel = new ProcessModel(processID);
+			processModel = new ProcessModel(ProcessParser.nsm + processModelId);
 		} catch (ProcessModelNotFoundException e) {
-			return notFound("Process Model not found! (ID: " + processID + ")");
+			return notFound("Process Model not found! (ID: " + processModelId + ")");
 		}
     	AuthController.getUser().createProcessInstance(processModel);
     	
-    	return ok(ajax_concat.render(main.render(), null, routes.Page.index().url()));
+    	return ok(ajax_concat.render(process_executor.render(), null, routes.Page.processExecutor().url() + "#current-process"));
     }
     
-    public static Result setCurrentProcess() {
-    	String processInstanceID = Parameters.get("process_instance");
-    	
+    public static Result setCurrentProcess(String processInstanceId) {
     	ProcessInstance processInstance;
     	
 		try {
-			processInstance = new ProcessInstance(processInstanceID);
+			processInstance = new ProcessInstance(ProcessParser.nsmi + processInstanceId);
 			AuthController.getUser().setCurrentProcessInstance(processInstance);
 			
-			return ok(ajax_concat.render(main.render(), null, routes.Page.index().url()));
+			return ok(ajax_concat.render(process_executor.render(), null, routes.Page.processExecutor().url() + "#current-process"));
 		} catch (ProcessInstanceNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-			return notFound("Process Instance not found! (ID: " + processInstanceID + ")");
+			return notFound("Process Instance not found! (ID: " + processInstanceId + ")");
 		}
     }
     

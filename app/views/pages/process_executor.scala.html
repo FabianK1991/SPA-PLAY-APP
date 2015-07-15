@@ -20,10 +20,46 @@
 				</section>
 				
 				<section id="process-instances">
+				
+					<div class="info">
+					
+						Click on the process name to resume the respective process instance.
+					
+					</div>
+				
+					@process.tables.process_instances()
 			
 				</section>
 				
 				<section id="process-models">
+				
+				@for(processModel <- ProcessModel.getAll()) {
+				
+					<div class="info">
+					
+						Select a process model to start the respective process.
+					
+					</div>
+					
+					<a class="process-model box"
+						href="@routes.ProcessExecutor.startProcess(processModel.getRawId())"
+						data-target="#content">
+					
+						<div class="name">
+						
+							@processModel.getName()
+						
+						</div>
+						
+						<div class="phase-list">
+						
+							@process.phase_list(processModel, null)
+						
+						</div>
+					
+					</a>
+				
+				}
 			
 				</section>
 			

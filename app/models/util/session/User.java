@@ -67,7 +67,7 @@ public class User {
 	
 	public void setCurrentProcessInstance(ProcessInstance pi){
 		this.currentProcessInstance = pi;
-		Application.db.update(this, "current_process", pi.getRawId());
+		Application.db.update(this, "current_process_instance", pi.getRawId());
 	}
 	
 	

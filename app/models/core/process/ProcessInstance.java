@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -207,6 +208,7 @@ public class ProcessInstance {
 				continue;
 			}
 	    }
+		Collections.reverse(resultList);
 		
 		if( latestInstance != null ){
 			resultList.remove(latestInstance);

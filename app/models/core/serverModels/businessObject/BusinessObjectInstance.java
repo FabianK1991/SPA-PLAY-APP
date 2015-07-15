@@ -13,6 +13,7 @@ import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.exceptions.ForbiddenBusinessObjectAttributeException;
 import models.core.process.ActivityInstance;
 import models.core.serverModels.document.Document;
+import models.core.servers.DocumentServer;
 import models.core.util.parsing.ProcessParser;
 import controllers.Application;
 
@@ -230,7 +231,7 @@ public class BusinessObjectInstance {
 	 * e.g. BusinessObjectInstance="BILL-1" (BusinessObject="Bill") and documents like PDF-bill,...
 	 */
 	public List<Document> getRelatedDocuments() {
-		return null;
+		return DocumentServer.getRelatedDocuments(this);
 	}
 	
 	/*

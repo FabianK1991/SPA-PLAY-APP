@@ -31,8 +31,8 @@
 
 				<td>
 
-					<form action="@routes.ProcessExecutor.startProcess"
-						method="@routes.ProcessExecutor.startProcess.method"
+					<form action="@routes.ProcessExecutor.startProcess(processModel.getRawId())"
+						method="@routes.ProcessExecutor.startProcess(processModel.getRawId()).method"
 						data-target="#content">
 
 						<input type="hidden" name="process_model"
