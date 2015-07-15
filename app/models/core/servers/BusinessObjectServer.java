@@ -178,7 +178,7 @@ public class BusinessObjectServer {
 		String query = "SELECT name FROM business_object_properties WHERE business_object = '%s' ORDER BY `order` ASC";
 		
 		ArrayList<String> args = new ArrayList<String>();
-		args.add(id);
+		args.add(getBusinessObjectDatabaseId(id));
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		

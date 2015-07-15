@@ -30,7 +30,9 @@ public class BusinessObject {
 	private String[] neededAttributes;
 	
 	public List<BusinessObjectInstance> getAllInstances() throws Exception{
-		String bo = this.getDBId(); //this.getRawId();
+		Logger.info("TTTTESSSSTTT!!!");
+		
+		String bo = this.getSAPId(); //this.getRawId();
 		
 		List<String> properties = Application.sss.getBusinessObjectProperties(bo);
 		List<String> properties_names = Application.sss.getBusinessObjectPropertiesNames(bo);
@@ -67,7 +69,7 @@ public class BusinessObject {
 		            	value = values.get(name).toString(); 
 		            }
 		            
-		            //Logger.info(key + " " + value);  
+		            Logger.info(key + " " + value);  
 				} 
 				
 				pis.add(new BusinessObjectInstance(this, bo, properties_names.get(0), values));
