@@ -7,10 +7,11 @@ import models.core.serverModels.businessObject.BusinessObject;
 import models.core.serverModels.businessObject.BusinessObjectInstance;
 import models.core.util.parsing.ProcessParser;
 import models.util.http.Parameters;
+import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.documents.document_explorer;
+import views.html.documents.explorer;
 
 @With(ActionController.class)
 public class DocumentExplorer extends Controller {
@@ -22,10 +23,11 @@ public class DocumentExplorer extends Controller {
     	try {
     		businessObject = new BusinessObject(businessObjectId);
     		businessObjectInstance = BusinessObjectInstance.getBySAPId(businessObject, businessObjectInstanceId);
+        	Logger.info(businessObjectInstance.getRelatedDocuments().size() + "");
     	}
     	catch (Exception e) {
-    		
+    		e.printStackTrace();
     	}
-    	return ok(document_explorer.render(businessObjectInstance, null));
+    	return ok(explorer.render(businessObjectInstance));
     }
 }

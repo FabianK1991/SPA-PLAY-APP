@@ -30,7 +30,7 @@ public class BusinessObjectInstance {
 	// the id of the instance in the SAP database
 	private int databaseId;
 	
-	public static BusinessObjectInstance getBySAPId(BusinessObject bo, String id){
+	public static BusinessObjectInstance getBySAPId(BusinessObject bo, String id) throws Exception{
 		List<BusinessObjectInstance> r = bo.getAllInstances();
 		
 		for(int i=0;i<r.size();i++){

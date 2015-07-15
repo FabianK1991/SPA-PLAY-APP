@@ -62,6 +62,10 @@ public class OntologyHandler {
         boiId = UriEncoding.encodePathSegment(boiId, "UTF-8");
         OWLNamedIndividual boiOWL = OntologyHelper.createIndividual(boiId);
         
+        if(ontology.getObjectPropertyAssertionAxioms(boiOWL) == null){
+            return res;
+        }
+        
         for(OWLObjectPropertyAssertionAxiom axiom : ontology.getObjectPropertyAssertionAxioms(boiOWL)){
             OWLNamedIndividual docOWL = (OWLNamedIndividual)axiom.getObject();
             Document doc = new Document(docOWL, docOWL.getDataPropertyValues(ontology));
@@ -70,8 +74,8 @@ public class OntologyHandler {
         
         return res;
     }
-    
-    public static ArrayList<Document> getAllDocuments(){
+
+	public static ArrayList<Document> getAllDocuments(){
         ArrayList<Document> res = new ArrayList<Document>();
         OWLOntology ontology = OntologyManager.ontology;
         OWLDataFactory factory = OntologyManager.factory;

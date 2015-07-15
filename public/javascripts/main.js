@@ -441,7 +441,7 @@ var jsSet = function() {
                     checkbox.prop("checked", !checked);
                     
                     if ($(this).parents('.activity-operators').length > 0) {
-                        
+                        ajaxRequest('.related-documents', '/getDocument?boType=' + $(this).data('bo-type') + '&sapId=' + $('td:eq(1)', this).text(), 'get', {});
                     }
                 })
                 .addClass('set');
