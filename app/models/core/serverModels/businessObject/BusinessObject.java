@@ -30,8 +30,6 @@ public class BusinessObject {
 	private String[] neededAttributes;
 	
 	public List<BusinessObjectInstance> getAllInstances() throws Exception{
-		Logger.info("TTTTESSSSTTT!!!");
-		
 		String bo = this.getSAPId(); //this.getRawId();
 		
 		List<String> properties = Application.sss.getBusinessObjectProperties(bo);
@@ -109,11 +107,11 @@ public class BusinessObject {
 	}
 	
 	public List<String> getPropertyNames(){
-		return Application.sss.getBusinessObjectPropertiesNames(this.getDBId());
+		return Application.sss.getBusinessObjectPropertiesNames(this.getSAPId());
 	}
 	
 	public List<BusinessObjectProperty> getBusinessObjectProperties(){
-		String bo = this.getDBId();
+		String bo = this.getSAPId();
 		
 		List<String> l = Application.sss.getBusinessObjectPropertiesNames(bo);
 		List<BusinessObjectProperty> resultList = new ArrayList<BusinessObjectProperty>();
