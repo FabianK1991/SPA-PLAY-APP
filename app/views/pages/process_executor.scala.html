@@ -33,13 +33,13 @@
 				
 				<section id="process-models">
 				
-				@for(processModel <- ProcessModel.getAll()) {
-				
 					<div class="info">
 					
 						Select a process model to start the respective process.
 					
 					</div>
+				
+				@for(processModel <- ProcessModel.getAll()) {
 					
 					<a class="process-model box"
 						href="@routes.ProcessExecutor.startProcess(processModel.getRawId())"
