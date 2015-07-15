@@ -97,6 +97,28 @@ public class ProcessModel {
 		return this.pm.getId();
 	}
 	
+	public List<Activity> getActivities(){
+		ArrayList<Activity> resultList = new ArrayList<Activity>();
+		
+		String query = "SELECT activity_id FROM process_activities WHERE `process_model` = '%s'";
+		ArrayList<String> args = new ArrayList<>();
+		args.add(this.getRawId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			while(rs.next()) {
+				resultList.add(new Activity(ProcessParser.nsm + rs.getString("activity_id"), this));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return resultList;
+	}
+	
 	/*
 	 * TODO for Christian ASAP
 	 */
