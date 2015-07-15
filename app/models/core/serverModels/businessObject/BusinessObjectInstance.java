@@ -18,6 +18,7 @@ import controllers.Application;
 
 import java.util.HashMap;
 
+import play.Logger;
 import play.mvc.Http.MultipartFormData.FilePart;
 
 public class BusinessObjectInstance {
@@ -163,16 +164,23 @@ public class BusinessObjectInstance {
 		else{
 			throw new ForbiddenBusinessObjectAttributeException();
 		}*/
+		//Logger.info("GET THE NAME " + propertyName + " MAP SIZE: " + this.values.size());
 		
 		Iterator it = this.values.entrySet().iterator();
+
 	    while (it.hasNext()) {
 	        Map.Entry pair = (Map.Entry)it.next();
 	        //System.out.println(pair.getKey() + " = " + pair.getValue());
+	        //Logger.info("THE MAP KEY: " + pair.getKey());
+	        
 	        if( propertyName.equals(pair.getKey()) ){
+	        	//Logger.info("RETURN THE VALUE  " + pair.getValue().toString());
+	    		
+	        	
 	        	return pair.getValue().toString();
 	        }
 	        
-	        it.remove(); // avoids a ConcurrentModificationException
+	       // it.remove(); // avoids a ConcurrentModificationException
 	    }
 	    
 	    return null;
