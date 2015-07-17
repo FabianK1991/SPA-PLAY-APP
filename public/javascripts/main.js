@@ -237,7 +237,6 @@ ajaxRequest = function(targetData, requestURL, requestMethod, requestData) {
                 
                 if (re[i] !== undefined) {
                     target.html(re[i]);
-                    target.css('display', 'none');
                 }
                 i++;
             }
@@ -255,8 +254,11 @@ ajaxRequest = function(targetData, requestURL, requestMethod, requestData) {
             jsSet();
             
             setTimeout(function() {
-                target.css('display', '');
-            }, 50);
+                for (var i = 0; i < targets.length; i++) {
+                    targets[i].css('display', 'none');
+                    targets[i].css('display', '');
+                }
+            }, 10);
         },
         error: function(re) {
             alert('Request error:\n\n' + re.responseText);
