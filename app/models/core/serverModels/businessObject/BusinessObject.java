@@ -8,6 +8,7 @@ import java.util.Iterator;
 import models.core.util.parsing.ProcessParser;
 import controllers.Application;
 import models.core.serverModels.businessObject.BusinessObjectInstance;
+import models.core.serverModels.document.DocumentType;
 
 import java.util.HashMap;
 
@@ -278,5 +279,10 @@ public class BusinessObject {
 	
 	public String getRawId() {
 		return this.getId().replace(ProcessParser.nsm, "");
+	}
+	
+	public List<DocumentType> getDocumentTypes() {
+		
+		return null;
 	}
 }

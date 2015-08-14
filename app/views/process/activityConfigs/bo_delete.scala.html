@@ -1,1 +1,18 @@
-@(activity: models.core.process.Activity = null)
+@import core.process._
+@(activity: Activity = null)
+
+<form class="auto-submit"
+	action="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId()).method"
+	data-target=".bo_property_changer|.bo_quantity_changer">
+
+	<label for="business_object">Which kind of Business Object needs to be deleted?</label>
+	@selectors.business_objects(activity.getBusinessObject())
+
+</form>
+
+<div class="bo_property_changer">
+
+	@util.bo_property_changer(activity)
+
+</div>

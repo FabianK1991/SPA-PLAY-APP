@@ -1,5 +1,5 @@
-New log file opened at Wed Jul 15 13:57:20 CEST 2015 by 10864@LG-Lenovo
-jvm 10864@LG-Lenovo
+New log file opened at Fri Jul 17 19:01:30 CEST 2015 by 13984@LG-Lenovo
+jvm 13984@LG-Lenovo
 jvm vmName=Java HotSpot(TM) 64-Bit Server VM vmVendor=Oracle Corporation vmVersion=25.45-b02
 jvm specName=Java Virtual Machine Specification specVendor=Oracle Corporation specVersion=1.8
 jvm arguments: [-Xms256m, -Xmx1024m, -XX:MetaspaceSize=64m, -XX:MaxMetaspaceSize=256m]
@@ -27,7 +27,7 @@ sorting: ns: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.Jvm
   :: sorted deduced result: List(sbt.plugins.CorePlugin, sbt.plugins.IvyPlugin, sbt.plugins.JvmPlugin, sbt.plugins.JUnitXmlReportPlugin)
 [Loading] Done in C:\Users\micro_000\play-workspace\SPA-PLAY-APP\project, returning: (spa-play-app-build)
 Loading project definition from C:\Users\micro_000\play-workspace\SPA-PLAY-APP\project
-Running task... Cancel: sbt.TaskCancellationStrategy$Null$@dc22c6d, check cycles: false
+Running task... Cancel: sbt.TaskCancellationStrategy$Null$@5de520ff, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -67,7 +67,7 @@ Set current project to Smart Process API - PlayApp (in build file:/C:/Users/micr
 > server-handle-next-server-request
 > {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@46fd4eea, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@4f4f1bc3, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -84,18 +84,18 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 2 s, completed 15.07.2015 13:57:34
+Total time: 2 s, completed 17.07.2015 19:01:43
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
 Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@3b3eb556, check cycles: false
-Total time: 0 s, completed 15.07.2015 13:57:34
+Running task... Cancel: sbt.server.ServerTaskCancellation@5594453c, check cycles: false
+Total time: 0 s, completed 17.07.2015 19:01:44
 > server-post-command-cleanup
 > server-handle-next-server-request
 > {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:discoveredMainClasses
 Evaluating tasks: compile:discoveredMainClasses
-Running task... Cancel: sbt.server.ServerTaskCancellation@5d4040ed, check cycles: false
+Running task... Cancel: sbt.server.ServerTaskCancellation@54e5f09f, check cycles: false
 
 Initial source changes: 
 	removed:Set()
@@ -112,12 +112,6 @@ Sources indirectly invalidated by:
 	external source: Set()
 All initially invalidated sources: Set()
 
-Total time: 1 s, completed 15.07.2015 13:57:35
-> server-post-command-cleanup
-> server-handle-next-server-request
-> {file:/C:/Users/micro_000/play-workspace/SPA-PLAY-APP/}root/compile:mainClass
-Evaluating tasks: compile:mainClass
-Running task... Cancel: sbt.server.ServerTaskCancellation@5651e34f, check cycles: false
-Total time: 0 s, completed 15.07.2015 13:57:35
+Total time: 1 s, completed 17.07.2015 19:01:45
 > server-post-command-cleanup
 > server-handle-next-server-request
