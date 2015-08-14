@@ -23,7 +23,8 @@ public class DocumentExplorer extends Controller {
     	try {
     		businessObject = new BusinessObject(businessObjectId);
     		businessObjectInstance = BusinessObjectInstance.getBySAPId(businessObject, businessObjectInstanceId);
-        	Logger.info(businessObjectInstance.getRelatedDocuments().size() + "");
+    		Logger.info(businessObjectInstance.getInstanceId() + "");
+    		Logger.info(businessObjectInstance.getRelatedDocuments().size() + "");
     	}
     	catch (Exception e) {
     		e.printStackTrace();

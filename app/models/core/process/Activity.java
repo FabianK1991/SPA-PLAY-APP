@@ -421,6 +421,9 @@ public class Activity {
 		return this.pm;
 	}
 	
+	public List<Activity> getPreceedingActivities() {
+		return null;
+	}
 	
 	public models.spa.api.process.buildingblock.Activity getSPAActivity(){
 		return this.activity;

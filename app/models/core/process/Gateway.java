@@ -36,6 +36,10 @@ public class Gateway {
 		return this.gateway.getName();
 	}
 	
+	public void setCondition(String condition) {
+		
+	}
+	
 	/*
 	 */
 	public HashMap<String,Activity> getOptions() {

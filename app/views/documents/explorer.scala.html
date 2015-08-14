@@ -1,8 +1,11 @@
 @import core.serverModels.businessObject._
+@import core.servers._
 @(businessObjectInstance: BusinessObjectInstance = null)
 
 <ul class="document-list">
 
-
+	@for(document <- DocumentServer.getRelatedDocuments(businessObjectInstance)) {
+		<li>@document.getName()</li>
+	}
 
 </ul>

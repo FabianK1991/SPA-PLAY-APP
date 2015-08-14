@@ -285,4 +285,8 @@ public class BusinessObject {
 		
 		return null;
 	}
+	
+	public BusinessObjectInstance createInstance(HashMap<String, Object> properties) {
+		return null;
+	}
 }

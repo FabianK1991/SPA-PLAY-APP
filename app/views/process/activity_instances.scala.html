@@ -56,11 +56,11 @@
 						
 							@for(boInstance <- businessObject.getAllInstances()) {
 								
-								<tr data-bo-type="@businessObject.getDBId()">
+								<tr data-bo-type="@businessObject.getDBId()" data-boi-id="@boInstance.getInstanceId()">
 								
 									<td>
 									
-										<input type="checkbox" name="checkboxvar[]" value="@boInstance.getDatabaseId()">
+										<input type="checkbox" name="checkboxvar[]" value="@boInstance.getInstanceId()">
 									
 									</td>
 									

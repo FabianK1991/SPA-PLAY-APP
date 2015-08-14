@@ -171,4 +171,16 @@ public class ActivityInstance {
 		}
 		return id;
 	}
+	
+	public void setOutputs(List<Object> outputs) {
+		
+	}
+	
+	public List<Object> getOutputs() {
+		return null;
+	}
+	
+	public List<ActivityInstance> getPreceedingActivityInstances() {
+		return null;
+	}
 }
