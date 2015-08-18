@@ -118,7 +118,7 @@ public class BusinessObject {
 		List<BusinessObjectProperty> resultList = new ArrayList<BusinessObjectProperty>();
 		
 		for(int i=0;i<l.size();i++){
-			BusinessObjectProperty bop = new BusinessObjectProperty(l.get(i));
+			BusinessObjectProperty bop = new BusinessObjectProperty(l.get(i), this);
 			
 			resultList.add(bop);
 		}
@@ -149,7 +149,7 @@ public class BusinessObject {
 		}
 	}
 	
-	public BusinessObject(String id, String action, String min, String max){
+	/*public BusinessObject(String id, String action, String min, String max){
 		this.id = id;
 		this.action = action;
 		this.min = min;
@@ -162,7 +162,7 @@ public class BusinessObject {
 		this.min = min;
 		this.max = max;
 		this.neededAttributes = neededAttributes;
-	}
+	}*/
 	
 	public void setName(String name){
 		this.name = name;
@@ -194,7 +194,7 @@ public class BusinessObject {
 		ArrayList<BusinessObjectProperty> resultList = new ArrayList<BusinessObjectProperty>();
 		
 		for (String a : attr) {
-			BusinessObjectProperty boa = new BusinessObjectProperty(a);
+			BusinessObjectProperty boa = new BusinessObjectProperty(a, this);
 			resultList.add(boa);
 		}
 		
@@ -286,6 +286,9 @@ public class BusinessObject {
 		return null;
 	}
 	
+	/*
+	 * Not needed anymore at the moment!!
+	 */
 	public BusinessObjectInstance createInstance(HashMap<String, Object> properties) {
 		return null;
 	}

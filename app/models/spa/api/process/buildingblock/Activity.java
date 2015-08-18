@@ -13,6 +13,7 @@ public class Activity extends Node
     public Activity(ProcessModel process)
     {
         super(process);
+        this.type = Activity.type;
     }
 
 

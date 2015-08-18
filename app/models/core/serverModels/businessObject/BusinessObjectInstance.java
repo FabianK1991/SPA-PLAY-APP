@@ -46,7 +46,7 @@ public class BusinessObjectInstance {
 	 * Method to internally (PRIVATE method) create an empty BusinessObjectInstance
 	 * Should be used only by static method BusinessObjectInstance.create()
 	 */
-	private BusinessObjectInstance(BusinessObject bo, ActivityInstance ai) {
+	/*private BusinessObjectInstance(BusinessObject bo, ActivityInstance ai) {
 		this.ai = ai;
 		this.bo = bo;
 		
@@ -67,12 +67,12 @@ public class BusinessObjectInstance {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	/*
 	 * Instantiates a BusinessObjectInstance
 	 */
-	public BusinessObjectInstance(String id, ActivityInstance ai) throws BusinessObjectInstanceNotFoundException {
+	/*public BusinessObjectInstance(String id, ActivityInstance ai) throws BusinessObjectInstanceNotFoundException {
 		this.ai = ai;
 		
 		Set<models.spa.api.process.buildingblock.instance.BusinessObjectInstance> list = ai.getSPAActivityInstance().getBoi();
@@ -92,12 +92,12 @@ public class BusinessObjectInstance {
 		
 		// 
 		this.databaseId = Integer.parseInt(this.boi.getId().substring(ProcessParser.nsboi.length()));
-	}
+	}*/
 	
-	public BusinessObjectInstance(String databaseId, BusinessObject bo) throws BusinessObjectInstanceNotFoundException {
+	/*public BusinessObjectInstance(String databaseId, BusinessObject bo) throws BusinessObjectInstanceNotFoundException {
 		this.bo = bo;
 		this.databaseId = Integer.parseInt(databaseId);
-	}
+	}*/
 	
 	private String bo_name;
 	private String bo_id;
@@ -228,9 +228,10 @@ public class BusinessObjectInstance {
 	 * Creates and returns BusinessObjectInstance referencing the "template" of a BusinessObject,
 	 * e.g. BusinessObjectInstance.create(new BusinessObject('bill'))
 	 */
-	public static BusinessObjectInstance create(ActivityInstance ai, BusinessObject businessObject) {
+	/*public static BusinessObjectInstance create(ActivityInstance ai, BusinessObject businessObject) {
+		//outdated
 		return new BusinessObjectInstance(businessObject, ai);
-	}
+	}*/
 	
 	private static String getUID() {
 		String id = UUID.randomUUID().toString().replace('-', '0');

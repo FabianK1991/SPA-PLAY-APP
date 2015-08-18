@@ -37,7 +37,15 @@ public class Gateway {
 	}
 	
 	public void setCondition(String condition) {
+		this.gateway.setName(condition);
 		
+		// Update it in spa
+		try {
+			this.pm.pm.store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/*

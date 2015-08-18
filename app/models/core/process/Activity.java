@@ -3,12 +3,15 @@ package models.core.process;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Arrays;
+import java.util.Set;
 
 import models.core.exceptions.PhaseNotFoundException;
 import models.core.serverModels.businessObject.BusinessObject;
+import models.core.serverModels.businessObject.BusinessObjectProperty;
 import models.core.util.parsing.ProcessParser;
 import models.spa.api.process.buildingblock.Flow;
 import models.spa.api.process.buildingblock.Node;
@@ -422,7 +425,48 @@ public class Activity {
 	}
 	
 	public List<Activity> getPreceedingActivities() {
-		return null;
+		ArrayList<Activity> returnList = new ArrayList<Activity>();
+		
+		ArrayList<String> checkNodes = new ArrayList<String>();
+		checkNodes.add(this.getId());
+		
+		boolean research = true;
+		
+		Set<Node> allNodes = this.pm.getSPAProcessModel().getNodes();
+		
+		while( research ){
+			research = false;
+			
+			for(models.spa.api.process.buildingblock.Node n : allNodes){
+				Set<Flow> flows = n.getNextFlows();
+				
+				for(models.spa.api.process.buildingblock.Flow f : flows){
+					if( checkNodes.contains(f.getTo().getId()) ){
+						// we found it boys
+						if( n.type.equals("Node") ){
+							returnList.add(new Activity(f.getTo().getId(), this.pm));
+						}
+						else{
+							if( !checkNodes.contains(n.getId()) ){
+								checkNodes.add(n.getId());
+								research = true;
+								break;
+							}
+						}
+					}
+					
+					if( research ){
+						break;
+					}
+				}
+				
+				if( research ){
+					break;
+				}
+			}
+		}
+		
+		return returnList;
 	}
 	
 	public models.spa.api.process.buildingblock.Activity getSPAActivity(){
@@ -435,5 +479,150 @@ public class Activity {
 	
 	public static Map<String, String> getTypes() {
 		return Activity.activityTypes;
+	}
+	
+	
+	
+	public String getDatabaseId() {
+		String query = "SELECT id FROM process_activities WHERE process_model = '%s' AND activity_id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.pm.getRawId());
+		args.add(this.getRawId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				return rs.getString("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	public void setInputs(HashMap<BusinessObjectProperty,HashMap<Activity,BusinessObjectProperty>> inputs){
+		String databaseId = this.getDatabaseId();
+		
+		// Delete old entries
+		String query = "DELETE FROM process_activities_inputs WHERE activity_id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(databaseId);
+		
+		Application.db.exec(query, args, false);
+		
+		// Insert new stuff
+		Iterator it = inputs.entrySet().iterator();
+		int order = 0;
+		
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        
+	        // get business object property id
+	        BusinessObjectProperty bop = (BusinessObjectProperty)pair.getKey();
+	        HashMap<Activity,BusinessObjectProperty> value = (HashMap<Activity,BusinessObjectProperty>)pair.getValue();
+	        
+	        Iterator it2 = value.entrySet().iterator();
+			
+		    while (it2.hasNext()) {
+		        Map.Entry pair2 = (Map.Entry)it2.next();
+		        Activity sourceActivity = (Activity)pair2.getKey();
+		        
+		        query = "INSERT INTO process_activities_inputs (activity_id,source_activity_id,business_object_property,type,value,order) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')";
+		        args = new ArrayList<String>();
+		        
+		        args.add(databaseId);
+		        args.add(sourceActivity.getDatabaseId());
+		        args.add(bop.getId());
+		        
+		        if( pair2.getValue() instanceof BusinessObjectProperty ){
+		        	args.add("bop");
+		        	args.add(((BusinessObjectProperty)pair2.getValue()).getId());
+		        }
+		        else{
+		        	args.add("String");
+		        	args.add("");
+		        }
+		        
+		        
+		        // order
+		        args.add(Integer.toString(order));
+		        
+		        Application.db.exec(query, args, false);
+		    }
+		    
+		    order++;
+	    }
+	}
+	
+	public HashMap<BusinessObjectProperty,HashMap<Activity,BusinessObjectProperty>> getInputs(){
+		String databaseId = this.getDatabaseId();
+		
+		String query = "SELECT * FROM process_activities_inputs WHERE activity_id = '%s' ORDER BY order ASC";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(databaseId);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		HashMap<BusinessObjectProperty,HashMap<Activity,BusinessObjectProperty>> returnMap = new HashMap<BusinessObjectProperty,HashMap<Activity,BusinessObjectProperty>>();
+		
+		try {
+			while(rs.next()){
+				Activity sourceActivity = null;
+				BusinessObjectProperty bop = null;
+				BusinessObjectProperty target_bop = null;
+				
+				// get the source activity
+				query = "SELECT * FROM process_activities WHERE id = '%s'";
+				
+				args = new ArrayList<String>();
+				args.add(rs.getString("source_activity_id"));
+				
+				ResultSet rs2 = Application.db.exec(query, args, true);
+				
+				if( rs2.next() ){
+					sourceActivity = new Activity(ProcessParser.nsm + rs2.getString("activity_id"), this.pm);
+				}
+				
+				// get the businessobjectproperty
+				query = "SELECT name FROM business_object_properties WHERE id = '%s'";
+				
+				args = new ArrayList<String>();
+				args.add(rs.getString("business_object_property"));
+				
+				rs2 = Application.db.exec(query, args, true);
+				
+				if( rs2.next() ){
+					bop = new BusinessObjectProperty(rs2.getString("name"), this.getBusinessObject());
+				}
+				
+				// get the target businessobjectproperty
+				if( rs.getString("type").equals("bop") ){
+					query = "SELECT name FROM business_object_properties WHERE id = '%s'";
+					
+					args = new ArrayList<String>();
+					args.add(rs.getString("value"));
+					
+					rs2 = Application.db.exec(query, args, true);
+					
+					if( rs2.next() ){
+						target_bop = new BusinessObjectProperty(rs2.getString("name"), sourceActivity.getBusinessObject());
+					}
+				}
+				
+				HashMap<Activity,BusinessObjectProperty> _entry = new HashMap<Activity,BusinessObjectProperty>();
+				_entry.put(sourceActivity, target_bop);
+				
+				returnMap.put(bop, _entry);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return returnMap;
 	}
 }

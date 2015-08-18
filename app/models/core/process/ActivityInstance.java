@@ -1,6 +1,9 @@
 package models.core.process;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import controllers.Application;
 import models.core.exceptions.ActivityInstanceNotFoundException;
 import models.core.exceptions.BusinessObjectInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
@@ -23,6 +27,8 @@ public class ActivityInstance {
 	private models.spa.api.process.buildingblock.instance.ActivityInstance activityInstance;
 	private static List<ActivityInstance> instances = new ArrayList<ActivityInstance>();
 	
+	private ProcessInstance pi;
+	
 	/*
 	 * Method to internally (PRIVATE method) create an empty ActivityInstance
 	 * Should be used only by static method ActivityInstance.create()
@@ -34,6 +40,8 @@ public class ActivityInstance {
 	private ActivityInstance(ProcessInstance pi, Activity activity, Date date) {
 		this.id = ProcessParser.nsmi + getUID(pi);
 		this.activity = activity;
+		
+		this.pi = pi;
 		
 		
 		this.activityInstance = new models.spa.api.process.buildingblock.instance.ActivityInstance(pi.getSPAProcessInstance());
@@ -99,7 +107,7 @@ public class ActivityInstance {
 	/*
 	 * Returns a List of BusinessObjectInstances (sometimes created and) referenced by this ActivityInstance
 	 */
-	public List<BusinessObjectInstance> getBusinessObjectInstances() {
+	/*public List<BusinessObjectInstance> getBusinessObjectInstances() {
 		Set<models.spa.api.process.buildingblock.instance.BusinessObjectInstance> list = this.getSPAActivityInstance().getBoi();
 		List<BusinessObjectInstance> resultList = new ArrayList<BusinessObjectInstance>();
 		
@@ -112,15 +120,15 @@ public class ActivityInstance {
 		}
 		
 		return resultList;
-	}
+	}*/
 	
 	/*
 	 * Adds a reference to a BusinessObjectInstance to this ActivityInstance
 	 *	Deprecated: Not needed anymore because of the additional parameter in BusinessObjectInstance.create the instance is automatically added to the ActivityInstance
 	 */
-	public void addBusinessObjectInstance(BusinessObject businessObject) {
+	/*public void addBusinessObjectInstance(BusinessObject businessObject) {
 		BusinessObjectInstance.create(this, businessObject);
-	}
+	}*/
 	
 	/*
 	 * Removes the reference to a BusinessObjectInstance from this ActivityInstance
@@ -172,15 +180,116 @@ public class ActivityInstance {
 		return id;
 	}
 	
+	/*
+	 * int, string, businessobjectinstance
+	 * 
+	 * 
+	 */
 	public void setOutputs(List<Object> outputs) {
+		String pi_id = this.pi.getDatabaseId();
+		String activity_id = this.activity.getDatabaseId();
 		
+		// Delete old entries
+		String query = "DELETE FROM process_activity_instance_outputs WHERE process_instance = '%s' AND activity = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(pi_id);
+		args.add(activity_id);
+		
+		Application.db.exec(query, args, false);
+		
+		int order = 0;
+		
+		for (Object temp : outputs) {
+			
+			query = "INSERT INTO process_activity_instance_outputs (process_instance,activity,output,type,order) VALUES ('%s', '%s', '%s', '%s', '%s')";
+	        args = new ArrayList<String>();
+	        
+	        args.add(pi_id);
+	        args.add(activity_id);
+	        
+	        if( temp instanceof BusinessObjectInstance ){
+	        	args.add(((BusinessObjectInstance)temp).getInstanceId());
+	        	args.add("BusinessObjectInstance");
+	        }
+	        else{
+	        	args.add(temp.toString());
+	        	args.add("String");
+	        }
+	        
+	        args.add(Integer.toString(order));
+			
+	        order++;
+		}
+
 	}
 	
 	public List<Object> getOutputs() {
-		return null;
+		String pi_id = this.pi.getDatabaseId();
+		String activity_id = this.activity.getDatabaseId();
+		ArrayList<Object> returnList = new ArrayList<Object>();
+		
+		String query = "SELECT * FROM process_activity_instance_outputs WHERE process_instance = '%s' AND activity = '%s' ORDER BY order ASC";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(pi_id);
+		args.add(activity_id);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			while(rs.next()){
+				if( rs.getString("type").equals("BusinessObjectInstance") ){
+					try {
+						returnList.add(BusinessObjectInstance.getBySAPId(this.activity.getBusinessObject(), rs.getString("output")));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else{
+					returnList.add(rs.getString("output"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return returnList;
 	}
 	
-	public List<ActivityInstance> getPreceedingActivityInstances() {
+	public ActivityInstance getPreceedingActivityInstance() {
+		Set<models.spa.api.process.buildingblock.instance.ActivityInstance> instances = this.pi.getSPAProcessInstance().getActivities();
+		models.spa.api.process.buildingblock.instance.ActivityInstance latestInstance = null;
+		
+		for (models.spa.api.process.buildingblock.instance.ActivityInstance instance : instances) {
+			SimpleDateFormat inFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+			
+			try {
+				Date dtIn = inFormat.parse(instance.getDateTime());
+				
+				if( dtIn.getTime() < inFormat.parse(this.activityInstance.getDateTime()).getTime() ){
+					if( latestInstance == null || dtIn.getTime() > inFormat.parse(latestInstance.getDateTime()).getTime() ){
+						latestInstance = instance;
+					}
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+				continue;
+			} 
+	    }
+		
+		if( latestInstance != null ){
+			try {
+				return new ActivityInstance(latestInstance.getId(), this.pi);
+			} catch (ActivityInstanceNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return null;
 	}
 }

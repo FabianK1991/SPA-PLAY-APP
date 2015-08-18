@@ -1,5 +1,7 @@
 package models.core.process;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
@@ -330,6 +332,25 @@ public class ProcessInstance {
 
 	public void setTime(Date time) {
 		this.time = time;
+	}
+	
+	public String getDatabaseId(){
+		String query = "SELECT id FROM process_instances WHERE process = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.getRawId());
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				return rs.getString("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	private static String getUID() {
