@@ -128,7 +128,7 @@ public class BusinessObjectInstance {
 		Application.sss.deleteBusinessObjectInstance(this.databaseId);
 	}
 	
-	private boolean isAttributeAllowed(String name){
+	/*public boolean isAttributeAllowed(String name){
 		String[] nA = this.bo.getNeededAttributes();
 		
 		if( nA == null || nA.length == 0 ){
@@ -142,7 +142,7 @@ public class BusinessObjectInstance {
 		}
 		
 		return false;
-	}
+	}*/
 	
 	/*
 	 * Sets the given type of BusinessObjectAttribute to the given value,
@@ -151,13 +151,12 @@ public class BusinessObjectInstance {
 	 * 
 	 * Should throw an exception if this attribute is not allowed for this kind of BusinessObject
 	 */
-	public void setPropertyValue(BusinessObjectProperty attribute, Object value) throws ForbiddenBusinessObjectAttributeException {
-		//todo fabian
-		if(this.isAttributeAllowed(attribute.getName())){
-			Application.sss.setBusinessObjectAttribute(this.databaseId, attribute, (String)value);
+	public void setPropertyValue(BusinessObjectProperty property, Object value) {
+		try{
+			Application.sss.setBusinessObjectProperty(property, this, value.toString());
 		}
-		else{
-			throw new ForbiddenBusinessObjectAttributeException();
+		catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -263,11 +262,11 @@ public class BusinessObjectInstance {
 		return this.values;
 	}
 
-    public int getDatabaseId() {
+    /*public int getDatabaseId() {
         return databaseId;
     }
 
     public void setDatabaseId(int databaseId) {
         this.databaseId = databaseId;
-    }
+    }*/
 }

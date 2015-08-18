@@ -323,8 +323,8 @@ public class ProcessModel {
 		}
 		
 		// persist bos in spa model and database
-		newProcessModel.addBusinessObjectsToSpaModel();
-		newProcessModel.persistBusinessObjectDataAssociations();
+		//newProcessModel.addBusinessObjectsToSpaModel();
+		//newProcessModel.persistBusinessObjectDataAssociations();
 		
 		// save process model
 		try {
@@ -426,7 +426,7 @@ public class ProcessModel {
 		Req_Attributes VARCHAR(255),
 		RID int(11) NOT NULL auto_increment, primary KEY (RID));
 	*/
-	private void persistBusinessObjectDataAssociations(){
+	/*private void persistBusinessObjectDataAssociations(){
 		Application.db.connect();
 		
 		for(DataAssociation da : this.dataAssoc){
@@ -552,7 +552,7 @@ public class ProcessModel {
 			
 			Application.db.exec(query, args, false);
 		}
-	}
+	}*/
 	
 	private String join(String[] s, String glue)
 	{

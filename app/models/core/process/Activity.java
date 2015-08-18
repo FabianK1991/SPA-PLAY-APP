@@ -532,7 +532,7 @@ public class Activity {
 		        Map.Entry pair2 = (Map.Entry)it2.next();
 		        Activity sourceActivity = (Activity)pair2.getKey();
 		        
-		        query = "INSERT INTO process_activities_inputs (activity_id,source_activity_id,business_object_property,type,value,order) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')";
+		        query = "INSERT INTO process_activities_inputs (activity_id,source_activity_id,business_object_property,type,value,`order`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')";
 		        args = new ArrayList<String>();
 		        
 		        args.add(databaseId);
@@ -562,7 +562,7 @@ public class Activity {
 	public HashMap<BusinessObjectProperty,HashMap<Activity,BusinessObjectProperty>> getInputs(){
 		String databaseId = this.getDatabaseId();
 		
-		String query = "SELECT * FROM process_activities_inputs WHERE activity_id = '%s' ORDER BY order ASC";
+		String query = "SELECT * FROM process_activities_inputs WHERE activity_id = '%s' ORDER BY `order` ASC";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(databaseId);

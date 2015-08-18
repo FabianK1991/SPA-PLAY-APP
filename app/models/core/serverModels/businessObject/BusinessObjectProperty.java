@@ -17,7 +17,7 @@ public class BusinessObjectProperty {
 	 * All available BusinessObjectAttributes can be found in database "attributes" (columns: id, name)
 	 */
 	public BusinessObjectProperty(String id, BusinessObject bo) {
-		this.name = name;
+		this.name = id;
 		this.bo = bo;
 	}
 	

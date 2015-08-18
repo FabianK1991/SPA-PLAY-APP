@@ -265,13 +265,13 @@ public class BusinessObject {
 		return re;
 	}
 	
-	public String[] getNeededAttributes() {
+	/*public String[] getNeededAttributes() {
 		return neededAttributes;
 	}
 	
 	public void setNeededAttributes(String[] neededAttributes) {
 		this.neededAttributes = neededAttributes;
-	}
+	}*/
 	
 	public String getId(){
 		return this.id;

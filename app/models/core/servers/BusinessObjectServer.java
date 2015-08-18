@@ -153,6 +153,8 @@ public class BusinessObjectServer {
 		
 		String query = "SELECT id FROM business_object_properties WHERE business_object = '%s' ORDER BY `order` ASC";
 		
+		Logger.info(query);
+		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(getBusinessObjectDatabaseId(id));
 		
@@ -194,6 +196,49 @@ public class BusinessObjectServer {
 		return resultList;
 	}
 	
+	private String getInstanceIdProperties(BusinessObjectProperty property, String instanceId, int tableAmount) {
+		String bo_id = property.getBo().getDBId();
+		String query = "SELECT property_location FROM business_object_properties WHERE `order` = '%s' AND business_object = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add("0");
+		args.add(bo_id);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				String property_location = rs.getString("property_location");
+				
+				query = "SELECT `column` FROM property_locations WHERE id = '" + property_location + "'";
+				rs = Application.db.exec(query, null, true);
+				
+				if(rs.next()){
+					String[] colmuns = rs.getString("column").split(",");
+					String[] values = instanceId.split(";");
+					
+					String result = "";
+					
+					for(int i=0;i<colmuns.length;i++){
+						result += " t" + tableAmount + "." + colmuns[i] + " = '" + values[i] + "'";
+						
+						if( i+1 != colmuns.length ){
+							result += " AND ";
+						}
+					}
+					
+					return result;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	
 	/*
 	 * @author Fabian
 	 * @param id the bo instance id in the database
@@ -201,32 +246,126 @@ public class BusinessObjectServer {
 	 * @param value the value to set to the attribute
 	 * @return
 	 */
-	public void setBusinessObjectAttribute(int id, BusinessObjectProperty boa, String Value){
-		Application.db.connect();
+	public void setBusinessObjectProperty(BusinessObjectProperty property, BusinessObjectInstance boi, String value) throws Exception{
+		// get column from table left join join_column = parent column
+		// UPDATE table SET column = value WHERE split(column) (column/join_column = InstanceID)
+		this.connect();
+		String property_location = this.getPropertyLocation(property.getId());
 		
-		// Check if attribute exists
-		if( this.getBusinessObjectAttribute(id, boa) == null ){
-			// INSERT
-			String query = "INSERT INTO business_object_instances (id,attribute,value) VALUES ('%s','%s','%s')";
-			
-			ArrayList<String> args = new ArrayList<String>();
-			args.add(String.valueOf(id));
-			args.add(boa.getId());
-			args.add(Value);
-			
-			Application.db.exec(query, args, false);
+		String query = "SELECT `parent`,`table`,`column`,`join_column` FROM property_locations WHERE id = '%s'";
+		String final_query = null;
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(property_location);
+		
+		ResultSet rs = Application.db.exec(query, args, true);
+		
+		try {
+			if(rs.next()){
+				String parent = rs.getString("parent");
+				ArrayList<String> tables = new ArrayList<String>();
+				ArrayList<String> columns = new ArrayList<String>();
+				ArrayList<String> join_column = new ArrayList<String>();
+				
+				tables.add(rs.getString("table"));
+				columns.add(rs.getString("column"));
+				
+				if( rs.getString("join_column") != null ){
+					join_column.add(rs.getString("join_column"));
+				}
+				else{
+					join_column.add("null");
+				}
+				
+				final_query = "UPDATE ";
+				
+				String[] retrieve_columns = rs.getString("column").split(",");
+				
+				final_query += tables.get(0) + " as t0 ";
+				
+				if( parent != null ){
+					// dig deeper yo
+					while( true ){
+						args.clear();
+						args.add(parent);
+						
+						rs = Application.db.exec(query, args, true);
+						
+						if(rs.next()){
+							Logger.info("Table: " + rs.getString("table"));
+							Logger.info("Column: " + rs.getString("column"));
+							
+							parent = rs.getString("parent");
+							tables.add(rs.getString("table"));
+							columns.add(rs.getString("column"));
+							
+							if( rs.getString("join_column") != null ){
+								join_column.add(rs.getString("join_column"));
+							}
+							else{
+								join_column.add("null");
+							}
+							
+							if( parent == null ){
+								break;
+							}
+						}
+						else{
+							throw new Exception("Parent: " + parent + " not found!");
+						}
+					}
+					
+					//final_query += tables.get(tables.size()-1) + " as t" + (tables.size()-1) + " LEFT JOIN ";
+					final_query += " LEFT JOIN ";
+					
+					for(int i=1;i<tables.size();i++){
+						String[] aColumns = columns.get(i).split(",");
+						
+						final_query += tables.get(i) + " as t" + i + " ON ";
+						
+						for(int j=0;j<aColumns.length;j++){
+							if( join_column.get(i-1).equals("null") ){
+								final_query += "t" + (i) + "." + aColumns[j] + " = t" + (i-1) + "." + aColumns[j];
+							}
+							else{
+								final_query += "t" + (i) + "." + aColumns[j] + " = t" + (i-1) + "." + join_column.get(i-1);
+							}
+							
+							if( j+1 != aColumns.length ){
+								final_query += " AND ";
+							}
+						}
+						
+						if( i+1!=tables.size() ){
+							final_query += " LEFT JOIN ";
+						}
+					}
+					
+					//Logger.info(final_query);
+				}
+				
+				for(int i=0;i<retrieve_columns.length;i++){
+					final_query += " SET t0." + retrieve_columns[i] + " = '" + value + "'";
+					
+					if( i+1 != retrieve_columns.length ){
+						final_query += ",";
+					}
+				}
+				
+				// WHERE
+				final_query += " WHERE " + this.getInstanceIdProperties(property, boi.getInstanceId(), tables.size() - 1);
+				
+				Logger.info("FINAL QUERY:");
+				Logger.info(final_query);
+				
+				this.exec(final_query, null, false);
+				return;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		else{
-			// UPDATE
-			String query = "UPDATE business_object_instances SET value = '%s' WHERE id = '%s' AND attribute = '%s'";
-			
-			ArrayList<String> args = new ArrayList<String>();
-			args.add(Value);
-			args.add(String.valueOf(id));
-			args.add(boa.getId());
-			
-			Application.db.exec(query, args, false);
-		}
+		
+		return;
 	}
 	
 	private String getPropertyLocation(String id){

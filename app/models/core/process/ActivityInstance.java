@@ -202,7 +202,7 @@ public class ActivityInstance {
 		
 		for (Object temp : outputs) {
 			
-			query = "INSERT INTO process_activity_instance_outputs (process_instance,activity,output,type,order) VALUES ('%s', '%s', '%s', '%s', '%s')";
+			query = "INSERT INTO process_activity_instance_outputs (process_instance,activity,output,type,`order`) VALUES ('%s', '%s', '%s', '%s', '%s')";
 	        args = new ArrayList<String>();
 	        
 	        args.add(pi_id);
@@ -229,7 +229,7 @@ public class ActivityInstance {
 		String activity_id = this.activity.getDatabaseId();
 		ArrayList<Object> returnList = new ArrayList<Object>();
 		
-		String query = "SELECT * FROM process_activity_instance_outputs WHERE process_instance = '%s' AND activity = '%s' ORDER BY order ASC";
+		String query = "SELECT * FROM process_activity_instance_outputs WHERE process_instance = '%s' AND activity = '%s' ORDER BY `order` ASC";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(pi_id);
