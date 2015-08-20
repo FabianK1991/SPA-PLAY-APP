@@ -1,6 +1,8 @@
 package models.core.process;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import models.core.util.parsing.ProcessParser;
@@ -51,7 +53,29 @@ public class Gateway {
 	/*
 	 */
 	public void setOptions(HashMap<Activity, String> options) {
-		//TODO Fabi
+		Set<Flow> nextFlows = this.gateway.getNextFlows();
+		
+		for(Flow f: nextFlows){
+			Iterator it = options.entrySet().iterator();
+			
+		    while (it.hasNext()) {
+		        Map.Entry pair = (Map.Entry)it.next();
+		        //System.out.println(pair.getKey() + " = " + pair.getValue());
+
+		        if( ((Activity)pair.getKey()).getId().equals(f.getTo().getId()) ){
+		        	f.setCondition((String)pair.getValue());
+		        	break;
+		        }
+		    }
+		}
+		
+		try {
+			// Update it
+			this.pm.getSPAProcessModel().store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/*
