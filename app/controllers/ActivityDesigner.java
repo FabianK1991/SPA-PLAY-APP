@@ -2,10 +2,14 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import models.core.process.Activity;
 import models.core.process.ProcessModel;
 import models.core.serverModels.businessObject.BusinessObject;
+import models.core.serverModels.businessObject.BusinessObjectProperty;
 import models.core.util.parsing.ProcessParser;
 import models.util.http.Parameters;
 import play.Logger;
@@ -102,6 +106,17 @@ public class ActivityDesigner extends Controller {
     	catch(Exception e) {
     		
     	}
+    	return ok();
+    }
+    
+    public static Result setGatewayCondition(String modelId, String gatewayActivityId, String nextActivityId, String conditionActivityId, String conditionPropertyId) {
+    	Activity gatewayActivity = getActivity(modelId, gatewayActivityId);
+    	
+    	HashMap<Activity, String> gatewayOptions = gatewayActivity.getNextGateway().getOptions();
+    	
+	    if (gatewayOptions.containsKey(gatewayActivity)) {
+	    	
+	    }
     	return ok();
     }
 }

@@ -24,10 +24,10 @@
 		
 			@for((typeId, typeName) <- Activity.getTypes()) {
 
-			<option value="@typeId"@if(typeId.equals(activityType)){selected}>@typeName</option>
+			<option value="@typeId"@if(typeId.equals(activityType)){ selected}@if(activity.getNextGateway() == null){ disabled}>@typeName</option>
 
-			} 
-			
+			}
+		
 		}
 
 		</select>

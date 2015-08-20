@@ -50,9 +50,15 @@ public class Gateway {
 	
 	/*
 	 */
-	public HashMap<String,Activity> getOptions() {
+	public void setOptions(HashMap<Activity, String> options) {
+		//TODO Fabi
+	}
+	
+	/*
+	 */
+	public HashMap<Activity, String> getOptions() {
 		/*Matching: possible answer (e.g. credit card) => related next activity (e.g. payment with credit card)*/
-		HashMap<String,Activity> result = new HashMap<String,Activity>();
+		HashMap<Activity, String> result = new HashMap<Activity, String>();
 		
 		Set<Flow> nextFlows = this.gateway.getNextFlows();
 		
@@ -69,7 +75,7 @@ public class Gateway {
 					break;
 				}
 			}*/
-			result.put(key, new Activity(toId, this.pm));
+			result.put(new Activity(toId, this.pm), key);
 		}
 		
 		return result;

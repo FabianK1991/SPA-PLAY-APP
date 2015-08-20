@@ -625,4 +625,13 @@ public class Activity {
 		
 		return returnMap;
 	}
+	
+	public boolean equals(Activity otherActivity) {
+		if (this.pm.getRawId() == otherActivity.getModel().getRawId() && this.getRawId() == otherActivity.getRawId()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

@@ -1,1 +1,36 @@
 @(activity: models.core.process.Activity = null)
+
+@defining(activity.getInputs()) { inputMap =>
+
+@if(inputMap.size() > 0) {
+
+@defining(activity.getNextGateway()) { nextGateway =>
+
+@for(nextActivity <- activity.getNextActivities()) {
+
+<form class="auto-submit"
+	action="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId()).method"
+	data-target=".gateway_condition-@nextActivity.getRawId()">
+
+	<label for="business_object">On the output of which activity is the decision based?</label>
+	<input name="input_activity" value="Click here to pick an activity." disabled />
+
+</form>
+
+<div class="gateway_condition-@nextActivity.getRawId()">
+
+	@util.gateway_condition()
+
+</div>
+
+}
+
+}
+
+} else {
+
+
+}
+
+}
