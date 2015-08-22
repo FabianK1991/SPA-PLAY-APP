@@ -46,7 +46,7 @@ public class Gateway {
 		
 		// Update it in spa
 		try {
-			this.pm.pm.store();
+			this.pm.pm.update();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +78,7 @@ public class Gateway {
 		
 		try {
 			// Update it
-			this.pm.getSPAProcessModel().store();
+			this.pm.getSPAProcessModel().update();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
