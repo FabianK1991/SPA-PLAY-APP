@@ -82,7 +82,12 @@ public class ActivityInstance {
 		for(models.spa.api.process.buildingblock.instance.ActivityInstance ai : instances){
 			if( ai.getId().equals(id) ){
 				this.activityInstance = ai;
+				try {
 				this.activity = new Activity(ai.getActivity(), pi.getProcessModel());
+				}
+				catch(Exception e) {
+					
+				}
 				this.id = ai.getId();
 				break;
 			}

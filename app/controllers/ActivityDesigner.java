@@ -5,8 +5,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import models.core.process.Activity;
+import models.core.process.Event;
+import models.core.process.Gateway;
+import models.core.process.Node;
 import models.core.process.ProcessModel;
 import models.core.serverModels.businessObject.BusinessObject;
 import models.core.serverModels.businessObject.BusinessObjectProperty;
@@ -32,6 +36,20 @@ public class ActivityDesigner extends Controller {
     	try {
     		processModel = new ProcessModel(ProcessParser.nsm + modelId);
     		activity = new Activity(ProcessParser.nsm + activityId, processModel);
+    	}
+    	catch (Exception e) {
+    		
+    	}
+        return activity;
+	}
+	
+	public static Event getEvent(String modelId, String activityId) {
+		ProcessModel processModel = null;
+    	Event activity = null;
+    	
+    	try {
+    		processModel = new ProcessModel(ProcessParser.nsm + modelId);
+    		activity = new Event(ProcessParser.nsm + activityId, processModel);
     	}
     	catch (Exception e) {
     		
@@ -109,13 +127,66 @@ public class ActivityDesigner extends Controller {
     	return ok();
     }
     
-    public static Result setGatewayCondition(String modelId, String gatewayActivityId, String nextActivityId, String conditionActivityId, String conditionPropertyId) {
-    	Activity gatewayActivity = getActivity(modelId, gatewayActivityId);
+    public static Result changeGatewayOption(String modelId, String activityId) {
+    	/*String conditionActivityId, String conditionPropertyId*/
     	
-    	HashMap<Activity, String> gatewayOptions = gatewayActivity.getNextGateway().getOptions();
+    	Node nextNode = getActivity(modelId, Parameters.get("next_node"));
     	
-	    if (gatewayOptions.containsKey(gatewayActivity)) {
+    	if (nextNode == null) {Logger.info("use event!!!!");
+    		nextNode = getEvent(modelId, Parameters.get("next_node"));
+    	}
+    	Activity activity = getActivity(modelId, activityId);
+    	Gateway nextGateway = activity.getNextGateway();
+    	
+    	HashMap<Node, HashMap<String, Object>> gatewayOptions = nextGateway.getOptions();
+
+    	Logger.info(nextNode.toString());
+    	Logger.info(gatewayOptions.toString());
+    	
+    	Iterator<Entry<Node, HashMap<String, Object>>> i = gatewayOptions.entrySet().iterator();
+    	
+    	Node optionKey = null;
+    	
+    	while(i.hasNext()) {
+    		Entry<Node, HashMap<String, Object>> mapEntry = i.next();
+    		
+    		Node mapKey = mapEntry.getKey();
+    		
+    		Logger.info(nextNode.getRawId());
+    		Logger.info(mapKey.getRawId());
+    		
+    		if (nextNode.equals(mapKey)) {
+    			optionKey = mapKey;
+    		}
+    	}
+    	
+    	Logger.info(optionKey.toString());
+    	
+	    if (optionKey != null) {
+	    	HashMap<String, Object>conditionMap = new HashMap<String, Object>();
 	    	
+	    	Activity decisionActivity = getActivity(modelId, Parameters.get("decision_activity"));
+
+	    	conditionMap.put("activity", decisionActivity.getRawId());
+	    	
+	    	try {
+		    	String[] boProperties = Parameters.getAll("bo_properties");
+		    	
+		    	if (boProperties.length > 0) {
+			    	conditionMap.put("activity_prop", boProperties[0]);
+					conditionMap.put("comparator", Parameters.get("gateway_comparator"));
+					conditionMap.put("comp_value", Parameters.get("gateway_decision_value"));
+		    	}
+		    	gatewayOptions.put(nextNode, conditionMap);
+	    	}
+	    	catch(Exception e) {
+	    	}
+	    	gatewayOptions.put(optionKey, conditionMap);
+	    	
+	    	nextGateway.setOptions(gatewayOptions);
+	    }
+	    else {
+	    	return notFound();
 	    }
     	return ok();
     }

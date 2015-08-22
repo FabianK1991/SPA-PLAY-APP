@@ -26,6 +26,7 @@ POST    /changeActivityType			controllers.ActivityDesigner.changeActivityType(mo
 POST    /changeBusinessObject		controllers.ActivityDesigner.changeBusinessObject(model:String ?= "", activity:String ?= "")
 POST    /changeBO_Properties		controllers.ActivityDesigner.changeBO_Properties(model:String ?= "", activity:String ?= "")
 POST    /changeObjectAmount			controllers.ActivityDesigner.changeObjectAmount(model:String ?= "", activity:String ?= "")
+POST    /changeGatewayOption		controllers.ActivityDesigner.changeGatewayOption(model:String ?= "", activity:String ?= "")
 
 # Process Executor
 POST    /uploadProcess				controllers.ProcessExecutor.uploadProcess()

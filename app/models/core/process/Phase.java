@@ -102,7 +102,13 @@ public class Phase {
 			ArrayList<Activity> resultList = new ArrayList<Activity>();
 			
 			while(rs.next()){
-				Activity a = new Activity(ProcessParser.nsm + rs.getString("activity"), this.pm);
+				Activity a = null;
+				try {
+					a = new Activity(ProcessParser.nsm + rs.getString("activity"), this.pm);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				resultList.add(a);
 			}

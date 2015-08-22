@@ -1,0 +1,56 @@
+@import models.core.process._
+@(activity: Activity, nextNode: Node, decisionActivity: Activity = null)
+
+@if(decisionActivity != null) {
+
+@defining(activity.getBusinessObject()) { bo =>
+
+@if(bo != null) {
+
+<form class="auto-submit"
+	action="@routes.ActivityDesigner.changeGatewayOption(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeGatewayOption(activity.getModel().getRawId(), activity.getRawId()).method">
+
+	<input type="hidden" name="decision_activity" value="@decisionActivity.getRawId()" disabled />
+	<input type="hidden" name="next_node" value="@nextNode.getRawId()" disabled />
+	
+	<label for="business_object">
+
+		What is the decision criterion?
+	
+	</label>
+	
+	<div class="bo_property_selector">
+	
+		@selectors.bo_properties(bo, false, decisionActivity.getBO_Properties())
+	
+	</div>
+	
+	<div class="gateway_comparator">
+	
+		<select name="gateway_comparator">
+		
+			<option>&lt;</option>
+			<option>&lt;=</option>
+			<option>=</option>
+			<option>=&gt;</option>
+			<option>&gt;</option>
+			<option>!=</option>
+		
+		</select>
+	
+	</div>
+	
+	<div class="gateway_comparator">
+	
+		<input name="gateway_decision_value" value="0" />
+	
+	</div>
+
+</form>
+
+}
+
+}
+
+}

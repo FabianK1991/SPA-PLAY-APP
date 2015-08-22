@@ -158,15 +158,23 @@ getLoadingCallback = function(BpmnViewer, obj) {
                             $(this).append(submitForm);
                         })
                         .on('vclick', function() {
+                            var activityId = $(this).attr('data-element-id');
+                            
                             if (location.hash == '#activity-designer') {
-                                $('form', this).trigger('submit');
+                                var decisionActivityInput = $('input[name="decision_activity"].selected');
+                                
+                                if (decisionActivityInput.length == 1) {
+                                    decisionActivityInput.prev('input[name="decision_activity_name"]').val($(this).text());
+                                    decisionActivityInput.val(activityId).removeClass('selected').closest("form").submit();
+                                }
+                                else {
+                                    $('form', this).trigger('submit');
+                                }
                             }
                             else {
                                 var phase = $('.phase-list .selected');
                                 
                                 if (phase.length == 1) {
-                                    var activityId = $(this).attr('data-element-id');
-                                    
                                     if ($(this).attr('class').indexOf('phase-activity') != -1) {
                                         $('.delete-form').attr('method', 'post').attr('action', phase.data('delete-activity').replace('_placeholder_', activityId)).submit();
                                         
@@ -431,6 +439,13 @@ var jsSet = function() {
             $('.process_modeler .nav a[href="#activity-designer"]:not(.set)')
                 .on('vclick', function() {
                     $('.phase-list li.selected').trigger('vclick');
+                })
+                .addClass('set');
+            
+            $('input[name="decision_activity_name"]:not(.set)')
+                .on('vclick', function() {
+                    $('input[name="decision_activity"]').removeClass('selected');
+                    $(this).next('input[name="decision_activity"]').addClass('selected');
                 })
                 .addClass('set');
             

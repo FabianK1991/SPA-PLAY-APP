@@ -154,10 +154,10 @@ public class ProcessInstance {
 			Gateway activeGateway = activityInstance.getActivity().getNextGateway();
 			
 			if (activeGateway != null) {
-				HashMap<String, Activity> activeGatewayOptions = activeGateway.getOptions();
+				HashMap<Node, HashMap<String, Object>> activeGatewayOptions = activeGateway.getOptions();
 				
-				for (String key : activeGatewayOptions.keySet()) {
-					nextActivities.add(activeGatewayOptions.get(key).getRawId());
+				for (Node activity : activeGatewayOptions.keySet()) {
+					nextActivities.add(activity.getRawId());
 				}
 			}
 		}
@@ -274,8 +274,12 @@ public class ProcessInstance {
 			
 			// should be empty anyway
 			resultList.clear();
+			try {
 			resultList.add(ActivityInstance.create(this, new Activity(a.getId(), this.pm)));
-			
+			}
+			catch(Exception e) {
+				
+			}
 			return resultList;
 		}
 	}

@@ -1,35 +1,33 @@
+@import models.core.process._
 @(activity: models.core.process.Activity = null)
-
-@defining(activity.getInputs()) { inputMap =>
-
-@if(inputMap.size() > 0) {
 
 @defining(activity.getNextGateway()) { nextGateway =>
 
-@for(nextActivity <- activity.getNextActivities()) {
+@for((nextNode, condition) <- nextGateway.getOptions()) {
+
+@defining(condition.get("activity").asInstanceOf[Activity]) { decisionActivity =>
+
+<h2>Decision Criterion for Activity: @nextNode.getName()</h2>
 
 <form class="auto-submit"
-	action="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId())"
-	method="@routes.ActivityDesigner.changeBusinessObject(activity.getModel().getRawId(), activity.getRawId()).method"
-	data-target=".gateway_condition-@nextActivity.getRawId()">
+	action="@routes.ActivityDesigner.changeGatewayOption(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeGatewayOption(activity.getModel().getRawId(), activity.getRawId()).method"
+	data-target=".gateway_condition-@nextNode.getRawId()">
 
 	<label for="business_object">On the output of which activity is the decision based?</label>
-	<input name="input_activity" value="Click here to pick an activity." disabled />
+	<input name="decision_activity_name" value="@if(decisionActivity != null){@decisionActivity.getName()}else{Click here to pick an activity.}" disabled />
+	<input type="hidden" name="decision_activity" value="@if(decisionActivity != null){@decisionActivity.getRawId()}" />
+	<input type="hidden" name="next_node" value="@nextNode.getRawId()" />
 
 </form>
 
-<div class="gateway_condition-@nextActivity.getRawId()">
+<div class="gateway_condition-@nextNode.getRawId()">
 
-	@util.gateway_condition()
+	@util.gateway_condition(activity, nextNode, decisionActivity)
 
 </div>
 
 }
-
-}
-
-} else {
-
 
 }
 

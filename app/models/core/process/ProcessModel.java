@@ -108,7 +108,12 @@ public class ProcessModel {
 		
 		try {
 			while(rs.next()) {
-				resultList.add(new Activity(ProcessParser.nsm + rs.getString("activity_id"), this));
+				try {
+					resultList.add(new Activity(ProcessParser.nsm + rs.getString("activity_id"), this));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		} catch (SQLException e) {

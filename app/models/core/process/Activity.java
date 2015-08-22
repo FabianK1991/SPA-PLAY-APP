@@ -23,7 +23,7 @@ import java.sql.SQLException;
 import controllers.Application;
 
 @SuppressWarnings("unused")
-public class Activity {
+public class Activity extends models.core.process.Node {
 	private models.spa.api.process.buildingblock.Activity activity;
 	private ProcessModel pm;
 	private BusinessObject bo;
@@ -46,9 +46,13 @@ public class Activity {
     }
 	
 	
-	public Activity(String id, ProcessModel pm){
+	public Activity(String id, ProcessModel pm) throws Exception{
 		this.activity = (models.spa.api.process.buildingblock.Activity)pm.getSPANodeById(id);
 		this.pm = pm;
+		
+		if (this.activity == null) {
+			throw new Exception("Activity does not exist!");
+		}
 	}
 	
 	public String getId() {
@@ -398,7 +402,12 @@ public class Activity {
 			Node n = e.getTo();
 			
 			if (n.type.equals("Node")) {
-				resultList.add(new Activity(n.getId(), this.pm));
+				try {
+					resultList.add(new Activity(n.getId(), this.pm));
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 		return resultList;
@@ -444,7 +453,12 @@ public class Activity {
 					if( checkNodes.contains(f.getTo().getId()) ){
 						// we found it boys
 						if( n.type.equals("Node") ){
-							returnList.add(new Activity(f.getTo().getId(), this.pm));
+							try {
+								returnList.add(new Activity(f.getTo().getId(), this.pm));
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 						else{
 							if( !checkNodes.contains(n.getId()) ){
@@ -585,7 +599,12 @@ public class Activity {
 				ResultSet rs2 = Application.db.exec(query, args, true);
 				
 				if( rs2.next() ){
-					sourceActivity = new Activity(ProcessParser.nsm + rs2.getString("activity_id"), this.pm);
+					try {
+						sourceActivity = new Activity(ProcessParser.nsm + rs2.getString("activity_id"), this.pm);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				
 				// get the businessobjectproperty
@@ -624,14 +643,5 @@ public class Activity {
 		}
 		
 		return returnMap;
-	}
-	
-	public boolean equals(Activity otherActivity) {
-		if (this.pm.getRawId() == otherActivity.getModel().getRawId() && this.getRawId() == otherActivity.getRawId()) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 }

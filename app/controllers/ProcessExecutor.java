@@ -83,9 +83,15 @@ public class ProcessExecutor extends Controller {
     	
 		try {
 			ProcessInstance processInstance = new ProcessInstance(ProcessParser.nsmi + processInstanceId);
+
+			Activity activity = null;
 			
-			Activity activity = new Activity(ProcessParser.nsm + activityId, processInstance.getProcessModel());
-		    
+			try {
+				activity = new Activity(ProcessParser.nsm + activityId, processInstance.getProcessModel());
+			}
+			catch(Exception e) {
+		    	
+		    }
 			processInstance.setCurrentActivities(activity.getNextActivities());
 			
 			return ok(process_execution.render(processInstance));
@@ -104,7 +110,12 @@ public class ProcessExecutor extends Controller {
 			ArrayList<Activity> newCurrentActivities = new ArrayList<Activity>();
 			
 			for (String nextActivityId : nextActivities) {
+				try {
 				newCurrentActivities.add(new Activity(ProcessParser.nsm + nextActivityId, processInstance.getProcessModel()));
+				}
+				catch(Exception e) {
+					
+				}
 			}
 			processInstance.setCurrentActivities(newCurrentActivities);
 			
