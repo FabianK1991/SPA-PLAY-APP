@@ -196,7 +196,11 @@ public class User {
 	 * TODO
 	 */
 	public ProcessInstance createProcessInstance(ProcessModel processModel) {
-		return ProcessInstance.create(this, processModel);
+		ProcessInstance processInstance = ProcessInstance.create(this, processModel);
+		
+		this.setCurrentProcessInstance(processInstance);
+		
+		return processInstance;
 	}
 	
 	/*

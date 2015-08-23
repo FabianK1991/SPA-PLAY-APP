@@ -250,7 +250,7 @@ ajaxRequest = function(targetData, requestURL, requestMethod, requestData) {
             }
             
             if (re[i] !== undefined && re[i] != '') {
-                $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])/g, '') + '$3'));
+                $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])|(#.*)/g, '') + '$3'));
                 
                 if (window.history.pushState) {
                     window.history.pushState(null, null, re[i]);
@@ -342,7 +342,7 @@ var jsSet = function() {
             $('.nav > *')
                 .each(function() {
                     if ($(this).data('set') != 1) {
-                        if ($('a', this).prop('href') == location.href) {
+                        if ($('a', this).prop('href') == location.href && $('a', this).prop('href') != location.href + location.hash) {
                             $(this).addClass('active');
                             location.href = $('a', this).prop('href');
                         }

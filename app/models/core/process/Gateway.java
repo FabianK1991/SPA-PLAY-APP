@@ -63,12 +63,26 @@ public class Gateway {
 			
 		    while (it.hasNext()) {
 		        Entry<Node, HashMap<String, Object>> pair = it.next();
-		        //System.out.println(pair.getKey() + " = " + pair.getValue());
+		        
+		        Logger.info("****");
+		        Logger.info(pair.getKey() + " = " + pair.getValue());
+		        Logger.info(f.getTo().getId());
 
 		        if( (pair.getKey()).getId().equals(f.getTo().getId()) ){
+		        	Logger.info("set option");
 		        	HashMap<String, Object> optionMap = pair.getValue();
 		        	
-		        	String conditionString = optionMap.get("activity") + "|" + optionMap.get("bo_prop") + "|" + optionMap.get("comparator") + "|" + optionMap.get("comp_value");
+		        	Object optionActivity = optionMap.get("activity");
+		        	
+		        	String conditionString = "";
+		        	
+		        	if (optionActivity instanceof Activity) {
+		        		conditionString = ((Activity) optionActivity).getRawId();
+		        	}
+		        	else if (optionActivity instanceof String) {
+		        		conditionString = optionActivity.toString();
+		        	}
+		        	conditionString = conditionString + "|" + optionMap.get("bo_prop") + "|" + optionMap.get("comparator") + "|" + optionMap.get("comp_value");
 		        	
 		        	f.setCondition(conditionString);
 		        	break;
@@ -114,25 +128,29 @@ public class Gateway {
 			catch(Exception e) {
 				activity = new Event(toId, this.pm);
 			}
-			String[] condParts = condition.split("|");
+			String[] condParts = condition.split("\\|");
+			
+			Logger.info("#################");
+			Logger.info(condition);
 			
 			HashMap<String, Object> conditionMap = new HashMap<String, Object>();
 			
 			conditionMap.put("activity", null);
 			conditionMap.put("bo_prop", "");
 			conditionMap.put("comparator", "");
-			conditionMap.put("comp_value", 0);
+			conditionMap.put("comp_value", "");
+			
+			Logger.info(ProcessParser.nsm + condParts[0]);
 			
 			try {
 				conditionMap.put("activity", new Activity(ProcessParser.nsm + condParts[0], this.pm));
-				conditionMap.put("activity_prop", condParts[1]);
+				conditionMap.put("bo_prop", condParts[1]);
 				conditionMap.put("comparator", condParts[2]);
 				conditionMap.put("comp_value", condParts[3]);
 			}
 			catch(Exception e) {
-				
+				Logger.info(e.toString());
 			}
-			
 			result.put(activity, conditionMap);
 		}
 		

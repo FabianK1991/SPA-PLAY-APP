@@ -1,12 +1,19 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 import models.core.exceptions.ProcessInstanceNotFoundException;
 import models.core.exceptions.ProcessModelNotFoundException;
 import models.core.process.Activity;
+import models.core.process.ActivityInstance;
+import models.core.process.Node;
 import models.core.process.ProcessInstance;
 import models.core.process.ProcessModel;
+import models.core.serverModels.businessObject.BusinessObject;
+import models.core.serverModels.businessObject.BusinessObjectInstance;
 import models.core.util.parsing.ProcessParser;
 import models.util.http.Parameters;
 import play.Logger;
@@ -80,24 +87,134 @@ public class ProcessExecutor extends Controller {
     }
     
     public static Result performActivity(String processInstanceId, String activityId) {
-    	
+		
 		try {
 			ProcessInstance processInstance = new ProcessInstance(ProcessParser.nsmi + processInstanceId);
 
 			Activity activity = null;
+			ActivityInstance activityInstance = null;
 			
 			try {
 				activity = new Activity(ProcessParser.nsm + activityId, processInstance.getProcessModel());
+				activityInstance = processInstance.getCurrentActivities().get(0);
 			}
 			catch(Exception e) {
 		    	
 		    }
-			processInstance.setCurrentActivities(activity.getNextActivities());
+			List<Object> outputs = new ArrayList<Object>();
 			
-			return ok(process_execution.render(processInstance));
+			Logger.info(activityInstance.getActivity().getType());
+			
+			if (activityInstance.getActivity().getType().equals("bo_select")) {Logger.info("123");
+				String[] selectedBOs = Parameters.getAll("selected_bos[]");
+				BusinessObject bo = activity.getBusinessObject();
+				
+				for (int i = 0; i < selectedBOs.length; i++) {
+					Logger.info("get BO " + bo.getName());
+					Logger.info("get BO " + selectedBOs[i]);
+					outputs.add(BusinessObjectInstance.getBySAPId(bo, selectedBOs[i]));
+				}
+			}
+			else if (activityInstance.getActivity().getType().equals("def_question")) {
+				outputs.add(Parameters.get("output_value"));
+			}
+			Logger.info(outputs.toString());
+			activityInstance.setOutputs(outputs);
+			
+			List<Activity> nextActivities = activity.getNextActivities();
+			
+			if (nextActivities.size() > 0) {
+				processInstance.setCurrentActivities(nextActivities);
+				
+				for (int i = 0; i < nextActivities.size(); i++) {
+					Activity nextActivity = nextActivities.get(i);
+					
+					if (nextActivity != null && nextActivity.getType().equals("gateway_decision")) {
+						HashMap<Node, HashMap<String, Object>> gatewayOptions = nextActivity.getNextGateway().getOptions();
+						
+						for (Node nextNode : gatewayOptions.keySet()) {
+							HashMap<String, Object> gatewayOption = gatewayOptions.get(nextNode);
+							
+							Activity decisionActivity = (Activity) gatewayOption.get("activity");
+							String boProp = (String) gatewayOption.get("bo_prop");
+							String comparator = (String) gatewayOption.get("comparator");
+							String compValue = (String) gatewayOption.get("comp_value");
+							
+							List<Object> decisionOutputs = processInstance.getActivityInstance(decisionActivity).getOutputs();
+							
+							String decisionOutput;
+							
+							try {
+								decisionOutput = ((BusinessObjectInstance)decisionOutputs.get(0)).getPropertyValue(boProp);
+							}
+							catch (Exception e) {
+								if (decisionOutputs.size() > 0) {
+									decisionOutput = (String)decisionOutputs.get(0);
+								}
+								else {
+									decisionOutput = "";
+								}
+								
+							}
+							boolean decision = false;
+							
+							if (comparator.equals("=") && compValue.equals(decisionOutput)) {Logger.info("ja");
+								decision = true;
+							}
+							if (comparator.equals("!=") && compValue.equals(decisionOutput) == false) {
+								decision = true;
+							}
+							if (comparator.equals(">=") && Float.parseFloat(decisionOutput) >= Float.parseFloat(compValue)) {
+								decision = true;
+							}
+							if (comparator.equals(">") && Float.parseFloat(decisionOutput) > Float.parseFloat(compValue)) {
+								decision = true;
+							}
+							if (comparator.equals("<=") && Float.parseFloat(decisionOutput) <= Float.parseFloat(compValue)) {
+								decision = true;
+							}
+							if (comparator.equals("<") && Float.parseFloat(decisionOutput) < Float.parseFloat(compValue)) {
+								decision = true;
+							}
+							Logger.info("*** make gateway decision ***");
+							Logger.info(decision + "");
+							Logger.info(decisionOutput + "");
+							Logger.info(comparator + "");
+							Logger.info(compValue + "");
+							
+							if (decision) {
+								if (nextNode instanceof Activity) {
+									Activity gatewayNextActivity = (Activity)nextNode;
+									Logger.info(gatewayNextActivity.getName());
+									
+									ArrayList<Activity> gatewayDecisionActivities = new ArrayList<Activity>();
+									
+									gatewayDecisionActivities.add(gatewayNextActivity);
+									
+									processInstance.setCurrentActivities(gatewayDecisionActivities);
+									
+									//recursive gateway check call!
+								}
+								else {
+									if (true) {//check if Event == End of Process
+										processInstance.terminate();
+										return notFound("Process terminated!");
+									}
+								}
+							}
+						}
+					}
+				}
+				return ok(process_execution.render(processInstance));
+			}
+			else {
+				processInstance.terminate();
+				return notFound("Process terminated!");
+			}
 		} catch (ProcessInstanceNotFoundException e1) {
-			return notFound("Process Instance not found! (ID: " + processInstanceId + ")");
+			
 		}
+		return notFound("Process Instance not found! (ID: " + processInstanceId + ")");
     }
     
     public static Result performGatewayAction() {

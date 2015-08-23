@@ -79,6 +79,8 @@ public class ActivityInstance {
 	public ActivityInstance(String id, ProcessInstance pi) throws ActivityInstanceNotFoundException {
 		Set<models.spa.api.process.buildingblock.instance.ActivityInstance> instances = pi.getSPAProcessInstance().getActivities();
 		
+		this.pi = pi;
+		
 		for(models.spa.api.process.buildingblock.instance.ActivityInstance ai : instances){
 			if( ai.getId().equals(id) ){
 				this.activityInstance = ai;
@@ -223,6 +225,8 @@ public class ActivityInstance {
 	        }
 	        
 	        args.add(Integer.toString(order));
+	        
+	        Application.db.exec(query, args, false);
 			
 	        order++;
 		}

@@ -25,6 +25,7 @@ import views.html.process.activity_config;
 import views.html.selectors.business_objects;
 import views.html.process.activityConfigs.util.bo_property_changer;
 import views.html.process.activityConfigs.util.bo_quantity_changer;
+import views.html.process.activityConfigs.util.gateway_condition;
 
 @With(ActionController.class)
 public class ActivityDesigner extends Controller {
@@ -163,30 +164,36 @@ public class ActivityDesigner extends Controller {
     	Logger.info(optionKey.toString());
     	
 	    if (optionKey != null) {
-	    	HashMap<String, Object>conditionMap = new HashMap<String, Object>();
+	    	HashMap<String, Object>conditionMap = gatewayOptions.get(optionKey);
 	    	
 	    	Activity decisionActivity = getActivity(modelId, Parameters.get("decision_activity"));
 
-	    	conditionMap.put("activity", decisionActivity.getRawId());
+	    	conditionMap.put("activity", decisionActivity);
+	    	
+	    	Status returnView = ok();
 	    	
 	    	try {
-		    	String[] boProperties = Parameters.getAll("bo_properties");
+		    	String[] boProperties = Parameters.getAll("bo_properties[]");
 		    	
 		    	if (boProperties.length > 0) {
-			    	conditionMap.put("activity_prop", boProperties[0]);
+			    	conditionMap.put("bo_prop", boProperties[0]);
 					conditionMap.put("comparator", Parameters.get("gateway_comparator"));
 					conditionMap.put("comp_value", Parameters.get("gateway_decision_value"));
 		    	}
-		    	gatewayOptions.put(nextNode, conditionMap);
+		    	Logger.info("set 1" + boProperties.length);
 	    	}
 	    	catch(Exception e) {
+	    		returnView = ok(gateway_condition.render(activity, nextNode, decisionActivity, conditionMap));
 	    	}
+	    	Logger.info("****");
+	    	Logger.info(conditionMap.toString());
 	    	gatewayOptions.put(optionKey, conditionMap);
 	    	
+	    	Logger.info(gatewayOptions.toString());
+	    	
 	    	nextGateway.setOptions(gatewayOptions);
-	    }
-	    else {
-	    	return notFound();
+	    	
+	    	return returnView;
 	    }
     	return ok();
     }

@@ -41,6 +41,7 @@ public class Activity extends models.core.process.Node {
         aMap.put("bo_delete", "Business Object Deletion");
         aMap.put("document_upload", "Document Upload");
         aMap.put("gateway_decision", "Gateway Decision");
+        aMap.put("def_question", "Question (Variable)");
         
         activityTypes = (Map<String, String>) Collections.unmodifiableMap(aMap);
     }
@@ -88,10 +89,11 @@ public class Activity extends models.core.process.Node {
 	public Phase getPhase() throws PhaseNotFoundException {
 		Application.db.connect();
 		
-		String query = "SELECT process_phase FROM process_phase_activities WHERE activity = '%s'";
+		String query = "SELECT process_phase FROM process_phase_activities LEFT JOIN process_phases ON process_phases.id = process_phase WHERE activity = '%s' AND process = '%s'";
 		
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(this.getRawId());
+		args.add(this.pm.getRawId());
 		
 		ResultSet rs = Application.db.exec(query, args, true);
 		
@@ -130,7 +132,7 @@ public class Activity extends models.core.process.Node {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return "";
 		//Logger.info(this.pm.getActionForActivity(this.activity.getId()));
 		//Logger.info(this.pm.getActionForActivity(this.activity.getId()));
 		//return this.pm.getActionForActivity(this.activity.getId());
@@ -422,7 +424,7 @@ public class Activity extends models.core.process.Node {
 		for (Flow e : this.getSPAActivity().getNextFlows()) {
 			Node n = e.getTo();
 			
-			if (Gateway.isGatewayType(n.type)) {
+			if (n != null && Gateway.isGatewayType(n.type)) {
 				return new Gateway(n.getId(), this.pm);
 			}
 		}

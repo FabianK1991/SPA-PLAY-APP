@@ -176,7 +176,8 @@ public class ProcessInstance {
 		}
 	}
 	
-	public Phase getCurrentPhase() throws PhaseNotFoundException {
+	public Phase getCurrentPhase() throws Exception {
+		Logger.info(this.getCurrentActivities().get(0).toString());
 		return this.getCurrentActivities().get(0).getActivity().getPhase();
 	}
 	
@@ -227,6 +228,19 @@ public class ProcessInstance {
 			
 			return resultList;
 		}
+	}
+	
+	public ActivityInstance getActivityInstance(Activity activity) {
+		List<ActivityInstance> instances = this.getCompletedActivities();
+		
+		for (int i = 0; i < instances.size(); i++) {
+			ActivityInstance instance = instances.get(i);
+			
+			if (instance.getActivity().getRawId().equals(activity.getRawId())) {
+				return instance;
+			}
+		}
+		return null;
 	}
 	
 	/*
@@ -370,5 +384,17 @@ public class ProcessInstance {
 			}
 		}
 		return id;
+	}
+	
+	public void terminate() {
+		Application.db.connect();
+		
+		String query = "UPDATE process_instances SET status = 'completed' WHERE id = '%s'";
+		
+		ArrayList<String> args = new ArrayList<String>();
+		args.add(this.getDatabaseId());
+		
+		Application.db.exec(query, args, false);
+		return;
 	}
 }

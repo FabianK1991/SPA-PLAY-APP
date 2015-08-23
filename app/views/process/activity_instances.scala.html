@@ -16,6 +16,7 @@
 	            case "bo_update" 	=> 	{}
 	            case "bo_create" 	=> 	{}
 	            case "bo_delete" 	=> 	{}
+	            case "def_question"	=> 	{@activity.getBO_Properties().get(0)}
 	            case _ 			=>	{}
             }
 			
@@ -60,7 +61,7 @@
 								
 									<td>
 									
-										<input type="checkbox" name="checkboxvar[]" value="@boInstance.getInstanceId()">
+										<input type="checkbox" name="selected_bos[]" value="@boInstance.getInstanceId()">
 									
 									</td>
 									
@@ -87,6 +88,10 @@
 	            case "bo_update" 	=> 	{}
 	            case "bo_create" 	=> 	{}
 	            case "bo_delete" 	=> 	{}
+	            case "def_question"	=> 	{
+					<input name="output_value" value="" />
+					<input type="submit" value="Proceed" />
+				}
 	            case _ 			=>	{}
             }
 			

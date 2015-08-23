@@ -11,6 +11,8 @@ import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
+import play.twirl.api.Content;
+import play.twirl.api.Html;
 import views.html.documents.explorer;
 
 @With(ActionController.class)
@@ -29,6 +31,14 @@ public class DocumentExplorer extends Controller {
     	catch (Exception e) {
     		e.printStackTrace();
     	}
-    	return ok(explorer.render(businessObjectInstance));
+    	Html re;
+    	
+    	try {
+    		re = explorer.render(businessObjectInstance);
+    	}
+    	catch(Exception e) {
+    		return ok();
+    	}
+		return ok(re);
     }
 }

@@ -1,0 +1,14 @@
+@import models.core.process._
+@(activity: models.core.process.Activity = null)
+
+@defining(activity.getBO_Properties().get(0)) { defQuestion =>
+
+<form class="auto-submit"
+	action="@routes.ActivityDesigner.changeBO_Properties(activity.getModel().getRawId(), activity.getRawId())"
+	method="@routes.ActivityDesigner.changeBO_Properties(activity.getModel().getRawId(), activity.getRawId()).method">
+
+	<input name="bo_properties[]" value="@if(defQuestion.equals("")){Define a question for the process executor.}else{@defQuestion}" />
+
+</form>
+
+}
