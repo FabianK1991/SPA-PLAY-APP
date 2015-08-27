@@ -110,7 +110,10 @@ public class Document {
 	public ArrayList<String> getImages() {
 		return this.images;
 	}
-	
+
+	public String getFilePath() {
+		return this.filepath;
+	}
 	
 	public File getFile() {
 		return new File(this.filepath);

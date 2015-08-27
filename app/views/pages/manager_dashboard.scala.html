@@ -1,0 +1,46 @@
+@design("Manager Dashboard") {
+	<div class="manager_dashboard">
+	
+		<div>
+		
+			<div class="chart new-instances-per-process">
+			
+				<div class="diagram"></div>
+			
+			</div>
+			
+			<div class="chart duration-per-process">
+			
+				<div class="diagram"></div>
+			
+			</div>
+		
+		</div>
+		
+		<div>
+		
+			<div class="dashboard-control">
+			
+				<h2>Process Control Dashboard</h2>
+				
+				Select a process model for details:
+				@selectors.process_model()
+			
+			</div>
+			
+			<div class="chart instances-in-time">
+			
+				<div class="diagram"></div>
+			
+			</div>
+		
+			<div class="chart instances-per-process">
+			
+				<div class="diagram"></div>
+			
+			</div>
+		
+		</div>
+	
+	</div>
+}

@@ -12,6 +12,7 @@ import views.html.pages.main;
 import views.html.pages.manage_models;
 import views.html.pages.process_executor;
 import views.html.pages.process_modeler;
+import views.html.pages.manager_dashboard;
 import views.html.process.activity_designer;
 
 @With(ActionController.class)
@@ -35,6 +36,10 @@ public class Page extends Controller {
     
     public static Result manageProcessModels() {
         return ok(manage_models.render());
+    }
+    
+    public static Result managerDashboard() {
+    	return ok(manager_dashboard.render());
     }
     
     public static Result processModeler(String modelId) {

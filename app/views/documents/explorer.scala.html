@@ -4,8 +4,8 @@
 
 <ul class="document-list">
 
-	@for(document <- DocumentServer.getRelatedDocuments(businessObjectInstance)) {
-		<li>@document.getName()</li>
+	@for((document, index) <- DocumentServer.getRelatedDocuments(businessObjectInstance).zipWithIndex) {
+		<li><a href="@routes.DocumentExplorer.getDocument(document.getFilePath()).toString().replace("data%5Cdocuments%5C", "")" target="_blank">@document.getName()</a></li>
 	}
 
 </ul>

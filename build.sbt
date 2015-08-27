@@ -22,7 +22,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "jquery-mobile" % "1.4.5",
   "org.webjars" % "datatables" % "1.10.7",
   "org.webjars" % "bpmn-js" % "0.10.3",
-  "org.webjars" % "chosen" % "1.3.0"
+  "org.webjars" % "chosen" % "1.3.0",
+  "org.webjars" % "c3" % "0.4.9-1"
 )
 
 fork in run := true

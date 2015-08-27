@@ -6,21 +6,15 @@
 	
 		@if(processModels.length > 0) {
 		
-			<form action="@routes.ProcessExecutor.startProcess("_placeholder_")" method="post" data-target="#general">
+			<select name="process_model">
 			
-				<select name="process_model">
+				@for(model <- processModels) {
 				
-					@for(model <- processModels) {
-					
-						<option value="@model.getId()">@model.getName()</option>
-					
-					}
+					<option value="@model.getId()">@model.getName()</option>
 				
-				</select>
-				
-				<input type="submit" value="Start" />
+				}
 			
-			</form>
+			</select>
 		
 		} else {
 				

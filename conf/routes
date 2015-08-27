@@ -4,7 +4,7 @@
 
 GET     /data/instancesOfPMs		controllers.StatsController.instancesOfProcessModels()
 GET		/data/timePerPM				controllers.StatsController.timePerProcessModel()
-GET		/data/newInstancesPerPM		controllers.StatsController.newInstancesPerProcessModel()
+GET		/data/newInstancesPerPM		controllers.StatsController.newInstancesPerProcessModel(model:String ?= "")
 GET 	/data/processesInTime		controllers.StatsController.processesInTime()
 
 # Pages
@@ -15,6 +15,7 @@ GET    	/manageProcessModels		controllers.Page.manageProcessModels()
 GET    	/addProcessModel			controllers.Page.addProcessModel()
 GET    	/processModeler				controllers.Page.processModeler(model:String ?= "")
 GET    	/activityDesigner			controllers.Page.activityDesigner(model:String ?= "", activity:String ?= "")
+GET     /managerDashboard           controllers.Page.managerDashboard()
 
 # Login page
 POST    /login                     	controllers.AuthController.login()
@@ -40,7 +41,9 @@ GET     /process/*processID			controllers.ProcessExecutor.xmlProcess(processID)
 GET    	/setCurrentProcess			controllers.ProcessExecutor.setCurrentProcess(process:String ?= "")
 POST    /performActivity			controllers.ProcessExecutor.performActivity(processInstance:String ?= "", activity:String ?= "")
 POST    /performGatewayAction		controllers.ProcessExecutor.performGatewayAction()
-GET 	/getDocument				controllers.DocumentExplorer.getDocument(boType:String ?= "", sapId:String ?= "")
+GET 	/getDocumentExplorer		controllers.DocumentExplorer.getDocumentExplorer(boType:String ?= "", sapId:String ?= "")
+GET 	/getDocument				controllers.DocumentExplorer.getDocument(file:String ?= "")
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

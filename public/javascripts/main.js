@@ -463,7 +463,7 @@ var jsSet = function() {
                     checkbox.prop("checked", !checked);
                     
                     if ($(this).parents('.activity-operators').length > 0) {
-                        ajaxRequest('.related-documents', '/getDocument?boType=' + $(this).data('bo-type') + '&sapId=' + $('td:eq(0) input', this).val(), 'get', {});
+                        ajaxRequest('.related-documents', '/getDocumentExplorer?boType=' + $(this).data('bo-type') + '&sapId=' + $('td:eq(0) input', this).val(), 'get', {});
                     }
                 })
                 .addClass('set');
@@ -501,6 +501,124 @@ var jsSet = function() {
                 }
             })
             .chosen({allow_single_deselect: false});
+    });
+    
+    require(["c3"], function(c3) {
+        setTimeout(function() {
+            var defaultType = 'donut';
+            var alternativeType = 'bar';
+            
+            var chart1 = c3.generate({
+                bindto: '.chart.instances-per-process > .diagram',
+                data: {
+                    url: '/data/instancesOfPMs',
+                    mimeType: 'json',
+                    type: defaultType,
+                }
+            });
+            
+            $('#button').data('currentType', defaultType).on('click', function(e) {
+                if ($(this).data('currentType') == defaultType){
+                    $(this).data('currentType', alternativeType);
+                }
+                else {
+                    $(this).data('currentType', defaultType);
+                }    
+                
+                chart1.transform($(this).data('currentType'));
+            });
+        }, 3500);
+        
+        var chart2 = c3.generate({
+            bindto: '.chart.duration-per-process > .diagram',
+            data: {
+                columns: [
+                    ['best', 34.5, 20, 48],
+                    ['worst', 54.3, 31.8, 76],
+                    ['average', 40.6, 26.3, 63],
+                ],/*
+                url: '/data/timePerPM',
+                mimeType: 'json',*/
+                type: 'bar',
+            },
+            axis: {
+                x: {
+                    type: 'category',
+                    categories: ['Sales Process', 'Procurement Process', 'Customer Inquiry Processing'],
+                }
+            }
+        });
+        
+        
+        
+        
+        
+        
+        
+        var now = new Date();
+        var aDay = 1000*60*60*24;
+
+        var chart3 = c3.generate({
+            bindto: '.chart.new-instances-per-process > .diagram',
+            data: {
+                x: 'x',
+                columns: [
+                    ['x', new Date((now.getTime()-6*aDay)), new Date(now.getTime()-5*aDay), new Date(now.getTime()-4*aDay), new Date(now.getTime()-3*aDay), new Date(now.getTime()-2*aDay), new Date().setTime(now.getTime()-aDay), now],
+                    ['Procurement Process', 3, 4, 2, 6, 1, 4, 5]
+                ]
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%d-%m-%Y'
+                    }
+                }
+            }
+        });
+
+        setTimeout(function() {
+            chart3.load({
+                columns: [
+                    ['Procurement Process', 3, 4, 2, 6, 1, 4, 5]
+                ]
+            });
+        }, 1000);
+
+        setTimeout(function() {
+            chart3.load({
+                columns: [
+                    ['Sales Process', 2, 1, 6, 3, 4, 8, 2]
+                ]
+            });
+        }, 2000);
+
+        setTimeout(function() {
+            chart3.load({
+                columns: [
+                    ['Customer Inquiry Processing', 14, 8, 18, 21, 28, 17, 8]
+                ]
+            });
+        }, 3000);
+        
+        
+        setTimeout(function() {
+            var chart = c3.generate({
+                bindto: '.chart.instances-in-time > .diagram',
+                data: {
+                    columns: [
+                        ['data', 91.4]
+                    ],
+                    type: 'gauge'
+                },
+                color: {
+                    pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'],
+                    threshold: {
+                        values: [30, 60, 90, 100]
+                    }
+                }
+            });
+        }, 2000);
     });
 };
 

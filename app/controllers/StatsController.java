@@ -76,8 +76,4 @@ public class StatsController extends Controller{
         
         return ok(s);      
     }
-    
-    
-    
-    
 }
