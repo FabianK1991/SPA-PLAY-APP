@@ -1239,6 +1239,7 @@ margin-left: -5px;
   cursor: inherit!important;
 }
 
+<<<<<<< HEAD
 
 
 
@@ -1293,3 +1294,38 @@ width: 98%;
     text-align: center;
     z-index: 1;
 }
+
+
+
+
+
+.document-explorer .document-list > li{
+	margin: 2px;
+	padding: 5px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	cursor: pointer;
+	
+	color: #111;
+}
+
+.document-explorer .document-list > li:hover{
+	background-color: #dedede;
+}
+
+.document-explorer .document-list > li::before{
+	background-image: url("/images/icon_document.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	
+	display: inline-block;
+	content: " ";
+	
+	width: 24px;
+	height: 24px;
+	
+	margin-right: 4px;
+	position: relative;
+	top: 5px;
+}
+
