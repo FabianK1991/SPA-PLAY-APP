@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -211,7 +212,20 @@ public class ProcessInstance {
 				continue;
 			}
 	    }
-		Collections.reverse(resultList);
+		
+		Collections.sort(resultList, new Comparator<ActivityInstance>() {
+	        @Override public int compare(ActivityInstance p1, ActivityInstance p2) {
+	        	SimpleDateFormat inFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+	        	
+	        	try {
+	        		return (int)(inFormat.parse(p2.getTime()).getTime() - inFormat.parse(p1.getTime()).getTime()); // Ascending
+	        	} catch (ParseException e) {
+					return -1;
+				}
+	        }
+
+	    });
+		
 		
 		if( latestInstance != null ){
 			resultList.remove(latestInstance);
