@@ -170,13 +170,18 @@ public class ActivityDesigner extends Controller {
 
 	    	conditionMap.put("activity", decisionActivity);
 	    	
-	    	Status returnView = ok();
+	    	Status returnView = ok(gateway_condition.render(activity, nextNode, decisionActivity, conditionMap));
 	    	
 	    	try {
 		    	String[] boProperties = Parameters.getAll("bo_properties[]");
 		    	
 		    	if (boProperties.length > 0) {
-			    	conditionMap.put("bo_prop", boProperties[0]);
+		    		if (decisionActivity.getBusinessObject().getPropertyNames().contains(boProperties[0])) {
+		    			conditionMap.put("bo_prop", boProperties[0]);
+		    		}
+		    		else {
+		    			conditionMap.put("bo_prop", "");
+		    		}
 					conditionMap.put("comparator", Parameters.get("gateway_comparator"));
 					conditionMap.put("comp_value", Parameters.get("gateway_decision_value"));
 		    	}

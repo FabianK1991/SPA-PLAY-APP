@@ -19,7 +19,7 @@ import views.html.process.activity_designer;
 public class Page extends Controller {
 
     public static Result index() {
-    	return ok(main.render());
+    	return processExecutor();
     }
     
     public static Result processExecutor() {

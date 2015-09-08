@@ -403,7 +403,7 @@ public class Activity extends models.core.process.Node {
 		for (Flow e : this.getSPAActivity().getNextFlows()) {
 			Node n = e.getTo();
 			
-			if (n.type.equals("Node")) {
+			if (n != null && n.type != null && n.type.equals("Node")) {
 				try {
 					resultList.add(new Activity(n.getId(), this.pm));
 				} catch (Exception e1) {

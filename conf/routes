@@ -19,6 +19,7 @@ GET     /managerDashboard           controllers.Page.managerDashboard()
 
 # Login page
 POST    /login                     	controllers.AuthController.login()
+GET     /logout                    	controllers.AuthController.logout()
 
 # Process Designer: Phase Designer
 POST    /createPhase				controllers.PhaseDesigner.createPhase(model:String ?= "")

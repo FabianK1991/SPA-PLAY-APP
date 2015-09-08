@@ -3,9 +3,11 @@
 @design("Login") {
 	<form class="login-form" action="@routes.AuthController.login" method="post" data-target="#content|.auth_header">
 	
-		<input type="text" name="email" value="email" />
+		<div class="info">Please login with your email address and password.</div>
 		
-		<input type="password" name="passwd" />
+		<input type="text" name="email" placeholder="your@@mail-address.com" />
+		
+		<input type="password" name="passwd" placeholder="your password" />
 		
 		<input type="submit" name="submit" value="Login" />
 	

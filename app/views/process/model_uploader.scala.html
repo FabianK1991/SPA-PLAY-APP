@@ -1,12 +1,18 @@
 <div class="process_model_uploader">
 
+	<div class="info">
+	
+		Upload a new BPMN-compliant process model.
+	
+	</div>
+	
 	<form class="upload" action="@routes.ProcessExecutor.uploadProcess" method="post" enctype="multipart/form-data">
 	
-		<input type="text" name="process_name" value="Enter Process Name" />
+		<input type="text" name="process_name" placeholder="Define a process name" />
 		
 		<input type="file" name="bpmn_file" accept=".bpmn,.xml" />
 		
-		<input type="submit" name="Add" />
+		<input type="submit" name="Add" value="Upload" />
 	
 	</form>
 

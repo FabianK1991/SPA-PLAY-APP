@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import play.Logger;
 import models.spa.api.process.buildingblock.Activity;
 import models.spa.api.process.buildingblock.BusinessObject;
 import models.spa.api.process.buildingblock.Event;
@@ -471,6 +472,10 @@ public class ProcessModel
 
         // nodes
         for(Node n : p.nodes) {
+        	Logger.info("+++++++++++++++");
+        	Logger.info(n.getClass().toString());
+        	Logger.info(n.getId());
+        	Logger.info(n.getName());
             n.addToModel(m);
         }
 

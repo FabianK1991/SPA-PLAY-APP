@@ -103,9 +103,9 @@ public class ProcessExecutor extends Controller {
 		    }
 			List<Object> outputs = new ArrayList<Object>();
 			
-			Logger.info(activityInstance.getActivity().getType());
+			Logger.info("Current Activity: " + activityInstance.getActivity().getRawId());
 			
-			if (activityInstance.getActivity().getType().equals("bo_select")) {Logger.info("123");
+			if (activity.getType().equals("bo_select")) {Logger.info("123");
 				String[] selectedBOs = Parameters.getAll("selected_bos[]");
 				BusinessObject bo = activity.getBusinessObject();
 				
@@ -114,20 +114,37 @@ public class ProcessExecutor extends Controller {
 					Logger.info("get BO " + selectedBOs[i]);
 					outputs.add(BusinessObjectInstance.getBySAPId(bo, selectedBOs[i]));
 				}
+				
+				if (outputs.size() < activity.getObjectAmountMin() || (outputs.size() > activity.getObjectAmountMax() && activity.getObjectAmountMax() > 0)) {
+					return notFound("Please select the correct amount of business objects!");
+				}
 			}
 			else if (activityInstance.getActivity().getType().equals("def_question")) {
 				outputs.add(Parameters.get("output_value"));
 			}
 			Logger.info(outputs.toString());
+			
 			activityInstance.setOutputs(outputs);
 			
 			List<Activity> nextActivities = activity.getNextActivities();
 			
+			Logger.info("Num next Activities: " + nextActivities.size());
+			
 			if (nextActivities.size() > 0) {
+				
+				//TODO: wait for FIX of getNextActivities(), then remove complete if clause + internal block
+				if (nextActivities.size() > 1 && activity.getRawId().equals("Task_3")) {
+					for (int i = 0; i < nextActivities.size(); i++) {
+						if (nextActivities.get(i).getRawId().equals("Task_4")) {
+							nextActivities.remove(i);
+						}
+					}
+				}
 				processInstance.setCurrentActivities(nextActivities);
 				
 				for (int i = 0; i < nextActivities.size(); i++) {
 					Activity nextActivity = nextActivities.get(i);
+					Logger.info("Next Activity: " + nextActivity.getRawId());
 					
 					if (nextActivity != null && nextActivity.getType().equals("gateway_decision")) {
 						HashMap<Node, HashMap<String, Object>> gatewayOptions = nextActivity.getNextGateway().getOptions();

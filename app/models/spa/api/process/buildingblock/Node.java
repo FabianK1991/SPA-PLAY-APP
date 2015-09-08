@@ -186,7 +186,11 @@ public abstract class Node
             m.add(fRes, RDF.type, m.createResource(FLOW));
             m.add(m.createResource(process.getId()), m.createProperty(COMPOSED_OF), fRes);
             m.add(node, m.createProperty(NODE_TO_FLOW), fRes);
-            m.add(fRes, m.createProperty(FLOW_TO_NODE), m.createResource(f.getTo().getId()));
+            
+            //not possible for end nodes!!! > FIX for SPA
+            if (f.getTo() != null) {
+            	m.add(fRes, m.createProperty(FLOW_TO_NODE), m.createResource(f.getTo().getId()));
+            }
             if(f.getCondition() != null) {
                 m.add(fRes, m.createProperty(CONDITION), m.createLiteral(f.getCondition()));
             }

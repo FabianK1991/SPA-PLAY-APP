@@ -1,16 +1,19 @@
 @design("Manager Dashboard") {
+<div class="manager_dashboard-area">
 	<div class="manager_dashboard">
 	
 		<div>
 		
 			<div class="chart new-instances-per-process">
 			
+				<h2>New Process Instances</h2>
 				<div class="diagram"></div>
 			
 			</div>
 			
 			<div class="chart duration-per-process">
 			
+				<h2>Process Duration <small>(min/max/avg)</small></h2>
 				<div class="diagram"></div>
 			
 			</div>
@@ -19,9 +22,9 @@
 		
 		<div>
 		
-			<div class="dashboard-control">
+			<div class="dashboard-control box">
 			
-				<h2>Process Control Dashboard</h2>
+				<h3>Process Control Dashboard</h3>
 				
 				Select a process model for details:
 				@selectors.process_model()
@@ -30,12 +33,14 @@
 			
 			<div class="chart instances-in-time">
 			
+				<h2>Completed in Time</h2>
 				<div class="diagram"></div>
 			
 			</div>
 		
 			<div class="chart instances-per-process">
 			
+				<h2>Running Instances</h2>
 				<div class="diagram"></div>
 			
 			</div>
@@ -43,4 +48,5 @@
 		</div>
 	
 	</div>
+</div>
 }

@@ -13,7 +13,9 @@ import play.mvc.Controller;
 import play.mvc.Http.Cookie;
 import play.mvc.Result;
 import play.mvc.With;
+import play.twirl.api.Html;
 import views.html.pages.main;
+import views.html.pages.process_executor;
 import views.html.ajax_concat;
 import views.html.auth_header;
 
@@ -67,7 +69,7 @@ public class AuthController extends Controller {
 			if(u.createSession(Parameters.get("passwd"))){
 				AuthController.s = u.getSession();
 				
-				return ok(ajax_concat.render(main.render(), auth_header.render(1), routes.Page.index().url()));
+				return ok(ajax_concat.render(process_executor.render(), auth_header.render(1), routes.Page.index().url()));
 			}
 		}
 		return badRequest("Login failed!");

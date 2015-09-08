@@ -164,10 +164,15 @@ getLoadingCallback = function(BpmnViewer, obj) {
                                 var decisionActivityInput = $('input[name="decision_activity"].selected');
                                 
                                 if (decisionActivityInput.length == 1) {
-                                    decisionActivityInput.prev('input[name="decision_activity_name"]').val($(this).text());
+                                    decisionActivityInput.prev('input[name="decision_activity_name"]').removeClass('selected').val($(this).text()).data('activity-name', $(this).text());
                                     decisionActivityInput.val(activityId).removeClass('selected').closest("form").submit();
                                 }
                                 else {
+                                    $('g[data-element-id*="Task_"]').each(function() {
+                                        $(this).attr('class', $(this).attr('class').replace('current-activity', ''));
+                                    });
+                                    $(this).attr('class', $(this).attr('class') + ' current-activity');
+                                    
                                     $('form', this).trigger('submit');
                                 }
                             }
@@ -250,7 +255,9 @@ ajaxRequest = function(targetData, requestURL, requestMethod, requestData) {
             }
             
             if (re[i] !== undefined && re[i] != '') {
-                $('body').attr('class', $('body').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + re[i].replace(/(^\/)|([\s])|(#.*)/g, '') + '$3'));
+                var newViewName = re[i].replace(/(^\/)|([\s])|(#.*)/g, '');
+                
+                $('#general').attr('class', $('#general').attr('class').replace(/(^|\s)view-([^\s]*)(\s|$)/gi, '$1view-' + newViewName + '$3'));
                 
                 if (window.history.pushState) {
                     window.history.pushState(null, null, re[i]);
@@ -442,14 +449,32 @@ var jsSet = function() {
                 })
                 .addClass('set');
             
-            $('input[name="decision_activity_name"]:not(.set)')
+            $('.process_modeler .nav a[href="#phase-designer"]:not(.set)')
                 .on('vclick', function() {
-                    $('input[name="decision_activity"]').removeClass('selected');
-                    $(this).next('input[name="decision_activity"]').addClass('selected');
+                    $('g[data-element-id*="Task_"]').each(function() {
+                        $(this).attr('class', $(this).attr('class').replace('current-activity', ''));
+                    });
                 })
                 .addClass('set');
             
-            $('tbody tr:not(.set)')
+            $('input[name="decision_activity_name"]:not(.set)')
+                .each(function() {
+                    $(this).data('activity-name', $(this).val());
+                })
+                .on('vclick', function() {
+                    $('input[name="decision_activity"]').removeClass('selected').prev('input[name="decision_activity_name"]').removeClass('selected').each(function() {
+                        if ($(this).next('input[name="decision_activity"]').val() == '') {
+                            $(this).val('');
+                        }
+                        else if ($(this).data('activity-name') != false) {
+                            $(this).val($(this).data('activity-name'));
+                        }
+                    });
+                    $(this).val($(this).data('alt_value')).addClass('selected').next('input[name="decision_activity"]').addClass('selected');
+                })
+                .addClass('set');
+            
+            $('.activity-instance tbody tr:not(.set)')
                 .on('vclick', function() {
                     var checkbox = $('input[type="checkbox"]', this);
                     var checked  = checkbox.prop("checked");
@@ -503,122 +528,135 @@ var jsSet = function() {
             .chosen({allow_single_deselect: false});
     });
     
-    require(["c3"], function(c3) {
-        setTimeout(function() {
-            var defaultType = 'donut';
-            var alternativeType = 'bar';
-            
-            var chart1 = c3.generate({
-                bindto: '.chart.instances-per-process > .diagram',
-                data: {
-                    url: '/data/instancesOfPMs',
-                    mimeType: 'json',
-                    type: defaultType,
-                }
-            });
-            
-            $('#button').data('currentType', defaultType).on('click', function(e) {
-                if ($(this).data('currentType') == defaultType){
-                    $(this).data('currentType', alternativeType);
-                }
-                else {
-                    $(this).data('currentType', defaultType);
-                }    
+    require(['jquery'], function($) {
+        if ($('#general').hasClass('view-managerDashboard')) {
+            require(["c3"], function(c3) {
+                setTimeout(function() {
+                    var defaultType = 'donut';
+                    var alternativeType = 'bar';
+                    
+                    var chart1 = c3.generate({
+                        bindto: '.chart.instances-per-process > .diagram',
+                        data: {
+                            url: '/data/instancesOfPMs',
+                            mimeType: 'json',
+                            type: defaultType,
+                        },
+                        color: {
+                            pattern: ['#003459', '#0073BF', '#0096FB']
+                        }
+                    });
+                    
+                    $('#button').data('currentType', defaultType).on('click', function(e) {
+                        if ($(this).data('currentType') == defaultType){
+                            $(this).data('currentType', alternativeType);
+                        }
+                        else {
+                            $(this).data('currentType', defaultType);
+                        }    
+                        
+                        chart1.transform($(this).data('currentType'));
+                    });
+                }, 3500);
                 
-                chart1.transform($(this).data('currentType'));
-            });
-        }, 3500);
-        
-        var chart2 = c3.generate({
-            bindto: '.chart.duration-per-process > .diagram',
-            data: {
-                columns: [
-                    ['best', 34.5, 20, 48],
-                    ['worst', 54.3, 31.8, 76],
-                    ['average', 40.6, 26.3, 63],
-                ],/*
-                url: '/data/timePerPM',
-                mimeType: 'json',*/
-                type: 'bar',
-            },
-            axis: {
-                x: {
-                    type: 'category',
-                    categories: ['Sales Process', 'Procurement Process', 'Customer Inquiry Processing'],
-                }
-            }
-        });
-        
-        
-        
-        
-        
-        
-        
-        var now = new Date();
-        var aDay = 1000*60*60*24;
-
-        var chart3 = c3.generate({
-            bindto: '.chart.new-instances-per-process > .diagram',
-            data: {
-                x: 'x',
-                columns: [
-                    ['x', new Date((now.getTime()-6*aDay)), new Date(now.getTime()-5*aDay), new Date(now.getTime()-4*aDay), new Date(now.getTime()-3*aDay), new Date(now.getTime()-2*aDay), new Date().setTime(now.getTime()-aDay), now],
-                    ['Procurement Process', 3, 4, 2, 6, 1, 4, 5]
-                ]
-            },
-            axis: {
-                x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: '%d-%m-%Y'
+                var chart2 = c3.generate({
+                    bindto: '.chart.duration-per-process > .diagram',
+                    data: {
+                        columns: [
+                            ['best', 34.5, 20, 48],
+                            ['worst', 54.3, 31.8, 76],
+                            ['average', 40.6, 26.3, 63],
+                        ],/*
+                        url: '/data/timePerPM',
+                        mimeType: 'json',*/
+                        type: 'bar',
+                    },
+                    color: {
+                        pattern: ['#0096FB', '#003459', '#0073BF']
+                    },
+                    axis: {
+                        x: {
+                            type: 'category',
+                            categories: ['Sales Process', 'Procurement Process', 'Customer Inquiry Processing'],
+                        }
                     }
-                }
-            }
-        });
+                });
+                
+                
+                
+                
+                
+                
+                
+                var now = new Date();
+                var aDay = 1000*60*60*24;
 
-        setTimeout(function() {
-            chart3.load({
-                columns: [
-                    ['Procurement Process', 3, 4, 2, 6, 1, 4, 5]
-                ]
-            });
-        }, 1000);
-
-        setTimeout(function() {
-            chart3.load({
-                columns: [
-                    ['Sales Process', 2, 1, 6, 3, 4, 8, 2]
-                ]
-            });
-        }, 2000);
-
-        setTimeout(function() {
-            chart3.load({
-                columns: [
-                    ['Customer Inquiry Processing', 14, 8, 18, 21, 28, 17, 8]
-                ]
-            });
-        }, 3000);
-        
-        
-        setTimeout(function() {
-            var chart = c3.generate({
-                bindto: '.chart.instances-in-time > .diagram',
-                data: {
-                    columns: [
-                        ['data', 91.4]
-                    ],
-                    type: 'gauge'
-                },
-                color: {
-                    pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'],
-                    threshold: {
-                        values: [30, 60, 90, 100]
+                var chart3 = c3.generate({
+                    bindto: '.chart.new-instances-per-process > .diagram',
+                    data: {
+                        x: 'x',
+                        columns: [
+                            ['x', new Date((now.getTime()-6*aDay)), new Date(now.getTime()-5*aDay), new Date(now.getTime()-4*aDay), new Date(now.getTime()-3*aDay), new Date(now.getTime()-2*aDay), new Date().setTime(now.getTime()-aDay), now],
+                            ['Procurement Process', 3, 4, 2, 6, 1, 4, 5]
+                        ]
+                    },
+                    color: {
+                        pattern: ['#003459', '#0073BF', '#0096FB']
+                    },
+                    axis: {
+                        x: {
+                            type: 'timeseries',
+                            tick: {
+                                format: '%d-%m-%Y'
+                            }
+                        }
                     }
-                }
+                });
+
+                setTimeout(function() {
+                    chart3.load({
+                        columns: [
+                            ['Procurement Process', 3, 4, 2, 6, 1, 4, 5]
+                        ]
+                    });
+                }, 1000);
+
+                setTimeout(function() {
+                    chart3.load({
+                        columns: [
+                            ['Sales Process', 2, 1, 6, 3, 4, 8, 2]
+                        ]
+                    });
+                }, 2000);
+
+                setTimeout(function() {
+                    chart3.load({
+                        columns: [
+                            ['Customer Inquiry Processing', 14, 8, 18, 21, 28, 17, 8]
+                        ]
+                    });
+                }, 3000);
+                
+                
+                setTimeout(function() {
+                    var chart = c3.generate({
+                        bindto: '.chart.instances-in-time > .diagram',
+                        data: {
+                            columns: [
+                                ['data', 89.4]
+                            ],
+                            type: 'gauge'
+                        },
+                        color: {
+                            pattern: ['#0096FB', '#0073BF', '#003459', '#4C7013'],
+                            threshold: {
+                                values: [30, 60, 90, 100]
+                            }
+                        }
+                    });
+                }, 2000);
             });
-        }, 2000);
+        }
     });
 };
 

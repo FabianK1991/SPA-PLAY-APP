@@ -7,7 +7,7 @@
 
 @defining(condition.get("activity").asInstanceOf[Activity]) { decisionActivity =>
 
-<h2>Decision Criterion for Activity: @nextNode.getName()</h2>
+<h2>Decision Rule for: @nextNode.getName()</h2>
 
 <form class="auto-submit"
 	action="@routes.ActivityDesigner.changeGatewayOption(activity.getModel().getRawId(), activity.getRawId())"
@@ -15,13 +15,13 @@
 	data-target=".gateway_condition-@nextNode.getRawId()">
 
 	<label for="business_object">On the output of which activity is the decision based?</label>
-	<input name="decision_activity_name" value="@if(decisionActivity != null){@decisionActivity.getName()}else{Click here to pick an activity.}" disabled />
+	<input name="decision_activity_name" value="@if(decisionActivity != null){@decisionActivity.getName()}" placeholder="Click here to pick an activity." data-alt_value="Now click on an activity in the process diagram!" disabled />
 	<input type="hidden" name="decision_activity" value="@if(decisionActivity != null){@decisionActivity.getRawId()}" />
 	<input type="hidden" name="next_node" value="@nextNode.getRawId()" />
 
 </form>
 
-<div class="gateway_condition-@nextNode.getRawId()">
+<div class="gateway_condition-@nextNode.getRawId() gateway_condition">
 
 	@util.gateway_condition(activity, nextNode, decisionActivity, condition)
 

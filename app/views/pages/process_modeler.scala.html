@@ -3,33 +3,35 @@
 
 @design("Process Modeler") {
 
-<div class="process_modeler">
-
-	@process.model_viewer(processModel)
-
-	<div class="workbench box">
-		<ul class="nav horizontal">
-			<li><a href="#phase-designer">Phase Designer</a></li>
-			<li><a href="#activity-designer">Activity Designer</a></li>
-		</ul>
-		
-		<section id="phase-designer">
-			
-			@process.phase_designer(processModel)
-			
-		</section>
-		
-		<section id="activity-designer">
-			
-			<div class="info">
-			
-				Please click on an activity to edit it!
-			
-			</div>
+<div class="process_modeler-area">
+	<div class="process_modeler">
 	
-		</section>
+		@process.model_viewer(processModel)
+	
+		<div class="workbench box">
+			<ul class="nav horizontal">
+				<li><a href="#phase-designer">Phase Designer</a></li>
+				<li><a href="#activity-designer">Activity Designer</a></li>
+			</ul>
+			
+			<section id="phase-designer">
+				
+				@process.phase_designer(processModel)
+				
+			</section>
+			
+			<section id="activity-designer">
+				
+				<div class="info">
+				
+					Please click on an activity to edit it!
+				
+				</div>
+		
+			</section>
+		</div>
+	
 	</div>
-
 </div>
 
 }
