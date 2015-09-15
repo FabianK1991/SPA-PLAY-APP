@@ -19,7 +19,7 @@ import views.html.process.activity_designer;
 public class Page extends Controller {
 
     public static Result index() {
-    	return processExecutor();
+    	return redirect(controllers.routes.Page.processExecutor());
     }
     
     public static Result processExecutor() {
