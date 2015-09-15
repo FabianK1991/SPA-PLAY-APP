@@ -173,7 +173,7 @@ getLoadingCallback = function(BpmnViewer, obj) {
                                     });
                                     $(this).attr('class', $(this).attr('class') + ' current-activity');
                                     
-                                    $('#activity-designer form.auto-submit').data('target', '').submit();
+                                    //$('#activity-designer form.auto-submit').data('target', '').submit();
                                     $('form', this).trigger('submit');
                                 }
                             }
