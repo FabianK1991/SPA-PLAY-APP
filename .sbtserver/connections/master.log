@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 New log file opened at Tue Sep 15 12:38:02 CEST 2015 by 2664@FabiansDing
 Taking next connection to: 63151
 New client attempting to connect on port: 63158-63151
@@ -8,10 +9,23 @@ Taking next connection to: 63151
 New client attempting to connect on port: 63159-63151
   Address = /192.168.145.1:63151
 Handshake exception on socket: 63159
+=======
+New log file opened at Tue Sep 15 12:44:13 CEST 2015 by 2808@LG-Lenovo
+Taking next connection to: 54512
+New client attempting to connect on port: 54513-54512
+  Address = /192.168.1.100:54512
+This client on port 54513 has uuid c0875c4c-97a0-40d4-a9b7-041e35db8e52 configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
+Connected Clients: activator-c0875c4c-97a0-40d4-a9b7-041e35db8e52
+Taking next connection to: 54512
+New client attempting to connect on port: 54524-54512
+  Address = /192.168.1.100:54512
+Handshake exception on socket: 54524
+>>>>>>> origin/fix
 sbt.impl.ipc.HandshakeException: Unable to perform handshake
 	at sbt.impl.ipc.Peer.handshake(IPC.scala:46)
 	at sbt.impl.ipc.MultiClientServer.<init>(IPC.scala:150)
 	at sbt.server.SbtServerSocketHandler$$anon$1.run(SbtServerSocketHandler.scala:43)
+<<<<<<< HEAD
 Caused by: java.net.SocketException: Software caused connection abort: recv failed
 	at java.net.SocketInputStream.socketRead0(Native Method)
 	at java.net.SocketInputStream.read(SocketInputStream.java:150)
@@ -34,3 +48,19 @@ Taking next connection to: 63151
 Checking to see if clients are empty...
 We have 1 non-daemon clients, continuing serving connections.
 Taking next connection to: 63151
+=======
+Caused by: java.io.EOFException
+	at java.io.DataInputStream.readInt(Unknown Source)
+	at sbt.impl.ipc.Peer.receive(IPC.scala:95)
+	at sbt.impl.ipc.Peer.handshake(IPC.scala:49)
+	... 2 more
+Taking next connection to: 54512
+New client attempting to connect on port: 54525-54512
+  Address = /192.168.1.100:54512
+This client on port 54525 has uuid 9516b9bd-22cd-428e-a503-9432bec9fca4 configName play-fork-run humanReadableName Play Fork Run protocolVersion 1 featureTags Vector()
+Connected Clients: activator-c0875c4c-97a0-40d4-a9b7-041e35db8e52, play-fork-run-9516b9bd-22cd-428e-a503-9432bec9fca4
+Taking next connection to: 54512
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 54512
+>>>>>>> origin/fix
