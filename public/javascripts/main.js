@@ -16,6 +16,7 @@ require({
 	]
 });
 
+
 require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
      $('.process_model_viewer').each(function() {
 	     new Bpmn().renderUrl("/process/" + $(this).data('process_model'), {
