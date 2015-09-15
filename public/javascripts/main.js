@@ -16,6 +16,7 @@ require({
 	]
 });
 
+
 require(["bpmn/Bpmn", "dojo/domReady!"], function(Bpmn) {
      $('.process_model_viewer').each(function() {
 	     new Bpmn().renderUrl("/process/" + $(this).data('process_model'), {
@@ -173,7 +174,7 @@ getLoadingCallback = function(BpmnViewer, obj) {
                                     });
                                     $(this).attr('class', $(this).attr('class') + ' current-activity');
                                     
-                                    //$('#activity-designer form.auto-submit').data('target', '').submit();
+                                    //$('#activity-designer form.auto-submit').data('target', '#trash-container').submit();
                                     $('form', this).trigger('submit');
                                 }
                             }
@@ -489,7 +490,13 @@ var jsSet = function() {
                     checkbox.prop("checked", !checked);
                     
                     if ($(this).parents('.activity-operators').length > 0) {
-                        ajaxRequest('.related-documents', '/getDocumentExplorer?boType=' + $(this).data('bo-type') + '&sapId=' + $('td:eq(0) input', this).val(), 'get', {});
+                        if ($(this).is('.selected')) {
+                            var lastSelectedRow = $(this);
+                        }
+                        else {
+                            var lastSelectedRow = $('.activity-instance tbody tr.selected:eq(0)');
+                        }
+                        ajaxRequest('.related-documents', '/getDocumentExplorer?boType=' + lastSelectedRow.data('bo-type') + '&sapId=' + $('td:eq(0) input', lastSelectedRow).val(), 'get', {});
                     }
                 })
                 .addClass('set');
