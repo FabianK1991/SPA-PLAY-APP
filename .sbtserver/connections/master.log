@@ -5,3 +5,6 @@ New client attempting to connect on port: 54856-54855
 This client on port 54856 has uuid fabaf631-9a7b-4006-b082-486590956b3a configName activator humanReadableName Activator protocolVersion 3 featureTags Vector()
 Connected Clients: activator-fabaf631-9a7b-4006-b082-486590956b3a
 Taking next connection to: 54855
+Checking to see if clients are empty...
+We have 1 non-daemon clients, continuing serving connections.
+Taking next connection to: 54855
