@@ -133,13 +133,13 @@ public class ProcessExecutor extends Controller {
 			if (nextActivities.size() > 0) {
 				
 				//TODO: wait for FIX of getNextActivities(), then remove complete if clause + internal block
-				if (nextActivities.size() > 1 && activity.getRawId().equals("Task_3")) {
+				/*if (nextActivities.size() > 1 && activity.getRawId().equals("Task_3")) {
 					for (int i = 0; i < nextActivities.size(); i++) {
 						if (nextActivities.get(i).getRawId().equals("Task_4")) {
 							nextActivities.remove(i);
 						}
 					}
-				}
+				}*/
 				processInstance.setCurrentActivities(nextActivities);
 				
 				for (int i = 0; i < nextActivities.size(); i++) {

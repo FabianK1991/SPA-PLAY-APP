@@ -202,7 +202,12 @@ public class ProcessModel {
 	 * Returns the name of this ProcessModel
 	 */
 	public String getName() {
-		return this.pm.getName();
+		try{
+			return this.pm.getName();
+		}
+		catch(Throwable e){
+			return "-";
+		}
 	}
 	
 	public void setName(String name) {
@@ -321,7 +326,9 @@ public class ProcessModel {
 		// Check if file exists, otherwise write it
 		if( !f.exists() ){
 			try {
-				FileUtils.moveFile(file, f);
+				//Logger.info(pp.fileString);
+				FileUtils.write(f, pp.fileString);
+				//FileUtils.moveFile(file, f);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

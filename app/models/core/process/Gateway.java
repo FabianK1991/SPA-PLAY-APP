@@ -140,9 +140,9 @@ public class Gateway {
 			conditionMap.put("comparator", "");
 			conditionMap.put("comp_value", "");
 			
-			Logger.info(ProcessParser.nsm + condParts[0]);
-			
 			try {
+				Logger.info(ProcessParser.nsm + condParts[0]);
+				
 				conditionMap.put("activity", new Activity(ProcessParser.nsm + condParts[0], this.pm));
 				conditionMap.put("bo_prop", condParts[1]);
 				conditionMap.put("comparator", condParts[2]);

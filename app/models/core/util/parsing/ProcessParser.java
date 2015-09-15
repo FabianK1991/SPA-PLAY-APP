@@ -2,11 +2,15 @@ package models.core.util.parsing;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.regex.Pattern;
+
+import play.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,6 +28,7 @@ import models.spa.api.process.buildingblock.Gateway;
 import models.spa.api.process.buildingblock.Event.EventType;
 import models.spa.api.process.buildingblock.Gateway.GatewayType;
 
+import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -45,6 +50,8 @@ public class ProcessParser {
 	public static String nsm = "http://masterteamproject/";
 	public static String nsmi = "http://masterteamproject/instance/";
 	public static String nsboi = "http://masterteamproject/business_object_instance/";
+	
+	public String fileString;
 	
 	private static String getUID() {
 		String id = "";
@@ -88,8 +95,8 @@ public class ProcessParser {
 	 * 
 	 */
 	private void createFlow(Element el, ProcessModel pm){
-		models.spa.api.process.buildingblock.Node source = pm.getSPANodeById(nsm + el.getAttribute("sourceRef"));
-		models.spa.api.process.buildingblock.Node target = pm.getSPANodeById(nsm + el.getAttribute("targetRef"));
+		models.spa.api.process.buildingblock.Node source = pm.getSPANodeById(pm.getId() + el.getAttribute("sourceRef"));
+		models.spa.api.process.buildingblock.Node target = pm.getSPANodeById(pm.getId() + el.getAttribute("targetRef"));
 		
 		Flow f = new Flow(pm.getSPAProcessModel(), source, target);
 		
@@ -99,10 +106,13 @@ public class ProcessParser {
 		//System.out.println(target.getId());
 		
 		if( el.getAttribute("id") != null ){
-			f.setId(nsm + el.getAttribute("id"));
+			f.setId(pm.getId() + el.getAttribute("id"));
+			this.replaceName(el.getAttribute("id"), pm);
 		}
 		else{
-			f.setId(nsm + getUID());
+			String id =  getUID();
+			f.setId(pm.getId() + id);
+			this.replaceName(id, pm);
 		}
 		
 		// set name ? - not supported by spa
@@ -115,7 +125,18 @@ public class ProcessParser {
 			f.setCondition(el.getAttribute("name").replaceAll("[^0-9a-zA-Z!?.;:+'&(){}\\[\\]\\\\/=<>-_]", ""));
 		}
 		
+		Logger.info("INSERTING NEW FLOW: " + f.getId()  + " from: " + source.getId() + " to: " + target.getId());
+		
 		source.getNextFlows().add(f);
+	}
+	
+	private void replaceName(String oldID, ProcessModel pm){
+		this.fileString = this.fileString.replaceAll(Pattern.quote("bpmnElement=\"" + oldID + "\""), "bpmnElement=\"" + pm.getRawId() + oldID + "\"")
+				.replaceAll(Pattern.quote("id=\"" + oldID + "\""), "id=\"" + pm.getRawId() + oldID + "\"")
+				.replaceAll(Pattern.quote("sourceRef=\"" + oldID + "\""), "sourceRef=\"" + pm.getRawId() + oldID + "\"")
+				.replaceAll(Pattern.quote("targetRef=\"" + oldID + "\""), "targetRef=\"" + pm.getRawId() + oldID + "\"")
+				.replaceAll(Pattern.quote("<bpmn2:incoming>" + oldID + "</bpmn2:incoming>"), "<bpmn2:incoming>" + pm.getRawId() + oldID + "</bpmn2:incoming>")
+				.replaceAll(Pattern.quote("<bpmn2:outgoing>" + oldID + "</bpmn2:outgoing>"), "<bpmn2:outgoing>" + pm.getRawId() + oldID + "</bpmn2:outgoing>");
 	}
 	
 	/*
@@ -143,7 +164,8 @@ public class ProcessParser {
 				//Activity a = new Activity(id, pm.getSPAProcessModel());
 				models.spa.api.process.buildingblock.Activity a = new models.spa.api.process.buildingblock.Activity(pm.getSPAProcessModel());
 				
-				a.setId(nsm + id);
+				a.setId(pm.getId() + id);
+				this.replaceName(id, pm);
 				
 				if( el.getAttribute("name") != null ){
 					a.setName(el.getAttribute("name"));
@@ -155,7 +177,7 @@ public class ProcessParser {
 				this.insertActivity(pm.getRawId(), a.getId().replace(ProcessParser.nsm, ""));
 				
 				// Input Association
-				NodeList dataAssociations = el.getElementsByTagNameNS("*", "sourceRef");
+				/*NodeList dataAssociations = el.getElementsByTagNameNS("*", "sourceRef");
 				
 				for (int temp = 0; temp < dataAssociations.getLength(); temp++) {
 					Element e = (Element)dataAssociations.item(temp);
@@ -164,12 +186,13 @@ public class ProcessParser {
 					//System.out.println("Yolo: " + e.getTextContent());
 					
 					pm.dataAssoc.add(da);
-				}
+				}*/
 				break;
 			case "startEvent":
 				//System.out.println("Start!");
 				Event start = new Event(pm.getSPAProcessModel(), EventType.Start);
-		        start.setId(nsm + ((Element)n).getAttribute("id"));
+		        start.setId(pm.getId() + ((Element)n).getAttribute("id"));
+		        this.replaceName(((Element)n).getAttribute("id"), pm);
 		        
 		        System.out.println(((Element)n).getAttribute("id"));
 				
@@ -178,7 +201,8 @@ public class ProcessParser {
 			case "endEvent":
 				//System.out.println("End!");
 				Event end = new Event(pm.getSPAProcessModel(), EventType.End);
-		        end.setId(nsm + ((Element)n).getAttribute("id"));
+		        end.setId(pm.getId() + ((Element)n).getAttribute("id"));
+		        this.replaceName(((Element)n).getAttribute("id"), pm);
 		        
 		        System.out.println(((Element)n).getAttribute("id"));
 				
@@ -187,7 +211,8 @@ public class ProcessParser {
 			case "exclusiveGateway":
 				//System.out.println("Gaytway!");
 				Gateway xor = new Gateway(pm.getSPAProcessModel(), GatewayType.XOR);
-		        xor.setId(nsm + ((Element)n).getAttribute("id"));
+		        xor.setId(pm.getId() + ((Element)n).getAttribute("id"));
+		        this.replaceName(((Element)n).getAttribute("id"), pm);
 		        
 		        System.out.println(((Element)n).getAttribute("id"));
 		        
@@ -200,7 +225,8 @@ public class ProcessParser {
 			case "parallelGateway":
 				//System.out.println("Gaytway!");
 				Gateway and = new Gateway(pm.getSPAProcessModel(), GatewayType.AND);
-				and.setId(nsm + ((Element)n).getAttribute("id"));
+				and.setId(pm.getId() + ((Element)n).getAttribute("id"));
+				this.replaceName(((Element)n).getAttribute("id"), pm);
 		        
 		        System.out.println(((Element)n).getAttribute("id"));
 		        
@@ -213,7 +239,8 @@ public class ProcessParser {
 			case "inclusiveGateway":
 				//System.out.println("Gaytway!");
 				Gateway or = new Gateway(pm.getSPAProcessModel(), GatewayType.OR);
-				or.setId(nsm + ((Element)n).getAttribute("id"));
+				or.setId(pm.getId() + ((Element)n).getAttribute("id"));
+				this.replaceName(((Element)n).getAttribute("id"), pm);
 		        
 		        System.out.println(((Element)n).getAttribute("id"));
 		        
@@ -311,6 +338,7 @@ public class ProcessParser {
 			db = dbf.newDocumentBuilder();
 			
 			this.doc = db.parse(file);
+			this.fileString = FileUtils.readFileToString(file);
 			
 			NodeList nList = this.doc.getElementsByTagNameNS("*", "process");
 			
